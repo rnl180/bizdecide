@@ -120,23 +120,6 @@ await tool("complete_action", { actionId: action.id, claimToken: work.action.cla
 const saved = (await api(`/api/requests/${requestId}/actions`)).actions[0];
 assert.equal(saved.status, "done");
 assert.deepEqual(saved.email, email);
-assert.equal(saved.outcome, undefined, "Preparing a draft must not imply it was sent or paid");
-const outcomePath = `/api/requests/${requestId}/actions/${action.id}/outcome`;
-const sent = await api(outcomePath, { status: "sent", revision: 0 });
-assert.equal(sent.action.claimToken, undefined);
-assert.equal(sent.action.outcome.source, "owner_reported");
-const recorded = await api(outcomePath, { status: "recorded", revision: 1, amountRm: 321.25, note: "Smoke fixture: partial refund, owner report only" });
-assert.equal(recorded.action.outcome.amountRm, 321.25);
-for (const [route, body, status] of [
-  [outcomePath, { status: "sent", revision: 1 }, 409],
-  [outcomePath, { status: "recorded", revision: 2, amountRm: -1, note: "Invalid" }, 400],
-  [`/api/requests/wrong-request/actions/${action.id}/outcome`, { status: "sent", revision: 2 }, 404],
-]) {
-  const response = await fetch(`${base}${route}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-  assert.equal(response.status, status);
-}
-assert.equal((await api(`/api/requests/${requestId}/actions`)).actions[0].outcome.amountRm, 321.25);
-assert.equal((await api(`/api/requests/${requestId}`)).result.decisions[0].impactRm, 642);
 assert.equal((await api(`/api/requests/${requestId}`)).request.status, "completed");
 const { id: messageId } = await api(`/api/requests/${requestId}/messages`, { question: "Why is the refund RM642?" });
 const ownerQuestion = await tool("wait_for_request", { waitSeconds: 5 });

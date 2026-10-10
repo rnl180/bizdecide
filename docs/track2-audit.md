@@ -39,20 +39,6 @@ submission form requirements or live platform behaviour are assumed.
 
 ## Reproducible checks
 
-### Owner outcome tracking
-
-Prepared actions now offer a compact status editor: prepared → sent/submitted →
-result recorded. Owners enter the cumulative actual amount and an explanation with
-the date/period; partial, zero and corrected results are supported. Refund receipts,
-observed savings and funding received use distinct labels. Saving does not send an
-email, change the original forecast, or establish bank verification. Records show
-owner-reported provenance and the server update date. Updates require a prepared
-action belonging to the brief and an up-to-date revision, so concurrent edits cannot
-silently overwrite one another. Like existing approval and question controls, access
-uses the private brief link, not an authenticated owner identity. This strengthens
-measurable value tracking while leaving evidence verification of realised benefit
-for a future bank-matching workflow.
-
 `npm test` exercises calculation integrity, incomplete/monthly data, a failed stage,
 claim races, stale workers, owner answers and required artifacts. `npm run build`
 checks the production build and TypeScript integration.
@@ -65,8 +51,7 @@ BIZDECIDE_MCP_KEY=<local-test-key> node tests/mcp-refund.smoke.mjs
 
 The smoke test simulates MCP calls. It checks planning/progress, an owner question,
 Python execution over a data link, rejected wrong amounts, repaired delivery,
-simultaneous approvals, required refund output, owner-reported partial outcomes,
-stale outcome rejection, unchanged forecasts, and a follow-up answer. It does not
+simultaneous approvals, required refund output, and a follow-up answer. It does not
 run an LLM or WorkBuddy, save a Gmail draft, send an email, or test cloud Firestore.
 
 ## Remaining live acceptance run

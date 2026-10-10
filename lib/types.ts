@@ -353,7 +353,6 @@ export interface ActionDocument {
 }
 
 export interface ActionDoc {
-  outcome?: import("./action-outcome").ActionOutcome;
   id: string;
   claimToken?: string; // private worker lease; exclude from owner responses
   requestId: string;

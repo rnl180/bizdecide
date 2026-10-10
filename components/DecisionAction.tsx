@@ -5,14 +5,12 @@ import { Icon, type IconName } from "@/components/Icon";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { ACT, type ActStrings } from "@/lib/i18n-actions";
 import { impactKind, type ImpactKind } from "@/lib/impact";
-import type { ActionOutcomeInput } from "@/lib/action-outcome";
-import { ActionOutcomeTracker } from "./ActionOutcomeTracker";
 import type { ActionDoc, ActionDocument, ActionEmail, ActionStatus, Decision } from "@/lib/types";
 
 /**
  * "Approve → it's done": the owner approves a decision on the brief, the CFO agent (Claude, or WorkBuddy on duty) carries it out
  * (refund request, supplier email, funding application), saves it as a Gmail draft when Gmail is connected, and
- * reports back. Sending or realised results are recorded separately by the owner.
+ * reports back. Drafts only: nothing here ever says or implies that something was sent.
  */
 
 const POLL_MS = 2000;
@@ -42,7 +40,6 @@ function merge(prev: ActionDoc[], fresh: ActionDoc[]): ActionDoc[] {
   for (const a of fresh) {
     if (!a || typeof a.id !== "string") continue;
     const old = byId.get(a.id);
-    if (old && (old.outcome?.revision ?? 0) > (a.outcome?.revision ?? 0)) continue;
     if (old && (RANK[old.status] > RANK[a.status] || JSON.stringify(old) === JSON.stringify(a))) continue;
     byId.set(a.id, a);
     changed = true;
@@ -58,7 +55,6 @@ function merge(prev: ActionDoc[], fresh: ActionDoc[]): ActionDoc[] {
 export function useActions(requestId: string): {
   byIndex: Record<number, ActionDoc>;
   approve: (decisionIndex: number, lang: Lang) => Promise<void>;
-  recordOutcome: (actionId: string, input: ActionOutcomeInput, lang: Lang) => Promise<void>;
   error: string | null;
 } {
   const [actions, setActions] = useState<ActionDoc[]>([]);
@@ -160,17 +156,7 @@ export function useActions(requestId: string): {
     return out;
   }, [actions]);
 
-  const recordOutcome = useCallback(async (actionId: string, input: ActionOutcomeInput, lang: Lang) => {
-    const t = ACT[lang].outcome;
-    const res = await fetch(`${url}/${encodeURIComponent(actionId)}/outcome`, {
-      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(input),
-    });
-    const json = await res.json().catch(() => null);
-    if (!res.ok || !json?.action) throw new Error(res.status === 409 ? t.conflict : t.error);
-    setActions((prev) => merge(prev, [json.action as ActionDoc]));
-  }, [url]);
-
-  return { byIndex, approve, recordOutcome, error };
+  return { byIndex, approve, error };
 }
 
 /** Whole seconds since `since`, ticking while `active`; null before the first tick so server and client render the same. */
@@ -242,7 +228,6 @@ export function DecisionAction({
   decision,
   action,
   onApprove,
-  onOutcome,
   lang,
 }: {
   requestId: string;
@@ -250,7 +235,6 @@ export function DecisionAction({
   decision: Decision;
   action?: ActionDoc;
   onApprove: (lang: Lang) => Promise<void>;
-  onOutcome: (actionId: string, input: ActionOutcomeInput, lang: Lang) => Promise<void>;
   lang: Lang;
 }) {
   const t = ACT[lang] ?? ACT.en;
@@ -389,8 +373,6 @@ export function DecisionAction({
         {action.document && (
           <DocPreview doc={action.document} href={`/r/${encodeURIComponent(requestId)}/a/${encodeURIComponent(action.id)}`} t={t} />
         )}
-
-        <ActionOutcomeTracker action={action} kind={impactKind(decision)} lang={lang} onSave={onOutcome} />
 
         {links.length > 0 && (
           <ul className="ax-links">

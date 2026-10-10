@@ -3,7 +3,6 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { ActionCompletionError, actionCompletionProblem, type ActionCompletion } from "./action-completion";
 import { validateResultDelivery } from "./result-delivery";
-import { ActionOutcomeError, ActionOutcomeInputSchema } from "./action-outcome";
 import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
 
 /**
@@ -453,22 +452,6 @@ export async function listActions(requestId: string): Promise<ActionDoc[]> {
 
 export async function getAction(id: string): Promise<ActionDoc | null> {
   return db.get<ActionDoc>("actions", id);
-}
-
-/** Explicit owner report, separate from prepared artifacts and verified forecast calculations. */
-export async function recordActionOutcome(requestId: string, actionId: string, input: unknown): Promise<ActionDoc> {
-  const update = ActionOutcomeInputSchema.parse(input);
-  return db.transaction(async (tx) => {
-    const action = await tx.get<ActionDoc>("actions", actionId);
-    if (!action || action.requestId !== requestId) throw new ActionOutcomeError("Action not found", 404);
-    if (action.status !== "done") throw new ActionOutcomeError("Wait until the email or document is prepared", 409);
-    if ((action.outcome?.revision ?? 0) !== update.revision) {
-      throw new ActionOutcomeError("This outcome changed. Reload the brief before saving again.", 409);
-    }
-    const outcome = { ...update, revision: update.revision + 1, source: "owner_reported" as const, updatedAt: now() };
-    tx.update("actions", actionId, { outcome });
-    return { ...action, outcome };
-  });
 }
 
 /** Oldest approved action. A claim re-opens after 5 minutes so a crashed agent can't strand it. */
