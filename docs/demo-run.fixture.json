@@ -1,95 +1,87 @@
 {
  "about": "Recorded BizDecide run replayed by BIZDECIDE_REPLAY=1 (lib/replay.ts) and seeded by scripts/seed-demo-run.mjs. Re-record with scripts/capture-demo-run.mjs.",
  "source": "Scripted fake-model run on the real lane outputs and real demo data, 10 Oct 2026 (no ANTHROPIC_API_KEY was available). The skill scripts, questions, server-side checks and timing are real; the Analysis draft and the Verifier's wording are scripted. Re-record after a real run.",
- "capturedAt": "2026-10-10T14:13:27.828Z",
- "requestId": "8b8f440da124461a8fed",
+ "capturedAt": "2026-10-10T14:22:18.345Z",
+ "requestId": "43bac54d35364ed69196",
  "businessName": "Rock Cafe",
  "service": "cfo_brief",
  "language": "en",
- "durationMs": 66478,
+ "durationMs": 66953,
  "progress": [
   {
-   "offsetMs": 4014,
+   "offsetMs": 4023,
    "step": "5 agents working in parallel",
    "detail": "Bookkeeper · Reconciliation · Procurement · Classifier · Funding"
   },
   {
-   "offsetMs": 4026,
+   "offsetMs": 4051,
    "step": "Bookkeeper started",
    "lane": "bookkeeper",
    "state": "started"
   },
   {
-   "offsetMs": 4026,
+   "offsetMs": 4051,
    "step": "Reconciliation started",
    "lane": "reconciliation",
    "state": "started"
   },
   {
-   "offsetMs": 4026,
+   "offsetMs": 4051,
    "step": "Procurement started",
    "lane": "procurement",
    "state": "started"
   },
   {
-   "offsetMs": 4026,
+   "offsetMs": 4051,
    "step": "Classifier started",
    "lane": "classifier",
    "state": "started"
   },
   {
-   "offsetMs": 4026,
+   "offsetMs": 4051,
    "step": "Funding started",
    "lane": "funding",
    "state": "started"
   },
   {
-   "offsetMs": 4036,
+   "offsetMs": 4068,
    "step": "Reading 308 days of sales and 85 bank lines",
    "lane": "bookkeeper",
    "state": "step"
   },
   {
-   "offsetMs": 4045,
+   "offsetMs": 4085,
    "step": "Matching 26 invoices to the bank",
    "lane": "reconciliation",
    "state": "step"
   },
   {
-   "offsetMs": 4051,
+   "offsetMs": 4099,
    "step": "Tracking unit prices across 79 purchase lines",
    "lane": "procurement",
    "state": "step"
   },
   {
-   "offsetMs": 4058,
+   "offsetMs": 4114,
    "step": "Applying the official SME definition",
    "lane": "classifier",
    "state": "step"
   },
   {
-   "offsetMs": 4065,
+   "offsetMs": 4128,
    "step": "Screening the programmes in the market pack",
    "lane": "funding",
    "state": "step"
   },
   {
-   "offsetMs": 4135,
-   "step": "Serbuk Kopi O Campuran 1kg at Syarikat Kopi Cap Bintang Timur Sdn Bhd: +12%",
-   "lane": "procurement",
-   "state": "step",
-   "detail": "about RM986 a year",
-   "impactRm": 985.5
-  },
-  {
-   "offsetMs": 4136,
+   "offsetMs": 4211,
    "step": "Bank statement reconciles",
    "lane": "bookkeeper",
    "state": "step",
    "detail": "RM18,450 → RM16,959"
   },
   {
-   "offsetMs": 4136,
+   "offsetMs": 4211,
    "step": "LSS/2609/278 paid 2 times: RM642",
    "lane": "reconciliation",
    "state": "step",
@@ -97,215 +89,223 @@
    "impactRm": 642
   },
   {
-   "offsetMs": 4136,
+   "offsetMs": 4212,
+   "step": "Serbuk Kopi O Campuran 1kg at Syarikat Kopi Cap Bintang Timur Sdn Bhd: +12%",
+   "lane": "procurement",
+   "state": "step",
+   "detail": "about RM986 a year",
+   "impactRm": 985.5
+  },
+  {
+   "offsetMs": 4226,
    "step": "Declared sales differ from the data",
    "lane": "classifier",
    "state": "step",
    "detail": "RM235,000 declared, RM252,571 in the data"
   },
   {
-   "offsetMs": 4142,
-   "step": "Procurement done",
-   "lane": "procurement",
-   "state": "done",
-   "detail": "1 price alert(s)"
-  },
-  {
-   "offsetMs": 4147,
+   "offsetMs": 4227,
    "step": "2 seasonal dips found",
    "lane": "bookkeeper",
    "state": "step",
    "detail": "2026-02, 2026-03"
   },
   {
-   "offsetMs": 4151,
+   "offsetMs": 4241,
    "step": "DuitNow QR for 2026-09-18 never settled: RM312.40",
    "lane": "reconciliation",
    "state": "step",
    "impactRm": 312.4
   },
   {
-   "offsetMs": 4157,
+   "offsetMs": 4254,
+   "step": "Procurement done",
+   "lane": "procurement",
+   "state": "done",
+   "detail": "1 price alert(s)"
+  },
+  {
+   "offsetMs": 4269,
    "step": "e-Invoice: exempt",
    "lane": "classifier",
    "state": "step",
    "detail": "RM2,747,429 below the RM3,000,000 threshold"
   },
   {
-   "offsetMs": 4167,
-   "step": "Bookkeeper done",
-   "lane": "bookkeeper",
-   "state": "done",
-   "detail": "12 months, turnover RM252,571"
-  },
-  {
-   "offsetMs": 4172,
-   "step": "6 cash-on-delivery invoices: normal, no bank line expected",
-   "lane": "reconciliation",
-   "state": "step"
-  },
-  {
-   "offsetMs": 4176,
-   "step": "Facts missing for eligibility",
-   "lane": "classifier",
-   "state": "step",
-   "detail": "householdIncomeMonthlyRm"
-  },
-  {
-   "offsetMs": 4187,
-   "step": "Reconciliation done",
-   "lane": "reconciliation",
-   "state": "done",
-   "detail": "1 duplicate payment(s), 1 missing settlement(s), RM954 to recover"
-  },
-  {
-   "offsetMs": 4192,
-   "step": "Classifier done",
-   "lane": "classifier",
-   "state": "done",
-   "detail": "Micro"
-  },
-  {
-   "offsetMs": 4202,
+   "offsetMs": 4285,
    "step": "16 programmes pass the code checks",
    "lane": "funding",
    "state": "step",
    "detail": "4 excluded"
   },
   {
-   "offsetMs": 4208,
+   "offsetMs": 4285,
+   "step": "Bookkeeper done",
+   "lane": "bookkeeper",
+   "state": "done",
+   "detail": "12 months, turnover RM252,571"
+  },
+  {
+   "offsetMs": 4298,
+   "step": "6 cash-on-delivery invoices: normal, no bank line expected",
+   "lane": "reconciliation",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4326,
+   "step": "Facts missing for eligibility",
+   "lane": "classifier",
+   "state": "step",
+   "detail": "householdIncomeMonthlyRm"
+  },
+  {
+   "offsetMs": 4339,
    "step": "Funding done",
    "lane": "funding",
    "state": "done",
    "detail": "16 programme(s) pass the code checks"
   },
   {
-   "offsetMs": 4213,
+   "offsetMs": 4366,
+   "step": "Reconciliation done",
+   "lane": "reconciliation",
+   "state": "done",
+   "detail": "1 duplicate payment(s), 1 missing settlement(s), RM954 to recover"
+  },
+  {
+   "offsetMs": 4380,
+   "step": "Classifier done",
+   "lane": "classifier",
+   "state": "done",
+   "detail": "Micro"
+  },
+  {
+   "offsetMs": 4419,
    "step": "Choosing your 3 decisions"
   },
   {
-   "offsetMs": 10234,
+   "offsetMs": 10463,
    "step": "Waiting for your answer",
    "detail": "RM39.90 beras dari Serba Murah: stok kedai, peribadi, atau campur?",
    "question": 0
   },
   {
-   "offsetMs": 20280,
+   "offsetMs": 20567,
    "step": "Answer received",
    "detail": "Campur (split)",
    "answerOf": 0
   },
   {
-   "offsetMs": 20303,
+   "offsetMs": 20602,
    "step": "Waiting for your answer",
    "detail": "What is your monthly household income?",
    "question": 1
   },
   {
-   "offsetMs": 30353,
+   "offsetMs": 30685,
    "step": "Answer received",
    "detail": "Prefer not to say",
    "answerOf": 1
   },
   {
-   "offsetMs": 44367,
+   "offsetMs": 44709,
    "step": "Verifier checking every figure and link",
    "lane": "verifier",
    "state": "started"
   },
   {
-   "offsetMs": 66390,
+   "offsetMs": 66751,
    "step": "12-month turnover re-added",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66402,
+   "offsetMs": 66779,
    "step": "Bank statement reconciles",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66414,
+   "offsetMs": 66798,
    "step": "Duplicate payment confirmed",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66421,
+   "offsetMs": 66816,
    "step": "QR and card settlements matched to sales",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66428,
+   "offsetMs": 66830,
    "step": "Card fees and delivery payouts treated as normal",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66435,
+   "offsetMs": 66844,
    "step": "Funding URLs taken from the market pack",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66441,
+   "offsetMs": 66857,
    "step": "Every figure traced to the data",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66447,
+   "offsetMs": 66872,
    "step": "RML2229, TGP 303: cash on delivery, no bank line expected",
    "lane": "verifier",
    "state": "step",
    "detail": "passed"
   },
   {
-   "offsetMs": 66452,
+   "offsetMs": 66886,
    "step": "Credit record (CCRIS / CTOS)",
    "lane": "verifier",
    "state": "step",
    "detail": "not checked"
   },
   {
-   "offsetMs": 66458,
+   "offsetMs": 66899,
    "step": "Card and QR fee rates in your merchant agreement",
    "lane": "verifier",
    "state": "step",
    "detail": "not checked"
   },
   {
-   "offsetMs": 66463,
+   "offsetMs": 66912,
    "step": "Whether your landlord charges SST on rent",
    "lane": "verifier",
    "state": "step",
    "detail": "not checked"
   },
   {
-   "offsetMs": 66468,
+   "offsetMs": 66926,
    "step": "Supplier contracts and agreed prices",
    "lane": "verifier",
    "state": "step",
    "detail": "not checked"
   },
   {
-   "offsetMs": 66473,
+   "offsetMs": 66939,
    "step": "Payroll and rent as line items",
    "lane": "verifier",
    "state": "step",
    "detail": "not checked"
   },
   {
-   "offsetMs": 66478,
+   "offsetMs": 66953,
    "step": "Verifier done",
    "lane": "verifier",
    "state": "done",
@@ -894,7 +894,8 @@
    "headroomRm": 2747428.92,
    "nextCheck": "2028-01-01",
    "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
-   "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+   "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/",
+   "basis": "Legal form: Sole proprietorship (Registration of Businesses Act 1956)"
   },
   "notChecked": [
    {
@@ -1830,265 +1831,6 @@
     "balanceReconciles": true
    }
   },
-  "Reconciliation": {
-   "findings": {
-    "duplicatePayments": [
-     {
-      "invoiceNo": "LSS/2609/278",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "invoiceAmount": 642,
-      "timesPaid": 2,
-      "overpaid": 642,
-      "bankLines": [
-       {
-        "date": "2026-09-15",
-        "reference": "IBG0915S02",
-        "amount": 642
-       },
-       {
-        "date": "2026-09-16",
-        "reference": "IBG0916S02",
-        "amount": 642
-       }
-      ],
-      "source": {
-       "table": "bank",
-       "keys": [
-        "IBG0915S02",
-        "IBG0916S02"
-       ]
-      },
-      "ledgerSource": {
-       "table": "payables",
-       "keys": [
-        "LSS/2609/278"
-       ]
-      }
-     }
-    ],
-    "missingQrSettlements": [
-     {
-      "saleDate": "2026-09-18",
-      "expectedAmount": 312.4,
-      "expectedOn": "2026-09-19",
-      "expectedDescription": "DUITNOW QR MERCHANT SETTLEMENT 180926",
-      "source": {
-       "table": "sales",
-       "keys": [
-        "2026-09-18"
-       ]
-      }
-     }
-    ],
-    "missingCardSettlements": [],
-    "ledgerPaymentsNotInBank": [],
-    "nonSupplierCardPurchases": [
-     {
-      "date": "2026-09-12",
-      "amount": 144.15,
-      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
-      "receiptLines": [
-       {
-        "item": "Susu Pekat Manis 500g",
-        "qty": 6,
-        "totalRm": 25.2
-       },
-       {
-        "item": "Gula Halus 1kg",
-        "qty": 5,
-        "totalRm": 14.25
-       },
-       {
-        "item": "Sabun Pinggan 900ml",
-        "qty": 2,
-        "totalRm": 13
-       },
-       {
-        "item": "Beras Wangi 10kg",
-        "qty": 1,
-        "totalRm": 39.9
-       },
-       {
-        "item": "Lampin Bayi Saiz M (38s)",
-        "qty": 1,
-        "totalRm": 42.9
-       },
-       {
-        "item": "Ubat Gigi 175g",
-        "qty": 1,
-        "totalRm": 8.9
-       }
-      ],
-      "why": "Paid from the business account at a shop that is not a registered supplier; may mix business and personal items. Split line by line and ask the owner only about unclear lines.",
-      "source": {
-       "table": "bank",
-       "keys": [
-        "POS0912-47731"
-       ]
-      },
-      "receiptSource": {
-       "table": "purchases",
-       "keys": [
-        "R-0912-0047731"
-       ]
-      }
-     }
-    ],
-    "cashToRecover": 954.4
-   },
-   "normal_do_not_flag": {
-    "cashOnDeliveryInvoices": [
-     "RML2812",
-     "TGP 363",
-     "RML2370",
-     "RML2520",
-     "TGP 303",
-     "RML2229"
-    ],
-    "cashOnDeliverySource": {
-     "table": "payables",
-     "keys": [
-      "RML2812",
-      "TGP 363",
-      "RML2370",
-      "RML2520",
-      "TGP 303",
-      "RML2229"
-     ]
-    },
-    "cashOnDeliveryInStatementPeriod": [
-     "RML2229",
-     "TGP 303"
-    ],
-    "qrSettlingAfterStatementEnd": [
-     {
-      "saleDate": "2026-09-30",
-      "amount": 224.71
-     }
-    ],
-    "cardMerchantDiscountRatePct": 1.5,
-    "deliveryPayoutChecks": [
-     {
-      "weekEnding": "2026-08-30",
-      "gross": 818.87,
-      "payout": 573.21,
-      "payoutPct": 70
-     },
-     {
-      "weekEnding": "2026-09-06",
-      "gross": 998.52,
-      "payout": 698.96,
-      "payoutPct": 70
-     },
-     {
-      "weekEnding": "2026-09-13",
-      "gross": 989,
-      "payout": 692.3,
-      "payoutPct": 70
-     },
-     {
-      "weekEnding": "2026-09-20",
-      "gross": 781.61,
-      "payout": 547.13,
-      "payoutPct": 70
-     },
-     {
-      "weekEnding": "2026-09-27",
-      "gross": 973.39,
-      "payout": 681.37,
-      "payoutPct": 70
-     }
-    ],
-    "ownerDrawings_classifyAsDrawingsNotExpenses": [
-     {
-      "date": "2026-09-25",
-      "amount": 1500,
-      "description": "DUITNOW TRF AMINAH BT RAHMAN (OWNER DRAWING)",
-      "source": {
-       "table": "bank",
-       "keys": [
-        "OWN0925"
-       ]
-      }
-     }
-    ]
-   },
-   "matchedPayables": 8,
-   "bank": {
-    "period": [
-     "2026-09-01",
-     "2026-09-30"
-    ],
-    "opening": 18450,
-    "closing": 16959.22,
-    "totalCredits": 17297.74,
-    "totalDebits": 18788.52,
-    "balanceReconciles": true
-   }
-  },
-  "Classifier": {
-   "sectorGroup": "services_and_other",
-   "bySales": "Micro",
-   "byEmployees": "Micro",
-   "category": "Micro",
-   "basis": "lower of sales and employees",
-   "next": {
-    "nextCategory": "Small",
-    "salesThreshold": 300000,
-    "salesHeadroom": 47428.92
-   },
-   "source": "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf",
-   "salesUsed": 252571.08,
-   "salesSource": "actual sales data, 12 months",
-   "salesRows": {
-    "table": "sales",
-    "keys": [
-     "2025-10",
-     "2025-11",
-     "2025-12",
-     "2026-01",
-     "2026-02",
-     "2026-03",
-     "2026-04",
-     "2026-05",
-     "2026-06",
-     "2026-07",
-     "2026-08",
-     "2026-09"
-    ]
-   },
-   "declaredVsActual": {
-    "declared": 235000,
-    "actual": 252571.08,
-    "note": "Declared turnover differs from the data by more than 5%; use the actual figure."
-   },
-   "yearsOperating": 5.6,
-   "ownerFacts": {
-    "age": 34,
-    "gender": "female",
-    "bumiputera": true,
-    "citizenship": "Malaysian"
-   },
-   "unknownForEligibility": [
-    "householdIncomeMonthlyRm"
-   ],
-   "sizeCategory": "Micro",
-   "groupStatus": "independent",
-   "groupBasis": "legal form: Sole proprietorship (Registration of Businesses Act 1956)",
-   "assistanceEligibility": "eligible",
-   "einvoice": {
-    "status": "exempt",
-    "thresholdRm": 3000000,
-    "revenueUsedRm": 252571.08,
-    "headroomRm": 2747428.92,
-    "declaredRm": 235000,
-    "actualRm": 252571.08,
-    "nextCheck": "2028-01-01",
-    "nextCheckReason": "The penalty-free relaxation runs to 31 Dec 2027 (VERIFY against the official text); re-check after every LHDN guideline update and with each year's revenue.",
-    "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
-    "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
-   }
-  },
   "Funding": {
    "market": "MY",
    "sme": {
@@ -2867,6 +2609,265 @@
     ]
    },
    "errors": {}
+  },
+  "Reconciliation": {
+   "findings": {
+    "duplicatePayments": [
+     {
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceAmount": 642,
+      "timesPaid": 2,
+      "overpaid": 642,
+      "bankLines": [
+       {
+        "date": "2026-09-15",
+        "reference": "IBG0915S02",
+        "amount": 642
+       },
+       {
+        "date": "2026-09-16",
+        "reference": "IBG0916S02",
+        "amount": 642
+       }
+      ],
+      "source": {
+       "table": "bank",
+       "keys": [
+        "IBG0915S02",
+        "IBG0916S02"
+       ]
+      },
+      "ledgerSource": {
+       "table": "payables",
+       "keys": [
+        "LSS/2609/278"
+       ]
+      }
+     }
+    ],
+    "missingQrSettlements": [
+     {
+      "saleDate": "2026-09-18",
+      "expectedAmount": 312.4,
+      "expectedOn": "2026-09-19",
+      "expectedDescription": "DUITNOW QR MERCHANT SETTLEMENT 180926",
+      "source": {
+       "table": "sales",
+       "keys": [
+        "2026-09-18"
+       ]
+      }
+     }
+    ],
+    "missingCardSettlements": [],
+    "ledgerPaymentsNotInBank": [],
+    "nonSupplierCardPurchases": [
+     {
+      "date": "2026-09-12",
+      "amount": 144.15,
+      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "receiptLines": [
+       {
+        "item": "Susu Pekat Manis 500g",
+        "qty": 6,
+        "totalRm": 25.2
+       },
+       {
+        "item": "Gula Halus 1kg",
+        "qty": 5,
+        "totalRm": 14.25
+       },
+       {
+        "item": "Sabun Pinggan 900ml",
+        "qty": 2,
+        "totalRm": 13
+       },
+       {
+        "item": "Beras Wangi 10kg",
+        "qty": 1,
+        "totalRm": 39.9
+       },
+       {
+        "item": "Lampin Bayi Saiz M (38s)",
+        "qty": 1,
+        "totalRm": 42.9
+       },
+       {
+        "item": "Ubat Gigi 175g",
+        "qty": 1,
+        "totalRm": 8.9
+       }
+      ],
+      "why": "Paid from the business account at a shop that is not a registered supplier; may mix business and personal items. Split line by line and ask the owner only about unclear lines.",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "POS0912-47731"
+       ]
+      },
+      "receiptSource": {
+       "table": "purchases",
+       "keys": [
+        "R-0912-0047731"
+       ]
+      }
+     }
+    ],
+    "cashToRecover": 954.4
+   },
+   "normal_do_not_flag": {
+    "cashOnDeliveryInvoices": [
+     "RML2812",
+     "TGP 363",
+     "RML2370",
+     "RML2520",
+     "TGP 303",
+     "RML2229"
+    ],
+    "cashOnDeliverySource": {
+     "table": "payables",
+     "keys": [
+      "RML2812",
+      "TGP 363",
+      "RML2370",
+      "RML2520",
+      "TGP 303",
+      "RML2229"
+     ]
+    },
+    "cashOnDeliveryInStatementPeriod": [
+     "RML2229",
+     "TGP 303"
+    ],
+    "qrSettlingAfterStatementEnd": [
+     {
+      "saleDate": "2026-09-30",
+      "amount": 224.71
+     }
+    ],
+    "cardMerchantDiscountRatePct": 1.5,
+    "deliveryPayoutChecks": [
+     {
+      "weekEnding": "2026-08-30",
+      "gross": 818.87,
+      "payout": 573.21,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-06",
+      "gross": 998.52,
+      "payout": 698.96,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-13",
+      "gross": 989,
+      "payout": 692.3,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-20",
+      "gross": 781.61,
+      "payout": 547.13,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-27",
+      "gross": 973.39,
+      "payout": 681.37,
+      "payoutPct": 70
+     }
+    ],
+    "ownerDrawings_classifyAsDrawingsNotExpenses": [
+     {
+      "date": "2026-09-25",
+      "amount": 1500,
+      "description": "DUITNOW TRF AMINAH BT RAHMAN (OWNER DRAWING)",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "OWN0925"
+       ]
+      }
+     }
+    ]
+   },
+   "matchedPayables": 8,
+   "bank": {
+    "period": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "opening": 18450,
+    "closing": 16959.22,
+    "totalCredits": 17297.74,
+    "totalDebits": 18788.52,
+    "balanceReconciles": true
+   }
+  },
+  "Classifier": {
+   "sectorGroup": "services_and_other",
+   "bySales": "Micro",
+   "byEmployees": "Micro",
+   "category": "Micro",
+   "basis": "lower of sales and employees",
+   "next": {
+    "nextCategory": "Small",
+    "salesThreshold": 300000,
+    "salesHeadroom": 47428.92
+   },
+   "source": "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf",
+   "salesUsed": 252571.08,
+   "salesSource": "actual sales data, 12 months",
+   "salesRows": {
+    "table": "sales",
+    "keys": [
+     "2025-10",
+     "2025-11",
+     "2025-12",
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ]
+   },
+   "declaredVsActual": {
+    "declared": 235000,
+    "actual": 252571.08,
+    "note": "Declared turnover differs from the data by more than 5%; use the actual figure."
+   },
+   "yearsOperating": 5.6,
+   "ownerFacts": {
+    "age": 34,
+    "gender": "female",
+    "bumiputera": true,
+    "citizenship": "Malaysian"
+   },
+   "unknownForEligibility": [
+    "householdIncomeMonthlyRm"
+   ],
+   "sizeCategory": "Micro",
+   "groupStatus": "independent",
+   "groupBasis": "legal form: Sole proprietorship (Registration of Businesses Act 1956)",
+   "assistanceEligibility": "eligible",
+   "einvoice": {
+    "status": "exempt",
+    "thresholdRm": 3000000,
+    "revenueUsedRm": 252571.08,
+    "headroomRm": 2747428.92,
+    "declaredRm": 235000,
+    "actualRm": 252571.08,
+    "nextCheck": "2028-01-01",
+    "nextCheckReason": "The penalty-free relaxation runs to 31 Dec 2027 (VERIFY against the official text); re-check after every LHDN guideline update and with each year's revenue.",
+    "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
+    "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+   }
   }
  },
  "messages": []

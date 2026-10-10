@@ -184,6 +184,10 @@ Declare the small nested schemas above `ResultSchema` so no new `z.lazy` is need
 
 Each item: what the owner sees, what to build (by file), acceptance test.
 
+**Engine status, 10 Oct 2026 (branch `phase-1-engine`):** items 8, 3, 6, 7, 4 and 9 are built on the server side; the UI items (22b, 22, 2, 1, 5, 10) are not. No API key was available, so every check ran with a scripted fake Claude client on the real lane outputs (`processRequest` end to end, score 14/14, 0 false positives); a real model run is still owed. Two rules that apply to everything below:
+- **Structured-output limit.** The API rejects a schema with more than 24 optional fields in its main part (fields inside `$defs` don't count). The Verifier writes `VerifierOutputSchema` in `lib/claude-cfo.ts` (14 optional fields): `ResultSchema` without `reportUrl`, `notChecked`, `morningNote`, `followUps`, `einvoice`, `zakat`, `channels`, `benchmarks`, decisions without `priceMove`, packs without `ladder`, `shariah`, `proposedNotes`. Anything the server can fill from lane outputs or the market pack stays out of that schema and is set after parsing. `ReplySchema` has 0, `ActionOutSchema` 3. The stored `Result` and the MCP `submit_results` schema keep every field.
+- **`finalizeResult` (`lib/verifier-checks.ts`)** runs after the Verifier and inside `submit_results`, so both engines get the same deterministic parts: could-not-check list, rejected false positive, confidence rule, pack ladder / Shariah / Budget 2027 lines, price series and SST line, e-invoice status. WorkBuddy has no lane outputs on the server, so its brief only gets the parts that need none (not-checked list, confidence, packs).
+
 ### 22b. Conversational intake
 
 **Owner sees.** The home page is one chat with Kak Kira. First bubble greets in the owner's language with two chips (EN / BM) and a "Cuba kedai kopi contoh / Try the demo café" chip. The owner drops files into the thread or taps the paperclip; each file becomes an attachment card (name, size, detected kind, row count, date range, tick when uploaded). Kak Kira replies with what she sees ("Nampak 308 hari jualan Okt 2025–Sep 2026, 26 invois pembekal, 1 penyata bank Sep 2026. Betul?") and asks only what the files cannot tell her, one bubble at a time with tap chips: business name, sector, declared annual sales (prefilled from the sales total, editable), goal, Shariah-only, service. The last bubble is "Baik, saya mula sekarang" and the six lanes appear.
@@ -245,6 +249,12 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 
 **Accept.** Verification card shows ≥ 6 passed checks, 0 failed, ≥ 4 not-checked with reasons; each decision has a badge; `node scripts/score-result.mjs` still passes all 14 checks and the 4 false-positive checks.
 
+**Status, 10 Oct 2026: backend done** (the badge and the not-checked box are UI work). Differences from the spec:
+- `notChecked[]` and the `not_checked` verification entries are added by `finalizeResult`, not the Verifier (the prompt tells it to leave them out). Sources: failed lanes, empty tables (strings in `not_checkable.json` `when_empty`) and the fixed list (`always`: CCRIS/CTOS, merchant agreement rates, landlord SST, supplier contracts, payroll and rent unless purchases contain rent or payroll lines). Every string is en + ms. The demo gets 5.
+- `analyze.py` adds `cashOnDeliveryInStatementPeriod` (`RML2229`, `TGP 303`: the cash invoices paid while the bank statement ran). If the Verifier didn't name them, the server adds the passed check "RML2229, TGP 303: cash on delivery, no bank line expected" (en/ms, none of the scorer's false-positive words).
+- Confidence: a decision marked `high` whose evidence has no `source`, or has a `basis: "assumption"` item, is lowered to `medium` with a worded note; a missing confidence is filled the same way.
+- The brief page score (`app/r/[id]/page.tsx`) now counts only entries whose status isn't `not_checked`. **UI still to do:** the check list draws `not_checked` entries with the red ✗ of a failed check; give them their own look.
+
 ### 4. Audience QR poll on the owner question
 
 **Owner sees.** When Kak Kira asks ("RM39.90 beras dari Serba Murah: stok kedai, peribadi, atau campur?"), the card shows a QR code and a 6-character join code. Anyone opening `/p/<code>` on their phone votes without login; the tally updates live on the card; the presenter taps "Guna jawapan ramai" (use the audience answer) or the owner answers directly. The run continues and the artifact updates.
@@ -256,6 +266,13 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 - Keep the question open long enough: `BIZDECIDE_ASK_WAIT_MS` (section 3, decision 7).
 
 **Accept.** Two phones vote on `/p/<code>`; the card shows 2 votes; the presenter's button posts the majority; `request.status` leaves `waiting_for_user` within 3 s; the Verifier's `owner_answers` includes it.
+
+**Status, 10 Oct 2026: backend and the public page done; the `QuestionCard` part (QR, live counts, "Guna jawapan ramai") is UI work.** Differences from the spec:
+- The code is not the first 6 characters of the question id (local ids are lowercase hex, Firestore ids are mixed case, and looking up a prefix needs a range query). `createQuestion` stores a random `pollCode` (6 characters, no 0/O/1/I/L) on every question, on both engines; `getQuestionByPollCode` finds it. The brief page already receives it as `question.pollCode`.
+- One vote per cookie per question is enforced by the vote's id (`questionId_voterHash`) through a new create-if-absent `create()` on both store backends. The cookie (`bd_voter`, httpOnly, 30 days) is stored only as a SHA-256 of cookie + question id.
+- `GET /api/polls/[code]` returns `{code, status, question, context, options, tally, total, myVote, answer, lang}` and never the request or question id. Its rate limit is per browser cookie + IP (phones poll every 2 s); the vote route uses `vote:<code>`, 300 per 10 min per IP. Votes return 409 once the question is closed or this browser has voted.
+- `app/p/[code]/page.tsx` (+ `layout.tsx` for the title, `app/poll.css` with prefix `pl-`, strings in `lib/i18n-poll.ts`) hides the site header and footer with `body:has(.pl-page)` because the root layout can't be changed from here.
+- For the UI: the card's QR should encode `${origin}/p/${question.pollCode}`; poll `GET /api/polls/[code]` for `tally`; "use the audience answer" posts the top option to the existing `POST /api/questions/[id]/answer` (ties are the presenter's call). No QR library was added.
 
 ### 5. Found-money ledger with footnote and hours saved
 
@@ -275,6 +292,12 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 
 **Accept.** Demo brief shows three packs; TEKUN's checklist reads 1 ready / 1 partial / 2 missing; toggling Shariah hides any pack whose `shariah` is not `true` and shows "2 daripada 3"; no pack says "approved"; the proposed line carries the date.
 
+**Status, 10 Oct 2026: backend done, no UI.** Differences from the spec:
+- `shariah` column added to `funding_db.csv` and `funding_db.json` (Y: TEKUN-NIAGA, MARA-SEMAI, AGRO-PENJAJA, SMEBANK-TECHAD, CGC-BIZMULA, CGC-BIZWANITA; everything else blank = unknown). No `proposed_note` column: the Budget 2027 lines live only in `proposed_measures.json` (linked by `program_ids`), so there is one place to change them. `funding_db.xlsx` was not regenerated.
+- `run_all.py` builds a checklist for every candidate whose row lists documents, not only TEKUN: each `documents` item (split on `;` outside brackets; "other/additional documents" items dropped) marked from the data: SSM or registration → ready from `profile.ssmNumber`; bank statements → by months covered (TEKUN: "Sep 2026 only (1 of 3 months); download Jul–Aug 2026"); sales records → ready from the sales months; everything else missing. Details come in en and `detailMs`. TEKUN on the demo: IC missing, SSM ready, photos missing, bank partial.
+- `ladder`, `shariah` and `proposedNotes` are set by `finalizeResult`, not the Verifier (schema limit above): shariah from `funding_db.json` (left out when blank), ladder `matched` → `eligible` (verdict eligible) → `document_ready` (eligible and every checklist item ready), proposed lines in the owner's language with "Budget 2027 (tabled 9 Oct 2026, not yet law)". It also copies the lane's checklist into a pack the Verifier left empty. The scripted demo run gives TEKUN eligible / Shariah / 1 Budget line, MARA matched / Shariah, BNM MEF eligible / unknown: the toggle would show 2 of 3.
+- The checklist item names are the pack's English text; the Verifier translates them for BM when it writes the checklist itself.
+
 ### 7. Price Movers decision card with sparkline and SST note
 
 **Owner sees.** Decision #1: "Serbuk Kopi O Campuran naik 12% dalam 8 invois sejak Jun; tiada notis dari Kopi Cap Bintang (Syarikat Kopi Cap Bintang Timur Sdn Bhd, S01)" with a per-SKU sparkline (28.00 → 31.36), extra paid so far RM147.62, projected RM983/yr at current volume, the eight invoice chips, and one line on tax: the SST status of the item from the lookup, or "SST status not verified" when unknown. (For milk-type items the line reads "0% sales tax: this is margin, not tax".)
@@ -286,6 +309,11 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 
 **Accept.** Sparkline shows 8 points rising in three steps (four price levels); the card quotes 28.00 and 31.36 and RM983/yr; the SST line cites a source or says "not verified".
 
+**Status, 10 Oct 2026: backend done, no UI.** Differences from the spec:
+- The series keeps Phase 0's name `series` (`{date, invoice, price, qty}`), now on every tracked item, stable ones too; no separate `history`.
+- `track.py` adds `sst: {ratePct, note: {en, ms}, sourceUrl}` from `references/sst_rates.json`. Only fresh milk ("susu segar"), rice and vegetables are listed at 0% (StoreHub source); condensed and evaporated milk are excluded. Coffee is not in any source we hold, so the kopi powder line reads "SST status not verified" (`ratePct: null`). Skill version 1.1.0.
+- The card's data is a new optional `Decision.priceMove`: `{item, supplier, series: [{date, value, key}], changePct, extraPaidRm, projectedPerYearRm, notified, sstRatePct?, sstNote, sstSourceUrl?}`. `finalizeResult` copies it from the Procurement alert that matches the decision's purchase `source.item` (or the item name in its text). Demo: 8 points 28.00 → 31.36, RM147.62 so far, RM985.50/yr (the script's figure; the answer key rounds to ≈RM983), not notified.
+
 ### 8. Classifier guardrails
 
 **Build.**
@@ -294,6 +322,13 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 - Prompts: "If `assistanceEligibility` is `cannot_determine`, ask the owner with `ask_owner` (options: independent / part of a group / not sure)"; "Proposed measures are labelled as proposed; never present them as current rules".
 
 **Accept.** Demo (sole proprietorship): no group question is asked; `einvoice.status = exempt`, `headroomRm ≈ 2,747,429`. A test profile with `legalForm: "Sdn Bhd"` and no `groupOwnership` triggers the question.
+
+**Status, 10 Oct 2026: done.** Differences from the spec:
+- The skill reads `references/sme_rules.json` (a copy of the pack file; skill version 1.2.0). `sme_rules.json` gained `group_rule` (independent legal forms, the question and options in en/ms) and `einvoice` (RM3m threshold, Guideline v4.8, history, group exception, next check 1 Jan 2028 with a VERIFY note on the relaxation end date).
+- `classify.py` returns `sizeCategory`, `groupStatus` (`independent`/`group`/`unknown`), `groupBasis`, `assistanceEligibility` (`eligible`/`not_eligible`/`cannot_determine`) and `askOwner`. An unknown legal form is treated like a company with unknown ties (cannot_determine), never as independent. A business that answered "part of a group" stays cannot_determine (group figures are needed).
+- `einvoice` uses the higher of declared and actual revenue and includes `revenueUsedRm`, `actualRm`, `nextCheckReason`. The Verifier doesn't write `result.einvoice`; `finalizeResult` takes it from the Classifier lane (`bankImpliedRm` = 12-month sales) and turns cannot_determine into exempt only when the owner answered the group question "Independent"/"Bebas"; `einvoice.basis` (new, optional) says which.
+- `run_all.py` marks every programme "needs info" while group ties are unknown. `proposed_measures.json` (Budget 2027, status proposed, tabled 2026-10-09, sources, linked programmes, en/ms notes; the MSME tax line notes it applies to companies, not sole proprietors) is in the market knowledge for every agent.
+- Checked: demo → independent, exempt, headroom 2,747,428.92, no group question; Sdn Bhd test → cannot_determine and the question; after answering "Independent" → exempt with the basis line.
 
 ### 9. Deterministic seed, cached replay, recording
 
@@ -304,6 +339,14 @@ Each item: what the owner sees, what to build (by file), acceptance test.
 - Recording: record the replay at 1280×800 as the backup video; keep it on the presenter's laptop and phone.
 
 **Accept.** With `ANTHROPIC_API_KEY` unset and `BIZDECIDE_REPLAY=1`, the demo café runs end to end in under 3 minutes with identical numbers every time, including the poll.
+
+**Status, 10 Oct 2026: done except the recording; the fixture must be re-recorded after a real run.** Differences from the spec:
+- `lib/replay.ts`. Replay applies to the business named in the fixture (the demo café); any other business runs live with a key, or fails with "Replay mode covers Rock Cafe only". The claim line reads "Replaying the recorded demo run". Gaps are capped at 25 s each; `BIZDECIDE_REPLAY_SPEED` (e.g. 4) speeds it up for rehearsals. The recorded brief is delivered whatever the live answers were, so the numbers never change.
+- `claudeEnabled()` is true in replay mode. Without a key, chat answers come from the fixture's recorded messages (exact question match) or an en/ms note, and approved actions fail with an en/ms note instead of calling the API.
+- `docs/demo-run.fixture.json` was captured from the scripted fake-model run (real skill scripts, questions, server checks and timing; scripted Analysis draft and Verifier wording; no chat answers). Run the demo once for real, then `node scripts/capture-demo-run.mjs` to replace it.
+- `scripts/seed-demo-run.mjs` writes a completed request in the fixture's language into `.data/db.json`.
+- Checked: replay through `next start` with no key: two questions opened live with poll codes, two votes each, audience answer posted, brief delivered (17 s at speed 4; 51 s at speed 1 in the harness), result identical to the fixture, score 14/14.
+- Not done: the 1280×800 screen recording (needs a person).
 
 ### 10. Kak Kira voice and copy (BizDecide stays the brand)
 
