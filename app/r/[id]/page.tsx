@@ -636,18 +636,23 @@ const span = (from: string, to: string, locale: string) => {
   return a === b ? a : `${a} – ${b}`;
 };
 
-/** Three small cards under the headline: sales, purchases and the bank balance. */
+/** Three small cards under the headline: sales (money in), purchases (money out) and the bank balance, each in its own colour. */
 function Figures({ s, market, t }: { s: Statements; market?: string; t: AppStrings }) {
   const cur = marketPack(market)?.currencySymbol ?? "RM";
-  const cards: [string, number, string][] = [];
-  if (s.sales) cards.push([t.figSales, s.sales.total, span(s.sales.from, s.sales.to, t.dateLocale)]);
-  if (s.purchases) cards.push([t.figPurchases, s.purchases.total, span(s.purchases.from, s.purchases.to, t.dateLocale)]);
-  if (s.bank) cards.push([t.figBank, s.bank.closing, dayMonthYear(s.bank.to, t.dateLocale)]);
+  const cards: ["sales" | "purchases" | "bank", IconName, string, number, string][] = [];
+  if (s.sales) cards.push(["sales", "chart", t.figSales, s.sales.total, span(s.sales.from, s.sales.to, t.dateLocale)]);
+  if (s.purchases) cards.push(["purchases", "receipt", t.figPurchases, s.purchases.total, span(s.purchases.from, s.purchases.to, t.dateLocale)]);
+  if (s.bank) cards.push(["bank", "landmark", t.figBank, s.bank.closing, dayMonthYear(s.bank.to, t.dateLocale)]);
   return (
     <ul className="figs">
-      {cards.map(([label, value, when]) => (
-        <li key={label} className="fig">
-          <span className="fig-l">{label}</span>
+      {cards.map(([key, icon, label, value, when]) => (
+        <li key={key} className={`fig fig-${key}`}>
+          <span className="fig-l">
+            <span className="fig-ico" aria-hidden="true">
+              <Icon name={icon} size={15} />
+            </span>
+            {label}
+          </span>
           <span className="fig-v">{n2(value)}</span>
           <span className="fig-n">
             {cur} · {when}
@@ -663,6 +668,8 @@ function StatementsFold({ s, market, t }: { s: Statements; market?: string; t: A
   const cur = marketPack(market)?.currencySymbol ?? "RM";
   const channels = s.sales?.channels ?? [];
   if (!channels.length && !s.bank) return null;
+  const salesTotal = s.sales?.total ?? 0;
+  const pct = (n: number) => (salesTotal > 0 ? Math.round((n / salesTotal) * 100) : 0);
   return (
     <details className="brief-more" id="statements">
       <summary>
@@ -676,10 +683,24 @@ function StatementsFold({ s, market, t }: { s: Statements; market?: string; t: A
             <span className="stmt-n">
               {cur} · {span(s.sales.from, s.sales.to, t.dateLocale)}
             </span>
+            {/* The channel mix as one thin bar; the rows below are its legend and its table. */}
+            <div className="mix" role="img" aria-label={channels.map((c) => `${t.channel[c.key]} ${pct(c.amount)}%`).join(", ")}>
+              {channels.map((c) => (
+                <span
+                  key={c.key}
+                  className={`mix-seg ch-${c.key}`}
+                  style={{ flexGrow: Math.max(c.amount, 0) }}
+                  title={`${t.channel[c.key]}: ${n2(c.amount)} (${pct(c.amount)}%)`}
+                />
+              ))}
+            </div>
             <dl>
               {channels.map((c) => (
                 <div key={c.key}>
-                  <dt>{t.channel[c.key]}</dt>
+                  <dt>
+                    <i className={`dot ch-${c.key}`} aria-hidden="true" />
+                    {t.channel[c.key]} <span className="stmt-pct">{pct(c.amount)}%</span>
+                  </dt>
                   <dd>{n2(c.amount)}</dd>
                 </div>
               ))}

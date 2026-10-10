@@ -703,16 +703,43 @@ details[open] > summary .fold-icon { transform: rotate(180deg); }
   .brief-more-body { padding: 16px 18px 20px; }
 }
 
-/* brief: the owner's own figures, three small cards, and the statements behind them */
+/* brief: the owner's own figures, three small cards, and the statements behind them.
+   Colours carry identity only: money in, money out, the bank; and one hue per sales channel. Numbers and labels stay
+   in ink. Both sets passed the dataviz palette validator (light surface); every colour sits beside its written label. */
+:root {
+  --c-in: #1baf7a;
+  --c-out: #eb6834;
+  --c-bank: #2a67a8;
+  --ch-cash: #2a78d6;
+  --ch-qr: #eb6834;
+  --ch-card: #1baf7a;
+  --ch-delivery: #eda100;
+  --ch-other: #898781;
+}
 .figs { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.fig { display: grid; gap: 2px; min-width: 0; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-chop); box-shadow: var(--shadow-card); }
-.fig-l { font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
+.fig { --fig: var(--brand); position: relative; overflow: hidden; display: grid; gap: 2px; min-width: 0; padding: 16px 18px 14px; background: color-mix(in srgb, var(--fig) 6%, var(--surface)); border: 1px solid color-mix(in srgb, var(--fig) 22%, var(--line)); border-radius: var(--r-chop); box-shadow: var(--shadow-card); }
+.fig::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--fig); }
+.fig-sales { --fig: var(--c-in); }
+.fig-purchases { --fig: var(--c-out); }
+.fig-bank { --fig: var(--c-bank); }
+.fig-l { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); }
+.fig-ico { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: color-mix(in srgb, var(--fig) 16%, var(--surface)); color: color-mix(in srgb, var(--fig) 78%, var(--ink)); }
 .fig-v { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .fig-n { font-size: 0.75rem; color: var(--subtle); }
 .stmts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 .stmt { min-width: 0; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--r-chop); background: var(--surface-2); }
 .stmt h4 { margin: 0; font-size: 1rem; color: var(--ink); }
 .stmt-n { display: block; margin: 2px 0 8px; font-size: 0.75rem; color: var(--subtle); }
+.mix { display: flex; gap: 2px; height: 12px; margin: 6px 0 10px; }
+.mix-seg { flex-basis: 0; min-width: 4px; }
+.mix-seg:last-child { border-radius: 0 4px 4px 0; }
+.ch-cash { background: var(--ch-cash); }
+.ch-qr { background: var(--ch-qr); }
+.ch-card { background: var(--ch-card); }
+.ch-delivery { background: var(--ch-delivery); }
+.ch-other { background: var(--ch-other); }
+.stmt dt .dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; vertical-align: 0; }
+.stmt-pct { margin-left: 4px; font-size: 0.8125rem; color: var(--subtle); font-variant-numeric: tabular-nums; }
 .stmt dl { margin: 0; }
 .stmt dl > div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 0.9375rem; color: var(--ink-2); }
 .stmt dl > div:first-child { border-top: 0; }
@@ -722,7 +749,7 @@ details[open] > summary .fold-icon { transform: rotate(180deg); }
 .stmt-check.bad { color: var(--urgent); }
 @media (max-width: 640px) {
   .figs { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .fig { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0 12px; padding: 12px 16px; }
+  .fig { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 12px; padding: 14px 16px 12px; }
   .fig-v { grid-column: 2; grid-row: 1 / span 2; font-size: 1.25rem; }
 }
 
