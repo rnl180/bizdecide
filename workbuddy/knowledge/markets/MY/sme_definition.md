@@ -78,7 +78,7 @@ def classify(sector: str, turnover: float, employees: int) -> str | None:
 ```
 
 Test cases for the skill:
-- services, RM265,000, 4 employees → micro (Kedai Kopi Aminah)
+- services, RM265,000, 4 employees → micro (Rock Cafe)
 - services, RM400,000, 4 employees → micro (conflict rule)
 - services, RM25 mil, 40 employees → medium (employees qualify; turnover alone would exclude)
 - manufacturing, RM60 mil, 250 employees → not SME

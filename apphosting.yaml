@@ -10,3 +10,8 @@ env:
   - variable: BIZDECIDE_MCP_KEY
     secret: bizdecide-mcp-key        # firebase apphosting:secrets:set bizdecide-mcp-key
     availability: [RUNTIME]
+  # The Claude engine runs the skill scripts with python3. The server logs "[startup] Python 3.x" when it
+  # finds it; if it logs "not found", point PYTHON_BIN at the interpreter (or deploy the Docker image).
+  # - variable: PYTHON_BIN
+  #   value: /usr/bin/python3
+  #   availability: [RUNTIME]

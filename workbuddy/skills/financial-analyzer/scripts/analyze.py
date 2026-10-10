@@ -3,6 +3,8 @@
 
 Usage: python3 analyze.py --data <link-or-file>
 Prints a compact JSON summary. All money in RM. Python standard library only.
+Each finding carries source: {table, keys}, the rows behind it (bank: reference, payables/purchases: invoiceNo,
+sales: period date). Copy those keys as they are; the app opens the rows from them.
 """
 import re
 from collections import defaultdict
@@ -23,8 +25,12 @@ def D(s):
 def norm(s):
     return re.sub(r"[^A-Z0-9]", "", (s or "").upper())
 
+def src(table, keys):
+    keys = [k for k in dict.fromkeys(keys) if k]
+    return {"table": table, "keys": keys} if keys else None
+
 # ---------------- P&L ----------------
-by_month = defaultdict(lambda: {"revenue": 0.0, "cash": 0.0, "qr": 0.0, "card": 0.0, "delivery": 0.0, "openDays": 0})
+by_month = defaultdict(lambda: {"revenue": 0.0, "cash": 0.0, "qr": 0.0, "card": 0.0, "delivery": 0.0, "openDays": 0, "closedDays": 0})
 notes = {}
 for s in sales:
     m = s["period"][:7]
@@ -34,7 +40,8 @@ for s in sales:
     b["qr"] += s.get("duitnowQrRm") or 0
     b["card"] += s.get("cardRm") or 0
     b["delivery"] += s.get("deliveryGrossRm") or 0
-    b["openDays"] += 1
+    is_open = (s.get("amountRm") or 0) > 0  # closed days come through with RM0 and a note
+    b["openDays" if is_open else "closedDays"] += 1
     if s.get("note"):
         notes.setdefault(m, set()).add(s["note"])
 
@@ -43,6 +50,12 @@ for p in purchases:
     cost_by_month[p["date"][:7]] += p.get("totalRm") or 0
 
 months = sorted(by_month)
+# A note on every month (a weekly closing day) is routine: report it once, not in each month.
+regular = sorted(n for n in set().union(*notes.values()) if all(n in notes.get(m, ()) for m in months)) if len(months) > 2 and notes else []
+for m in list(notes):
+    notes[m] -= set(regular)
+    if not notes[m]:
+        del notes[m]
 turnover = sum(by_month[m]["revenue"] for m in months)
 avg_month = turnover / len(months) if months else 0
 monthly = []
@@ -52,6 +65,7 @@ for m in months:
         "month": m,
         "revenue": r2(b["revenue"]),
         "openDays": b["openDays"],
+        "closedDays": b["closedDays"],
         "supplierPurchases": r2(cost_by_month.get(m, 0)) if m in cost_by_month else None,
         "vsAverage": f"{(b['revenue'] / avg_month - 1) * 100:+.0f}%" if avg_month else None,
         "note": "; ".join(sorted(notes[m]))[:120] if m in notes else None,
@@ -84,6 +98,8 @@ for p in payables:
             "invoiceNo": p["invoiceNo"], "supplier": p["supplier"], "invoiceAmount": p["amountRm"],
             "timesPaid": len(hits), "overpaid": r2(sum(h["debitRm"] for h in hits) - p["amountRm"]),
             "bankLines": [{"date": h["date"], "reference": h.get("reference"), "amount": h["debitRm"]} for h in hits],
+            "source": src("bank", [h.get("reference") for h in hits]),
+            "ledgerSource": src("payables", [p["invoiceNo"]]),
         })
     elif hits:
         matched_payables.append(p["invoiceNo"])
@@ -92,7 +108,7 @@ for p in payables:
     elif "cash" in method or "cod" in method:
         cash_paid.append(p["invoiceNo"])
     elif period_start and p.get("paidDate") and period_start <= D(p["paidDate"]) <= period_end:
-        unmatched_payables.append({"invoiceNo": p["invoiceNo"], "supplier": p["supplier"], "amount": p["amountRm"], "ledgerPaidDate": p["paidDate"]})
+        unmatched_payables.append({"invoiceNo": p["invoiceNo"], "supplier": p["supplier"], "amount": p["amountRm"], "ledgerPaidDate": p["paidDate"], "source": src("payables", [p["invoiceNo"]])})
 
 # ---------------- sales vs bank: QR / card / delivery settlements ----------------
 def settlement_lines(word):
@@ -122,14 +138,14 @@ for s in sales:
         elif settle_day > period_end:
             qr_after_period.append({"saleDate": s["period"], "amount": r2(qr)})
         else:
-            missing_qr.append({"saleDate": s["period"], "expectedAmount": r2(qr), "expectedOn": settle_day.isoformat(), "expectedDescription": f"DUITNOW QR MERCHANT SETTLEMENT {code}"})
+            missing_qr.append({"saleDate": s["period"], "expectedAmount": r2(qr), "expectedOn": settle_day.isoformat(), "expectedDescription": f"DUITNOW QR MERCHANT SETTLEMENT {code}", "source": src("sales", [s["period"]])})
     card = s.get("cardRm") or 0
     if card > 0:
         if code in card_lines:
             card_gross += card
             card_net += card_lines[code]["creditRm"]
         elif settle_day <= period_end:
-            missing_card.append({"saleDate": s["period"], "expectedGross": r2(card)})
+            missing_card.append({"saleDate": s["period"], "expectedGross": r2(card), "source": src("sales", [s["period"]])})
 
 mdr = (1 - card_net / card_gross) * 100 if card_gross else None
 
@@ -145,7 +161,7 @@ for t in delivery_payouts:
         delivery_checks.append({"weekEnding": we.isoformat(), "gross": r2(gross), "payout": t["creditRm"], "payoutPct": round(t["creditRm"] / gross * 100, 1)})
 
 # ---------------- other debits worth a look ----------------
-drawings = [{"date": t["date"], "amount": t["debitRm"], "description": t["description"]} for t in debit_lines if "DRAWING" in t["description"].upper()]
+drawings = [{"date": t["date"], "amount": t["debitRm"], "description": t["description"], "source": src("bank", [t.get("reference")])} for t in debit_lines if "DRAWING" in t["description"].upper()]
 known_suppliers = [norm(s.get("name"))[:10] for s in suppliers]
 non_supplier_card = []
 for t in debit_lines:
@@ -156,6 +172,8 @@ for t in debit_lines:
             "date": t["date"], "amount": t["debitRm"], "description": t["description"],
             "receiptLines": [{"item": p["item"], "qty": p.get("qty"), "totalRm": p["totalRm"]} for p in lines],
             "why": "Paid from the business account at a shop that is not a registered supplier; may mix business and personal items. Split line by line and ask the owner only about unclear lines.",
+            "source": src("bank", [t.get("reference")]),
+            "receiptSource": src("purchases", [p.get("invoiceNo") for p in lines]),
         })
 
 out({
@@ -164,6 +182,7 @@ out({
     "months": len(months),
     "averageMonthlyRevenue": r2(avg_month),
     "channelTotals12m": channel_totals,
+    "regularClosures": regular,
     "seasonalDips": [{"month": x["month"], "revenue": x["revenue"], "vsAverage": x["vsAverage"], "note": x["note"]} for x in dips],
     "monthly": monthly,
     "bank": {
@@ -181,6 +200,7 @@ out({
     },
     "normal_do_not_flag": {
         "cashOnDeliveryInvoices": cash_paid,
+        "cashOnDeliverySource": src("payables", cash_paid),
         "qrSettlingAfterStatementEnd": qr_after_period,
         "cardMerchantDiscountRatePct": round(mdr, 2) if mdr is not None else None,
         "deliveryPayoutChecks": delivery_checks,

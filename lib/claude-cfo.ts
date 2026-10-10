@@ -17,15 +17,17 @@ import {
   createQuestion,
   expireQuestion,
   getBusiness,
+  getLaneOutputs,
   getQuestion,
   getRequest,
   getResult,
   listMessages,
+  saveLaneOutputs,
   saveResult,
   sleep,
   updateRequest,
 } from "./store";
-import { ResultSchema, SERVICE_LABELS, type Result } from "./types";
+import { EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
 import { impactKind } from "./impact";
 
 /**
@@ -45,9 +47,15 @@ const MODEL = "claude-opus-5-5";
 const EFFORT = "high";
 const BETAS = ["server-side-fallback-2026-07-01"]; // fallbacks: "default" re-runs a declined turn on another model
 const WB = path.join(process.cwd(), "workbuddy");
-const ASK_WAIT_MS = 60_000;
-const MAX_QUESTIONS = 2;
+const envInt = (name: string, fallback: number) => {
+  const n = Number(process.env[name]);
+  return Number.isInteger(n) && n > 0 ? n : fallback;
+};
+const ASK_WAIT_MS = envInt("BIZDECIDE_ASK_WAIT_MS", 120_000); // raise it on stage so the audience can vote
+const MAX_QUESTIONS = envInt("BIZDECIDE_MAX_QUESTIONS", 3);
 const MAX_TURNS = 12;
+/** A run whose request hasn't changed for this long died with its server; the next poll restarts it. */
+export const STALE_RUN_MS = Math.max(5 * 60_000, ASK_WAIT_MS + 60_000);
 
 export const claudeEnabled = () => Boolean(process.env.ANTHROPIC_API_KEY);
 
@@ -75,9 +83,9 @@ const SCRIPTS = {
   all: "run_all.py", // the three above plus the funding pre-screen and ranked candidate decisions
 } as const;
 
-async function python(script: string, dataFile: string): Promise<Json> {
+async function python(script: string, dataFile: string, extraArgs: string[] = []): Promise<Json> {
   try {
-    const { stdout } = await execFileP(process.env.PYTHON_BIN || "python3", [path.join(WB, script), "--data", dataFile], {
+    const { stdout } = await execFileP(process.env.PYTHON_BIN || "python3", [path.join(WB, script), "--data", dataFile, ...extraArgs], {
       cwd: WB,
       timeout: 60_000,
       maxBuffer: 20 * 1024 * 1024,
@@ -101,38 +109,80 @@ async function openWorkspace(businessId: string): Promise<Workspace> {
   const file = path.join(dir, "data.json");
   await writeFile(file, JSON.stringify(data));
   const cache = new Map<string, Promise<Json>>();
-  const run = (s: keyof typeof SCRIPTS) => {
-    if (!cache.has(s)) cache.set(s, python(SCRIPTS[s], file));
+  const run = (s: keyof typeof SCRIPTS): Promise<Json> => {
+    if (!cache.has(s)) cache.set(s, s === "all" ? runAll() : python(SCRIPTS[s], file));
     return cache.get(s)!;
+  };
+  // run_all.py reads the three outputs we already have instead of running the scripts a second time.
+  // A script that failed here is left out, so run_all.py runs it again and reports its error.
+  const runAll = async () => {
+    await Promise.all(
+      (["financial", "prices", "sme"] as const).map((s) =>
+        run(s).then((data) => writeFile(path.join(dir, `${s}.json`), JSON.stringify(data)), () => undefined),
+      ),
+    );
+    return python(SCRIPTS.all, file, ["--inputs", dir]);
   };
   return { business, run, close: () => rm(dir, { recursive: true, force: true }) };
 }
 
 type Fmt = (n: number) => string;
+/** Reports one step of a lane to the owner's screen; impactRm feeds the rolling found-money counter. */
+type Emit = (step: string, extra?: { detail?: string; impactRm?: number }) => Promise<void>;
 interface Lane {
+  id: LaneId;
   tool: string;
   agent: string; // matches the TEAM names on the brief page
   description: string;
-  run: (ws: Workspace, fmt: Fmt) => Promise<{ data: Json; summary: string }>;
+  run: (ws: Workspace, fmt: Fmt, emit: Emit) => Promise<{ data: Json; summary: string }>;
 }
+
+const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
+/** Exact amounts for findings the owner will check against a statement (RM312.40, not RM312). */
+const sen = (fmt: Fmt, n: number) => {
+  const cents = Math.round(Math.abs(n) * 100);
+  return cents % 100 ? `${fmt(Math.floor(cents / 100))}.${String(cents % 100).padStart(2, "0")}` : fmt(cents / 100);
+};
 
 const LANES: Lane[] = [
   {
+    id: "bookkeeper",
     tool: "run_bookkeeper",
     agent: "Bookkeeper",
     description: "Bookkeeper lane: 12-month turnover, monthly revenue with open days and notes, channel totals, seasonal dips, supplier purchases by month, and the bank statement summary (opening, closing, reconciles).",
-    run: async (ws, fmt) => {
+    run: async (ws, fmt, emit) => {
+      const openDays = (ws.business.sales ?? []).filter((s) => s.amountRm > 0).length;
+      await emit(`Reading ${plural(openDays, "day")} of sales and ${plural(ws.business.bank?.length ?? 0, "bank line")}`);
       const { findings: _f, normal_do_not_flag: _n, matchedPayables: _m, ...data } = await ws.run("financial");
+      if (data.bank?.balanceReconciles != null) {
+        await emit(data.bank.balanceReconciles ? "Bank statement reconciles" : "Bank statement does not reconcile", {
+          detail: `${fmt(data.bank.opening ?? 0)} → ${fmt(data.bank.closing ?? 0)}`,
+        });
+      }
+      if (data.seasonalDips?.length) await emit(`${plural(data.seasonalDips.length, "seasonal dip")} found`, { detail: data.seasonalDips.map((d: Json) => d.month).join(", ") });
       return { data, summary: `${data.months ?? "?"} months, turnover ${fmt(data.turnover12m ?? 0)}` };
     },
   },
   {
+    id: "reconciliation",
     tool: "run_reconciliation",
     agent: "Reconciliation",
     description: "Reconciliation lane: payables vs bank (duplicate payments), sales vs bank (missing QR and card settlements), card purchases at non-suppliers (possible mixed receipts), cash to recover, and the items verified as normal that must not be flagged.",
-    run: async (ws, fmt) => {
+    run: async (ws, fmt, emit) => {
+      await emit(`Matching ${plural(ws.business.payables?.length ?? 0, "invoice")} to the bank`);
       const fin = await ws.run("financial");
       const f = fin.findings ?? {};
+      for (const d of f.duplicatePayments ?? []) {
+        await emit(`${d.invoiceNo} paid ${d.timesPaid} times: ${sen(fmt, d.overpaid)}`, { detail: d.supplier, impactRm: d.overpaid });
+      }
+      for (const m of f.missingQrSettlements ?? []) {
+        await emit(`DuitNow QR for ${m.saleDate} never settled: ${sen(fmt, m.expectedAmount)}`, { impactRm: m.expectedAmount });
+      }
+      for (const m of f.missingCardSettlements ?? []) {
+        await emit(`Card sales for ${m.saleDate} never settled: ${sen(fmt, m.expectedGross)}`, { impactRm: m.expectedGross });
+      }
+      const cod = fin.normal_do_not_flag?.cashOnDeliveryInvoices?.length ?? 0;
+      if (cod) await emit(`${plural(cod, "cash-on-delivery invoice")}: normal, no bank line expected`);
       const missing = (f.missingQrSettlements?.length ?? 0) + (f.missingCardSettlements?.length ?? 0);
       return {
         data: { findings: f, normal_do_not_flag: fin.normal_do_not_flag, matchedPayables: fin.matchedPayables, bank: fin.bank },
@@ -141,29 +191,42 @@ const LANES: Lane[] = [
     },
   },
   {
+    id: "procurement",
     tool: "run_procurement",
     agent: "Procurement",
-    description: "Procurement lane: unit price per supplier and item over time, price-rise alerts (item-specific or supplier-wide, notified or not, extra paid so far, projected extra per month and year, evidence invoices).",
-    run: async (ws) => {
+    description: "Procurement lane: unit price per supplier and item over time, price-rise alerts (item-specific or supplier-wide, notified or not, extra paid so far, projected extra per month and year, the invoices of the series), and a source object per alert.",
+    run: async (ws, fmt, emit) => {
+      await emit(`Tracking unit prices across ${plural(ws.business.purchases?.length ?? 0, "purchase line")}`);
       const data = await ws.run("prices");
+      for (const a of data.alerts ?? []) {
+        await emit(`${a.item} at ${a.supplier}: +${a.changePct}%`, { detail: `about ${fmt(a.projectedExtraPerYear)} a year`, impactRm: a.projectedExtraPerYear });
+      }
       return { data, summary: `${data.alerts?.length ?? 0} price alert(s)` };
     },
   },
   {
+    id: "classifier",
     tool: "run_classifier",
     agent: "Classifier",
     description: "Classifier lane: official SME category from actual 12-month sales (and declared vs actual), headroom to the next category, years operating, owner facts and what is unknown for funding eligibility.",
-    run: async (ws) => {
+    run: async (ws, fmt, emit) => {
+      await emit("Applying the official SME definition");
       const data = await ws.run("sme");
+      if (data.declaredVsActual) await emit("Declared sales differ from the data", { detail: `${fmt(data.declaredVsActual.declared)} declared, ${fmt(data.declaredVsActual.actual)} in the data` });
+      if (data.unknownForEligibility?.length) await emit("Facts missing for eligibility", { detail: data.unknownForEligibility.join(", ") });
       return { data, summary: String(data.category ?? "category unknown") };
     },
   },
   {
+    id: "funding",
     tool: "run_funding",
     agent: "Funding",
     description: "Funding lane: every programme in the market pack pre-screened with the rules code can check (screen, checks, notes such as ASK the owner, verify flag, source URL), the excluded programmes with the failed rule, plus all lanes' candidate decisions ranked by yearly money impact.",
-    run: async (ws) => {
+    run: async (ws, _fmt, emit) => {
+      await emit("Screening the programmes in the market pack");
       const all = await ws.run("all");
+      const passing = all.funding?.candidates?.length ?? 0;
+      await emit(`${plural(passing, "programme")} pass the code checks`, { detail: `${all.funding?.excluded?.length ?? 0} excluded` });
       return {
         data: {
           market: all.market,
@@ -173,14 +236,39 @@ const LANES: Lane[] = [
           verified_ok_do_not_flag: all.verified_ok_do_not_flag,
           errors: all.errors,
         },
-        summary: `${all.funding?.candidates?.length ?? 0} programme(s) pass the code checks`,
+        summary: `${passing} programme(s) pass the code checks`,
       };
     },
   },
 ];
 
+const noEmit: Emit = async () => {};
+
+/** Progress lines for one lane on the request, so the brief page can draw it as its own lane. */
+function laneProgress(requestId: string, lane: LaneId) {
+  const write = (state: LaneState, step: string, extra?: { detail?: string; impactRm?: number }) =>
+    updateRequest(requestId, { progress: { step, lane, state, ...extra } }).catch((e) => console.error(`[claude] progress ${requestId}`, e));
+  const emit: Emit = (step, extra) => write("step", step, extra);
+  return { write, emit };
+}
+
+/** Runs one lane with started / step / done / failed progress. Returns the data, or { error } if it failed. */
+async function runLane(requestId: string | null, lane: Lane, ws: Workspace, fmt: Fmt): Promise<Json> {
+  const p = requestId ? laneProgress(requestId, lane.id) : null;
+  await p?.write("started", `${lane.agent} started`);
+  try {
+    const { data, summary } = await lane.run(ws, fmt, p?.emit ?? noEmit);
+    await p?.write("done", `${lane.agent} done`, { detail: summary });
+    return data;
+  } catch (e) {
+    const error = (e as Error).message;
+    await p?.write("failed", `${lane.agent} failed`, { detail: error.slice(0, 300) });
+    return { error };
+  }
+}
+
 async function runLanes(ws: Workspace, fmt: Fmt) {
-  const out = await Promise.all(LANES.map((l) => l.run(ws, fmt).then((r) => r.data, (e: Error) => ({ error: e.message }))));
+  const out = await Promise.all(LANES.map((l) => runLane(null, l, ws, fmt)));
   return Object.fromEntries(LANES.map((l, i) => [l.agent, out[i]]));
 }
 
@@ -313,7 +401,7 @@ const ANALYSIS_TOOLS: Anthropic.Beta.BetaTool[] = [
   {
     name: "ask_owner",
     description:
-      "Ask the business owner a multiple-choice question in the BizDecide app; they can also type their own answer. Use it only when the data is genuinely ambiguous and the answer changes a decision. Waits up to 60 seconds. Returns the answer, or the default if the owner doesn't answer in time (record that as an assumption). At most 2 questions per request.",
+      `Ask the business owner a multiple-choice question in the BizDecide app; they can also type their own answer. Use it only when the data is genuinely ambiguous and the answer changes a decision. Questions are shown one at a time; each waits up to ${Math.round(ASK_WAIT_MS / 60_000)} minute(s). Returns the answer, or the default if the owner doesn't answer in time (record that as an assumption). At most ${MAX_QUESTIONS} questions per request.`,
     input_schema: {
       type: "object",
       properties: {
@@ -385,7 +473,7 @@ const clampResult = (r: Json) => ({
 /** Claims a submitted request and runs the Claude CFO team on it. Safe to call more than once. */
 export function processRequest(requestId: string) {
   return once(`request:${requestId}`, async () => {
-    const r = await claimRequest(requestId, `Claude Opus 5.5 started working`);
+    const r = await claimRequest(requestId, `Claude Opus 5.5 started working`, STALE_RUN_MS);
     if (!r) return;
     const usage = newUsage();
     const started = Date.now();
@@ -411,24 +499,22 @@ export function processRequest(requestId: string) {
           const names = lanes.map((c) => LANES.find((l) => l.tool === c.name)!.agent).join(" · ");
           await updateRequest(requestId, { progress: { step: `${lanes.length} agents working in parallel`, detail: names } });
         }
+        // The app shows one question at a time, so questions asked in the same turn wait their turn.
+        let askQueue: Promise<unknown> = Promise.resolve();
         const results = await Promise.all(
           calls.map(async (c) => {
             const lane = LANES.find((l) => l.tool === c.name);
             if (lane) {
-              try {
-                const { data, summary } = await lane.run(ws!, fmt);
-                laneData[lane.agent] = data;
-                await updateRequest(requestId, { progress: { step: `${lane.agent} done`, detail: summary } });
-                return toolResult(c.id, data);
-              } catch (e) {
-                laneData[lane.agent] = { error: (e as Error).message };
-                return toolResult(c.id, `Lane failed: ${(e as Error).message}`, true);
-              }
+              const data = await runLane(requestId, lane, ws!, fmt);
+              laneData[lane.agent] = data;
+              return data.error ? toolResult(c.id, `Lane failed: ${data.error}`, true) : toolResult(c.id, data);
             }
             if (c.name === "ask_owner") {
               const input = AskInput.safeParse(c.input);
               if (!input.success) return toolResult(c.id, `Invalid input: ${z.prettifyError(input.error)}`, true);
-              return toolResult(c.id, await askOwner(requestId, input.data, asked));
+              const asking = askQueue.then(() => askOwner(requestId, input.data, asked));
+              askQueue = asking.catch(() => undefined);
+              return toolResult(c.id, await asking);
             }
             return toolResult(c.id, `Unknown tool ${c.name}`, true);
           }),
@@ -456,12 +542,15 @@ export function processRequest(requestId: string) {
       );
 
       // Lanes the agent skipped still go to the Verifier, so every figure can be checked.
-      for (const lane of LANES) {
-        if (!laneData[lane.agent]) laneData[lane.agent] = await lane.run(ws, fmt).then((x) => x.data, (e: Error) => ({ error: e.message }));
-      }
+      await Promise.all(
+        LANES.filter((l) => !laneData[l.agent]).map(async (l) => {
+          laneData[l.agent] = await runLane(requestId, l, ws!, fmt);
+        }),
+      );
 
       // 2) Verifier agent: checks the draft against the lane outputs and writes the final Result.
-      await updateRequest(requestId, { progress: { step: "Verifier checking every figure and link" } });
+      const verifier = laneProgress(requestId, "verifier");
+      await verifier.write("started", "Verifier checking every figure and link");
       const verifierParams: Params = {
         system: [
           { type: "text", text: VERIFIER_PROMPT },
@@ -486,7 +575,16 @@ export function processRequest(requestId: string) {
       const final = await converse(verifierParams, verifierMessages, usage);
       const result: Result = await parseStructured(ResultSchema, final, verifierParams, verifierMessages, usage, clampResult);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
+      for (const v of result.verification) {
+        const status = v.status ?? (v.passed ? "passed" : "failed");
+        await verifier.emit(v.check, { detail: status === "not_checked" ? "not checked" : status });
+      }
+      await verifier.write("done", "Verifier done", {
+        detail: `${result.verification.filter((v) => (v.status ?? (v.passed ? "passed" : "failed")) === "passed").length} of ${result.verification.length} checks passed`,
+      });
 
+      // Follow-up questions read these instead of running the lanes again.
+      await saveLaneOutputs(requestId, laneData).catch((e) => console.error(`[claude] lane outputs ${requestId}`, e));
       await saveResult(requestId, result);
       await updateRequest(requestId, { status: "completed", progress: { step: "CFO brief delivered", detail: result.headline } });
     } catch (e) {
@@ -507,7 +605,7 @@ export function processRequest(requestId: string) {
 
 const ReplySchema = z.object({
   answer: z.string().min(1).max(2000),
-  evidence: z.array(z.object({ label: z.string(), detail: z.string().optional(), url: z.string().optional() })).max(5),
+  evidence: z.array(EvidenceSchema).max(5),
 });
 const ReplyFormat = zodOutputFormat(ReplySchema);
 
@@ -520,11 +618,23 @@ export function answerOwnerMessage(messageId: string) {
     let ws: Workspace | undefined;
     let language: string | undefined;
     try {
-      const [request, brief, thread] = await Promise.all([getRequest(m.requestId), getResult(m.requestId), listMessages(m.requestId)]);
-      ws = await openWorkspace(m.businessId);
-      language = request?.language ?? ws.business.profile.language;
-      const pack = marketPack(request?.market ?? ws.business.profile.market);
+      const [request, brief, thread, cached, business] = await Promise.all([
+        getRequest(m.requestId),
+        getResult(m.requestId),
+        listMessages(m.requestId),
+        getLaneOutputs(m.requestId),
+        getBusiness(m.businessId),
+      ]);
+      if (!business) throw new Error(`Business ${m.businessId} not found`);
+      language = request?.language ?? business.profile.language;
+      const pack = marketPack(request?.market ?? business.profile.market);
       if (!pack) throw new Error("Market not supported yet");
+      // Lane outputs saved with the brief; briefs delivered before they were saved run the lanes once more.
+      let laneOutputs = cached;
+      if (!laneOutputs) {
+        ws = await openWorkspace(m.businessId);
+        laneOutputs = await runLanes(ws, money(pack.code));
+      }
       const params: Params = {
         system: [
           { type: "text", text: CHAT_PROMPT },
@@ -537,9 +647,9 @@ export function answerOwnerMessage(messageId: string) {
           role: "user",
           content: [
             `Market ${pack.code}, currency ${pack.currencySymbol}.`,
-            block("business_profile", ws.business.profile),
-            block("owner_details", ws.business.profileExtras ?? {}),
-            block("lane_outputs", await runLanes(ws, money(pack.code))),
+            block("business_profile", business.profile),
+            block("owner_details", business.profileExtras ?? {}),
+            block("lane_outputs", laneOutputs),
             block("brief", brief ?? "No brief yet."),
             block("earlier_questions", thread.filter((t) => t.status === "answered").map((t) => ({ question: t.question, answer: t.answer }))),
             block("owner_question", m.question),

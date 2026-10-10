@@ -1,10 +1,11 @@
 {
   "disclaimer": "Fictional business created for a hackathon demo. All names, numbers and IDs are invented.",
   "profile": {
-    "name": "Kedai Kopi Aminah",
+    "name": "Rock Cafe",
     "sector": "F&B",
     "state": "Selangor",
     "employeesFullTime": 4,
+    "annualSalesDeclaredRm": 235000,
     "ssmNumber": "202103999901 (FICTIONAL)",
     "registeredSince": "2021-03",
     "ownershipFlags": [
@@ -22,7 +23,8 @@
       "gender": "female",
       "age": 34,
       "citizenship": "Malaysian",
-      "bumiputera": true
+      "bumiputera": true,
+      "muslimOwnershipPct": 100
     },
     "sectorDetail": "Services - F&B (kopitiam / café)",
     "premises": "Rented shoplot, RM3,200/month",
@@ -82,6 +84,17 @@
       "cardRm": 93.15,
       "deliveryGrossRm": 164.3,
       "transactions": 113
+    },
+    {
+      "period": "2025-10-06",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-10-07",
@@ -144,6 +157,17 @@
       "transactions": 105
     },
     {
+      "period": "2025-10-13",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-10-14",
       "amountRm": 739.9,
       "channel": "all",
@@ -202,6 +226,17 @@
       "cardRm": 77.9,
       "deliveryGrossRm": 244,
       "transactions": 105
+    },
+    {
+      "period": "2025-10-20",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-10-21",
@@ -264,6 +299,17 @@
       "transactions": 104
     },
     {
+      "period": "2025-10-27",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-10-28",
       "amountRm": 817.78,
       "channel": "all",
@@ -322,6 +368,17 @@
       "cardRm": 68.95,
       "deliveryGrossRm": 126.07,
       "transactions": 106
+    },
+    {
+      "period": "2025-11-03",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-11-04",
@@ -384,6 +441,17 @@
       "transactions": 113
     },
     {
+      "period": "2025-11-10",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-11-11",
       "amountRm": 784.46,
       "channel": "all",
@@ -442,6 +510,17 @@
       "cardRm": 100.83,
       "deliveryGrossRm": 173.09,
       "transactions": 117
+    },
+    {
+      "period": "2025-11-17",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-11-18",
@@ -504,6 +583,17 @@
       "transactions": 88
     },
     {
+      "period": "2025-11-24",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-11-25",
       "amountRm": 818.21,
       "channel": "all",
@@ -562,6 +652,17 @@
       "cardRm": 64.39,
       "deliveryGrossRm": 149.35,
       "transactions": 82
+    },
+    {
+      "period": "2025-12-01",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-12-02",
@@ -624,6 +725,17 @@
       "transactions": 102
     },
     {
+      "period": "2025-12-08",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-12-09",
       "amountRm": 737.44,
       "channel": "all",
@@ -682,6 +794,17 @@
       "cardRm": 104.31,
       "deliveryGrossRm": 171.84,
       "transactions": 106
+    },
+    {
+      "period": "2025-12-15",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-12-16",
@@ -744,6 +867,17 @@
       "transactions": 101
     },
     {
+      "period": "2025-12-22",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2025-12-23",
       "amountRm": 750.53,
       "channel": "all",
@@ -802,6 +936,17 @@
       "cardRm": 103.83,
       "deliveryGrossRm": 179.24,
       "transactions": 120
+    },
+    {
+      "period": "2025-12-29",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2025-12-30",
@@ -864,6 +1009,17 @@
       "transactions": 116
     },
     {
+      "period": "2026-01-05",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-01-06",
       "amountRm": 643.26,
       "channel": "all",
@@ -922,6 +1078,17 @@
       "cardRm": 103.37,
       "deliveryGrossRm": 141.61,
       "transactions": 103
+    },
+    {
+      "period": "2026-01-12",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-01-13",
@@ -984,6 +1151,17 @@
       "transactions": 102
     },
     {
+      "period": "2026-01-19",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-01-20",
       "amountRm": 721.58,
       "channel": "all",
@@ -1042,6 +1220,17 @@
       "cardRm": 92.38,
       "deliveryGrossRm": 146.1,
       "transactions": 105
+    },
+    {
+      "period": "2026-01-26",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-01-27",
@@ -1104,6 +1293,17 @@
       "transactions": 92
     },
     {
+      "period": "2026-02-02",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-02-03",
       "amountRm": 723.72,
       "channel": "all",
@@ -1164,6 +1364,17 @@
       "transactions": 97
     },
     {
+      "period": "2026-02-09",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-02-10",
       "amountRm": 650.39,
       "channel": "all",
@@ -1222,6 +1433,17 @@
       "cardRm": 74.11,
       "deliveryGrossRm": 140.26,
       "transactions": 94
+    },
+    {
+      "period": "2026-02-16",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-02-17",
@@ -1286,6 +1508,17 @@
       "deliveryGrossRm": 94.37,
       "transactions": 53,
       "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-23",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-02-24",
@@ -1354,6 +1587,17 @@
       "note": "Ramadan"
     },
     {
+      "period": "2026-03-02",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-03-03",
       "amountRm": 355.28,
       "channel": "all",
@@ -1418,6 +1662,17 @@
       "deliveryGrossRm": 59.11,
       "transactions": 46,
       "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-09",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-03-10",
@@ -1486,6 +1741,17 @@
       "note": "Ramadan"
     },
     {
+      "period": "2026-03-16",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-03-17",
       "amountRm": 310.09,
       "channel": "all",
@@ -1506,6 +1772,72 @@
       "deliveryGrossRm": 56.85,
       "transactions": 34,
       "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-19",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
+    },
+    {
+      "period": "2026-03-20",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
+    },
+    {
+      "period": "2026-03-21",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
+    },
+    {
+      "period": "2026-03-22",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
+    },
+    {
+      "period": "2026-03-23",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
+    },
+    {
+      "period": "2026-03-24",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed - Hari Raya Aidilfitri"
     },
     {
       "period": "2026-03-25",
@@ -1556,6 +1888,17 @@
       "cardRm": 100.8,
       "deliveryGrossRm": 205.33,
       "transactions": 101
+    },
+    {
+      "period": "2026-03-30",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-03-31",
@@ -1618,6 +1961,17 @@
       "transactions": 94
     },
     {
+      "period": "2026-04-06",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-04-07",
       "amountRm": 666.42,
       "channel": "all",
@@ -1676,6 +2030,17 @@
       "cardRm": 82.87,
       "deliveryGrossRm": 153.97,
       "transactions": 108
+    },
+    {
+      "period": "2026-04-13",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-04-14",
@@ -1738,6 +2103,17 @@
       "transactions": 96
     },
     {
+      "period": "2026-04-20",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-04-21",
       "amountRm": 842.82,
       "channel": "all",
@@ -1796,6 +2172,17 @@
       "cardRm": 104.53,
       "deliveryGrossRm": 149.66,
       "transactions": 136
+    },
+    {
+      "period": "2026-04-27",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-04-28",
@@ -1858,6 +2245,17 @@
       "transactions": 105
     },
     {
+      "period": "2026-05-04",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-05-05",
       "amountRm": 906.85,
       "channel": "all",
@@ -1916,6 +2314,17 @@
       "cardRm": 86.87,
       "deliveryGrossRm": 145.68,
       "transactions": 110
+    },
+    {
+      "period": "2026-05-11",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-05-12",
@@ -1978,6 +2387,17 @@
       "transactions": 89
     },
     {
+      "period": "2026-05-18",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-05-19",
       "amountRm": 892.99,
       "channel": "all",
@@ -2036,6 +2456,17 @@
       "cardRm": 92.77,
       "deliveryGrossRm": 188.12,
       "transactions": 130
+    },
+    {
+      "period": "2026-05-25",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-05-26",
@@ -2098,6 +2529,17 @@
       "transactions": 101
     },
     {
+      "period": "2026-06-01",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-06-02",
       "amountRm": 792.88,
       "channel": "all",
@@ -2156,6 +2598,17 @@
       "cardRm": 94.09,
       "deliveryGrossRm": 176.62,
       "transactions": 94
+    },
+    {
+      "period": "2026-06-08",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-06-09",
@@ -2218,6 +2671,17 @@
       "transactions": 87
     },
     {
+      "period": "2026-06-15",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-06-16",
       "amountRm": 859.4,
       "channel": "all",
@@ -2276,6 +2740,17 @@
       "cardRm": 80.4,
       "deliveryGrossRm": 186.55,
       "transactions": 100
+    },
+    {
+      "period": "2026-06-22",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-06-23",
@@ -2338,6 +2813,17 @@
       "transactions": 125
     },
     {
+      "period": "2026-06-29",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-06-30",
       "amountRm": 760.8,
       "channel": "all",
@@ -2396,6 +2882,17 @@
       "cardRm": 93.88,
       "deliveryGrossRm": 174.34,
       "transactions": 101
+    },
+    {
+      "period": "2026-07-06",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-07-07",
@@ -2458,6 +2955,17 @@
       "transactions": 99
     },
     {
+      "period": "2026-07-13",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-07-14",
       "amountRm": 717.5,
       "channel": "all",
@@ -2516,6 +3024,17 @@
       "cardRm": 90.14,
       "deliveryGrossRm": 189.28,
       "transactions": 129
+    },
+    {
+      "period": "2026-07-20",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-07-21",
@@ -2578,6 +3097,17 @@
       "transactions": 114
     },
     {
+      "period": "2026-07-27",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-07-28",
       "amountRm": 851.73,
       "channel": "all",
@@ -2636,6 +3166,17 @@
       "cardRm": 82.62,
       "deliveryGrossRm": 283.8,
       "transactions": 139
+    },
+    {
+      "period": "2026-08-03",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-08-04",
@@ -2698,6 +3239,17 @@
       "transactions": 96
     },
     {
+      "period": "2026-08-10",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-08-11",
       "amountRm": 705.11,
       "channel": "all",
@@ -2756,6 +3308,17 @@
       "cardRm": 67.38,
       "deliveryGrossRm": 151.11,
       "transactions": 95
+    },
+    {
+      "period": "2026-08-17",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-08-18",
@@ -2818,6 +3381,17 @@
       "transactions": 89
     },
     {
+      "period": "2026-08-24",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-08-25",
       "amountRm": 821.98,
       "channel": "all",
@@ -2876,6 +3450,17 @@
       "cardRm": 79.47,
       "deliveryGrossRm": 152.05,
       "transactions": 82
+    },
+    {
+      "period": "2026-08-31",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-09-01",
@@ -2938,6 +3523,17 @@
       "transactions": 112
     },
     {
+      "period": "2026-09-07",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-09-08",
       "amountRm": 742.29,
       "channel": "all",
@@ -2996,6 +3592,17 @@
       "cardRm": 90.02,
       "deliveryGrossRm": 203.8,
       "transactions": 103
+    },
+    {
+      "period": "2026-09-14",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-09-15",
@@ -3058,6 +3665,17 @@
       "transactions": 98
     },
     {
+      "period": "2026-09-21",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
+    },
+    {
       "period": "2026-09-22",
       "amountRm": 796.45,
       "channel": "all",
@@ -3116,6 +3734,17 @@
       "cardRm": 66.66,
       "deliveryGrossRm": 158.3,
       "transactions": 104
+    },
+    {
+      "period": "2026-09-28",
+      "amountRm": 0,
+      "channel": "all",
+      "cashRm": 0,
+      "duitnowQrRm": 0,
+      "cardRm": 0,
+      "deliveryGrossRm": 0,
+      "transactions": 0,
+      "note": "Closed (Monday)"
     },
     {
       "period": "2026-09-29",

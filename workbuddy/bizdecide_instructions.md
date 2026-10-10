@@ -64,7 +64,7 @@ One-off prompt (no loop): **"Process new BizDecide requests"** (uses `list_pendi
   `skills/financial-analyzer/scripts/analyze.py`, `skills/supplier-price-tracker/scripts/track.py`, `skills/sme-classifier/scripts/classify.py` (paths from the `workbuddy` folder).
   They return small JSON summaries with exact numbers. Use `get_business_data` only if a script fails.
 - **Funding:** use the pack's `funding_db.csv` (Malaysia verified 10 Oct 2026). Do **not** open programme websites during a request; cite the `source_url` from the file.
-- **Progress:** at most 5 `update_request` calls: Reading data → Analysing → Checking funding → Verifying → Writing brief.
+- **Progress:** at most 5 `update_request` calls: Reading data → Analysing → Checking funding → Verifying → Writing brief. Tag each with `lane` (`bookkeeper`, `reconciliation`, `procurement`, `classifier`, `funding`, `verifier`) and `state` (`started` / `step` / `done` / `failed`), and put the RM amount of a money finding (e.g. the duplicate payment) in `impactRm` so the owner's counter moves.
 - Target: brief delivered in under 2 minutes, plus the owner's answer time.
 
 3. **Execute in parallel** (spawn sub-agents / experts where possible):
@@ -94,7 +94,11 @@ One-off prompt (no loop): **"Process new BizDecide requests"** (uses `list_pendi
    - `headline`: one-line verdict ("Profitable, but milk costs are eating your September margin").
    - `keyNumbers`: max 4 (revenue, net profit, margin, SME category).
    - `decisions`: priority (`urgent` / `important` / `opportunity`), title, action, `impactRm` with `impactType` (`monthly` / `one_off` / `financing`), reason with numbers, evidence (invoice numbers, supplier names, official URLs), cta.
-   - `verification`: the checks you ran, pass/fail.
+     - Each evidence item that cites invoices, bank lines or sale dates carries `source: {table, keys}`, copied exactly from the `source` object the scripts print next to each finding (bank → reference, purchases/payables → invoiceNo, sales → date or YYYY-MM). Add `formula` for computed figures (the price tracker prints one) and `basis` (`data` or `assumption`).
+     - `confidence`: `high` (every figure traces to script output with keys), `medium` (relies on a default or guideline), `check` (depends on an owner answer that is missing or assumed), plus a one-line `confidenceNote`.
+   - `verification`: the checks you ran, pass/fail, with `status` `passed` or `failed`.
+   - `numbers` (optional): the figures table, one row per figure with `label`, `value`, `unit`, `formula`, `source`, `basis`; mark owner-editable inputs `editable: true` with a `variable` name.
+   - `impactBasis` (one sentence under the found-money total) and `hoursSavedPerMonth` with `hoursBasis` (optional).
    - `assumptions`, `agentsUsed`.
    - `applicationPacks` (for `funding` and `cfo_brief`): one pack for each of the top 1–3 programmes rated eligible or conditional. This is what turns "you qualify" into "here is your application". For each pack:
      - `programId`, `programName`, `agency`, `verdict` (`eligible` / `conditional` / `need_info`), `verdictNote` (the condition or missing fact), `sourceUrl`, `howToApply`, and `unverified: true` if the row is marked VERIFY.
