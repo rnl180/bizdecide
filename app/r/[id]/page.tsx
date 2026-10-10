@@ -499,7 +499,8 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   const decisions = [...result.decisions].sort((a, b) => order[a.priority] - order[b.priority]);
   const totals = impactTotals(decisions);
   const { byIndex, approve } = useActions(request.id);
-  const passed = result.verification.filter((v) => v.passed).length;
+  const scored = result.verification.filter((v) => v.status !== "not_checked").length; // not_checked items list a limit, not a failed check
+  const passed = result.verification.filter((v) => v.passed && v.status !== "not_checked").length;
   const [headline, subhead] = splitDash(result.headline);
   const { done, toggle } = useDone(request.id, result.decisions.length);
   // Evidence starts open on wide screens and folded on phones; printing opens everything.
@@ -519,7 +520,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
     ...(result.applicationPacks?.length ? [{ id: "funding", label: t.navFunding, count: String(result.applicationPacks.length) }] : []),
     { id: "ask", label: t.askTitle },
     ...(result.verification.length || result.assumptions.length
-      ? [{ id: "checks", label: t.checked, count: result.verification.length ? `${passed}/${result.verification.length}` : undefined }]
+      ? [{ id: "checks", label: t.checked, count: result.verification.length ? `${passed}/${scored}` : undefined }]
       : []),
   ];
   const facts: [string, string][] = [];
@@ -561,8 +562,8 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
           </span>
           <span className="chip">{request.businessName}</span>
           {result.verification.length > 0 && (
-            <a className={`status ${passed === result.verification.length ? "done" : "waiting"} checks-chip`} href="#checks">
-              <Icon name="shield" size={14} /> {t.checksChip(passed, result.verification.length)}
+            <a className={`status ${passed === scored ? "done" : "waiting"} checks-chip`} href="#checks">
+              <Icon name="shield" size={14} /> {t.checksChip(passed, scored)}
             </a>
           )}
         </div>
@@ -752,7 +753,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
             <section className="card">
               <h3 className="card-title">
                 <Icon name="shield" size={18} /> {t.checked}
-                <span className="score">{t.passed(passed, result.verification.length)}</span>
+                <span className="score">{t.passed(passed, scored)}</span>
               </h3>
               <ul className="checks">
                 {result.verification.map((v, i) => (

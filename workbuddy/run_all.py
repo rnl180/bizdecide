@@ -164,6 +164,7 @@ out = {
     "candidateDecisions": cands,
     "verified_ok_do_not_flag": {
         "cashOnDeliveryInvoices": len(nd.get("cashOnDeliveryInvoices", [])),
+        "cashOnDeliveryInStatementPeriod": nd.get("cashOnDeliveryInStatementPeriod"),
         "cardMerchantDiscountRatePct": nd.get("cardMerchantDiscountRatePct"),
         "deliveryPayoutPctOfGross": round(sum(dp) / len(dp), 1) if dp else None,
         "ownerDrawings": nd.get("ownerDrawings_classifyAsDrawingsNotExpenses"),

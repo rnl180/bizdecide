@@ -29,6 +29,7 @@ import {
 } from "./store";
 import { EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
 import { impactKind } from "./impact";
+import { finalizeResult } from "./verifier-checks";
 
 /**
  * BizDecide on the Claude API: the server runs the CFO team itself instead of waiting for WorkBuddy on /api/mcp.
@@ -583,12 +584,15 @@ export function processRequest(requestId: string) {
       const final = await converse(verifierParams, verifierMessages, usage);
       const result: Result = await parseStructured(ResultSchema, final, verifierParams, verifierMessages, usage, clampResult);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
+      // What could not be checked, the rejected false positive and the confidence rule don't depend on the model.
+      await finalizeResult(result, { market: pack.code, language: language === "ms" ? "ms" : "en", business: ws.business, laneData });
       for (const v of result.verification) {
         const status = v.status ?? (v.passed ? "passed" : "failed");
         await verifier.emit(v.check, { detail: status === "not_checked" ? "not checked" : status });
       }
+      const scored = result.verification.filter((v) => v.status !== "not_checked");
       await verifier.write("done", "Verifier done", {
-        detail: `${result.verification.filter((v) => (v.status ?? (v.passed ? "passed" : "failed")) === "passed").length} of ${result.verification.length} checks passed`,
+        detail: `${scored.filter((v) => v.passed).length} of ${scored.length} checks passed, ${result.verification.length - scored.length} could not be checked`,
       });
 
       // Follow-up questions read these instead of running the lanes again.

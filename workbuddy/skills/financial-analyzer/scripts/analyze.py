@@ -201,6 +201,11 @@ out({
     "normal_do_not_flag": {
         "cashOnDeliveryInvoices": cash_paid,
         "cashOnDeliverySource": src("payables", cash_paid),
+        # the ones a naive bank match would wrongly flag: paid in cash while the statement was running
+        "cashOnDeliveryInStatementPeriod": sorted(
+            p["invoiceNo"] for p in payables
+            if p["invoiceNo"] in cash_paid and period_start and p.get("paidDate") and period_start <= D(p["paidDate"]) <= period_end
+        ),
         "qrSettlingAfterStatementEnd": qr_after_period,
         "cardMerchantDiscountRatePct": round(mdr, 2) if mdr is not None else None,
         "deliveryPayoutChecks": delivery_checks,

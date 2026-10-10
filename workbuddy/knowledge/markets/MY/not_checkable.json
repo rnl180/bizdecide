@@ -1,0 +1,74 @@
+{
+  "about": "What the owner's uploads can never show, listed under the brief as 'could not check'. The server adds these after the Verifier (lib/verifier-checks.ts), so every brief is honest about its limits. 'unless' skips an item when the uploaded rows already cover it (a regular expression, case-insensitive, over the named fields). 'when_empty' items appear only when that table has no rows.",
+  "checked": "2026-10-10",
+  "always": [
+    {
+      "id": "ccris",
+      "item": { "en": "Credit record (CCRIS / CTOS)", "ms": "Rekod kredit (CCRIS / CTOS)" },
+      "reason": {
+        "en": "We cannot see your CCRIS or CTOS report. Lenders read it first; pull your free CTOS report before you apply.",
+        "ms": "Kami tidak dapat melihat laporan CCRIS atau CTOS anda. Pemberi pinjaman membacanya dahulu; dapatkan laporan CTOS percuma sebelum memohon."
+      }
+    },
+    {
+      "id": "acquirer-mdr",
+      "item": { "en": "Card and QR fee rates in your merchant agreement", "ms": "Kadar caj kad dan QR dalam perjanjian peniaga anda" },
+      "reason": {
+        "en": "We measured what the bank actually settled, not the rate your acquirer agreed to. Check your merchant agreement.",
+        "ms": "Kami mengukur jumlah yang benar-benar dimasukkan oleh bank, bukan kadar yang dipersetujui oleh pemeroleh anda. Semak perjanjian peniaga anda."
+      }
+    },
+    {
+      "id": "landlord-sst",
+      "item": { "en": "Whether your landlord charges SST on rent", "ms": "Sama ada tuan rumah mengenakan SST atas sewa" },
+      "reason": {
+        "en": "Rental is a taxed service (8%) only if the landlord is SST-registered; your files don't say.",
+        "ms": "Sewa ialah perkhidmatan bercukai (8%) hanya jika tuan rumah berdaftar SST; fail anda tidak menyatakannya."
+      }
+    },
+    {
+      "id": "supplier-contracts",
+      "item": { "en": "Supplier contracts and agreed prices", "ms": "Kontrak pembekal dan harga yang dipersetujui" },
+      "reason": {
+        "en": "We see invoices, not the terms behind them, so we cannot tell whether a price rise breaks an agreement.",
+        "ms": "Kami melihat invois, bukan terma di sebaliknya, jadi kami tidak dapat menentukan sama ada kenaikan harga melanggar perjanjian."
+      }
+    },
+    {
+      "id": "payroll-rent",
+      "item": { "en": "Payroll and rent as line items", "ms": "Gaji dan sewa mengikut butiran" },
+      "reason": {
+        "en": "No payroll or rent records were uploaded; we only see the months your bank statement covers.",
+        "ms": "Tiada rekod gaji atau sewa dimuat naik; kami hanya melihat bulan yang diliputi oleh penyata bank anda."
+      },
+      "unless": { "fields": ["purchases.item", "purchases.supplier"], "pattern": "\\b(gaji|salary|salaries|payroll|sewa|rent|rental)\\b" }
+    }
+  ],
+  "when_empty": [
+    {
+      "table": "sales",
+      "item": { "en": "Sales and turnover", "ms": "Jualan dan perolehan" },
+      "reason": { "en": "No sales records were uploaded.", "ms": "Tiada rekod jualan dimuat naik." }
+    },
+    {
+      "table": "purchases",
+      "item": { "en": "Supplier prices", "ms": "Harga pembekal" },
+      "reason": { "en": "No purchase invoices were uploaded.", "ms": "Tiada invois pembelian dimuat naik." }
+    },
+    {
+      "table": "bank",
+      "item": { "en": "Bank reconciliation and settlements", "ms": "Penyesuaian bank dan penyelesaian" },
+      "reason": { "en": "No bank statement was uploaded.", "ms": "Tiada penyata bank dimuat naik." }
+    },
+    {
+      "table": "payables",
+      "item": { "en": "Duplicate supplier payments", "ms": "Bayaran berganda kepada pembekal" },
+      "reason": { "en": "No list of bills paid was uploaded.", "ms": "Tiada senarai bil yang telah dibayar dimuat naik." }
+    },
+    {
+      "table": "suppliers",
+      "item": { "en": "Supplier terms and price-change notices", "ms": "Terma pembekal dan notis perubahan harga" },
+      "reason": { "en": "No supplier list was uploaded.", "ms": "Tiada senarai pembekal dimuat naik." }
+    }
+  ]
+}

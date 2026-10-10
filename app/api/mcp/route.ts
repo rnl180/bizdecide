@@ -21,6 +21,7 @@ import {
 } from "@/lib/store";
 import { LANE_IDS, LANE_STATES, ResultSchema } from "@/lib/types";
 import { impactKind } from "@/lib/impact";
+import { finalizeResult } from "@/lib/verifier-checks";
 import { makeDataLink, rememberOrigin } from "@/lib/data-link";
 import { bucket } from "@/lib/firebase";
 
@@ -354,12 +355,16 @@ const mcp = createMcpHandler(
       {
         title: "Submit results",
         description:
-          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran (status not_checked for what the data can't show) and any assumptions. Give each decision a confidence (high, medium or check). Evidence that cites invoices, bank lines or sale dates carries source {table, keys} with keys copied exactly from the script output. Optional extras: numbers (the figures table with formula, source and basis), impactBasis, hoursSavedPerMonth with hoursBasis, einvoice (copied from the sme-classifier's einvoice; cannot_determine is never 'exempt', never say 'compliant'). Budget 2027 measures are proposed: label them 'tabled 9 Oct 2026, not yet law'. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
+          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran and any assumptions; name the cash-on-delivery invoices paid while the bank statement ran (cashOnDeliveryInStatementPeriod) as a passed check, '<invoice numbers>: cash on delivery, no bank line expected'. The server adds what could not be checked (notChecked, status not_checked), so leave that out. Give each decision a confidence (high, medium or check). Evidence that cites invoices, bank lines or sale dates carries source {table, keys} with keys copied exactly from the script output. Optional extras: numbers (the figures table with formula, source and basis), impactBasis, hoursSavedPerMonth with hoursBasis, einvoice (copied from the sme-classifier's einvoice; cannot_determine is never 'exempt', never say 'compliant'). Budget 2027 measures are proposed: label them 'tabled 9 Oct 2026, not yet law'. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
         inputSchema: z.object({ requestId: z.string(), result: ResultSchema }),
       },
       async ({ requestId, result }) => {
         const r = await getRequest(requestId);
         if (!r) return fail(`Request ${requestId} not found`);
+        // The same server-side rules as the Claude engine (what could not be checked, confidence, funding ladder).
+        const business = await getBusiness(r.businessId);
+        const language = (r.language ?? business?.profile.language) === "ms" ? "ms" : "en";
+        await finalizeResult(result, { market: r.market ?? business?.profile.market ?? "MY", language, business });
         await saveResult(requestId, result);
         await updateRequest(requestId, { status: "completed", progress: { step: "CFO brief delivered", detail: result.headline } });
         return json({ ok: true, viewAt: `/r/${requestId}` });
