@@ -1,0 +1,88 @@
+{
+  "about": "Measures that are tabled but not yet law. Keep them apart from the rules in force: never apply them as current rules, and label every mention as proposed with the date it was tabled. Re-check once the Finance Act or the agency's own page confirms a measure, then move it into the rule files.",
+  "label": {
+    "en": "Budget 2027 (tabled 9 Oct 2026, not yet law)",
+    "ms": "Belanjawan 2027 (dibentang 9 Okt 2026, belum menjadi undang-undang)"
+  },
+  "checked": "2026-10-10",
+  "measures": [
+    {
+      "id": "B27-MICROFINANCE",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "Microfinance allocation RM6.6bn: AIM RM3bn, TEKUN RM1.3bn, BSN RM1.7bn",
+      "program_ids": { "TEKUN-NIAGA": "TEKUN RM1.3bn", "TEKUN-SPOT": "TEKUN RM1.3bn", "AIM-PADURI": "AIM RM3bn", "BSN-BELIA": "BSN RM1.7bn" },
+      "note": {
+        "en": "{share} allocation proposed for microfinance; the programme's own rules are unchanged until the agency announces them",
+        "ms": "Peruntukan {share} dicadangkan untuk pembiayaan mikro; syarat program kekal sehingga agensi mengumumkannya"
+      },
+      "source_url": "https://www.bernama.com/en/general/news.php?id=2617655",
+      "source_type": "Secondary (Bernama, 9 Oct 2026)"
+    },
+    {
+      "id": "B27-GUARANTEES",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "SJPP and CGC guarantees of up to RM32bn, within RM57bn of SME financing",
+      "program_ids": { "SJPP-GGSM4": "SJPP and CGC guarantees up to RM32bn", "SJPP-WCGS-W": "SJPP and CGC guarantees up to RM32bn", "CGC-BIZMULA": "SJPP and CGC guarantees up to RM32bn", "CGC-BIZWANITA": "SJPP and CGC guarantees up to RM32bn" },
+      "note": {
+        "en": "{share} proposed; current guarantee terms apply until the new scheme is published",
+        "ms": "{share} dicadangkan; terma jaminan semasa terpakai sehingga skim baharu diterbitkan"
+      },
+      "source_url": "https://fintechnews.my/61310/fintech-lending-malaysia/budget-2027-sme-financing-malaysia-rm57-billion/",
+      "source_type": "Secondary (Fintech News Malaysia)"
+    },
+    {
+      "id": "B27-SRF",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "BNM SME Stabilisation Relief Facility topped up by RM5bn",
+      "program_ids": { "BNM-SRF": "RM5bn more for the SME SRF" },
+      "note": {
+        "en": "{share} proposed; apply under the facility's current terms and closing date",
+        "ms": "{share} dicadangkan; mohon mengikut terma dan tarikh tutup kemudahan semasa"
+      },
+      "source_url": "https://blog.fundingsocieties.com.my/budget-2027-malaysia/",
+      "source_type": "Secondary (Funding Societies blog)"
+    },
+    {
+      "id": "B27-MSME-TAX",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "MSME income tax 14% on the first RM150k of chargeable income and 16% on the next RM450k, from YA2027",
+      "applies_to": "Resident SME companies (the rates today are 15% and 17%). Sole proprietors and partners pay personal income tax instead, so this does not apply to them. VERIFY against the Finance Bill.",
+      "program_ids": {},
+      "source_url": "https://www.bernama.com/en/general/news.php?id=2617655",
+      "source_type": "Secondary (Bernama, 9 Oct 2026)"
+    },
+    {
+      "id": "B27-MIN-WAGE",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "Minimum wage RM2,000 a month from June 2027; MSMEs with sales under RM50m exempt",
+      "applies_to": "Employers. The exemption scope (who counts as an MSME for this rule) is not published yet. VERIFY.",
+      "program_ids": {},
+      "source_url": "https://www.bernama.com/en/general/news.php?id=2617655",
+      "source_type": "Secondary (Bernama, 9 Oct 2026)"
+    },
+    {
+      "id": "B27-MDEC-AI",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "RM30m MDEC fund to help 4,000 MSMEs adopt AI and automation",
+      "program_ids": {},
+      "source_url": "https://www.bernama.com/en/general/news.php?id=2617655",
+      "source_type": "Secondary (Bernama, 9 Oct 2026)"
+    },
+    {
+      "id": "B27-HALAL",
+      "status": "proposed",
+      "tabled": "2026-10-09",
+      "measure": "Halal certification matching grant of up to RM5,000",
+      "program_ids": {},
+      "source_url": "https://blog.fundingsocieties.com.my/budget-2027-malaysia/",
+      "source_type": "Secondary (Funding Societies blog)"
+    }
+  ],
+  "official_speech": "https://belanjawan.mof.gov.my/pdf/belanjawan2027/ucapan/ub27.pdf"
+}

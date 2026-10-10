@@ -21,5 +21,34 @@
     "category_by_employees = first of micro/small/medium whose employee limit the headcount satisfies",
     "category = the SMALLER of the two (micro < small < medium)",
     "if turnover and employees both exceed medium limits -> not an SME"
-  ]
+  ],
+  "group_rule": {
+    "source": "SME Corp Malaysia, Guideline on SME Definition (March 2024), section II(C) and FAQ 12",
+    "rule": "Size alone is not enough for SME assistance: the business must not be listed on a main board or be a subsidiary of a main-board company, large firm, MNC, GLC, MKD or state-owned enterprise. A subsidiary is an SME only if both parent and subsidiary meet the definition.",
+    "independent_legal_forms": ["sole proprietorship", "sole proprietor", "partnership", "pemilikan tunggal", "perkongsian"],
+    "independent_legal_forms_note": "Matched as a case-insensitive prefix of profileExtras.legalForm. Sole proprietorships and partnerships (Registration of Businesses Act 1956) have no shareholders, so they are independent by construction. A limited liability partnership is a body corporate and is not on this list.",
+    "group_ownership_field": "profileExtras.groupOwnership: independent | group | not_sure",
+    "when_unknown": "A company (Sdn Bhd, Berhad, LLP) or an unknown legal form with no groupOwnership answer: assistance eligibility is cannot_determine. Ask the owner; never assume independent.",
+    "ask": {
+      "en": { "question": "Is the business independent, or part of a group (a parent, holding or related company)?", "options": ["Independent", "Part of a group", "Not sure"] },
+      "ms": { "question": "Adakah perniagaan ini bebas, atau sebahagian daripada kumpulan (syarikat induk, pegangan atau berkaitan)?", "options": ["Bebas", "Sebahagian daripada kumpulan", "Tidak pasti"] }
+    }
+  },
+  "einvoice": {
+    "authority": "LHDN (Inland Revenue Board of Malaysia), MyInvois",
+    "exemption_threshold_rm": 3000000,
+    "test": "Annual turnover or revenue below the threshold: exempt from e-invoicing today. At or above it: required. Use the higher of the declared figure and the 12 months of sales in the data.",
+    "rule_version": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
+    "effective": "2026-09-01",
+    "source_url": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/",
+    "history": [
+      { "from": "2025-06", "exempt_below_rm": 500000 },
+      { "from": "2026-01", "exempt_below_rm": 1000000 },
+      { "from": "2026-09-01", "exempt_below_rm": 3000000 }
+    ],
+    "group_exception": "Not exempt when a non-individual shareholder, holding company or related company has revenue at or above RM3m (Guideline v4.8, per a secondary source: https://www.3ecpa.com.my/resources/corporate-compliance-requirement/malaysia-e-invoice/). A company with unknown group ties is cannot_determine, never exempt.",
+    "next_check": "2028-01-01",
+    "next_check_reason": "The penalty-free relaxation runs to 31 Dec 2027 (VERIFY against the official text); re-check after every LHDN guideline update and with each year's revenue.",
+    "wording": "Exempt means exempt today under this guideline version. Never say the business is compliant."
+  }
 }

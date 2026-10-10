@@ -66,6 +66,7 @@ age, gender, bumi = owner.get("age"), owner.get("gender"), owner.get("bumiputera
 years = sme.get("yearsOperating") if isinstance(sme, dict) else None
 turnover = sme.get("salesUsed") if isinstance(sme, dict) else None
 unknown = set(sme.get("unknownForEligibility", [])) if isinstance(sme, dict) else set()
+group_unknown = isinstance(sme, dict) and sme.get("groupStatus") == "unknown"  # a company whose group ties nobody has told us
 
 # market pack: knowledge/markets/<profile.market>/ (default MY); older flat layout as fallback
 try:
@@ -116,6 +117,8 @@ if os.path.exists(db):
                 ask.append(f"short by RM{mt - turnover:,.0f}")
         if re.search(r"household income", r["other_criteria"] + r["notes"], re.I) and "householdIncomeMonthlyRm" in unknown:
             ask.append("household income unknown: ASK the owner before deciding")
+        if group_unknown:
+            ask.append("SME status cannot be determined (group ownership unknown): ASK the owner (independent / part of a group / not sure) before deciding")
         failed = [c for c, ok in checks if not ok]
         funding.append({
             "id": r["id"], "program": r["program"], "type": r["type"],
@@ -153,7 +156,7 @@ out = {
     "market": market,
     "elapsedSeconds": round(time.time() - t0, 2),
     "business": fin.get("business") if isinstance(fin, dict) else None,
-    "sme": {k: sme.get(k) for k in ("category", "salesUsed", "salesSource", "salesRows", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "source") if isinstance(sme, dict) and sme.get(k) is not None},
+    "sme": {k: sme.get(k) for k in ("category", "sizeCategory", "assistanceEligibility", "groupStatus", "groupBasis", "assistanceNote", "askOwner", "salesUsed", "salesSource", "salesRows", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "einvoice", "source") if isinstance(sme, dict) and sme.get(k) is not None},
     "keyNumbers": {
         "turnover12m": fin.get("turnover12m"), "averageMonthlyRevenue": fin.get("averageMonthlyRevenue"),
         "cashToRecover": f.get("cashToRecover"), "bankReconciles": (fin.get("bank") or {}).get("balanceReconciles"),

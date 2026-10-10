@@ -13,6 +13,8 @@ markets/<CODE>/
   funding_db.json    same rows as the CSV
   programs/<id>.md   required: one fact sheet per programme, including "## Required documents"
   glossary.md        optional: local-language finance terms
+  proposed_measures.json  optional: tabled measures that are not law yet (status "proposed", date tabled, source)
+  not_checkable.json      optional: what the data can never show (CCRIS, contracts...), listed as "could not check"
 ```
 
 ## market.json

@@ -208,11 +208,17 @@ const LANES: Lane[] = [
     id: "classifier",
     tool: "run_classifier",
     agent: "Classifier",
-    description: "Classifier lane: official SME category from actual 12-month sales (and declared vs actual), headroom to the next category, years operating, owner facts and what is unknown for funding eligibility.",
+    description: "Classifier lane: official SME category from actual 12-month sales (and declared vs actual), headroom to the next category in RM, years operating, owner facts, what is unknown for funding eligibility, whether SME assistance eligibility can be determined (group ownership), and the LHDN e-invoice status with its headroom in RM.",
     run: async (ws, fmt, emit) => {
       await emit("Applying the official SME definition");
       const data = await ws.run("sme");
       if (data.declaredVsActual) await emit("Declared sales differ from the data", { detail: `${fmt(data.declaredVsActual.declared)} declared, ${fmt(data.declaredVsActual.actual)} in the data` });
+      if (data.assistanceEligibility === "cannot_determine") await emit("SME status needs one answer", { detail: data.groupBasis });
+      if (data.einvoice?.status) {
+        await emit(`e-Invoice: ${data.einvoice.status.replace("_", " ")}`, {
+          detail: data.einvoice.headroomRm > 0 ? `${fmt(data.einvoice.headroomRm)} below the ${fmt(data.einvoice.thresholdRm)} threshold` : undefined,
+        });
+      }
       if (data.unknownForEligibility?.length) await emit("Facts missing for eligibility", { detail: data.unknownForEligibility.join(", ") });
       return { data, summary: String(data.category ?? "category unknown") };
     },
@@ -289,7 +295,9 @@ async function loadKnowledge(code: string) {
     return text === null ? "" : `<file name="${rel}">\n${text.trim()}\n</file>`;
   };
   const programs = (await readdir(path.join(dir, "programs")).catch(() => [] as string[])).filter((f) => f.endsWith(".md")).sort();
-  const parts = await Promise.all(["market.json", "sme_definition.md", "sme_rules.json", "glossary.md", ...programs.map((p) => `programs/${p}`)].map(file));
+  const parts = await Promise.all(
+    ["market.json", "sme_definition.md", "sme_rules.json", "glossary.md", "proposed_measures.json", ...programs.map((p) => `programs/${p}`)].map(file),
+  );
   return `<market_pack code="${code}">\n${parts.filter(Boolean).join("\n\n")}\n</market_pack>`;
 }
 

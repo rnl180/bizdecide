@@ -4,17 +4,25 @@
 Usage: python3 classify.py --data <link-or-file>
    or: python3 classify.py --sector "F&B" --sales 252571 --employees 4 [--market SG]
 MY (SME Corp Malaysia, 2024): sales OR full-time employees, whichever gives the LOWER of micro/small/medium.
+   The thresholds, the group-ownership rule and the e-invoice threshold come from references/sme_rules.json
+   (a copy of knowledge/markets/MY/sme_rules.json; keep the two the same).
 SG (Enterprise Singapore): SME if group sales <= S$100m OR group employees <= 200; one tier, no micro/small split.
 """
-import sys
+import json, os, sys
 from datetime import date
 from _load import load, out, r2
 
-SOURCE = "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf"
-RULES = {
-    "manufacturing": [("Micro", 300_000, 5), ("Small", 15_000_000, 75), ("Medium", 50_000_000, 200)],
-    "services_and_other": [("Micro", 300_000, 5), ("Small", 3_000_000, 30), ("Medium", 20_000_000, 75)],
-}
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references", "sme_rules.json"), encoding="utf-8") as fh:
+    MY_RULES = json.load(fh)
+SOURCE = MY_RULES["source_url"]
+
+def _limits(sector):
+    s = MY_RULES["sectors"][sector]
+    return [("Micro", s["micro"]["sales_rm_lt"], s["micro"]["employees_lt"]),
+            ("Small", s["small"]["sales_rm_lt"], s["small"]["employees_lt"]),
+            ("Medium", s["medium"]["sales_rm_lte"], s["medium"]["employees_lte"])]
+
+RULES = {k: _limits(k) for k in ("manufacturing", "services_and_other")}
 ORDER = ["Micro", "Small", "Medium", "Not an SME"]
 
 SG_SOURCE = "https://www.enterprisesg.gov.sg/resources/all-faqs/edge-grant"
@@ -96,6 +104,56 @@ if since:
 owner = x.get("owner") or {}
 res["ownerFacts"] = {k: owner.get(k) for k in ("age", "gender", "bumiputera", "citizenship") if k in owner}
 res["unknownForEligibility"] = [k for k in ("householdIncomeMonthlyRm",) if x.get(k) is None and k in x]
+
+def group_status(extras):
+    """independent / group / unknown, from the legal form (sole proprietors and partners have no shareholders) or the owner's answer."""
+    rule = MY_RULES["group_rule"]
+    form = str(extras.get("legalForm") or "").strip().lower()
+    answer = str(extras.get("groupOwnership") or "").strip().lower()
+    if form and any(form.startswith(f) for f in rule["independent_legal_forms"]):
+        return "independent", f"legal form: {extras.get('legalForm')}"
+    if answer == "independent":
+        return "independent", "owner's answer: independent"
+    if answer == "group":
+        return "group", "owner's answer: part of a group"
+    return "unknown", ("company with unknown group ties" if form else "legal form unknown")
+
+def einvoice(status, declared, actual):
+    """MyInvois exemption today: exempt below the threshold, required at or above it, cannot_determine when group ties are unknown."""
+    rule = MY_RULES["einvoice"]
+    threshold = rule["exemption_threshold_rm"]
+    revenue = max([v for v in (declared, actual) if v is not None], default=None)
+    if revenue is None:
+        verdict = "cannot_determine"
+    elif revenue >= threshold:
+        verdict = "required"
+    else:
+        verdict = "exempt" if status == "independent" else "cannot_determine"  # a related company at RM3m+ removes the exemption
+    e = {"status": verdict, "thresholdRm": threshold, "revenueUsedRm": r2(revenue) if revenue is not None else None,
+         "headroomRm": r2(threshold - revenue) if revenue is not None else None,  # RM, not a ratio
+         "declaredRm": declared, "actualRm": r2(actual) if actual is not None else None,
+         "nextCheck": rule["next_check"], "nextCheckReason": rule["next_check_reason"],
+         "ruleVersion": rule["rule_version"], "sourceUrl": rule["source_url"]}
+    if verdict == "cannot_determine" and revenue is not None and revenue < threshold:
+        e["why"] = "group ties unknown: a related company with RM3m+ revenue removes the exemption"
+    return {k: v for k, v in e.items() if v is not None}
+
+if market in (None, "", "MY"):
+    status, basis = group_status(x)
+    res["sizeCategory"] = res.get("category")  # the size test only; assistance also needs independence
+    res["groupStatus"] = status
+    res["groupBasis"] = basis
+    if res.get("category") == "Not an SME":
+        res["assistanceEligibility"] = "not_eligible"
+    elif status == "independent":
+        res["assistanceEligibility"] = "eligible"
+    else:
+        res["assistanceEligibility"] = "cannot_determine"
+        res["assistanceNote"] = MY_RULES["group_rule"]["rule"]
+        if status == "unknown":
+            res["unknownForEligibility"].append("groupOwnership")
+            res["askOwner"] = MY_RULES["group_rule"]["ask"]
+    res["einvoice"] = einvoice(status, declared, actual)
 if market == "SG":
     # Scheme conditions that sit outside the size test: local ownership and local (CPF-paid) staff.
     staff = x.get("staff") or []

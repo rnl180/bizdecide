@@ -24,7 +24,8 @@
     "smeDefinition": "sme_definition.md",
     "fundingDb": "funding_db.csv",
     "programs": "programs/",
-    "glossary": "glossary.md"
+    "glossary": "glossary.md",
+    "proposedMeasures": "proposed_measures.json"
   },
   "demo": "/demo/kedai-kopi-aminah.json",
   "ms": {
