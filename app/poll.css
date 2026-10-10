@@ -1,0 +1,28 @@
+/* Audience poll page (/p/[code]): phone first, no site chrome, big tap targets. Prefix pl-. */
+body:has(.pl-page) .topbar,
+body:has(.pl-page) .footer { display: none; }
+
+.pl-page { min-height: 100dvh; background: var(--paper); color: var(--ink); padding: 20px 16px 32px; display: flex; flex-direction: column; gap: 16px; max-width: 560px; margin: 0 auto; }
+.pl-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pl-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.125rem; letter-spacing: -0.01em; }
+.pl-code { font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink-soft); }
+.pl-lang { background: none; border: 1px solid var(--rule); border-radius: var(--r-pill); color: var(--ink); font: inherit; font-size: 0.8125rem; padding: 6px 12px; min-height: 36px; cursor: pointer; }
+.pl-kicker { font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); margin: 0; }
+.pl-q { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.15; margin: 0; }
+.pl-context { font-size: 0.9375rem; color: var(--ink-soft); margin: 0; }
+.pl-hint { font-size: 0.875rem; color: var(--ink-soft); margin: 0; }
+.pl-options { display: flex; flex-direction: column; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.pl-opt { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 64px; padding: 14px 16px; background: var(--card); color: var(--ink); border: 2px solid var(--rule); border-radius: var(--r-chop); box-shadow: var(--press); font: inherit; font-size: 1.0625rem; font-weight: 600; text-align: left; cursor: pointer; }
+.pl-opt:disabled { cursor: default; }
+.pl-opt:not(:disabled):active { transform: translate(1px, 1px); box-shadow: none; }
+.pl-opt[data-mine="true"] { border-color: var(--cop); }
+.pl-opt[data-answer="true"] { border-color: var(--lulus); }
+.pl-bar { position: absolute; inset: 0 auto 0 0; background: var(--cop-wash); z-index: 0; transition: width 400ms ease-out; }
+.pl-opt > span { position: relative; z-index: 1; }
+.pl-count { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600; white-space: nowrap; }
+.pl-status { font-size: 0.9375rem; font-weight: 600; margin: 0; }
+.pl-status[data-tone="ok"] { color: var(--lulus); }
+.pl-status[data-tone="warn"] { color: var(--semak); }
+.pl-status[data-tone="err"] { color: var(--gagal); }
+.pl-total { font-size: 0.8125rem; color: var(--ink-soft); margin: 0; }
+@media (prefers-reduced-motion: reduce) { .pl-bar { transition: none; } }

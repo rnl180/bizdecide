@@ -51,6 +51,7 @@ export const col = {
   messages: () => db().collection("messages"),
   actions: () => db().collection("actions"),
   lane_outputs: () => db().collection("lane_outputs"),
+  votes: () => db().collection("votes"),
 };
 
 export const now = () => new Date().toISOString();

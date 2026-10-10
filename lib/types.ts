@@ -132,6 +132,17 @@ export interface QuestionDoc {
   otherText?: string;
   createdAt: string;
   answeredAt?: string;
+  pollCode?: string; // 6-character audience poll code: anyone can vote at /p/<pollCode>
+}
+
+/** One audience vote on an owner question. The tally sits beside the owner's answer; it never closes the question. */
+export interface VoteDoc {
+  id: string; // `${questionId}_${voter}`: one vote per voter per question
+  questionId: string;
+  option: string;
+  voter: string; // hash of the voter cookie and the question id, never the cookie itself
+  at: string;
+  createdAt: string;
 }
 
 /** The data rows behind a figure: keys are invoiceNo (purchases, payables), reference (bank), period (sales) or name (suppliers). */

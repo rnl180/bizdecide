@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
-import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
+import { randomInt, randomUUID } from "node:crypto";
+import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service, VoteDoc } from "./types";
 
 /**
  * Storage for the BizDecide app.
@@ -25,7 +25,7 @@ export const storeMode: "firebase" | "local" =
 const now = () => new Date().toISOString();
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions" | "lane_outputs";
+type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions" | "lane_outputs" | "votes";
 type Doc = Record<string, unknown>;
 /** Optional server-side pre-filter for Firestore: [field, "==" value] or [field, "in" values]. `match` still decides. */
 type Pre = [string, "==" | "in", unknown];
@@ -33,6 +33,8 @@ type Pre = [string, "==" | "in", unknown];
 interface Backend {
   add(c: Collection, data: Doc): Promise<string>;
   set(c: Collection, id: string, data: Doc): Promise<void>;
+  /** Writes the doc only if no doc has that id yet. False when it already exists. */
+  create(c: Collection, id: string, data: Doc): Promise<boolean>;
   get<T>(c: Collection, id: string): Promise<(T & { id: string }) | null>;
   update(c: Collection, id: string, patch: Doc, appendProgress?: ProgressEntry): Promise<void>;
   where<T>(c: Collection, match: (d: Doc) => boolean, limit: number, pre?: Pre): Promise<(T & { id: string })[]>;
@@ -46,7 +48,7 @@ type Db = Record<Collection, Record<string, Doc>>;
 let queue: Promise<unknown> = Promise.resolve();
 
 async function loadDb(): Promise<Db> {
-  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {}, lane_outputs: {} };
+  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {}, lane_outputs: {}, votes: {} };
   try {
     return { ...empty, ...JSON.parse(await readFile(DB_FILE, "utf8")) };
   } catch {
@@ -79,6 +81,12 @@ const local: Backend = {
   set: (c, id, data) =>
     withDb((db) => {
       db[c][id] = data;
+    }, true),
+  create: (c, id, data) =>
+    withDb((db) => {
+      if (db[c][id]) return false;
+      db[c][id] = data;
+      return true;
     }, true),
   get: <T,>(c: Collection, id: string) =>
     withDb((db) => (db[c][id] ? ({ id, ...db[c][id] } as T & { id: string }) : null), false),
@@ -118,6 +126,16 @@ const firebase: Backend = {
   async set(c, id, data) {
     const { col } = await fs();
     await col[c]().doc(id).set(data);
+  },
+  async create(c, id, data) {
+    const { col } = await fs();
+    try {
+      await col[c]().doc(id).create(data);
+      return true;
+    } catch (e) {
+      if ((e as { code?: number }).code === 6) return false; // ALREADY_EXISTS
+      throw e;
+    }
   },
   async get<T>(c: Collection, id: string) {
     const { col } = await fs();
@@ -220,8 +238,19 @@ export async function updateRequest(
 
 // ---------- questions (live poll between the agent and the owner) ----------
 
-export async function createQuestion(q: Omit<QuestionDoc, "id" | "status" | "createdAt">) {
-  return db.add("questions", { ...q, status: "open", createdAt: now() });
+// No 0/O, 1/I/L: the code is read off a slide and typed on a phone.
+const POLL_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+const newPollCode = () => Array.from({ length: 6 }, () => POLL_ALPHABET[randomInt(POLL_ALPHABET.length)]).join("");
+export const isPollCode = (s: string) => /^[A-HJ-NP-Z2-9]{6}$/.test(s);
+
+export async function createQuestion(q: Omit<QuestionDoc, "id" | "status" | "createdAt" | "pollCode">) {
+  return db.add("questions", { ...q, pollCode: newPollCode(), status: "open", createdAt: now() });
+}
+
+/** The question an audience poll code points to (/p/<code>). */
+export async function getQuestionByPollCode(code: string): Promise<QuestionDoc | null> {
+  const rows = await db.where<QuestionDoc>("questions", (d) => d.pollCode === code, 5, ["pollCode", "==", code]);
+  return rows.sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0] ?? null;
 }
 
 export async function getQuestion(id: string): Promise<QuestionDoc | null> {
@@ -239,6 +268,32 @@ export async function answerQuestion(id: string, answer: string, otherText?: str
 
 export async function expireQuestion(id: string) {
   await db.update("questions", id, { status: "expired" });
+}
+
+// ---------- votes (audience poll on an owner question; the tally sits beside the owner's answer) ----------
+
+const voteId = (questionId: string, voter: string) => `${questionId}_${voter}`;
+
+/** One vote per voter (hashed cookie) per question. False when this voter already voted. */
+export async function addVote(questionId: string, option: string, voter: string) {
+  const at = now();
+  return db.create("votes", voteId(questionId, voter), { questionId, option, voter, at, createdAt: at });
+}
+
+export async function getVote(questionId: string, voter: string): Promise<VoteDoc | null> {
+  return db.get<VoteDoc>("votes", voteId(questionId, voter));
+}
+
+/** Votes per option for one question. */
+export async function tallyByQuestion(questionId: string): Promise<Record<string, number>> {
+  const rows = await db.where<VoteDoc>("votes", (d) => d.questionId === questionId, 10_000, ["questionId", "==", questionId]);
+  const tally: Record<string, number> = {};
+  for (const v of rows) tally[v.option] = (tally[v.option] ?? 0) + 1;
+  return tally;
+}
+
+export async function countVotes(questionId: string) {
+  return Object.values(await tallyByQuestion(questionId)).reduce((a, b) => a + b, 0);
 }
 
 // ---------- results ----------
