@@ -326,7 +326,7 @@ function WhyNotChatGPT({ t }: { t: LandingStrings["vs"] }) {
 
 function Capabilities({ t }: { t: LandingStrings["grid"] }) {
   return (
-    <section className="lx-section" aria-labelledby="lx-grid-title">
+    <section className="lx-section" id="checks" aria-labelledby="lx-grid-title">
       <div className="container">
         <SectionHead kicker={t.kicker} title={t.title} id="lx-grid-title" />
         <ul className="lx-grid">
@@ -361,7 +361,7 @@ function Capabilities({ t }: { t: LandingStrings["grid"] }) {
 
 function HowItWorks({ t }: { t: LandingStrings["how"] }) {
   return (
-    <section className="lx-section lx-band" aria-labelledby="lx-how-title">
+    <section className="lx-section lx-band" id="how" aria-labelledby="lx-how-title">
       <div className="container">
         <SectionHead kicker={t.kicker} title={t.title} id="lx-how-title" />
         <ol className="lx-steps">
@@ -441,7 +441,7 @@ function Problem({ t }: { t: LandingStrings["stats"] }) {
 /** Plain answers to what owners worry about before uploading: data, sending, accuracy, approval. */
 function Faq({ t }: { t: LandingStrings["faq"] }) {
   return (
-    <section className="lx-section" aria-labelledby="lx-faq-title">
+    <section className="lx-section" id="faq" aria-labelledby="lx-faq-title">
       <div className="container lx-faq">
         <div className="section-head lx-head lx-faq-head">
           <div className="kicker">{t.kicker}</div>

@@ -17,10 +17,15 @@ export function MyRequestsLink({ current }: { current?: "page" }) {
   const list = useMyRequests();
   const t = APP[useLang()];
   return (
-    <a href="/requests" className="nav-link my-req-link" aria-current={current} aria-label={list.length ? `${t.myRequests} (${list.length})` : undefined}>
-      <Icon name="clipboard" size={16} />
-      <span className="label">{t.myRequests}</span>
-      {list.length > 0 && <span className="count">{list.length}</span>}
+    <a href="/requests" className="hdr-req" aria-current={current} title={t.myRequests}>
+      <Icon name="clipboard" size={20} />
+      <span className="hdr-req-label">{t.myRequests}</span>
+      {list.length > 0 && (
+        <span className="hdr-badge">
+          {list.length}
+          <span className="sr-only"> {t.myRequests.toLowerCase()}</span>
+        </span>
+      )}
     </a>
   );
 }

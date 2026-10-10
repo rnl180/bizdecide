@@ -229,7 +229,7 @@
 
 /* FAQ: heading on the left, ruled questions on the right */
 .lx-faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 24px 56px; align-items: start; }
-.section-head.lx-faq-head { position: sticky; top: 96px; margin: 0; }
+.section-head.lx-faq-head { position: sticky; top: calc(var(--header-h) + 24px); margin: 0; }
 .lx-faq-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-weight: 600; }
 .lx-faq-list { border-top: 1px solid var(--rule-strong); }
 .lx-qa { border-bottom: 1px solid var(--rule); }

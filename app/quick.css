@@ -77,7 +77,7 @@
 .qx-submit-row .field-error { margin: 0; }
 
 /* side */
-.qx-side { display: grid; gap: 16px; position: sticky; top: 88px; }
+.qx-side { display: grid; gap: 16px; position: sticky; top: calc(var(--header-h) + 12px); }
 .qx-side .card + .card { margin-top: 0; }
 .qx-next h3 { font-size: 1rem; margin-bottom: 12px; }
 .qx-next ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }

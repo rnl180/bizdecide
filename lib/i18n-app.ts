@@ -8,6 +8,9 @@ const en = {
   // site header and footer
   skipLink: "Skip to content",
   homeLabel: "Home",
+  navHow: "How it works",
+  navCheck: "What we check",
+  navFaq: "Questions",
   mainNav: "Main",
   menu: "Menu",
   closeMenu: "Close menu",
@@ -194,6 +197,9 @@ export type AppStrings = typeof en;
 const ms: AppStrings = {
   skipLink: "Langkau ke kandungan",
   homeLabel: "Laman utama",
+  navHow: "Cara ia berfungsi",
+  navCheck: "Apa yang kami semak",
+  navFaq: "Soalan lazim",
   mainNav: "Utama",
   menu: "Menu",
   closeMenu: "Tutup menu",
