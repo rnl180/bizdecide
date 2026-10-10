@@ -1,0 +1,17 @@
+# For a VPS that already runs Nginx on 80/443 (no Caddy).
+# App listens on 127.0.0.1:3170 only; Nginx proxies bizdecide.<domain> to it.
+#   docker compose -f docker-compose.nginx.yml up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - BIZDECIDE_MCP_KEY=${BIZDECIDE_MCP_KEY}
+      - BIZDECIDE_STORE=local
+    volumes:
+      - bizdecide-data:/app/.data
+    ports:
+      - "127.0.0.1:3170:3100"
+
+volumes:
+  bizdecide-data:

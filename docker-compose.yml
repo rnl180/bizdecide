@@ -1,0 +1,35 @@
+# Usage on the VPS:
+#   1) point a DNS A record (e.g. bizdecide.yourdomain.com) to this server
+#   2) create .env with DOMAIN and BIZDECIDE_MCP_KEY (see .env.vps.example)
+#   3) docker compose up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      - BIZDECIDE_MCP_KEY=${BIZDECIDE_MCP_KEY}
+      - BIZDECIDE_STORE=local
+    volumes:
+      - bizdecide-data:/app/.data      # businesses, requests, answers, results, uploads survive restarts
+    expose:
+      - "3100"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - app
+
+volumes:
+  bizdecide-data:
+  caddy-data:
+  caddy-config:

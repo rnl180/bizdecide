@@ -1,17 +1,23 @@
 import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 import {
+  answerMessage,
+  claimNextMessage,
   createQuestion,
   expireQuestion,
   getBusiness,
+  getMessage,
   getQuestion,
   getRequest,
+  getResult,
+  listMessages,
   listRequestsByStatus,
   saveResult,
   sleep,
   updateRequest,
 } from "@/lib/store";
 import { ResultSchema } from "@/lib/types";
+import { makeDataLink, rememberOrigin } from "@/lib/data-link";
 import { bucket } from "@/lib/firebase";
 
 /**
@@ -52,6 +58,73 @@ const mcp = createMcpHandler(
         const statuses = includeInProgress ? (["submitted", "processing"] as const) : (["submitted"] as const);
         const rows = await listRequestsByStatus([...statuses]);
         return json(rows.map(({ id, businessId, businessName, service, status, createdAt }) => ({ id, businessId, businessName, service, status, createdAt })));
+      },
+    );
+
+    server.registerTool(
+      "wait_for_request",
+      {
+        title: "Wait for the next request",
+        description:
+          "On-duty mode. Blocks until there is work (or waitSeconds pass), CLAIMS it and returns it. status 'owner_message': an owner asked a follow-up question on their brief page; answer it with reply_to_owner (quick, under 30 seconds). status 'new_request': process the request fully, then submit_results. status 'idle': nothing yet. After each, call wait_for_request again. Never stop the loop unless the user tells you to.",
+        inputSchema: z.object({ waitSeconds: z.number().int().min(5).max(55).default(45) }),
+      },
+      async ({ waitSeconds }) => {
+        const deadline = Date.now() + waitSeconds * 1000;
+        while (Date.now() < deadline) {
+          // Owner questions first: they are quick, and the owner is watching the chat.
+          const msg = await claimNextMessage();
+          if (msg) {
+            const [result, thread] = await Promise.all([getResult(msg.requestId), listMessages(msg.requestId)]);
+            return json({
+              status: "owner_message",
+              message: { id: msg.id, requestId: msg.requestId, businessId: msg.businessId, question: msg.question },
+              brief: result && {
+                headline: result.headline,
+                keyNumbers: result.keyNumbers,
+                decisions: result.decisions.map(({ priority, title, action, impactRm }) => ({ priority, title, action, impactRm })),
+                applicationPacks: (result.applicationPacks ?? []).map(({ programId, programName, verdict, amountRm }) => ({ programId, programName, verdict, amountRm })),
+              },
+              earlierInThread: thread.filter((m) => m.status === "answered").map((m) => ({ question: m.question, answer: m.answer })),
+              next: "Answer from this business's own data (get_data_link + the skill scripts) and the brief above. Then reply_to_owner(messageId, answer, evidence), then call wait_for_request again.",
+            });
+          }
+          const [next] = await listRequestsByStatus(["submitted"], 1);
+          if (next) {
+            await updateRequest(next.id, {
+              status: "processing",
+              progress: { step: "Picked up by your CFO team", detail: "BizDecide agents on WorkBuddy started working" },
+            });
+            const { id, businessId, businessName, service, market, createdAt } = next;
+            return json({ status: "new_request", request: { id, businessId, businessName, service, market: market ?? "MY", createdAt }, next: "Call get_business_data(businessId), plan, run the agents, then submit_results. Then call wait_for_request again." });
+          }
+          await sleep(2000);
+        }
+        return json({ status: "idle", next: "No new requests yet. Call wait_for_request again." });
+      },
+    );
+
+    server.registerTool(
+      "get_data_link",
+      {
+        title: "Get data link (fast path)",
+        description:
+          "FAST PATH. Returns a 15-minute signed link to one business's full data (profile, sales, purchases, suppliers, bank, payables). Pass it to the BizDecide skill scripts (financial-analyzer, supplier-price-tracker, sme-classifier) with --data instead of reading the raw rows yourself. Prefer this over get_business_data.",
+        inputSchema: z.object({ businessId: z.string() }),
+      },
+      async ({ businessId }) => {
+        const b = await getBusiness(businessId);
+        if (!b) return fail(`Business ${businessId} not found`);
+        const url = makeDataLink(businessId);
+        return json({
+          url,
+          expiresInSeconds: 900,
+          run: [
+            `python3 skills/financial-analyzer/scripts/analyze.py --data "${url}"`,
+            `python3 skills/supplier-price-tracker/scripts/track.py --data "${url}"`,
+            `python3 skills/sme-classifier/scripts/classify.py --data "${url}"`,
+          ],
+        });
       },
     );
 
@@ -166,11 +239,35 @@ const mcp = createMcpHandler(
     );
 
     server.registerTool(
+      "reply_to_owner",
+      {
+        title: "Reply to the owner",
+        description:
+          "Answer a follow-up question the owner asked on their brief page (from wait_for_request status 'owner_message'). 2-5 plain sentences in the owner's language, using figures from their own data and brief. Add evidence for each figure (invoice numbers, months, official URLs). Never invent numbers; if the data can't answer it, say what is missing.",
+        inputSchema: z.object({
+          messageId: z.string(),
+          answer: z.string().min(1).max(2000),
+          evidence: z
+            .array(z.object({ label: z.string(), detail: z.string().optional(), url: z.string().optional() }))
+            .max(5)
+            .optional(),
+        }),
+      },
+      async ({ messageId, answer, evidence }) => {
+        const m = await getMessage(messageId);
+        if (!m) return fail(`Message ${messageId} not found`);
+        if (m.status === "answered") return fail("This question already has an answer");
+        await answerMessage(messageId, answer, evidence);
+        return json({ ok: true, next: "Call wait_for_request again." });
+      },
+    );
+
+    server.registerTool(
       "submit_results",
       {
         title: "Submit results",
         description:
-          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with RM impact and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran and any assumptions.",
+          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran and any assumptions. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
         inputSchema: z.object({ requestId: z.string(), result: ResultSchema }),
       },
       async ({ requestId, result }) => {
@@ -185,7 +282,7 @@ const mcp = createMcpHandler(
   {
     serverInfo: { name: "bizdecide", version: "0.1.0" },
     instructions:
-      "BizDecide backend. Use list_pending_requests, then get_business_data, then report progress with update_request, ask the owner with ask_user only when needed, and finish with submit_results. These tools move data only; do all analysis yourself with the BizDecide skills.",
+      "BizDecide backend. Use list_pending_requests, then get_business_data, then report progress with update_request, ask the owner with ask_user only when needed, and finish with submit_results. In on-duty mode, wait_for_request also returns owner follow-up questions; answer those with reply_to_owner. These tools move data only; do all analysis yourself with the BizDecide skills.",
   },
 );
 
@@ -201,7 +298,57 @@ async function handler(req: Request) {
       });
     }
   }
-  return mcp(req);
+  rememberOrigin(req);
+
+  // The mcp-handler / MCP SDK requires Accept: application/json, text/event-stream
+  // and returns SSE format. Some MCP clients (e.g. WorkBuddy) don't send that
+  // Accept header and expect plain JSON. Patch the request to include the header,
+  // then convert SSE responses back to JSON so any client can consume them.
+  const accept = req.headers.get("accept") || "";
+  const needsAcceptPatch = !accept.includes("text/event-stream");
+
+  let requestToForward = req;
+  if (needsAcceptPatch) {
+    const headers = new Headers(req.headers);
+    headers.set("accept", "application/json, text/event-stream");
+    requestToForward = new Request(req.url, {
+      method: req.method,
+      headers,
+      body: req.body,
+      duplex: "half",
+    } as RequestInit);
+  }
+
+  const response = await mcp(requestToForward);
+
+  // If the client didn't ask for SSE but got an SSE response, convert to JSON.
+  if (needsAcceptPatch && response.headers.get("content-type")?.includes("text/event-stream")) {
+    const text = await response.text();
+    // Parse SSE: find the last "data:" line and extract the JSON payload.
+    let jsonPayload: unknown = null;
+    for (const block of text.split(/\r?\n\r?\n/)) {
+      const dataLines = block
+        .split(/\r?\n/)
+        .filter((line) => line.startsWith("data:"))
+        .map((line) => line.slice(5).replace(/^ /, ""))
+        .join("\n");
+      if (!dataLines) continue;
+      try {
+        const parsed = JSON.parse(dataLines);
+        if (parsed && ("result" in parsed || "error" in parsed)) {
+          jsonPayload = parsed;
+        }
+      } catch {
+        // skip non-JSON data
+      }
+    }
+    return new Response(JSON.stringify(jsonPayload), {
+      status: response.status,
+      headers: { "content-type": "application/json" },
+    });
+  }
+
+  return response;
 }
 
 export { handler as GET, handler as POST, handler as DELETE };

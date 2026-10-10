@@ -1,0 +1,30 @@
+{
+  "DISCLAIMER": "Fictional business created for a hackathon demo. All names, numbers and IDs are invented.",
+  "business_name": "Kedai Kopi Aminah",
+  "legal_form": "Sole proprietorship (Registration of Businesses Act 1956)",
+  "ssm_registration_no": "202103999901 (FICTIONAL)",
+  "registered_on": "2021-03-15",
+  "owner": {
+    "name": "Aminah binti Rahman (fictional)",
+    "gender": "female",
+    "age": 34,
+    "citizenship": "Malaysian",
+    "bumiputera": true
+  },
+  "sector": "Services - F&B (kopitiam / café)",
+  "msic_2008": "56101/56303 [VERIFY exact code with MSIC 2008 list]",
+  "state": "Selangor",
+  "city": "Petaling Jaya",
+  "address": "No. 12, Jalan Contoh 2/9, 47300 Petaling Jaya, Selangor (fictional)",
+  "full_time_employees": 4,
+  "working_owner_excluded_from_count": true,
+  "opening_hours": "07:00-16:00, closed Mondays",
+  "premises": "Rented shoplot, RM3,200/month",
+  "bank": "Bank Demo Nusantara Berhad (fictional), current account DEMO-0000-4417",
+  "pos": "Simple POS + DuitNow QR + card terminal; delivery via one food-delivery platform",
+  "accounting_today": "Exercise book + WhatsApp photos of invoices; accountant once a year for tax",
+  "household_income_monthly_rm": null,
+  "household_income_note": "Unknown on purpose: the agent must ASK before matching AIM PADURI MADANI (needs <= RM5,880).",
+  "existing_financing": "None",
+  "stated_goal": "RM40,000 to renovate kitchen and buy a second espresso/kopi urn line"
+}

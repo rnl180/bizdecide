@@ -1,1697 +1,4946 @@
 {
+  "disclaimer": "Fictional business created for a hackathon demo. All names, numbers and IDs are invented.",
   "profile": {
     "name": "Kedai Kopi Aminah",
     "sector": "F&B",
     "state": "Selangor",
-    "employeesFullTime": 6,
-    "ssmNumber": "202301012345 (DEMO)",
-    "registeredSince": "2023-02",
-    "annualSalesDeclaredRm": 240000,
+    "employeesFullTime": 4,
+    "ssmNumber": "202103999901 (FICTIONAL)",
+    "registeredSince": "2021-03",
     "ownershipFlags": [
-      "women_owned",
-      "bumiputera"
+      "bumiputera",
+      "women_owned"
     ],
-    "goal": "Open a second outlet in Subang Jaya next year"
+    "goal": "RM40,000 to renovate kitchen and buy a second espresso/kopi urn line"
+  },
+  "profileExtras": {
+    "legalForm": "Sole proprietorship (Registration of Businesses Act 1956)",
+    "registeredOn": "2021-03-15",
+    "city": "Petaling Jaya",
+    "owner": {
+      "name": "Aminah binti Rahman (fictional)",
+      "gender": "female",
+      "age": 34,
+      "citizenship": "Malaysian",
+      "bumiputera": true
+    },
+    "sectorDetail": "Services - F&B (kopitiam / café)",
+    "premises": "Rented shoplot, RM3,200/month",
+    "pos": "Simple POS + DuitNow QR + card terminal; delivery via one food-delivery platform",
+    "accountingToday": "Exercise book + WhatsApp photos of invoices; accountant once a year for tax",
+    "householdIncomeMonthlyRm": null,
+    "existingFinancing": "None",
+    "workingOwnerExcludedFromCount": true
   },
   "sales": [
     {
-      "period": "2025-10",
-      "amountRm": 29040,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-01",
+      "amountRm": 795.16,
+      "channel": "all",
+      "cashRm": 335.56,
+      "duitnowQrRm": 231.52,
+      "cardRm": 71.13,
+      "deliveryGrossRm": 156.95,
+      "transactions": 81
     },
     {
-      "period": "2025-11",
-      "amountRm": 30010,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-02",
+      "amountRm": 793.07,
+      "channel": "all",
+      "cashRm": 360.16,
+      "duitnowQrRm": 257.44,
+      "cardRm": 50.34,
+      "deliveryGrossRm": 125.13,
+      "transactions": 77
     },
     {
-      "period": "2025-12",
-      "amountRm": 35260,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-03",
+      "amountRm": 745.16,
+      "channel": "all",
+      "cashRm": 311.1,
+      "duitnowQrRm": 227.47,
+      "cardRm": 45.5,
+      "deliveryGrossRm": 161.09,
+      "transactions": 76
     },
     {
-      "period": "2026-01",
-      "amountRm": 29400,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-04",
+      "amountRm": 998.3,
+      "channel": "all",
+      "cashRm": 415.2,
+      "duitnowQrRm": 311.96,
+      "cardRm": 81.66,
+      "deliveryGrossRm": 189.48,
+      "transactions": 110
     },
     {
-      "period": "2026-02",
-      "amountRm": 30870,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-05",
+      "amountRm": 1009.91,
+      "channel": "all",
+      "cashRm": 469.36,
+      "duitnowQrRm": 283.1,
+      "cardRm": 93.15,
+      "deliveryGrossRm": 164.3,
+      "transactions": 113
     },
     {
-      "period": "2026-03",
-      "amountRm": 27330,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-07",
+      "amountRm": 849.67,
+      "channel": "all",
+      "cashRm": 387.33,
+      "duitnowQrRm": 252.36,
+      "cardRm": 56.26,
+      "deliveryGrossRm": 153.72,
+      "transactions": 89
     },
     {
-      "period": "2026-04",
-      "amountRm": 33920,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-08",
+      "amountRm": 819.74,
+      "channel": "all",
+      "cashRm": 333.98,
+      "duitnowQrRm": 233.49,
+      "cardRm": 76.97,
+      "deliveryGrossRm": 175.3,
+      "transactions": 88
     },
     {
-      "period": "2026-05",
-      "amountRm": 31960,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-09",
+      "amountRm": 743.55,
+      "channel": "all",
+      "cashRm": 333.33,
+      "duitnowQrRm": 238.2,
+      "cardRm": 66.32,
+      "deliveryGrossRm": 105.7,
+      "transactions": 80
     },
     {
-      "period": "2026-06",
-      "amountRm": 32820,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-10",
+      "amountRm": 580.8,
+      "channel": "all",
+      "cashRm": 249.91,
+      "duitnowQrRm": 178.65,
+      "cardRm": 54.12,
+      "deliveryGrossRm": 98.12,
+      "transactions": 65
     },
     {
-      "period": "2026-07",
-      "amountRm": 33430,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-11",
+      "amountRm": 934.03,
+      "channel": "all",
+      "cashRm": 419.83,
+      "duitnowQrRm": 301.77,
+      "cardRm": 77.61,
+      "deliveryGrossRm": 134.82,
+      "transactions": 97
     },
     {
-      "period": "2026-08",
-      "amountRm": 34280,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-12",
+      "amountRm": 980.34,
+      "channel": "all",
+      "cashRm": 410.01,
+      "duitnowQrRm": 288.68,
+      "cardRm": 61.95,
+      "deliveryGrossRm": 219.7,
+      "transactions": 105
     },
     {
-      "period": "2026-09",
-      "amountRm": 35750,
-      "channel": "counter + GrabFood"
+      "period": "2025-10-14",
+      "amountRm": 739.9,
+      "channel": "all",
+      "cashRm": 309.74,
+      "duitnowQrRm": 210.91,
+      "cardRm": 52.62,
+      "deliveryGrossRm": 166.63,
+      "transactions": 77
+    },
+    {
+      "period": "2025-10-15",
+      "amountRm": 717.1,
+      "channel": "all",
+      "cashRm": 308.08,
+      "duitnowQrRm": 208.3,
+      "cardRm": 50.68,
+      "deliveryGrossRm": 150.04,
+      "transactions": 80
+    },
+    {
+      "period": "2025-10-16",
+      "amountRm": 710.93,
+      "channel": "all",
+      "cashRm": 337.64,
+      "duitnowQrRm": 222.1,
+      "cardRm": 59.98,
+      "deliveryGrossRm": 91.21,
+      "transactions": 70
+    },
+    {
+      "period": "2025-10-17",
+      "amountRm": 812.57,
+      "channel": "all",
+      "cashRm": 335.65,
+      "duitnowQrRm": 242.93,
+      "cardRm": 80.92,
+      "deliveryGrossRm": 153.07,
+      "transactions": 91
+    },
+    {
+      "period": "2025-10-18",
+      "amountRm": 1114.42,
+      "channel": "all",
+      "cashRm": 502.83,
+      "duitnowQrRm": 343.07,
+      "cardRm": 97.38,
+      "deliveryGrossRm": 171.14,
+      "transactions": 109
+    },
+    {
+      "period": "2025-10-19",
+      "amountRm": 1072.74,
+      "channel": "all",
+      "cashRm": 448.75,
+      "duitnowQrRm": 302.09,
+      "cardRm": 77.9,
+      "deliveryGrossRm": 244,
+      "transactions": 105
+    },
+    {
+      "period": "2025-10-21",
+      "amountRm": 661.26,
+      "channel": "all",
+      "cashRm": 278.66,
+      "duitnowQrRm": 192.13,
+      "cardRm": 64.62,
+      "deliveryGrossRm": 125.85,
+      "transactions": 67
+    },
+    {
+      "period": "2025-10-22",
+      "amountRm": 802.41,
+      "channel": "all",
+      "cashRm": 363.04,
+      "duitnowQrRm": 240.55,
+      "cardRm": 77.5,
+      "deliveryGrossRm": 121.32,
+      "transactions": 83
+    },
+    {
+      "period": "2025-10-23",
+      "amountRm": 718.31,
+      "channel": "all",
+      "cashRm": 313.69,
+      "duitnowQrRm": 210.64,
+      "cardRm": 50.19,
+      "deliveryGrossRm": 143.79,
+      "transactions": 75
+    },
+    {
+      "period": "2025-10-24",
+      "amountRm": 710.51,
+      "channel": "all",
+      "cashRm": 317.43,
+      "duitnowQrRm": 230.84,
+      "cardRm": 53.98,
+      "deliveryGrossRm": 108.26,
+      "transactions": 73
+    },
+    {
+      "period": "2025-10-25",
+      "amountRm": 1019.6,
+      "channel": "all",
+      "cashRm": 425.73,
+      "duitnowQrRm": 336.34,
+      "cardRm": 81.96,
+      "deliveryGrossRm": 175.57,
+      "transactions": 101
+    },
+    {
+      "period": "2025-10-26",
+      "amountRm": 1071.92,
+      "channel": "all",
+      "cashRm": 438.17,
+      "duitnowQrRm": 333.76,
+      "cardRm": 98.28,
+      "deliveryGrossRm": 201.71,
+      "transactions": 104
+    },
+    {
+      "period": "2025-10-28",
+      "amountRm": 817.78,
+      "channel": "all",
+      "cashRm": 354.73,
+      "duitnowQrRm": 231.58,
+      "cardRm": 61.55,
+      "deliveryGrossRm": 169.92,
+      "transactions": 85
+    },
+    {
+      "period": "2025-10-29",
+      "amountRm": 894.56,
+      "channel": "all",
+      "cashRm": 427.32,
+      "duitnowQrRm": 288.98,
+      "cardRm": 54.08,
+      "deliveryGrossRm": 124.18,
+      "transactions": 88
+    },
+    {
+      "period": "2025-10-30",
+      "amountRm": 803.44,
+      "channel": "all",
+      "cashRm": 367.7,
+      "duitnowQrRm": 252.35,
+      "cardRm": 65.46,
+      "deliveryGrossRm": 117.93,
+      "transactions": 81
+    },
+    {
+      "period": "2025-10-31",
+      "amountRm": 794.65,
+      "channel": "all",
+      "cashRm": 324.95,
+      "duitnowQrRm": 239.78,
+      "cardRm": 62.1,
+      "deliveryGrossRm": 167.82,
+      "transactions": 85
+    },
+    {
+      "period": "2025-11-01",
+      "amountRm": 1145.98,
+      "channel": "all",
+      "cashRm": 545.84,
+      "duitnowQrRm": 371.06,
+      "cardRm": 80.83,
+      "deliveryGrossRm": 148.25,
+      "transactions": 119
+    },
+    {
+      "period": "2025-11-02",
+      "amountRm": 958.5,
+      "channel": "all",
+      "cashRm": 453.38,
+      "duitnowQrRm": 310.1,
+      "cardRm": 68.95,
+      "deliveryGrossRm": 126.07,
+      "transactions": 106
+    },
+    {
+      "period": "2025-11-04",
+      "amountRm": 737.05,
+      "channel": "all",
+      "cashRm": 332.49,
+      "duitnowQrRm": 228.82,
+      "cardRm": 48.73,
+      "deliveryGrossRm": 127.01,
+      "transactions": 82
+    },
+    {
+      "period": "2025-11-05",
+      "amountRm": 743.69,
+      "channel": "all",
+      "cashRm": 343.8,
+      "duitnowQrRm": 227.95,
+      "cardRm": 44.64,
+      "deliveryGrossRm": 127.3,
+      "transactions": 82
+    },
+    {
+      "period": "2025-11-06",
+      "amountRm": 654.84,
+      "channel": "all",
+      "cashRm": 278.92,
+      "duitnowQrRm": 183.99,
+      "cardRm": 63.63,
+      "deliveryGrossRm": 128.3,
+      "transactions": 63
+    },
+    {
+      "period": "2025-11-07",
+      "amountRm": 827.81,
+      "channel": "all",
+      "cashRm": 351.49,
+      "duitnowQrRm": 234.18,
+      "cardRm": 78.74,
+      "deliveryGrossRm": 163.4,
+      "transactions": 88
+    },
+    {
+      "period": "2025-11-08",
+      "amountRm": 845.95,
+      "channel": "all",
+      "cashRm": 402.47,
+      "duitnowQrRm": 240.49,
+      "cardRm": 67.2,
+      "deliveryGrossRm": 135.79,
+      "transactions": 85
+    },
+    {
+      "period": "2025-11-09",
+      "amountRm": 1090.63,
+      "channel": "all",
+      "cashRm": 503.07,
+      "duitnowQrRm": 312.38,
+      "cardRm": 86.17,
+      "deliveryGrossRm": 189.01,
+      "transactions": 113
+    },
+    {
+      "period": "2025-11-11",
+      "amountRm": 784.46,
+      "channel": "all",
+      "cashRm": 348.29,
+      "duitnowQrRm": 230.05,
+      "cardRm": 74.44,
+      "deliveryGrossRm": 131.68,
+      "transactions": 86
+    },
+    {
+      "period": "2025-11-12",
+      "amountRm": 696.65,
+      "channel": "all",
+      "cashRm": 308.72,
+      "duitnowQrRm": 220.49,
+      "cardRm": 47.4,
+      "deliveryGrossRm": 120.04,
+      "transactions": 75
+    },
+    {
+      "period": "2025-11-13",
+      "amountRm": 758.46,
+      "channel": "all",
+      "cashRm": 322.3,
+      "duitnowQrRm": 250.11,
+      "cardRm": 65.22,
+      "deliveryGrossRm": 120.83,
+      "transactions": 79
+    },
+    {
+      "period": "2025-11-14",
+      "amountRm": 663.07,
+      "channel": "all",
+      "cashRm": 271.65,
+      "duitnowQrRm": 193.11,
+      "cardRm": 48.75,
+      "deliveryGrossRm": 149.56,
+      "transactions": 69
+    },
+    {
+      "period": "2025-11-15",
+      "amountRm": 997.85,
+      "channel": "all",
+      "cashRm": 446.1,
+      "duitnowQrRm": 290.88,
+      "cardRm": 68.66,
+      "deliveryGrossRm": 192.21,
+      "transactions": 103
+    },
+    {
+      "period": "2025-11-16",
+      "amountRm": 1068.26,
+      "channel": "all",
+      "cashRm": 446.87,
+      "duitnowQrRm": 347.47,
+      "cardRm": 100.83,
+      "deliveryGrossRm": 173.09,
+      "transactions": 117
+    },
+    {
+      "period": "2025-11-18",
+      "amountRm": 777.63,
+      "channel": "all",
+      "cashRm": 315.46,
+      "duitnowQrRm": 226.99,
+      "cardRm": 67.47,
+      "deliveryGrossRm": 167.71,
+      "transactions": 82
+    },
+    {
+      "period": "2025-11-19",
+      "amountRm": 745.07,
+      "channel": "all",
+      "cashRm": 353.79,
+      "duitnowQrRm": 229.89,
+      "cardRm": 58.79,
+      "deliveryGrossRm": 102.6,
+      "transactions": 80
+    },
+    {
+      "period": "2025-11-20",
+      "amountRm": 771.66,
+      "channel": "all",
+      "cashRm": 357.1,
+      "duitnowQrRm": 247.22,
+      "cardRm": 52.18,
+      "deliveryGrossRm": 115.16,
+      "transactions": 81
+    },
+    {
+      "period": "2025-11-21",
+      "amountRm": 794.99,
+      "channel": "all",
+      "cashRm": 344.94,
+      "duitnowQrRm": 241.16,
+      "cardRm": 70.88,
+      "deliveryGrossRm": 138.01,
+      "transactions": 85
+    },
+    {
+      "period": "2025-11-22",
+      "amountRm": 1010.75,
+      "channel": "all",
+      "cashRm": 458.75,
+      "duitnowQrRm": 332.75,
+      "cardRm": 64.62,
+      "deliveryGrossRm": 154.63,
+      "transactions": 103
+    },
+    {
+      "period": "2025-11-23",
+      "amountRm": 894.08,
+      "channel": "all",
+      "cashRm": 419.26,
+      "duitnowQrRm": 261.46,
+      "cardRm": 60.45,
+      "deliveryGrossRm": 152.91,
+      "transactions": 88
+    },
+    {
+      "period": "2025-11-25",
+      "amountRm": 818.21,
+      "channel": "all",
+      "cashRm": 356.65,
+      "duitnowQrRm": 246.36,
+      "cardRm": 58.21,
+      "deliveryGrossRm": 156.99,
+      "transactions": 83
+    },
+    {
+      "period": "2025-11-26",
+      "amountRm": 781.63,
+      "channel": "all",
+      "cashRm": 340.36,
+      "duitnowQrRm": 252.52,
+      "cardRm": 64.1,
+      "deliveryGrossRm": 124.65,
+      "transactions": 87
+    },
+    {
+      "period": "2025-11-27",
+      "amountRm": 940.8,
+      "channel": "all",
+      "cashRm": 380.13,
+      "duitnowQrRm": 310.43,
+      "cardRm": 87.91,
+      "deliveryGrossRm": 162.33,
+      "transactions": 105
+    },
+    {
+      "period": "2025-11-28",
+      "amountRm": 939.03,
+      "channel": "all",
+      "cashRm": 439.37,
+      "duitnowQrRm": 270.74,
+      "cardRm": 74.58,
+      "deliveryGrossRm": 154.34,
+      "transactions": 94
+    },
+    {
+      "period": "2025-11-29",
+      "amountRm": 975.43,
+      "channel": "all",
+      "cashRm": 406.85,
+      "duitnowQrRm": 292.68,
+      "cardRm": 60.81,
+      "deliveryGrossRm": 215.09,
+      "transactions": 105
+    },
+    {
+      "period": "2025-11-30",
+      "amountRm": 823.4,
+      "channel": "all",
+      "cashRm": 346.83,
+      "duitnowQrRm": 262.83,
+      "cardRm": 64.39,
+      "deliveryGrossRm": 149.35,
+      "transactions": 82
+    },
+    {
+      "period": "2025-12-02",
+      "amountRm": 998.32,
+      "channel": "all",
+      "cashRm": 433.11,
+      "duitnowQrRm": 327.32,
+      "cardRm": 99.65,
+      "deliveryGrossRm": 138.24,
+      "transactions": 101
+    },
+    {
+      "period": "2025-12-03",
+      "amountRm": 690.62,
+      "channel": "all",
+      "cashRm": 284.8,
+      "duitnowQrRm": 203.62,
+      "cardRm": 68.2,
+      "deliveryGrossRm": 134,
+      "transactions": 67
+    },
+    {
+      "period": "2025-12-04",
+      "amountRm": 758.76,
+      "channel": "all",
+      "cashRm": 338.66,
+      "duitnowQrRm": 233.02,
+      "cardRm": 68.23,
+      "deliveryGrossRm": 118.85,
+      "transactions": 74
+    },
+    {
+      "period": "2025-12-05",
+      "amountRm": 887.07,
+      "channel": "all",
+      "cashRm": 390.51,
+      "duitnowQrRm": 286.2,
+      "cardRm": 58.81,
+      "deliveryGrossRm": 151.55,
+      "transactions": 95
+    },
+    {
+      "period": "2025-12-06",
+      "amountRm": 1080.89,
+      "channel": "all",
+      "cashRm": 515.43,
+      "duitnowQrRm": 306.98,
+      "cardRm": 72.89,
+      "deliveryGrossRm": 185.59,
+      "transactions": 111
+    },
+    {
+      "period": "2025-12-07",
+      "amountRm": 921.6,
+      "channel": "all",
+      "cashRm": 385.98,
+      "duitnowQrRm": 263.57,
+      "cardRm": 88.12,
+      "deliveryGrossRm": 183.93,
+      "transactions": 102
+    },
+    {
+      "period": "2025-12-09",
+      "amountRm": 737.44,
+      "channel": "all",
+      "cashRm": 309.5,
+      "duitnowQrRm": 228.4,
+      "cardRm": 62.52,
+      "deliveryGrossRm": 137.02,
+      "transactions": 78
+    },
+    {
+      "period": "2025-12-10",
+      "amountRm": 714.91,
+      "channel": "all",
+      "cashRm": 315.86,
+      "duitnowQrRm": 233.59,
+      "cardRm": 48.74,
+      "deliveryGrossRm": 116.72,
+      "transactions": 69
+    },
+    {
+      "period": "2025-12-11",
+      "amountRm": 844.21,
+      "channel": "all",
+      "cashRm": 386.05,
+      "duitnowQrRm": 246.45,
+      "cardRm": 64.02,
+      "deliveryGrossRm": 147.69,
+      "transactions": 85
+    },
+    {
+      "period": "2025-12-12",
+      "amountRm": 769.34,
+      "channel": "all",
+      "cashRm": 327.2,
+      "duitnowQrRm": 244.34,
+      "cardRm": 48.39,
+      "deliveryGrossRm": 149.41,
+      "transactions": 81
+    },
+    {
+      "period": "2025-12-13",
+      "amountRm": 967.9,
+      "channel": "all",
+      "cashRm": 422.65,
+      "duitnowQrRm": 319.33,
+      "cardRm": 96.64,
+      "deliveryGrossRm": 129.28,
+      "transactions": 99
+    },
+    {
+      "period": "2025-12-14",
+      "amountRm": 1095.32,
+      "channel": "all",
+      "cashRm": 461.37,
+      "duitnowQrRm": 357.8,
+      "cardRm": 104.31,
+      "deliveryGrossRm": 171.84,
+      "transactions": 106
+    },
+    {
+      "period": "2025-12-16",
+      "amountRm": 820.09,
+      "channel": "all",
+      "cashRm": 385.72,
+      "duitnowQrRm": 244.78,
+      "cardRm": 54.38,
+      "deliveryGrossRm": 135.21,
+      "transactions": 88
+    },
+    {
+      "period": "2025-12-17",
+      "amountRm": 854.25,
+      "channel": "all",
+      "cashRm": 383.5,
+      "duitnowQrRm": 281.36,
+      "cardRm": 73.6,
+      "deliveryGrossRm": 115.79,
+      "transactions": 90
+    },
+    {
+      "period": "2025-12-18",
+      "amountRm": 701.16,
+      "channel": "all",
+      "cashRm": 280.9,
+      "duitnowQrRm": 224.97,
+      "cardRm": 50.47,
+      "deliveryGrossRm": 144.82,
+      "transactions": 69
+    },
+    {
+      "period": "2025-12-19",
+      "amountRm": 710.07,
+      "channel": "all",
+      "cashRm": 291.66,
+      "duitnowQrRm": 202.92,
+      "cardRm": 45.64,
+      "deliveryGrossRm": 169.85,
+      "transactions": 70
+    },
+    {
+      "period": "2025-12-20",
+      "amountRm": 848.52,
+      "channel": "all",
+      "cashRm": 376.96,
+      "duitnowQrRm": 249.14,
+      "cardRm": 71.44,
+      "deliveryGrossRm": 150.98,
+      "transactions": 85
+    },
+    {
+      "period": "2025-12-21",
+      "amountRm": 1024.66,
+      "channel": "all",
+      "cashRm": 461.86,
+      "duitnowQrRm": 300.43,
+      "cardRm": 81.5,
+      "deliveryGrossRm": 180.87,
+      "transactions": 101
+    },
+    {
+      "period": "2025-12-23",
+      "amountRm": 750.53,
+      "channel": "all",
+      "cashRm": 354.57,
+      "duitnowQrRm": 241.9,
+      "cardRm": 47.8,
+      "deliveryGrossRm": 106.26,
+      "transactions": 75
+    },
+    {
+      "period": "2025-12-24",
+      "amountRm": 746.73,
+      "channel": "all",
+      "cashRm": 298.9,
+      "duitnowQrRm": 237.88,
+      "cardRm": 63.83,
+      "deliveryGrossRm": 146.12,
+      "transactions": 75
+    },
+    {
+      "period": "2025-12-25",
+      "amountRm": 874.18,
+      "channel": "all",
+      "cashRm": 367.99,
+      "duitnowQrRm": 277.17,
+      "cardRm": 71.74,
+      "deliveryGrossRm": 157.28,
+      "transactions": 90
+    },
+    {
+      "period": "2025-12-26",
+      "amountRm": 836.35,
+      "channel": "all",
+      "cashRm": 339.57,
+      "duitnowQrRm": 271.11,
+      "cardRm": 80.42,
+      "deliveryGrossRm": 145.25,
+      "transactions": 85
+    },
+    {
+      "period": "2025-12-27",
+      "amountRm": 1105.71,
+      "channel": "all",
+      "cashRm": 490.54,
+      "duitnowQrRm": 355.74,
+      "cardRm": 92.11,
+      "deliveryGrossRm": 167.32,
+      "transactions": 116
+    },
+    {
+      "period": "2025-12-28",
+      "amountRm": 1130.52,
+      "channel": "all",
+      "cashRm": 480.09,
+      "duitnowQrRm": 367.36,
+      "cardRm": 103.83,
+      "deliveryGrossRm": 179.24,
+      "transactions": 120
+    },
+    {
+      "period": "2025-12-30",
+      "amountRm": 877.75,
+      "channel": "all",
+      "cashRm": 411.54,
+      "duitnowQrRm": 285.22,
+      "cardRm": 60.04,
+      "deliveryGrossRm": 120.95,
+      "transactions": 93
+    },
+    {
+      "period": "2025-12-31",
+      "amountRm": 845.98,
+      "channel": "all",
+      "cashRm": 391.19,
+      "duitnowQrRm": 274.27,
+      "cardRm": 64.51,
+      "deliveryGrossRm": 116.01,
+      "transactions": 93
+    },
+    {
+      "period": "2026-01-01",
+      "amountRm": 856.15,
+      "channel": "all",
+      "cashRm": 384.97,
+      "duitnowQrRm": 246.34,
+      "cardRm": 83.21,
+      "deliveryGrossRm": 141.63,
+      "transactions": 93
+    },
+    {
+      "period": "2026-01-02",
+      "amountRm": 955.06,
+      "channel": "all",
+      "cashRm": 443.97,
+      "duitnowQrRm": 309.51,
+      "cardRm": 58.25,
+      "deliveryGrossRm": 143.33,
+      "transactions": 92
+    },
+    {
+      "period": "2026-01-03",
+      "amountRm": 821.33,
+      "channel": "all",
+      "cashRm": 376.93,
+      "duitnowQrRm": 243.61,
+      "cardRm": 79.86,
+      "deliveryGrossRm": 120.93,
+      "transactions": 85
+    },
+    {
+      "period": "2026-01-04",
+      "amountRm": 1066.17,
+      "channel": "all",
+      "cashRm": 495.62,
+      "duitnowQrRm": 312.75,
+      "cardRm": 97.55,
+      "deliveryGrossRm": 160.25,
+      "transactions": 116
+    },
+    {
+      "period": "2026-01-06",
+      "amountRm": 643.26,
+      "channel": "all",
+      "cashRm": 262.87,
+      "duitnowQrRm": 208.16,
+      "cardRm": 60.69,
+      "deliveryGrossRm": 111.54,
+      "transactions": 71
+    },
+    {
+      "period": "2026-01-07",
+      "amountRm": 797.34,
+      "channel": "all",
+      "cashRm": 348.3,
+      "duitnowQrRm": 235.42,
+      "cardRm": 73.21,
+      "deliveryGrossRm": 140.41,
+      "transactions": 89
+    },
+    {
+      "period": "2026-01-08",
+      "amountRm": 901.77,
+      "channel": "all",
+      "cashRm": 377.13,
+      "duitnowQrRm": 253.56,
+      "cardRm": 61.07,
+      "deliveryGrossRm": 210.01,
+      "transactions": 88
+    },
+    {
+      "period": "2026-01-09",
+      "amountRm": 709.35,
+      "channel": "all",
+      "cashRm": 338.61,
+      "duitnowQrRm": 208.52,
+      "cardRm": 60.76,
+      "deliveryGrossRm": 101.46,
+      "transactions": 79
+    },
+    {
+      "period": "2026-01-10",
+      "amountRm": 1167.58,
+      "channel": "all",
+      "cashRm": 504.36,
+      "duitnowQrRm": 384.2,
+      "cardRm": 95.1,
+      "deliveryGrossRm": 183.92,
+      "transactions": 116
+    },
+    {
+      "period": "2026-01-11",
+      "amountRm": 1049.43,
+      "channel": "all",
+      "cashRm": 501.24,
+      "duitnowQrRm": 303.21,
+      "cardRm": 103.37,
+      "deliveryGrossRm": 141.61,
+      "transactions": 103
+    },
+    {
+      "period": "2026-01-13",
+      "amountRm": 762.32,
+      "channel": "all",
+      "cashRm": 321.12,
+      "duitnowQrRm": 217.58,
+      "cardRm": 58.99,
+      "deliveryGrossRm": 164.63,
+      "transactions": 74
+    },
+    {
+      "period": "2026-01-14",
+      "amountRm": 767.06,
+      "channel": "all",
+      "cashRm": 344.03,
+      "duitnowQrRm": 234.39,
+      "cardRm": 57.84,
+      "deliveryGrossRm": 130.8,
+      "transactions": 86
+    },
+    {
+      "period": "2026-01-15",
+      "amountRm": 715.22,
+      "channel": "all",
+      "cashRm": 319.08,
+      "duitnowQrRm": 209.37,
+      "cardRm": 63.19,
+      "deliveryGrossRm": 123.58,
+      "transactions": 76
+    },
+    {
+      "period": "2026-01-16",
+      "amountRm": 934.22,
+      "channel": "all",
+      "cashRm": 413.93,
+      "duitnowQrRm": 295.19,
+      "cardRm": 83.78,
+      "deliveryGrossRm": 141.32,
+      "transactions": 93
+    },
+    {
+      "period": "2026-01-17",
+      "amountRm": 1009.96,
+      "channel": "all",
+      "cashRm": 458.17,
+      "duitnowQrRm": 301.18,
+      "cardRm": 63.42,
+      "deliveryGrossRm": 187.19,
+      "transactions": 112
+    },
+    {
+      "period": "2026-01-18",
+      "amountRm": 966.09,
+      "channel": "all",
+      "cashRm": 410.7,
+      "duitnowQrRm": 311.47,
+      "cardRm": 85.78,
+      "deliveryGrossRm": 158.14,
+      "transactions": 102
+    },
+    {
+      "period": "2026-01-20",
+      "amountRm": 721.58,
+      "channel": "all",
+      "cashRm": 305.97,
+      "duitnowQrRm": 213.2,
+      "cardRm": 55.08,
+      "deliveryGrossRm": 147.33,
+      "transactions": 79
+    },
+    {
+      "period": "2026-01-21",
+      "amountRm": 727.43,
+      "channel": "all",
+      "cashRm": 298.38,
+      "duitnowQrRm": 218.97,
+      "cardRm": 71.01,
+      "deliveryGrossRm": 139.07,
+      "transactions": 71
+    },
+    {
+      "period": "2026-01-22",
+      "amountRm": 808.81,
+      "channel": "all",
+      "cashRm": 367.35,
+      "duitnowQrRm": 262.98,
+      "cardRm": 68.44,
+      "deliveryGrossRm": 110.04,
+      "transactions": 80
+    },
+    {
+      "period": "2026-01-23",
+      "amountRm": 747.54,
+      "channel": "all",
+      "cashRm": 299.04,
+      "duitnowQrRm": 220.03,
+      "cardRm": 57.71,
+      "deliveryGrossRm": 170.76,
+      "transactions": 74
+    },
+    {
+      "period": "2026-01-24",
+      "amountRm": 1116.25,
+      "channel": "all",
+      "cashRm": 498.29,
+      "duitnowQrRm": 349.09,
+      "cardRm": 87.74,
+      "deliveryGrossRm": 181.13,
+      "transactions": 123
+    },
+    {
+      "period": "2026-01-25",
+      "amountRm": 1005.9,
+      "channel": "all",
+      "cashRm": 440.44,
+      "duitnowQrRm": 326.98,
+      "cardRm": 92.38,
+      "deliveryGrossRm": 146.1,
+      "transactions": 105
+    },
+    {
+      "period": "2026-01-27",
+      "amountRm": 839.93,
+      "channel": "all",
+      "cashRm": 347.38,
+      "duitnowQrRm": 238.74,
+      "cardRm": 67.71,
+      "deliveryGrossRm": 186.1,
+      "transactions": 88
+    },
+    {
+      "period": "2026-01-28",
+      "amountRm": 776.87,
+      "channel": "all",
+      "cashRm": 361.61,
+      "duitnowQrRm": 246.7,
+      "cardRm": 67.52,
+      "deliveryGrossRm": 101.04,
+      "transactions": 78
+    },
+    {
+      "period": "2026-01-29",
+      "amountRm": 772.15,
+      "channel": "all",
+      "cashRm": 322.74,
+      "duitnowQrRm": 223.89,
+      "cardRm": 47.08,
+      "deliveryGrossRm": 178.44,
+      "transactions": 84
+    },
+    {
+      "period": "2026-01-30",
+      "amountRm": 824.43,
+      "channel": "all",
+      "cashRm": 385.82,
+      "duitnowQrRm": 233.84,
+      "cardRm": 63.13,
+      "deliveryGrossRm": 141.64,
+      "transactions": 86
+    },
+    {
+      "period": "2026-01-31",
+      "amountRm": 1177.33,
+      "channel": "all",
+      "cashRm": 530.25,
+      "duitnowQrRm": 341.1,
+      "cardRm": 103.43,
+      "deliveryGrossRm": 202.55,
+      "transactions": 127
+    },
+    {
+      "period": "2026-02-01",
+      "amountRm": 927.98,
+      "channel": "all",
+      "cashRm": 419.9,
+      "duitnowQrRm": 260.09,
+      "cardRm": 83.55,
+      "deliveryGrossRm": 164.44,
+      "transactions": 92
+    },
+    {
+      "period": "2026-02-03",
+      "amountRm": 723.72,
+      "channel": "all",
+      "cashRm": 334.07,
+      "duitnowQrRm": 206.5,
+      "cardRm": 55.73,
+      "deliveryGrossRm": 127.42,
+      "transactions": 76
+    },
+    {
+      "period": "2026-02-04",
+      "amountRm": 795.46,
+      "channel": "all",
+      "cashRm": 351.14,
+      "duitnowQrRm": 224.73,
+      "cardRm": 55.66,
+      "deliveryGrossRm": 163.93,
+      "transactions": 82
+    },
+    {
+      "period": "2026-02-05",
+      "amountRm": 868.17,
+      "channel": "all",
+      "cashRm": 406.19,
+      "duitnowQrRm": 262.9,
+      "cardRm": 79.92,
+      "deliveryGrossRm": 119.16,
+      "transactions": 93
+    },
+    {
+      "period": "2026-02-06",
+      "amountRm": 626.43,
+      "channel": "all",
+      "cashRm": 280.41,
+      "duitnowQrRm": 205.16,
+      "cardRm": 59.92,
+      "deliveryGrossRm": 80.94,
+      "transactions": 62
+    },
+    {
+      "period": "2026-02-07",
+      "amountRm": 720.52,
+      "channel": "all",
+      "cashRm": 323.52,
+      "duitnowQrRm": 227.66,
+      "cardRm": 57.78,
+      "deliveryGrossRm": 111.56,
+      "transactions": 75
+    },
+    {
+      "period": "2026-02-08",
+      "amountRm": 990.21,
+      "channel": "all",
+      "cashRm": 467.16,
+      "duitnowQrRm": 314.08,
+      "cardRm": 78.21,
+      "deliveryGrossRm": 130.76,
+      "transactions": 97
+    },
+    {
+      "period": "2026-02-10",
+      "amountRm": 650.39,
+      "channel": "all",
+      "cashRm": 273.64,
+      "duitnowQrRm": 190.15,
+      "cardRm": 55.61,
+      "deliveryGrossRm": 130.99,
+      "transactions": 69
+    },
+    {
+      "period": "2026-02-11",
+      "amountRm": 729.82,
+      "channel": "all",
+      "cashRm": 328.52,
+      "duitnowQrRm": 214.37,
+      "cardRm": 46.05,
+      "deliveryGrossRm": 140.88,
+      "transactions": 70
+    },
+    {
+      "period": "2026-02-12",
+      "amountRm": 643.52,
+      "channel": "all",
+      "cashRm": 272.12,
+      "duitnowQrRm": 188.93,
+      "cardRm": 46.84,
+      "deliveryGrossRm": 135.63,
+      "transactions": 62
+    },
+    {
+      "period": "2026-02-13",
+      "amountRm": 687.66,
+      "channel": "all",
+      "cashRm": 287.79,
+      "duitnowQrRm": 216.4,
+      "cardRm": 60.69,
+      "deliveryGrossRm": 122.78,
+      "transactions": 72
+    },
+    {
+      "period": "2026-02-14",
+      "amountRm": 927.09,
+      "channel": "all",
+      "cashRm": 375.6,
+      "duitnowQrRm": 278.48,
+      "cardRm": 75.75,
+      "deliveryGrossRm": 197.26,
+      "transactions": 100
+    },
+    {
+      "period": "2026-02-15",
+      "amountRm": 888.96,
+      "channel": "all",
+      "cashRm": 385.46,
+      "duitnowQrRm": 289.13,
+      "cardRm": 74.11,
+      "deliveryGrossRm": 140.26,
+      "transactions": 94
+    },
+    {
+      "period": "2026-02-17",
+      "amountRm": 744.33,
+      "channel": "all",
+      "cashRm": 339.15,
+      "duitnowQrRm": 240.3,
+      "cardRm": 67.45,
+      "deliveryGrossRm": 97.43,
+      "transactions": 77
+    },
+    {
+      "period": "2026-02-18",
+      "amountRm": 716.84,
+      "channel": "all",
+      "cashRm": 306.91,
+      "duitnowQrRm": 227.72,
+      "cardRm": 67.48,
+      "deliveryGrossRm": 114.73,
+      "transactions": 69
+    },
+    {
+      "period": "2026-02-19",
+      "amountRm": 399.76,
+      "channel": "all",
+      "cashRm": 190.39,
+      "duitnowQrRm": 120.31,
+      "cardRm": 35.94,
+      "deliveryGrossRm": 53.12,
+      "transactions": 39,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-20",
+      "amountRm": 350.53,
+      "channel": "all",
+      "cashRm": 146.4,
+      "duitnowQrRm": 101.99,
+      "cardRm": 27.14,
+      "deliveryGrossRm": 75,
+      "transactions": 34,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-21",
+      "amountRm": 498.17,
+      "channel": "all",
+      "cashRm": 200.43,
+      "duitnowQrRm": 147.86,
+      "cardRm": 43.42,
+      "deliveryGrossRm": 106.46,
+      "transactions": 55,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-22",
+      "amountRm": 493.22,
+      "channel": "all",
+      "cashRm": 215.73,
+      "duitnowQrRm": 141.25,
+      "cardRm": 41.87,
+      "deliveryGrossRm": 94.37,
+      "transactions": 53,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-24",
+      "amountRm": 409.24,
+      "channel": "all",
+      "cashRm": 164.58,
+      "duitnowQrRm": 122.65,
+      "cardRm": 33.79,
+      "deliveryGrossRm": 88.22,
+      "transactions": 41,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-25",
+      "amountRm": 474.49,
+      "channel": "all",
+      "cashRm": 194.95,
+      "duitnowQrRm": 143.81,
+      "cardRm": 29.42,
+      "deliveryGrossRm": 106.31,
+      "transactions": 46,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-26",
+      "amountRm": 430.13,
+      "channel": "all",
+      "cashRm": 185.1,
+      "duitnowQrRm": 124.99,
+      "cardRm": 31.43,
+      "deliveryGrossRm": 88.61,
+      "transactions": 44,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-27",
+      "amountRm": 423.54,
+      "channel": "all",
+      "cashRm": 194.89,
+      "duitnowQrRm": 136.21,
+      "cardRm": 29.69,
+      "deliveryGrossRm": 62.75,
+      "transactions": 47,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-02-28",
+      "amountRm": 499.25,
+      "channel": "all",
+      "cashRm": 202.97,
+      "duitnowQrRm": 140.27,
+      "cardRm": 40.73,
+      "deliveryGrossRm": 115.28,
+      "transactions": 49,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-01",
+      "amountRm": 530.5,
+      "channel": "all",
+      "cashRm": 239.79,
+      "duitnowQrRm": 169.26,
+      "cardRm": 45.66,
+      "deliveryGrossRm": 75.79,
+      "transactions": 52,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-03",
+      "amountRm": 355.28,
+      "channel": "all",
+      "cashRm": 163.55,
+      "duitnowQrRm": 116.35,
+      "cardRm": 24.15,
+      "deliveryGrossRm": 51.23,
+      "transactions": 38,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-04",
+      "amountRm": 373.54,
+      "channel": "all",
+      "cashRm": 153.19,
+      "duitnowQrRm": 117.09,
+      "cardRm": 30.84,
+      "deliveryGrossRm": 72.42,
+      "transactions": 37,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-05",
+      "amountRm": 357.65,
+      "channel": "all",
+      "cashRm": 149.3,
+      "duitnowQrRm": 112.65,
+      "cardRm": 32.43,
+      "deliveryGrossRm": 63.27,
+      "transactions": 38,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-06",
+      "amountRm": 376.89,
+      "channel": "all",
+      "cashRm": 173.31,
+      "duitnowQrRm": 107.69,
+      "cardRm": 34.96,
+      "deliveryGrossRm": 60.93,
+      "transactions": 36,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-07",
+      "amountRm": 511.3,
+      "channel": "all",
+      "cashRm": 243.98,
+      "duitnowQrRm": 145.93,
+      "cardRm": 31.2,
+      "deliveryGrossRm": 90.19,
+      "transactions": 56,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-08",
+      "amountRm": 438.15,
+      "channel": "all",
+      "cashRm": 208.85,
+      "duitnowQrRm": 131.37,
+      "cardRm": 38.82,
+      "deliveryGrossRm": 59.11,
+      "transactions": 46,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-10",
+      "amountRm": 399.8,
+      "channel": "all",
+      "cashRm": 162.35,
+      "duitnowQrRm": 125.75,
+      "cardRm": 34.02,
+      "deliveryGrossRm": 77.68,
+      "transactions": 38,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-11",
+      "amountRm": 399.43,
+      "channel": "all",
+      "cashRm": 186.94,
+      "duitnowQrRm": 123.83,
+      "cardRm": 25.9,
+      "deliveryGrossRm": 62.76,
+      "transactions": 43,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-12",
+      "amountRm": 388.17,
+      "channel": "all",
+      "cashRm": 185.82,
+      "duitnowQrRm": 123.88,
+      "cardRm": 28.68,
+      "deliveryGrossRm": 49.79,
+      "transactions": 40,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-13",
+      "amountRm": 327.6,
+      "channel": "all",
+      "cashRm": 144.3,
+      "duitnowQrRm": 97.32,
+      "cardRm": 30.79,
+      "deliveryGrossRm": 55.19,
+      "transactions": 35,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-14",
+      "amountRm": 479.3,
+      "channel": "all",
+      "cashRm": 223.25,
+      "duitnowQrRm": 136.73,
+      "cardRm": 47.18,
+      "deliveryGrossRm": 72.14,
+      "transactions": 54,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-15",
+      "amountRm": 410.47,
+      "channel": "all",
+      "cashRm": 187.41,
+      "duitnowQrRm": 123.87,
+      "cardRm": 36.68,
+      "deliveryGrossRm": 62.51,
+      "transactions": 46,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-17",
+      "amountRm": 310.09,
+      "channel": "all",
+      "cashRm": 147.99,
+      "duitnowQrRm": 91.01,
+      "cardRm": 28.63,
+      "deliveryGrossRm": 42.46,
+      "transactions": 32,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-18",
+      "amountRm": 319.6,
+      "channel": "all",
+      "cashRm": 138.97,
+      "duitnowQrRm": 101.17,
+      "cardRm": 22.61,
+      "deliveryGrossRm": 56.85,
+      "transactions": 34,
+      "note": "Ramadan"
+    },
+    {
+      "period": "2026-03-25",
+      "amountRm": 667.92,
+      "channel": "all",
+      "cashRm": 312.68,
+      "duitnowQrRm": 214.76,
+      "cardRm": 42.39,
+      "deliveryGrossRm": 98.09,
+      "transactions": 64
+    },
+    {
+      "period": "2026-03-26",
+      "amountRm": 718.68,
+      "channel": "all",
+      "cashRm": 314.19,
+      "duitnowQrRm": 223.16,
+      "cardRm": 54.02,
+      "deliveryGrossRm": 127.31,
+      "transactions": 76
+    },
+    {
+      "period": "2026-03-27",
+      "amountRm": 653.56,
+      "channel": "all",
+      "cashRm": 262.93,
+      "duitnowQrRm": 210.8,
+      "cardRm": 43.97,
+      "deliveryGrossRm": 135.86,
+      "transactions": 73
+    },
+    {
+      "period": "2026-03-28",
+      "amountRm": 923.96,
+      "channel": "all",
+      "cashRm": 394.74,
+      "duitnowQrRm": 299.38,
+      "cardRm": 81.35,
+      "deliveryGrossRm": 148.49,
+      "transactions": 89
+    },
+    {
+      "period": "2026-03-29",
+      "amountRm": 1029.4,
+      "channel": "all",
+      "cashRm": 434.51,
+      "duitnowQrRm": 288.76,
+      "cardRm": 100.8,
+      "deliveryGrossRm": 205.33,
+      "transactions": 101
+    },
+    {
+      "period": "2026-03-31",
+      "amountRm": 769.21,
+      "channel": "all",
+      "cashRm": 337.75,
+      "duitnowQrRm": 244.54,
+      "cardRm": 67.4,
+      "deliveryGrossRm": 119.52,
+      "transactions": 78
+    },
+    {
+      "period": "2026-04-01",
+      "amountRm": 890.82,
+      "channel": "all",
+      "cashRm": 402.36,
+      "duitnowQrRm": 271.29,
+      "cardRm": 81.7,
+      "deliveryGrossRm": 135.47,
+      "transactions": 88
+    },
+    {
+      "period": "2026-04-02",
+      "amountRm": 873.85,
+      "channel": "all",
+      "cashRm": 397.9,
+      "duitnowQrRm": 258.06,
+      "cardRm": 72.76,
+      "deliveryGrossRm": 145.13,
+      "transactions": 96
+    },
+    {
+      "period": "2026-04-03",
+      "amountRm": 810.32,
+      "channel": "all",
+      "cashRm": 354.81,
+      "duitnowQrRm": 248.4,
+      "cardRm": 62.41,
+      "deliveryGrossRm": 144.7,
+      "transactions": 87
+    },
+    {
+      "period": "2026-04-04",
+      "amountRm": 1015.55,
+      "channel": "all",
+      "cashRm": 463.32,
+      "duitnowQrRm": 298.11,
+      "cardRm": 71.15,
+      "deliveryGrossRm": 182.97,
+      "transactions": 100
+    },
+    {
+      "period": "2026-04-05",
+      "amountRm": 935.58,
+      "channel": "all",
+      "cashRm": 383.26,
+      "duitnowQrRm": 270.97,
+      "cardRm": 60.61,
+      "deliveryGrossRm": 220.74,
+      "transactions": 94
+    },
+    {
+      "period": "2026-04-07",
+      "amountRm": 666.42,
+      "channel": "all",
+      "cashRm": 276.44,
+      "duitnowQrRm": 193.81,
+      "cardRm": 52.89,
+      "deliveryGrossRm": 143.28,
+      "transactions": 73
+    },
+    {
+      "period": "2026-04-08",
+      "amountRm": 756.12,
+      "channel": "all",
+      "cashRm": 346.28,
+      "duitnowQrRm": 248.64,
+      "cardRm": 61.23,
+      "deliveryGrossRm": 99.97,
+      "transactions": 76
+    },
+    {
+      "period": "2026-04-09",
+      "amountRm": 776.12,
+      "channel": "all",
+      "cashRm": 322.5,
+      "duitnowQrRm": 226.14,
+      "cardRm": 52.14,
+      "deliveryGrossRm": 175.34,
+      "transactions": 81
+    },
+    {
+      "period": "2026-04-10",
+      "amountRm": 814.54,
+      "channel": "all",
+      "cashRm": 326.74,
+      "duitnowQrRm": 249.82,
+      "cardRm": 57.81,
+      "deliveryGrossRm": 180.17,
+      "transactions": 92
+    },
+    {
+      "period": "2026-04-11",
+      "amountRm": 1132.41,
+      "channel": "all",
+      "cashRm": 516.15,
+      "duitnowQrRm": 324.22,
+      "cardRm": 107.28,
+      "deliveryGrossRm": 184.76,
+      "transactions": 126
+    },
+    {
+      "period": "2026-04-12",
+      "amountRm": 998.93,
+      "channel": "all",
+      "cashRm": 438.8,
+      "duitnowQrRm": 323.29,
+      "cardRm": 82.87,
+      "deliveryGrossRm": 153.97,
+      "transactions": 108
+    },
+    {
+      "period": "2026-04-14",
+      "amountRm": 708.28,
+      "channel": "all",
+      "cashRm": 293.76,
+      "duitnowQrRm": 200.14,
+      "cardRm": 69.16,
+      "deliveryGrossRm": 145.22,
+      "transactions": 69
+    },
+    {
+      "period": "2026-04-15",
+      "amountRm": 797.31,
+      "channel": "all",
+      "cashRm": 349.4,
+      "duitnowQrRm": 256.02,
+      "cardRm": 60.62,
+      "deliveryGrossRm": 131.27,
+      "transactions": 82
+    },
+    {
+      "period": "2026-04-16",
+      "amountRm": 871.5,
+      "channel": "all",
+      "cashRm": 352.34,
+      "duitnowQrRm": 250.52,
+      "cardRm": 71.91,
+      "deliveryGrossRm": 196.73,
+      "transactions": 87
+    },
+    {
+      "period": "2026-04-17",
+      "amountRm": 827.36,
+      "channel": "all",
+      "cashRm": 351.05,
+      "duitnowQrRm": 272.78,
+      "cardRm": 53.56,
+      "deliveryGrossRm": 149.97,
+      "transactions": 85
+    },
+    {
+      "period": "2026-04-18",
+      "amountRm": 1028.97,
+      "channel": "all",
+      "cashRm": 476.68,
+      "duitnowQrRm": 299.72,
+      "cardRm": 83.25,
+      "deliveryGrossRm": 169.32,
+      "transactions": 114
+    },
+    {
+      "period": "2026-04-19",
+      "amountRm": 893.1,
+      "channel": "all",
+      "cashRm": 389.43,
+      "duitnowQrRm": 269.84,
+      "cardRm": 84.31,
+      "deliveryGrossRm": 149.52,
+      "transactions": 96
+    },
+    {
+      "period": "2026-04-21",
+      "amountRm": 842.82,
+      "channel": "all",
+      "cashRm": 379,
+      "duitnowQrRm": 261.68,
+      "cardRm": 75.52,
+      "deliveryGrossRm": 126.62,
+      "transactions": 90
+    },
+    {
+      "period": "2026-04-22",
+      "amountRm": 779.03,
+      "channel": "all",
+      "cashRm": 370.67,
+      "duitnowQrRm": 226.22,
+      "cardRm": 53.32,
+      "deliveryGrossRm": 128.82,
+      "transactions": 87
+    },
+    {
+      "period": "2026-04-23",
+      "amountRm": 760.83,
+      "channel": "all",
+      "cashRm": 314.91,
+      "duitnowQrRm": 215.89,
+      "cardRm": 45.73,
+      "deliveryGrossRm": 184.3,
+      "transactions": 80
+    },
+    {
+      "period": "2026-04-24",
+      "amountRm": 747.96,
+      "channel": "all",
+      "cashRm": 326.14,
+      "duitnowQrRm": 231.64,
+      "cardRm": 53.59,
+      "deliveryGrossRm": 136.59,
+      "transactions": 74
+    },
+    {
+      "period": "2026-04-25",
+      "amountRm": 1096.36,
+      "channel": "all",
+      "cashRm": 500.2,
+      "duitnowQrRm": 331.87,
+      "cardRm": 95.93,
+      "deliveryGrossRm": 168.36,
+      "transactions": 115
+    },
+    {
+      "period": "2026-04-26",
+      "amountRm": 1229.78,
+      "channel": "all",
+      "cashRm": 582.81,
+      "duitnowQrRm": 392.78,
+      "cardRm": 104.53,
+      "deliveryGrossRm": 149.66,
+      "transactions": 136
+    },
+    {
+      "period": "2026-04-28",
+      "amountRm": 737.66,
+      "channel": "all",
+      "cashRm": 320.15,
+      "duitnowQrRm": 226.63,
+      "cardRm": 63.37,
+      "deliveryGrossRm": 127.51,
+      "transactions": 71
+    },
+    {
+      "period": "2026-04-29",
+      "amountRm": 682.2,
+      "channel": "all",
+      "cashRm": 322.46,
+      "duitnowQrRm": 219.21,
+      "cardRm": 42.88,
+      "deliveryGrossRm": 97.65,
+      "transactions": 69
+    },
+    {
+      "period": "2026-04-30",
+      "amountRm": 862.04,
+      "channel": "all",
+      "cashRm": 396.47,
+      "duitnowQrRm": 265.91,
+      "cardRm": 61.67,
+      "deliveryGrossRm": 137.99,
+      "transactions": 97
+    },
+    {
+      "period": "2026-05-01",
+      "amountRm": 859.3,
+      "channel": "all",
+      "cashRm": 352.27,
+      "duitnowQrRm": 270.19,
+      "cardRm": 75.61,
+      "deliveryGrossRm": 161.23,
+      "transactions": 89
+    },
+    {
+      "period": "2026-05-02",
+      "amountRm": 1151.21,
+      "channel": "all",
+      "cashRm": 505.96,
+      "duitnowQrRm": 326.97,
+      "cardRm": 70.91,
+      "deliveryGrossRm": 247.37,
+      "transactions": 125
+    },
+    {
+      "period": "2026-05-03",
+      "amountRm": 951.08,
+      "channel": "all",
+      "cashRm": 413.3,
+      "duitnowQrRm": 281.63,
+      "cardRm": 66.59,
+      "deliveryGrossRm": 189.56,
+      "transactions": 105
+    },
+    {
+      "period": "2026-05-05",
+      "amountRm": 906.85,
+      "channel": "all",
+      "cashRm": 423.39,
+      "duitnowQrRm": 280,
+      "cardRm": 88.9,
+      "deliveryGrossRm": 114.56,
+      "transactions": 95
+    },
+    {
+      "period": "2026-05-06",
+      "amountRm": 854.92,
+      "channel": "all",
+      "cashRm": 410.33,
+      "duitnowQrRm": 268.12,
+      "cardRm": 60.51,
+      "deliveryGrossRm": 115.96,
+      "transactions": 87
+    },
+    {
+      "period": "2026-05-07",
+      "amountRm": 871.28,
+      "channel": "all",
+      "cashRm": 381.31,
+      "duitnowQrRm": 272.34,
+      "cardRm": 84.2,
+      "deliveryGrossRm": 133.43,
+      "transactions": 94
+    },
+    {
+      "period": "2026-05-08",
+      "amountRm": 788.74,
+      "channel": "all",
+      "cashRm": 326.95,
+      "duitnowQrRm": 243.93,
+      "cardRm": 67.35,
+      "deliveryGrossRm": 150.51,
+      "transactions": 83
+    },
+    {
+      "period": "2026-05-09",
+      "amountRm": 949.15,
+      "channel": "all",
+      "cashRm": 406.08,
+      "duitnowQrRm": 281.58,
+      "cardRm": 82.39,
+      "deliveryGrossRm": 179.1,
+      "transactions": 96
+    },
+    {
+      "period": "2026-05-10",
+      "amountRm": 990.02,
+      "channel": "all",
+      "cashRm": 463.94,
+      "duitnowQrRm": 293.53,
+      "cardRm": 86.87,
+      "deliveryGrossRm": 145.68,
+      "transactions": 110
+    },
+    {
+      "period": "2026-05-12",
+      "amountRm": 720.79,
+      "channel": "all",
+      "cashRm": 335.23,
+      "duitnowQrRm": 221.65,
+      "cardRm": 56.36,
+      "deliveryGrossRm": 107.55,
+      "transactions": 69
+    },
+    {
+      "period": "2026-05-13",
+      "amountRm": 920.11,
+      "channel": "all",
+      "cashRm": 391.2,
+      "duitnowQrRm": 272.5,
+      "cardRm": 90.91,
+      "deliveryGrossRm": 165.5,
+      "transactions": 103
+    },
+    {
+      "period": "2026-05-14",
+      "amountRm": 692.22,
+      "channel": "all",
+      "cashRm": 331.61,
+      "duitnowQrRm": 216.58,
+      "cardRm": 56.56,
+      "deliveryGrossRm": 87.47,
+      "transactions": 71
+    },
+    {
+      "period": "2026-05-15",
+      "amountRm": 806.59,
+      "channel": "all",
+      "cashRm": 349.3,
+      "duitnowQrRm": 233.41,
+      "cardRm": 60.07,
+      "deliveryGrossRm": 163.81,
+      "transactions": 83
+    },
+    {
+      "period": "2026-05-16",
+      "amountRm": 993.04,
+      "channel": "all",
+      "cashRm": 457.59,
+      "duitnowQrRm": 288.16,
+      "cardRm": 81.4,
+      "deliveryGrossRm": 165.89,
+      "transactions": 95
+    },
+    {
+      "period": "2026-05-17",
+      "amountRm": 863.49,
+      "channel": "all",
+      "cashRm": 409.48,
+      "duitnowQrRm": 260.69,
+      "cardRm": 75.93,
+      "deliveryGrossRm": 117.39,
+      "transactions": 89
+    },
+    {
+      "period": "2026-05-19",
+      "amountRm": 892.99,
+      "channel": "all",
+      "cashRm": 400.69,
+      "duitnowQrRm": 260.72,
+      "cardRm": 59.24,
+      "deliveryGrossRm": 172.34,
+      "transactions": 94
+    },
+    {
+      "period": "2026-05-20",
+      "amountRm": 887.15,
+      "channel": "all",
+      "cashRm": 393.95,
+      "duitnowQrRm": 272.9,
+      "cardRm": 56.54,
+      "deliveryGrossRm": 163.76,
+      "transactions": 92
+    },
+    {
+      "period": "2026-05-21",
+      "amountRm": 910.96,
+      "channel": "all",
+      "cashRm": 398.01,
+      "duitnowQrRm": 260.42,
+      "cardRm": 84.98,
+      "deliveryGrossRm": 167.55,
+      "transactions": 92
+    },
+    {
+      "period": "2026-05-22",
+      "amountRm": 752.65,
+      "channel": "all",
+      "cashRm": 331.07,
+      "duitnowQrRm": 237.71,
+      "cardRm": 60.48,
+      "deliveryGrossRm": 123.39,
+      "transactions": 72
+    },
+    {
+      "period": "2026-05-23",
+      "amountRm": 963.26,
+      "channel": "all",
+      "cashRm": 460.84,
+      "duitnowQrRm": 281.45,
+      "cardRm": 79.04,
+      "deliveryGrossRm": 141.93,
+      "transactions": 104
+    },
+    {
+      "period": "2026-05-24",
+      "amountRm": 1154.89,
+      "channel": "all",
+      "cashRm": 497.4,
+      "duitnowQrRm": 376.6,
+      "cardRm": 92.77,
+      "deliveryGrossRm": 188.12,
+      "transactions": 130
+    },
+    {
+      "period": "2026-05-26",
+      "amountRm": 910.76,
+      "channel": "all",
+      "cashRm": 384.43,
+      "duitnowQrRm": 290.99,
+      "cardRm": 69.76,
+      "deliveryGrossRm": 165.58,
+      "transactions": 90
+    },
+    {
+      "period": "2026-05-27",
+      "amountRm": 706,
+      "channel": "all",
+      "cashRm": 335.17,
+      "duitnowQrRm": 215.6,
+      "cardRm": 65.53,
+      "deliveryGrossRm": 89.7,
+      "transactions": 75
+    },
+    {
+      "period": "2026-05-28",
+      "amountRm": 793.1,
+      "channel": "all",
+      "cashRm": 354.48,
+      "duitnowQrRm": 261.68,
+      "cardRm": 63.12,
+      "deliveryGrossRm": 113.82,
+      "transactions": 79
+    },
+    {
+      "period": "2026-05-29",
+      "amountRm": 865.37,
+      "channel": "all",
+      "cashRm": 356.43,
+      "duitnowQrRm": 265.61,
+      "cardRm": 63.87,
+      "deliveryGrossRm": 179.46,
+      "transactions": 88
+    },
+    {
+      "period": "2026-05-30",
+      "amountRm": 935.48,
+      "channel": "all",
+      "cashRm": 408.27,
+      "duitnowQrRm": 276.98,
+      "cardRm": 63.19,
+      "deliveryGrossRm": 187.04,
+      "transactions": 93
+    },
+    {
+      "period": "2026-05-31",
+      "amountRm": 1009.46,
+      "channel": "all",
+      "cashRm": 460.11,
+      "duitnowQrRm": 311.51,
+      "cardRm": 70,
+      "deliveryGrossRm": 167.84,
+      "transactions": 101
+    },
+    {
+      "period": "2026-06-02",
+      "amountRm": 792.88,
+      "channel": "all",
+      "cashRm": 364.39,
+      "duitnowQrRm": 249.96,
+      "cardRm": 73.31,
+      "deliveryGrossRm": 105.22,
+      "transactions": 84
+    },
+    {
+      "period": "2026-06-03",
+      "amountRm": 725.03,
+      "channel": "all",
+      "cashRm": 312.41,
+      "duitnowQrRm": 227.07,
+      "cardRm": 67.3,
+      "deliveryGrossRm": 118.25,
+      "transactions": 81
+    },
+    {
+      "period": "2026-06-04",
+      "amountRm": 822.63,
+      "channel": "all",
+      "cashRm": 331.49,
+      "duitnowQrRm": 250.99,
+      "cardRm": 68.78,
+      "deliveryGrossRm": 171.37,
+      "transactions": 85
+    },
+    {
+      "period": "2026-06-05",
+      "amountRm": 735.37,
+      "channel": "all",
+      "cashRm": 345.31,
+      "duitnowQrRm": 238.05,
+      "cardRm": 57.07,
+      "deliveryGrossRm": 94.94,
+      "transactions": 72
+    },
+    {
+      "period": "2026-06-06",
+      "amountRm": 873.22,
+      "channel": "all",
+      "cashRm": 399.76,
+      "duitnowQrRm": 262.4,
+      "cardRm": 75.26,
+      "deliveryGrossRm": 135.8,
+      "transactions": 96
+    },
+    {
+      "period": "2026-06-07",
+      "amountRm": 952.61,
+      "channel": "all",
+      "cashRm": 392.81,
+      "duitnowQrRm": 289.09,
+      "cardRm": 94.09,
+      "deliveryGrossRm": 176.62,
+      "transactions": 94
+    },
+    {
+      "period": "2026-06-09",
+      "amountRm": 690.41,
+      "channel": "all",
+      "cashRm": 312.06,
+      "duitnowQrRm": 222.72,
+      "cardRm": 64.96,
+      "deliveryGrossRm": 90.67,
+      "transactions": 72
+    },
+    {
+      "period": "2026-06-10",
+      "amountRm": 832.24,
+      "channel": "all",
+      "cashRm": 390.11,
+      "duitnowQrRm": 248.84,
+      "cardRm": 60.48,
+      "deliveryGrossRm": 132.81,
+      "transactions": 83
+    },
+    {
+      "period": "2026-06-11",
+      "amountRm": 722.7,
+      "channel": "all",
+      "cashRm": 339.52,
+      "duitnowQrRm": 203.65,
+      "cardRm": 45.34,
+      "deliveryGrossRm": 134.19,
+      "transactions": 73
+    },
+    {
+      "period": "2026-06-12",
+      "amountRm": 633.84,
+      "channel": "all",
+      "cashRm": 285.54,
+      "duitnowQrRm": 206.66,
+      "cardRm": 63.32,
+      "deliveryGrossRm": 78.32,
+      "transactions": 62
+    },
+    {
+      "period": "2026-06-13",
+      "amountRm": 966.35,
+      "channel": "all",
+      "cashRm": 394.15,
+      "duitnowQrRm": 301.2,
+      "cardRm": 91.71,
+      "deliveryGrossRm": 179.29,
+      "transactions": 108
+    },
+    {
+      "period": "2026-06-14",
+      "amountRm": 875.28,
+      "channel": "all",
+      "cashRm": 381.18,
+      "duitnowQrRm": 275.45,
+      "cardRm": 84.15,
+      "deliveryGrossRm": 134.5,
+      "transactions": 87
+    },
+    {
+      "period": "2026-06-16",
+      "amountRm": 859.4,
+      "channel": "all",
+      "cashRm": 363.93,
+      "duitnowQrRm": 256.74,
+      "cardRm": 56.57,
+      "deliveryGrossRm": 182.16,
+      "transactions": 90
+    },
+    {
+      "period": "2026-06-17",
+      "amountRm": 778.86,
+      "channel": "all",
+      "cashRm": 344.64,
+      "duitnowQrRm": 240.12,
+      "cardRm": 71.42,
+      "deliveryGrossRm": 122.68,
+      "transactions": 84
+    },
+    {
+      "period": "2026-06-18",
+      "amountRm": 757.91,
+      "channel": "all",
+      "cashRm": 355.96,
+      "duitnowQrRm": 235.7,
+      "cardRm": 52.78,
+      "deliveryGrossRm": 113.47,
+      "transactions": 85
+    },
+    {
+      "period": "2026-06-19",
+      "amountRm": 768.63,
+      "channel": "all",
+      "cashRm": 363.58,
+      "duitnowQrRm": 220.72,
+      "cardRm": 60.3,
+      "deliveryGrossRm": 124.03,
+      "transactions": 84
+    },
+    {
+      "period": "2026-06-20",
+      "amountRm": 966.57,
+      "channel": "all",
+      "cashRm": 387.35,
+      "duitnowQrRm": 309.53,
+      "cardRm": 92.84,
+      "deliveryGrossRm": 176.85,
+      "transactions": 109
+    },
+    {
+      "period": "2026-06-21",
+      "amountRm": 1035.13,
+      "channel": "all",
+      "cashRm": 470.17,
+      "duitnowQrRm": 298.01,
+      "cardRm": 80.4,
+      "deliveryGrossRm": 186.55,
+      "transactions": 100
+    },
+    {
+      "period": "2026-06-23",
+      "amountRm": 694.39,
+      "channel": "all",
+      "cashRm": 313.25,
+      "duitnowQrRm": 209.16,
+      "cardRm": 48.61,
+      "deliveryGrossRm": 123.37,
+      "transactions": 72
+    },
+    {
+      "period": "2026-06-24",
+      "amountRm": 818.42,
+      "channel": "all",
+      "cashRm": 382.71,
+      "duitnowQrRm": 237.31,
+      "cardRm": 61.7,
+      "deliveryGrossRm": 136.7,
+      "transactions": 78
+    },
+    {
+      "period": "2026-06-25",
+      "amountRm": 737.48,
+      "channel": "all",
+      "cashRm": 328.74,
+      "duitnowQrRm": 227.69,
+      "cardRm": 73.53,
+      "deliveryGrossRm": 107.52,
+      "transactions": 76
+    },
+    {
+      "period": "2026-06-26",
+      "amountRm": 794.99,
+      "channel": "all",
+      "cashRm": 336.77,
+      "duitnowQrRm": 261.47,
+      "cardRm": 68.63,
+      "deliveryGrossRm": 128.12,
+      "transactions": 86
+    },
+    {
+      "period": "2026-06-27",
+      "amountRm": 1008.06,
+      "channel": "all",
+      "cashRm": 458.53,
+      "duitnowQrRm": 319.79,
+      "cardRm": 62.46,
+      "deliveryGrossRm": 167.28,
+      "transactions": 100
+    },
+    {
+      "period": "2026-06-28",
+      "amountRm": 1144.26,
+      "channel": "all",
+      "cashRm": 513.22,
+      "duitnowQrRm": 348.81,
+      "cardRm": 110.04,
+      "deliveryGrossRm": 172.19,
+      "transactions": 125
+    },
+    {
+      "period": "2026-06-30",
+      "amountRm": 760.8,
+      "channel": "all",
+      "cashRm": 341.27,
+      "duitnowQrRm": 226.43,
+      "cardRm": 65.02,
+      "deliveryGrossRm": 128.08,
+      "transactions": 81
+    },
+    {
+      "period": "2026-07-01",
+      "amountRm": 932.11,
+      "channel": "all",
+      "cashRm": 419.14,
+      "duitnowQrRm": 292.58,
+      "cardRm": 82.81,
+      "deliveryGrossRm": 137.58,
+      "transactions": 92
+    },
+    {
+      "period": "2026-07-02",
+      "amountRm": 730.84,
+      "channel": "all",
+      "cashRm": 329.07,
+      "duitnowQrRm": 237.65,
+      "cardRm": 62.74,
+      "deliveryGrossRm": 101.38,
+      "transactions": 71
+    },
+    {
+      "period": "2026-07-03",
+      "amountRm": 650.11,
+      "channel": "all",
+      "cashRm": 276.11,
+      "duitnowQrRm": 196.36,
+      "cardRm": 54.08,
+      "deliveryGrossRm": 123.56,
+      "transactions": 69
+    },
+    {
+      "period": "2026-07-04",
+      "amountRm": 983.72,
+      "channel": "all",
+      "cashRm": 416.71,
+      "duitnowQrRm": 312.21,
+      "cardRm": 65.93,
+      "deliveryGrossRm": 188.87,
+      "transactions": 109
+    },
+    {
+      "period": "2026-07-05",
+      "amountRm": 949.6,
+      "channel": "all",
+      "cashRm": 389.88,
+      "duitnowQrRm": 291.5,
+      "cardRm": 93.88,
+      "deliveryGrossRm": 174.34,
+      "transactions": 101
+    },
+    {
+      "period": "2026-07-07",
+      "amountRm": 611.5,
+      "channel": "all",
+      "cashRm": 285.23,
+      "duitnowQrRm": 179.08,
+      "cardRm": 56.86,
+      "deliveryGrossRm": 90.33,
+      "transactions": 59
+    },
+    {
+      "period": "2026-07-08",
+      "amountRm": 730.85,
+      "channel": "all",
+      "cashRm": 320.51,
+      "duitnowQrRm": 234.11,
+      "cardRm": 65.68,
+      "deliveryGrossRm": 110.55,
+      "transactions": 73
+    },
+    {
+      "period": "2026-07-09",
+      "amountRm": 742.11,
+      "channel": "all",
+      "cashRm": 354.01,
+      "duitnowQrRm": 213.01,
+      "cardRm": 73.22,
+      "deliveryGrossRm": 101.87,
+      "transactions": 72
+    },
+    {
+      "period": "2026-07-10",
+      "amountRm": 788.72,
+      "channel": "all",
+      "cashRm": 369.76,
+      "duitnowQrRm": 249.4,
+      "cardRm": 78.24,
+      "deliveryGrossRm": 91.32,
+      "transactions": 83
+    },
+    {
+      "period": "2026-07-11",
+      "amountRm": 1145.3,
+      "channel": "all",
+      "cashRm": 491.63,
+      "duitnowQrRm": 365.96,
+      "cardRm": 69.36,
+      "deliveryGrossRm": 218.35,
+      "transactions": 110
+    },
+    {
+      "period": "2026-07-12",
+      "amountRm": 955.19,
+      "channel": "all",
+      "cashRm": 423.08,
+      "duitnowQrRm": 289.17,
+      "cardRm": 83.02,
+      "deliveryGrossRm": 159.92,
+      "transactions": 99
+    },
+    {
+      "period": "2026-07-14",
+      "amountRm": 717.5,
+      "channel": "all",
+      "cashRm": 334.21,
+      "duitnowQrRm": 234.63,
+      "cardRm": 46.16,
+      "deliveryGrossRm": 102.5,
+      "transactions": 74
+    },
+    {
+      "period": "2026-07-15",
+      "amountRm": 679.92,
+      "channel": "all",
+      "cashRm": 284.69,
+      "duitnowQrRm": 191.23,
+      "cardRm": 64.84,
+      "deliveryGrossRm": 139.16,
+      "transactions": 66
+    },
+    {
+      "period": "2026-07-16",
+      "amountRm": 619.2,
+      "channel": "all",
+      "cashRm": 258.65,
+      "duitnowQrRm": 175.33,
+      "cardRm": 57.56,
+      "deliveryGrossRm": 127.66,
+      "transactions": 64
+    },
+    {
+      "period": "2026-07-17",
+      "amountRm": 702.81,
+      "channel": "all",
+      "cashRm": 332.25,
+      "duitnowQrRm": 207.41,
+      "cardRm": 53.65,
+      "deliveryGrossRm": 109.5,
+      "transactions": 69
+    },
+    {
+      "period": "2026-07-18",
+      "amountRm": 1125.29,
+      "channel": "all",
+      "cashRm": 477.52,
+      "duitnowQrRm": 342.8,
+      "cardRm": 71.89,
+      "deliveryGrossRm": 233.08,
+      "transactions": 112
+    },
+    {
+      "period": "2026-07-19",
+      "amountRm": 1153.49,
+      "channel": "all",
+      "cashRm": 543.27,
+      "duitnowQrRm": 330.8,
+      "cardRm": 90.14,
+      "deliveryGrossRm": 189.28,
+      "transactions": 129
+    },
+    {
+      "period": "2026-07-21",
+      "amountRm": 705.98,
+      "channel": "all",
+      "cashRm": 335.82,
+      "duitnowQrRm": 212.47,
+      "cardRm": 63.32,
+      "deliveryGrossRm": 94.37,
+      "transactions": 72
+    },
+    {
+      "period": "2026-07-22",
+      "amountRm": 661,
+      "channel": "all",
+      "cashRm": 272.57,
+      "duitnowQrRm": 198.79,
+      "cardRm": 42.28,
+      "deliveryGrossRm": 147.36,
+      "transactions": 65
+    },
+    {
+      "period": "2026-07-23",
+      "amountRm": 690.1,
+      "channel": "all",
+      "cashRm": 328.57,
+      "duitnowQrRm": 194.36,
+      "cardRm": 51.63,
+      "deliveryGrossRm": 115.54,
+      "transactions": 71
+    },
+    {
+      "period": "2026-07-24",
+      "amountRm": 764.69,
+      "channel": "all",
+      "cashRm": 333,
+      "duitnowQrRm": 250.46,
+      "cardRm": 72.05,
+      "deliveryGrossRm": 109.18,
+      "transactions": 82
+    },
+    {
+      "period": "2026-07-25",
+      "amountRm": 1163.63,
+      "channel": "all",
+      "cashRm": 516.14,
+      "duitnowQrRm": 382.71,
+      "cardRm": 86.51,
+      "deliveryGrossRm": 178.27,
+      "transactions": 130
+    },
+    {
+      "period": "2026-07-26",
+      "amountRm": 1131.1,
+      "channel": "all",
+      "cashRm": 488.47,
+      "duitnowQrRm": 327.44,
+      "cardRm": 73.39,
+      "deliveryGrossRm": 241.8,
+      "transactions": 114
+    },
+    {
+      "period": "2026-07-28",
+      "amountRm": 851.73,
+      "channel": "all",
+      "cashRm": 385.85,
+      "duitnowQrRm": 265.81,
+      "cardRm": 71.45,
+      "deliveryGrossRm": 128.62,
+      "transactions": 91
+    },
+    {
+      "period": "2026-07-29",
+      "amountRm": 740.43,
+      "channel": "all",
+      "cashRm": 297.44,
+      "duitnowQrRm": 236.45,
+      "cardRm": 51.64,
+      "deliveryGrossRm": 154.9,
+      "transactions": 75
+    },
+    {
+      "period": "2026-07-30",
+      "amountRm": 871.33,
+      "channel": "all",
+      "cashRm": 353.31,
+      "duitnowQrRm": 277.31,
+      "cardRm": 59.5,
+      "deliveryGrossRm": 181.21,
+      "transactions": 91
+    },
+    {
+      "period": "2026-07-31",
+      "amountRm": 872.09,
+      "channel": "all",
+      "cashRm": 363.9,
+      "duitnowQrRm": 282.11,
+      "cardRm": 63.79,
+      "deliveryGrossRm": 162.29,
+      "transactions": 88
+    },
+    {
+      "period": "2026-08-01",
+      "amountRm": 1192.19,
+      "channel": "all",
+      "cashRm": 477.15,
+      "duitnowQrRm": 384.98,
+      "cardRm": 78.43,
+      "deliveryGrossRm": 251.63,
+      "transactions": 127
+    },
+    {
+      "period": "2026-08-02",
+      "amountRm": 1233.44,
+      "channel": "all",
+      "cashRm": 506.2,
+      "duitnowQrRm": 360.82,
+      "cardRm": 82.62,
+      "deliveryGrossRm": 283.8,
+      "transactions": 139
+    },
+    {
+      "period": "2026-08-04",
+      "amountRm": 766.74,
+      "channel": "all",
+      "cashRm": 307.61,
+      "duitnowQrRm": 244.97,
+      "cardRm": 53.3,
+      "deliveryGrossRm": 160.86,
+      "transactions": 75
+    },
+    {
+      "period": "2026-08-05",
+      "amountRm": 761.69,
+      "channel": "all",
+      "cashRm": 324.4,
+      "duitnowQrRm": 219.91,
+      "cardRm": 47.3,
+      "deliveryGrossRm": 170.08,
+      "transactions": 81
+    },
+    {
+      "period": "2026-08-06",
+      "amountRm": 770.76,
+      "channel": "all",
+      "cashRm": 354.28,
+      "duitnowQrRm": 234.17,
+      "cardRm": 70.23,
+      "deliveryGrossRm": 112.08,
+      "transactions": 74
+    },
+    {
+      "period": "2026-08-07",
+      "amountRm": 690.05,
+      "channel": "all",
+      "cashRm": 304.35,
+      "duitnowQrRm": 196.98,
+      "cardRm": 55.31,
+      "deliveryGrossRm": 133.41,
+      "transactions": 74
+    },
+    {
+      "period": "2026-08-08",
+      "amountRm": 1033.19,
+      "channel": "all",
+      "cashRm": 478.02,
+      "duitnowQrRm": 334.08,
+      "cardRm": 83.54,
+      "deliveryGrossRm": 137.55,
+      "transactions": 99
+    },
+    {
+      "period": "2026-08-09",
+      "amountRm": 998.68,
+      "channel": "all",
+      "cashRm": 436.07,
+      "duitnowQrRm": 327.77,
+      "cardRm": 62.35,
+      "deliveryGrossRm": 172.49,
+      "transactions": 96
+    },
+    {
+      "period": "2026-08-11",
+      "amountRm": 705.11,
+      "channel": "all",
+      "cashRm": 320.75,
+      "duitnowQrRm": 214.72,
+      "cardRm": 67.96,
+      "deliveryGrossRm": 101.68,
+      "transactions": 79
+    },
+    {
+      "period": "2026-08-12",
+      "amountRm": 784.51,
+      "channel": "all",
+      "cashRm": 318.42,
+      "duitnowQrRm": 222.83,
+      "cardRm": 66.16,
+      "deliveryGrossRm": 177.1,
+      "transactions": 79
+    },
+    {
+      "period": "2026-08-13",
+      "amountRm": 826.46,
+      "channel": "all",
+      "cashRm": 372.44,
+      "duitnowQrRm": 254.07,
+      "cardRm": 60.34,
+      "deliveryGrossRm": 139.61,
+      "transactions": 88
+    },
+    {
+      "period": "2026-08-14",
+      "amountRm": 797.64,
+      "channel": "all",
+      "cashRm": 382.53,
+      "duitnowQrRm": 244.5,
+      "cardRm": 62.33,
+      "deliveryGrossRm": 108.28,
+      "transactions": 79
+    },
+    {
+      "period": "2026-08-15",
+      "amountRm": 975.07,
+      "channel": "all",
+      "cashRm": 444.77,
+      "duitnowQrRm": 314.6,
+      "cardRm": 83.89,
+      "deliveryGrossRm": 131.81,
+      "transactions": 98
+    },
+    {
+      "period": "2026-08-16",
+      "amountRm": 982.26,
+      "channel": "all",
+      "cashRm": 453.33,
+      "duitnowQrRm": 310.44,
+      "cardRm": 67.38,
+      "deliveryGrossRm": 151.11,
+      "transactions": 95
+    },
+    {
+      "period": "2026-08-18",
+      "amountRm": 727.26,
+      "channel": "all",
+      "cashRm": 310.62,
+      "duitnowQrRm": 220.12,
+      "cardRm": 55.74,
+      "deliveryGrossRm": 140.78,
+      "transactions": 80
+    },
+    {
+      "period": "2026-08-19",
+      "amountRm": 790.27,
+      "channel": "all",
+      "cashRm": 322.12,
+      "duitnowQrRm": 238.14,
+      "cardRm": 68.44,
+      "deliveryGrossRm": 161.57,
+      "transactions": 80
+    },
+    {
+      "period": "2026-08-20",
+      "amountRm": 746.93,
+      "channel": "all",
+      "cashRm": 353.92,
+      "duitnowQrRm": 211.65,
+      "cardRm": 69.67,
+      "deliveryGrossRm": 111.69,
+      "transactions": 74
+    },
+    {
+      "period": "2026-08-21",
+      "amountRm": 803.71,
+      "channel": "all",
+      "cashRm": 327.48,
+      "duitnowQrRm": 228.92,
+      "cardRm": 71.97,
+      "deliveryGrossRm": 175.34,
+      "transactions": 90
+    },
+    {
+      "period": "2026-08-22",
+      "amountRm": 1051.52,
+      "channel": "all",
+      "cashRm": 469.94,
+      "duitnowQrRm": 323.95,
+      "cardRm": 76.96,
+      "deliveryGrossRm": 180.67,
+      "transactions": 118
+    },
+    {
+      "period": "2026-08-23",
+      "amountRm": 900.72,
+      "channel": "all",
+      "cashRm": 369.1,
+      "duitnowQrRm": 268.13,
+      "cardRm": 78.01,
+      "deliveryGrossRm": 185.48,
+      "transactions": 89
+    },
+    {
+      "period": "2026-08-25",
+      "amountRm": 821.98,
+      "channel": "all",
+      "cashRm": 376.21,
+      "duitnowQrRm": 269.95,
+      "cardRm": 69.06,
+      "deliveryGrossRm": 106.76,
+      "transactions": 87
+    },
+    {
+      "period": "2026-08-26",
+      "amountRm": 672.86,
+      "channel": "all",
+      "cashRm": 288.07,
+      "duitnowQrRm": 207.84,
+      "cardRm": 46.1,
+      "deliveryGrossRm": 130.85,
+      "transactions": 71
+    },
+    {
+      "period": "2026-08-27",
+      "amountRm": 792.57,
+      "channel": "all",
+      "cashRm": 323.89,
+      "duitnowQrRm": 255.42,
+      "cardRm": 59.21,
+      "deliveryGrossRm": 154.05,
+      "transactions": 81
+    },
+    {
+      "period": "2026-08-28",
+      "amountRm": 777.8,
+      "channel": "all",
+      "cashRm": 358.57,
+      "duitnowQrRm": 240.11,
+      "cardRm": 71.78,
+      "deliveryGrossRm": 107.34,
+      "transactions": 79
+    },
+    {
+      "period": "2026-08-29",
+      "amountRm": 1214.86,
+      "channel": "all",
+      "cashRm": 565.49,
+      "duitnowQrRm": 377.43,
+      "cardRm": 104.12,
+      "deliveryGrossRm": 167.82,
+      "transactions": 122
+    },
+    {
+      "period": "2026-08-30",
+      "amountRm": 852.92,
+      "channel": "all",
+      "cashRm": 342.96,
+      "duitnowQrRm": 278.44,
+      "cardRm": 79.47,
+      "deliveryGrossRm": 152.05,
+      "transactions": 82
+    },
+    {
+      "period": "2026-09-01",
+      "amountRm": 808.61,
+      "channel": "all",
+      "cashRm": 368.9,
+      "duitnowQrRm": 238.9,
+      "cardRm": 59.51,
+      "deliveryGrossRm": 141.3,
+      "transactions": 86
+    },
+    {
+      "period": "2026-09-02",
+      "amountRm": 859.58,
+      "channel": "all",
+      "cashRm": 344.25,
+      "duitnowQrRm": 278.07,
+      "cardRm": 71.05,
+      "deliveryGrossRm": 166.21,
+      "transactions": 85
+    },
+    {
+      "period": "2026-09-03",
+      "amountRm": 736.58,
+      "channel": "all",
+      "cashRm": 331.94,
+      "duitnowQrRm": 207.37,
+      "cardRm": 66.18,
+      "deliveryGrossRm": 131.09,
+      "transactions": 75
+    },
+    {
+      "period": "2026-09-04",
+      "amountRm": 789.92,
+      "channel": "all",
+      "cashRm": 329.56,
+      "duitnowQrRm": 237.76,
+      "cardRm": 58.17,
+      "deliveryGrossRm": 164.43,
+      "transactions": 81
+    },
+    {
+      "period": "2026-09-05",
+      "amountRm": 899.53,
+      "channel": "all",
+      "cashRm": 415.71,
+      "duitnowQrRm": 277.4,
+      "cardRm": 57.03,
+      "deliveryGrossRm": 149.39,
+      "transactions": 95
+    },
+    {
+      "period": "2026-09-06",
+      "amountRm": 1102.55,
+      "channel": "all",
+      "cashRm": 445.66,
+      "duitnowQrRm": 317.39,
+      "cardRm": 93.4,
+      "deliveryGrossRm": 246.1,
+      "transactions": 112
+    },
+    {
+      "period": "2026-09-08",
+      "amountRm": 742.29,
+      "channel": "all",
+      "cashRm": 336.22,
+      "duitnowQrRm": 225.87,
+      "cardRm": 57.66,
+      "deliveryGrossRm": 122.54,
+      "transactions": 80
+    },
+    {
+      "period": "2026-09-09",
+      "amountRm": 718.71,
+      "channel": "all",
+      "cashRm": 303.19,
+      "duitnowQrRm": 228.37,
+      "cardRm": 46.39,
+      "deliveryGrossRm": 140.76,
+      "transactions": 80
+    },
+    {
+      "period": "2026-09-10",
+      "amountRm": 716.6,
+      "channel": "all",
+      "cashRm": 325.54,
+      "duitnowQrRm": 218.08,
+      "cardRm": 62.12,
+      "deliveryGrossRm": 110.86,
+      "transactions": 71
+    },
+    {
+      "period": "2026-09-11",
+      "amountRm": 791.64,
+      "channel": "all",
+      "cashRm": 319.53,
+      "duitnowQrRm": 237.3,
+      "cardRm": 66.48,
+      "deliveryGrossRm": 168.33,
+      "transactions": 82
+    },
+    {
+      "period": "2026-09-12",
+      "amountRm": 1073.86,
+      "channel": "all",
+      "cashRm": 447.69,
+      "duitnowQrRm": 308.05,
+      "cardRm": 75.41,
+      "deliveryGrossRm": 242.71,
+      "transactions": 114
+    },
+    {
+      "period": "2026-09-13",
+      "amountRm": 1001.55,
+      "channel": "all",
+      "cashRm": 426.91,
+      "duitnowQrRm": 280.82,
+      "cardRm": 90.02,
+      "deliveryGrossRm": 203.8,
+      "transactions": 103
+    },
+    {
+      "period": "2026-09-15",
+      "amountRm": 798.01,
+      "channel": "all",
+      "cashRm": 364.13,
+      "duitnowQrRm": 243.4,
+      "cardRm": 74.48,
+      "deliveryGrossRm": 116,
+      "transactions": 86
+    },
+    {
+      "period": "2026-09-16",
+      "amountRm": 827.95,
+      "channel": "all",
+      "cashRm": 384.58,
+      "duitnowQrRm": 234.81,
+      "cardRm": 78.22,
+      "deliveryGrossRm": 130.34,
+      "transactions": 89
+    },
+    {
+      "period": "2026-09-17",
+      "amountRm": 780.57,
+      "channel": "all",
+      "cashRm": 369.75,
+      "duitnowQrRm": 252.21,
+      "cardRm": 64.81,
+      "deliveryGrossRm": 93.8,
+      "transactions": 82
+    },
+    {
+      "period": "2026-09-18",
+      "amountRm": 771.13,
+      "channel": "all",
+      "cashRm": 274.7,
+      "duitnowQrRm": 312.4,
+      "cardRm": 59.15,
+      "deliveryGrossRm": 124.88,
+      "transactions": 74
+    },
+    {
+      "period": "2026-09-19",
+      "amountRm": 1011.7,
+      "channel": "all",
+      "cashRm": 430.96,
+      "duitnowQrRm": 323.81,
+      "cardRm": 85.72,
+      "deliveryGrossRm": 171.21,
+      "transactions": 109
+    },
+    {
+      "period": "2026-09-20",
+      "amountRm": 1010.1,
+      "channel": "all",
+      "cashRm": 471.27,
+      "duitnowQrRm": 329.28,
+      "cardRm": 64.17,
+      "deliveryGrossRm": 145.38,
+      "transactions": 98
+    },
+    {
+      "period": "2026-09-22",
+      "amountRm": 796.45,
+      "channel": "all",
+      "cashRm": 356.1,
+      "duitnowQrRm": 243.87,
+      "cardRm": 60.4,
+      "deliveryGrossRm": 136.08,
+      "transactions": 83
+    },
+    {
+      "period": "2026-09-23",
+      "amountRm": 724.84,
+      "channel": "all",
+      "cashRm": 307.93,
+      "duitnowQrRm": 215.26,
+      "cardRm": 53.15,
+      "deliveryGrossRm": 148.5,
+      "transactions": 80
+    },
+    {
+      "period": "2026-09-24",
+      "amountRm": 808.22,
+      "channel": "all",
+      "cashRm": 330.66,
+      "duitnowQrRm": 246.91,
+      "cardRm": 77.78,
+      "deliveryGrossRm": 152.87,
+      "transactions": 79
+    },
+    {
+      "period": "2026-09-25",
+      "amountRm": 889.85,
+      "channel": "all",
+      "cashRm": 380.81,
+      "duitnowQrRm": 281.52,
+      "cardRm": 82.54,
+      "deliveryGrossRm": 144.98,
+      "transactions": 93
+    },
+    {
+      "period": "2026-09-26",
+      "amountRm": 1085.53,
+      "channel": "all",
+      "cashRm": 446.93,
+      "duitnowQrRm": 314.65,
+      "cardRm": 91.29,
+      "deliveryGrossRm": 232.66,
+      "transactions": 106
+    },
+    {
+      "period": "2026-09-27",
+      "amountRm": 993.61,
+      "channel": "all",
+      "cashRm": 457.87,
+      "duitnowQrRm": 310.78,
+      "cardRm": 66.66,
+      "deliveryGrossRm": 158.3,
+      "transactions": 104
+    },
+    {
+      "period": "2026-09-29",
+      "amountRm": 825.89,
+      "channel": "all",
+      "cashRm": 380.2,
+      "duitnowQrRm": 262.63,
+      "cardRm": 64.38,
+      "deliveryGrossRm": 118.68,
+      "transactions": 92
+    },
+    {
+      "period": "2026-09-30",
+      "amountRm": 729.05,
+      "channel": "all",
+      "cashRm": 345.52,
+      "duitnowQrRm": 224.71,
+      "cardRm": 62.27,
+      "deliveryGrossRm": 96.55,
+      "transactions": 73
     }
   ],
   "purchases": [
     {
-      "date": "2025-10-01",
-      "invoiceNo": "INV-1005",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2025-10-01",
-      "invoiceNo": "INV-1006",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2025-10-01",
-      "invoiceNo": "INV-1007",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2025-10-03",
-      "invoiceNo": "INV-1002",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
+      "date": "2026-06-17",
+      "invoiceNo": "KCB-26-1187",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 12,
       "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
+      "unitPriceRm": 28,
+      "totalRm": 336,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-06-17_KCB_KCB-26-1187.pdf"
     },
     {
-      "date": "2025-10-03",
-      "invoiceNo": "INV-1003",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2025-10-05",
-      "invoiceNo": "INV-1000",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 275,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 1980
-    },
-    {
-      "date": "2025-10-08",
-      "invoiceNo": "KB-2510",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 37,
+      "date": "2026-06-17",
+      "invoiceNo": "KCB-26-1187",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
       "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2146
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-06-17_KCB_KCB-26-1187.pdf"
     },
     {
-      "date": "2025-10-10",
-      "invoiceNo": "INV-1004",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 33,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 808.5
-    },
-    {
-      "date": "2025-10-15",
-      "invoiceNo": "INV-1008",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 902,
-      "totalRm": 902
-    },
-    {
-      "date": "2025-10-15",
-      "invoiceNo": "INV-1009",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2025-10-19",
-      "invoiceNo": "INV-1001",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 275,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 1980
-    },
-    {
-      "date": "2025-10-28",
-      "invoiceNo": "INV-1010",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2025-10-28",
-      "invoiceNo": "INV-1011",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2025-11-01",
-      "invoiceNo": "INV-1017",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2025-11-01",
-      "invoiceNo": "INV-1018",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2025-11-01",
-      "invoiceNo": "INV-1019",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2025-11-03",
-      "invoiceNo": "INV-1014",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
+      "date": "2026-06-17",
+      "invoiceNo": "KCB-26-1187",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
       "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2025-11-03",
-      "invoiceNo": "INV-1015",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2025-11-05",
-      "invoiceNo": "INV-1012",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 284,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2044.8
-    },
-    {
-      "date": "2025-11-08",
-      "invoiceNo": "KB-2511",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 38,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2204
-    },
-    {
-      "date": "2025-11-10",
-      "invoiceNo": "INV-1016",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 34,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 833
-    },
-    {
-      "date": "2025-11-15",
-      "invoiceNo": "INV-1020",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 905,
-      "totalRm": 905
-    },
-    {
-      "date": "2025-11-15",
-      "invoiceNo": "INV-1021",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2025-11-19",
-      "invoiceNo": "INV-1013",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 284,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2044.8
-    },
-    {
-      "date": "2025-11-28",
-      "invoiceNo": "INV-1022",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2025-11-28",
-      "invoiceNo": "INV-1023",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2025-12-01",
-      "invoiceNo": "INV-1029",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2025-12-01",
-      "invoiceNo": "INV-1030",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2025-12-01",
-      "invoiceNo": "INV-1031",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2025-12-03",
-      "invoiceNo": "INV-1026",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2025-12-03",
-      "invoiceNo": "INV-1027",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2025-12-05",
-      "invoiceNo": "INV-1024",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 333,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2397.6
-    },
-    {
-      "date": "2025-12-08",
-      "invoiceNo": "KB-2512",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 44,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2552
-    },
-    {
-      "date": "2025-12-10",
-      "invoiceNo": "INV-1028",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 40,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 980
-    },
-    {
-      "date": "2025-12-15",
-      "invoiceNo": "INV-1032",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 920,
-      "totalRm": 920
-    },
-    {
-      "date": "2025-12-15",
-      "invoiceNo": "INV-1033",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2025-12-19",
-      "invoiceNo": "INV-1025",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 333,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2397.6
-    },
-    {
-      "date": "2025-12-28",
-      "invoiceNo": "INV-1034",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2025-12-28",
-      "invoiceNo": "INV-1035",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-01-01",
-      "invoiceNo": "INV-1041",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-01-01",
-      "invoiceNo": "INV-1042",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-01-01",
-      "invoiceNo": "INV-1043",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-01-03",
-      "invoiceNo": "INV-1038",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-01-03",
-      "invoiceNo": "INV-1039",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-01-05",
-      "invoiceNo": "INV-1036",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 278,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2001.6
-    },
-    {
-      "date": "2026-01-08",
-      "invoiceNo": "KB-2601",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 37,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2146
-    },
-    {
-      "date": "2026-01-10",
-      "invoiceNo": "INV-1040",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 33,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 808.5
-    },
-    {
-      "date": "2026-01-15",
-      "invoiceNo": "INV-1044",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 903,
-      "totalRm": 903
-    },
-    {
-      "date": "2026-01-15",
-      "invoiceNo": "INV-1045",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-01-19",
-      "invoiceNo": "INV-1037",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 278,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2001.6
-    },
-    {
-      "date": "2026-01-28",
-      "invoiceNo": "INV-1046",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-01-28",
-      "invoiceNo": "INV-1047",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-02-01",
-      "invoiceNo": "INV-1053",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-02-01",
-      "invoiceNo": "INV-1054",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-02-01",
-      "invoiceNo": "INV-1055",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-02-03",
-      "invoiceNo": "INV-1050",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-02-03",
-      "invoiceNo": "INV-1051",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-02-05",
-      "invoiceNo": "INV-1048",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 292,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2102.4
-    },
-    {
-      "date": "2026-02-08",
-      "invoiceNo": "KB-2602",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 39,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2262
-    },
-    {
-      "date": "2026-02-10",
-      "invoiceNo": "INV-1052",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 35,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 857.5
-    },
-    {
-      "date": "2026-02-15",
-      "invoiceNo": "INV-1056",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 908,
-      "totalRm": 908
-    },
-    {
-      "date": "2026-02-15",
-      "invoiceNo": "INV-1057",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-02-19",
-      "invoiceNo": "INV-1049",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 292,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2102.4
-    },
-    {
-      "date": "2026-02-28",
-      "invoiceNo": "INV-1058",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-02-28",
-      "invoiceNo": "INV-1059",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-03-01",
-      "invoiceNo": "INV-1065",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-03-01",
-      "invoiceNo": "INV-1066",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-03-01",
-      "invoiceNo": "INV-1067",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-03-03",
-      "invoiceNo": "INV-1062",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-03-03",
-      "invoiceNo": "INV-1063",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-03-05",
-      "invoiceNo": "INV-1060",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 258,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 1857.6
-    },
-    {
-      "date": "2026-03-08",
-      "invoiceNo": "KB-2603",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 34,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 1972
-    },
-    {
-      "date": "2026-03-10",
-      "invoiceNo": "INV-1064",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 31,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 759.5
-    },
-    {
-      "date": "2026-03-15",
-      "invoiceNo": "INV-1068",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 898,
-      "totalRm": 898
-    },
-    {
-      "date": "2026-03-15",
-      "invoiceNo": "INV-1069",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-03-19",
-      "invoiceNo": "INV-1061",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 258,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 1857.6
-    },
-    {
-      "date": "2026-03-28",
-      "invoiceNo": "INV-1070",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-03-28",
-      "invoiceNo": "INV-1071",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-04-01",
-      "invoiceNo": "INV-1077",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-04-01",
-      "invoiceNo": "INV-1078",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-04-01",
-      "invoiceNo": "INV-1079",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-04-03",
-      "invoiceNo": "INV-1074",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-04-03",
-      "invoiceNo": "INV-1075",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-04-05",
-      "invoiceNo": "INV-1072",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 321,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2311.2
-    },
-    {
-      "date": "2026-04-08",
-      "invoiceNo": "KB-2604",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 43,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2494
-    },
-    {
-      "date": "2026-04-10",
-      "invoiceNo": "INV-1076",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 38,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 931
-    },
-    {
-      "date": "2026-04-15",
-      "invoiceNo": "INV-1080",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 916,
-      "totalRm": 916
-    },
-    {
-      "date": "2026-04-15",
-      "invoiceNo": "INV-1081",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-04-19",
-      "invoiceNo": "INV-1073",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 321,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2311.2
-    },
-    {
-      "date": "2026-04-28",
-      "invoiceNo": "INV-1082",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-04-28",
-      "invoiceNo": "INV-1083",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-05-01",
-      "invoiceNo": "INV-1089",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-05-01",
-      "invoiceNo": "INV-1090",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-05-01",
-      "invoiceNo": "INV-1091",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-05-03",
-      "invoiceNo": "INV-1086",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-05-03",
-      "invoiceNo": "INV-1087",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-05-05",
-      "invoiceNo": "INV-1084",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 302,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2174.4
-    },
-    {
-      "date": "2026-05-08",
-      "invoiceNo": "KB-2605",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 40,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2320
-    },
-    {
-      "date": "2026-05-10",
-      "invoiceNo": "INV-1088",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 36,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 882
-    },
-    {
-      "date": "2026-05-15",
-      "invoiceNo": "INV-1092",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 911,
-      "totalRm": 911
-    },
-    {
-      "date": "2026-05-15",
-      "invoiceNo": "INV-1093",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-05-19",
-      "invoiceNo": "INV-1085",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 302,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2174.4
-    },
-    {
-      "date": "2026-05-28",
-      "invoiceNo": "INV-1094",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-05-28",
-      "invoiceNo": "INV-1095",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-06-01",
-      "invoiceNo": "INV-1101",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-06-01",
-      "invoiceNo": "INV-1102",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-06-01",
-      "invoiceNo": "INV-1103",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-06-03",
-      "invoiceNo": "INV-1098",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
-    },
-    {
-      "date": "2026-06-03",
-      "invoiceNo": "INV-1099",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
-    },
-    {
-      "date": "2026-06-05",
-      "invoiceNo": "INV-1096",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 310,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2232
-    },
-    {
-      "date": "2026-06-08",
-      "invoiceNo": "KB-2606",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 41,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2378
-    },
-    {
-      "date": "2026-06-10",
-      "invoiceNo": "INV-1100",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 37,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 906.5
-    },
-    {
-      "date": "2026-06-15",
-      "invoiceNo": "INV-1104",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 913,
-      "totalRm": 913
-    },
-    {
-      "date": "2026-06-15",
-      "invoiceNo": "INV-1105",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-06-19",
-      "invoiceNo": "INV-1097",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 310,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2232
-    },
-    {
-      "date": "2026-06-28",
-      "invoiceNo": "INV-1106",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-06-28",
-      "invoiceNo": "INV-1107",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-06-17_KCB_KCB-26-1187.pdf"
     },
     {
       "date": "2026-07-01",
-      "invoiceNo": "INV-1113",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
+      "invoiceNo": "KCB-26-1194",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 12,
+      "unit": "kg",
+      "unitPriceRm": 28,
+      "totalRm": 336,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-07-01_KCB_KCB-26-1194.pdf"
     },
     {
       "date": "2026-07-01",
-      "invoiceNo": "INV-1114",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
+      "invoiceNo": "KCB-26-1194",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-07-01_KCB_KCB-26-1194.pdf"
     },
     {
       "date": "2026-07-01",
-      "invoiceNo": "INV-1115",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
+      "invoiceNo": "KCB-26-1194",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 547,
+      "file": "invoices/2026-07-01_KCB_KCB-26-1194.pdf"
     },
     {
       "date": "2026-07-03",
-      "invoiceNo": "INV-1110",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
-      "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
+      "invoiceNo": "LSS/2607/828",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Pekat Manis 500g (tin)",
+      "qty": 48,
+      "unit": "tin",
+      "unitPriceRm": 3.9,
+      "totalRm": 187.2,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-07-03_LSS_LSS-2607-828.pdf"
     },
     {
       "date": "2026-07-03",
-      "invoiceNo": "INV-1111",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
-      "unitPriceRm": 3.9,
-      "totalRm": 468
+      "invoiceNo": "LSS/2607/828",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Sejat 390g (tin)",
+      "qty": 48,
+      "unit": "tin",
+      "unitPriceRm": 3.4,
+      "totalRm": 163.2,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-07-03_LSS_LSS-2607-828.pdf"
     },
     {
-      "date": "2026-07-05",
-      "invoiceNo": "INV-1108",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 316,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2275.2
+      "date": "2026-07-03",
+      "invoiceNo": "LSS/2607/828",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Segar 1L",
+      "qty": 20,
+      "unit": "btl",
+      "unitPriceRm": 6.8,
+      "totalRm": 136,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-07-03_LSS_LSS-2607-828.pdf"
     },
     {
       "date": "2026-07-08",
-      "invoiceNo": "KB-2607",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 42,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2436
+      "invoiceNo": "BMJ-0708-25",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Gula Pasir 10kg",
+      "qty": 3,
+      "unit": "beg",
+      "unitPriceRm": 28.5,
+      "totalRm": 85.5,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-07-08_BMJ_BMJ-0708-25.pdf"
+    },
+    {
+      "date": "2026-07-08",
+      "invoiceNo": "BMJ-0708-25",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Telur Gred A (30 biji)",
+      "qty": 6,
+      "unit": "papan",
+      "unitPriceRm": 13.8,
+      "totalRm": 82.8,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-07-08_BMJ_BMJ-0708-25.pdf"
+    },
+    {
+      "date": "2026-07-08",
+      "invoiceNo": "BMJ-0708-25",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Minyak Masak 5kg",
+      "qty": 2,
+      "unit": "botol",
+      "unitPriceRm": 30.5,
+      "totalRm": 61,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-07-08_BMJ_BMJ-0708-25.pdf"
     },
     {
       "date": "2026-07-10",
-      "invoiceNo": "INV-1112",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 38,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 931
-    },
-    {
-      "date": "2026-07-15",
-      "invoiceNo": "INV-1116",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 915,
-      "totalRm": 915
-    },
-    {
-      "date": "2026-07-15",
-      "invoiceNo": "INV-1117",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-07-19",
-      "invoiceNo": "INV-1109",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 316,
-      "unit": "L",
-      "unitPriceRm": 7.2,
-      "totalRm": 2275.2
-    },
-    {
-      "date": "2026-07-28",
-      "invoiceNo": "INV-1118",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-07-28",
-      "invoiceNo": "INV-1119",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-08-01",
-      "invoiceNo": "INV-1125",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-08-01",
-      "invoiceNo": "INV-1126",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-08-01",
-      "invoiceNo": "INV-1127",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-08-03",
-      "invoiceNo": "INV-1122",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
+      "invoiceNo": "RML2812",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Roti Benggali",
       "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
+      "unit": "buku",
+      "unitPriceRm": 2.2,
+      "totalRm": 132,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-07-10_RML_RML2812.pdf"
     },
     {
-      "date": "2026-08-03",
-      "invoiceNo": "INV-1123",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
+      "date": "2026-07-10",
+      "invoiceNo": "RML2812",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Kaya Homemade 1kg",
+      "qty": 3,
+      "unit": "bekas",
+      "unitPriceRm": 16,
+      "totalRm": 48,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-07-10_RML_RML2812.pdf"
+    },
+    {
+      "date": "2026-07-10",
+      "invoiceNo": "RML2812",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Mentega 250g",
+      "qty": 6,
+      "unit": "ketul",
+      "unitPriceRm": 8.5,
+      "totalRm": 51,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-07-10_RML_RML2812.pdf"
+    },
+    {
+      "date": "2026-07-15",
+      "invoiceNo": "KCB-26-1201",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 10,
+      "unit": "kg",
+      "unitPriceRm": 29.1,
+      "totalRm": 291,
+      "invoiceTotalRm": 502,
+      "file": "invoices/2026-07-15_KCB_KCB-26-1201.pdf"
+    },
+    {
+      "date": "2026-07-15",
+      "invoiceNo": "KCB-26-1201",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 502,
+      "file": "invoices/2026-07-15_KCB_KCB-26-1201.pdf"
+    },
+    {
+      "date": "2026-07-15",
+      "invoiceNo": "KCB-26-1201",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 502,
+      "file": "invoices/2026-07-15_KCB_KCB-26-1201.pdf"
+    },
+    {
+      "date": "2026-07-20",
+      "invoiceNo": "SPP260720",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Cawan Plastik 16oz (50pcs)",
+      "qty": 10,
+      "unit": "pek",
+      "unitPriceRm": 9.5,
+      "totalRm": 95,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-07-20_SPP_SPP260720.pdf"
+    },
+    {
+      "date": "2026-07-20",
+      "invoiceNo": "SPP260720",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Penutup Cawan (50pcs)",
+      "qty": 10,
+      "unit": "pek",
+      "unitPriceRm": 5.5,
+      "totalRm": 55,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-07-20_SPP_SPP260720.pdf"
+    },
+    {
+      "date": "2026-07-20",
+      "invoiceNo": "SPP260720",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Straw (100pcs)",
+      "qty": 5,
+      "unit": "pek",
+      "unitPriceRm": 3.8,
+      "totalRm": 19,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-07-20_SPP_SPP260720.pdf"
+    },
+    {
+      "date": "2026-07-20",
+      "invoiceNo": "SPP260720",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Plastik Ikat Tepi 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 12,
+      "totalRm": 24,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-07-20_SPP_SPP260720.pdf"
+    },
+    {
+      "date": "2026-07-24",
+      "invoiceNo": "LSS/2607/826",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Pekat Manis 500g (tin)",
+      "qty": 48,
+      "unit": "tin",
       "unitPriceRm": 3.9,
-      "totalRm": 468
+      "totalRm": 187.2,
+      "invoiceTotalRm": 445.6,
+      "file": "invoices/2026-07-24_LSS_LSS-2607-826.pdf"
+    },
+    {
+      "date": "2026-07-24",
+      "invoiceNo": "LSS/2607/826",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Sejat 390g (tin)",
+      "qty": 36,
+      "unit": "tin",
+      "unitPriceRm": 3.4,
+      "totalRm": 122.4,
+      "invoiceTotalRm": 445.6,
+      "file": "invoices/2026-07-24_LSS_LSS-2607-826.pdf"
+    },
+    {
+      "date": "2026-07-24",
+      "invoiceNo": "LSS/2607/826",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Segar 1L",
+      "qty": 20,
+      "unit": "btl",
+      "unitPriceRm": 6.8,
+      "totalRm": 136,
+      "invoiceTotalRm": 445.6,
+      "file": "invoices/2026-07-24_LSS_LSS-2607-826.pdf"
+    },
+    {
+      "date": "2026-07-29",
+      "invoiceNo": "KCB-26-1208",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 11,
+      "unit": "kg",
+      "unitPriceRm": 29.1,
+      "totalRm": 320.1,
+      "invoiceTotalRm": 531.1,
+      "file": "invoices/2026-07-29_KCB_KCB-26-1208.pdf"
+    },
+    {
+      "date": "2026-07-29",
+      "invoiceNo": "KCB-26-1208",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 531.1,
+      "file": "invoices/2026-07-29_KCB_KCB-26-1208.pdf"
+    },
+    {
+      "date": "2026-07-29",
+      "invoiceNo": "KCB-26-1208",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 531.1,
+      "file": "invoices/2026-07-29_KCB_KCB-26-1208.pdf"
+    },
+    {
+      "date": "2026-08-01",
+      "invoiceNo": "TGP 363",
+      "supplier": "Tong Gas Pantas Enterprise",
+      "item": "Isi semula tong gas LPG 14kg",
+      "qty": 4,
+      "unit": "tong",
+      "unitPriceRm": 27,
+      "totalRm": 108,
+      "invoiceTotalRm": 108,
+      "file": "invoices/2026-08-01_TGP_TGP363.pdf"
     },
     {
       "date": "2026-08-05",
-      "invoiceNo": "INV-1120",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 324,
-      "unit": "L",
-      "unitPriceRm": 7.7,
-      "totalRm": 2494.8
+      "invoiceNo": "BMJ-0805-35",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Gula Pasir 10kg",
+      "qty": 3,
+      "unit": "beg",
+      "unitPriceRm": 28.5,
+      "totalRm": 85.5,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-05_BMJ_BMJ-0805-35.pdf"
     },
     {
-      "date": "2026-08-08",
-      "invoiceNo": "KB-2608",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 43,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2494
+      "date": "2026-08-05",
+      "invoiceNo": "BMJ-0805-35",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Telur Gred A (30 biji)",
+      "qty": 6,
+      "unit": "papan",
+      "unitPriceRm": 13.8,
+      "totalRm": 82.8,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-05_BMJ_BMJ-0805-35.pdf"
     },
     {
-      "date": "2026-08-10",
-      "invoiceNo": "INV-1124",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 39,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 955.5
+      "date": "2026-08-05",
+      "invoiceNo": "BMJ-0805-35",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Minyak Masak 5kg",
+      "qty": 2,
+      "unit": "botol",
+      "unitPriceRm": 30.5,
+      "totalRm": 61,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-05_BMJ_BMJ-0805-35.pdf"
     },
     {
-      "date": "2026-08-15",
-      "invoiceNo": "INV-1128",
-      "supplier": "TNB",
-      "item": "Electricity",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 917,
-      "totalRm": 917
-    },
-    {
-      "date": "2026-08-15",
-      "invoiceNo": "INV-1129",
-      "supplier": "Air Selangor",
-      "item": "Water",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-08-19",
-      "invoiceNo": "INV-1121",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 324,
-      "unit": "L",
-      "unitPriceRm": 7.7,
-      "totalRm": 2494.8
-    },
-    {
-      "date": "2026-08-28",
-      "invoiceNo": "INV-1130",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-08-28",
-      "invoiceNo": "INV-1131",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
-    },
-    {
-      "date": "2026-09-01",
-      "invoiceNo": "INV-1137",
-      "supplier": "Roti Mesra Bakery",
-      "item": "Bread & buns (weekly standing order)",
-      "qty": 4,
-      "unit": "week",
-      "unitPriceRm": 310,
-      "totalRm": 1240
-    },
-    {
-      "date": "2026-09-01",
-      "invoiceNo": "INV-1138",
-      "supplier": "Telur Emas Farm",
-      "item": "Eggs (tray of 30)",
-      "qty": 30,
-      "unit": "tray",
-      "unitPriceRm": 15.5,
-      "totalRm": 465
-    },
-    {
-      "date": "2026-09-01",
-      "invoiceNo": "INV-1139",
-      "supplier": "Sri Utama Properties",
-      "item": "Shop rent",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 3500,
-      "totalRm": 3500
-    },
-    {
-      "date": "2026-09-03",
-      "invoiceNo": "INV-1134",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Sugar (1kg)",
+      "date": "2026-08-07",
+      "invoiceNo": "RML2370",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Roti Benggali",
       "qty": 60,
-      "unit": "kg",
-      "unitPriceRm": 2.85,
-      "totalRm": 171
+      "unit": "buku",
+      "unitPriceRm": 2.2,
+      "totalRm": 132,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-07_RML_RML2370.pdf"
     },
     {
-      "date": "2026-09-03",
-      "invoiceNo": "INV-1135",
-      "supplier": "Kedai Runcit Hock Seng",
-      "item": "Condensed milk (can)",
-      "qty": 120,
-      "unit": "can",
+      "date": "2026-08-07",
+      "invoiceNo": "RML2370",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Kaya Homemade 1kg",
+      "qty": 3,
+      "unit": "bekas",
+      "unitPriceRm": 16,
+      "totalRm": 48,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-07_RML_RML2370.pdf"
+    },
+    {
+      "date": "2026-08-07",
+      "invoiceNo": "RML2370",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Mentega 250g",
+      "qty": 6,
+      "unit": "ketul",
+      "unitPriceRm": 8.5,
+      "totalRm": 51,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-07_RML_RML2370.pdf"
+    },
+    {
+      "date": "2026-08-12",
+      "invoiceNo": "KCB-26-1215",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 11,
+      "unit": "kg",
+      "unitPriceRm": 30.2,
+      "totalRm": 332.2,
+      "invoiceTotalRm": 543.2,
+      "file": "invoices/2026-08-12_KCB_KCB-26-1215.pdf"
+    },
+    {
+      "date": "2026-08-12",
+      "invoiceNo": "KCB-26-1215",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 543.2,
+      "file": "invoices/2026-08-12_KCB_KCB-26-1215.pdf"
+    },
+    {
+      "date": "2026-08-12",
+      "invoiceNo": "KCB-26-1215",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 543.2,
+      "file": "invoices/2026-08-12_KCB_KCB-26-1215.pdf"
+    },
+    {
+      "date": "2026-08-14",
+      "invoiceNo": "LSS/2608/817",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Pekat Manis 500g (tin)",
+      "qty": 60,
+      "unit": "tin",
       "unitPriceRm": 3.9,
-      "totalRm": 468
+      "totalRm": 234,
+      "invoiceTotalRm": 560.4,
+      "file": "invoices/2026-08-14_LSS_LSS-2608-817.pdf"
+    },
+    {
+      "date": "2026-08-14",
+      "invoiceNo": "LSS/2608/817",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Sejat 390g (tin)",
+      "qty": 48,
+      "unit": "tin",
+      "unitPriceRm": 3.4,
+      "totalRm": 163.2,
+      "invoiceTotalRm": 560.4,
+      "file": "invoices/2026-08-14_LSS_LSS-2608-817.pdf"
+    },
+    {
+      "date": "2026-08-14",
+      "invoiceNo": "LSS/2608/817",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Segar 1L",
+      "qty": 24,
+      "unit": "btl",
+      "unitPriceRm": 6.8,
+      "totalRm": 163.2,
+      "invoiceTotalRm": 560.4,
+      "file": "invoices/2026-08-14_LSS_LSS-2608-817.pdf"
+    },
+    {
+      "date": "2026-08-25",
+      "invoiceNo": "BMJ-0825-27",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Gula Pasir 10kg",
+      "qty": 3,
+      "unit": "beg",
+      "unitPriceRm": 28.5,
+      "totalRm": 85.5,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-25_BMJ_BMJ-0825-27.pdf"
+    },
+    {
+      "date": "2026-08-25",
+      "invoiceNo": "BMJ-0825-27",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Telur Gred A (30 biji)",
+      "qty": 6,
+      "unit": "papan",
+      "unitPriceRm": 13.8,
+      "totalRm": 82.8,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-25_BMJ_BMJ-0825-27.pdf"
+    },
+    {
+      "date": "2026-08-25",
+      "invoiceNo": "BMJ-0825-27",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Minyak Masak 5kg",
+      "qty": 2,
+      "unit": "botol",
+      "unitPriceRm": 30.5,
+      "totalRm": 61,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-08-25_BMJ_BMJ-0825-27.pdf"
+    },
+    {
+      "date": "2026-08-26",
+      "invoiceNo": "KCB-26-1222",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 12,
+      "unit": "kg",
+      "unitPriceRm": 30.2,
+      "totalRm": 362.4,
+      "invoiceTotalRm": 573.4,
+      "file": "invoices/2026-08-26_KCB_KCB-26-1222.pdf"
+    },
+    {
+      "date": "2026-08-26",
+      "invoiceNo": "KCB-26-1222",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 573.4,
+      "file": "invoices/2026-08-26_KCB_KCB-26-1222.pdf"
+    },
+    {
+      "date": "2026-08-26",
+      "invoiceNo": "KCB-26-1222",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 573.4,
+      "file": "invoices/2026-08-26_KCB_KCB-26-1222.pdf"
+    },
+    {
+      "date": "2026-08-28",
+      "invoiceNo": "RML2520",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Roti Benggali",
+      "qty": 60,
+      "unit": "buku",
+      "unitPriceRm": 2.2,
+      "totalRm": 132,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-28_RML_RML2520.pdf"
+    },
+    {
+      "date": "2026-08-28",
+      "invoiceNo": "RML2520",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Kaya Homemade 1kg",
+      "qty": 3,
+      "unit": "bekas",
+      "unitPriceRm": 16,
+      "totalRm": 48,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-28_RML_RML2520.pdf"
+    },
+    {
+      "date": "2026-08-28",
+      "invoiceNo": "RML2520",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Mentega 250g",
+      "qty": 6,
+      "unit": "ketul",
+      "unitPriceRm": 8.5,
+      "totalRm": 51,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-08-28_RML_RML2520.pdf"
+    },
+    {
+      "date": "2026-09-04",
+      "invoiceNo": "LSS/2609/753",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Pekat Manis 500g (tin)",
+      "qty": 48,
+      "unit": "tin",
+      "unitPriceRm": 3.9,
+      "totalRm": 187.2,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-09-04_LSS_LSS-2609-753.pdf"
+    },
+    {
+      "date": "2026-09-04",
+      "invoiceNo": "LSS/2609/753",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Sejat 390g (tin)",
+      "qty": 48,
+      "unit": "tin",
+      "unitPriceRm": 3.4,
+      "totalRm": 163.2,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-09-04_LSS_LSS-2609-753.pdf"
+    },
+    {
+      "date": "2026-09-04",
+      "invoiceNo": "LSS/2609/753",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Segar 1L",
+      "qty": 20,
+      "unit": "btl",
+      "unitPriceRm": 6.8,
+      "totalRm": 136,
+      "invoiceTotalRm": 486.4,
+      "file": "invoices/2026-09-04_LSS_LSS-2609-753.pdf"
     },
     {
       "date": "2026-09-05",
-      "invoiceNo": "INV-1132",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 338,
-      "unit": "L",
-      "unitPriceRm": 8.06,
-      "totalRm": 2724.28
+      "invoiceNo": "SPP260905",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Cawan Plastik 16oz (50pcs)",
+      "qty": 10,
+      "unit": "pek",
+      "unitPriceRm": 9.5,
+      "totalRm": 95,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-09-05_SPP_SPP260905.pdf"
+    },
+    {
+      "date": "2026-09-05",
+      "invoiceNo": "SPP260905",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Penutup Cawan (50pcs)",
+      "qty": 10,
+      "unit": "pek",
+      "unitPriceRm": 5.5,
+      "totalRm": 55,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-09-05_SPP_SPP260905.pdf"
+    },
+    {
+      "date": "2026-09-05",
+      "invoiceNo": "SPP260905",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Straw (100pcs)",
+      "qty": 5,
+      "unit": "pek",
+      "unitPriceRm": 3.8,
+      "totalRm": 19,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-09-05_SPP_SPP260905.pdf"
+    },
+    {
+      "date": "2026-09-05",
+      "invoiceNo": "SPP260905",
+      "supplier": "SP Plastik & Pembungkusan",
+      "item": "Plastik Ikat Tepi 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 12,
+      "totalRm": 24,
+      "invoiceTotalRm": 193,
+      "file": "invoices/2026-09-05_SPP_SPP260905.pdf"
     },
     {
       "date": "2026-09-08",
-      "invoiceNo": "KB-2609",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 45,
-      "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2610
+      "invoiceNo": "BMJ-0908-40",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Gula Pasir 10kg",
+      "qty": 3,
+      "unit": "beg",
+      "unitPriceRm": 28.5,
+      "totalRm": 85.5,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-09-08_BMJ_BMJ-0908-40.pdf"
+    },
+    {
+      "date": "2026-09-08",
+      "invoiceNo": "BMJ-0908-40",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Telur Gred A (30 biji)",
+      "qty": 6,
+      "unit": "papan",
+      "unitPriceRm": 13.8,
+      "totalRm": 82.8,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-09-08_BMJ_BMJ-0908-40.pdf"
+    },
+    {
+      "date": "2026-09-08",
+      "invoiceNo": "BMJ-0908-40",
+      "supplier": "Borong Runcit Maju Jaya",
+      "item": "Minyak Masak 5kg",
+      "qty": 2,
+      "unit": "botol",
+      "unitPriceRm": 30.5,
+      "totalRm": 61,
+      "invoiceTotalRm": 229.3,
+      "file": "invoices/2026-09-08_BMJ_BMJ-0908-40.pdf"
     },
     {
       "date": "2026-09-09",
-      "invoiceNo": "KB-2609",
-      "supplier": "Kopi Borneo Roasters",
-      "item": "Arabica house blend",
-      "qty": 45,
+      "invoiceNo": "KCB-26-1229",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 12,
       "unit": "kg",
-      "unitPriceRm": 58,
-      "totalRm": 2610,
-      "note": "uploaded twice?"
+      "unitPriceRm": 31.36,
+      "totalRm": 376.32,
+      "invoiceTotalRm": 587.32,
+      "file": "invoices/2026-09-09_KCB_KCB-26-1229.pdf"
     },
     {
-      "date": "2026-09-10",
-      "invoiceNo": "INV-1136",
-      "supplier": "PackPro Supplies",
-      "item": "Takeaway cups + lids (pack of 50)",
-      "qty": 41,
-      "unit": "pack",
-      "unitPriceRm": 24.5,
-      "totalRm": 1004.5
+      "date": "2026-09-09",
+      "invoiceNo": "KCB-26-1229",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 587.32,
+      "file": "invoices/2026-09-09_KCB_KCB-26-1229.pdf"
     },
     {
-      "date": "2026-09-14",
-      "invoiceNo": "HN-88213",
-      "supplier": "Harvey Norman Sunway Pyramid",
-      "item": "Electrical appliance",
+      "date": "2026-09-09",
+      "invoiceNo": "KCB-26-1229",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 587.32,
+      "file": "invoices/2026-09-09_KCB_KCB-26-1229.pdf"
+    },
+    {
+      "date": "2026-09-11",
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Pekat Manis 500g (tin)",
+      "qty": 60,
+      "unit": "tin",
+      "unitPriceRm": 3.9,
+      "totalRm": 234,
+      "invoiceTotalRm": 642,
+      "file": "invoices/2026-09-11_LSS_LSS-2609-278.pdf"
+    },
+    {
+      "date": "2026-09-11",
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Sejat 390g (tin)",
+      "qty": 60,
+      "unit": "tin",
+      "unitPriceRm": 3.4,
+      "totalRm": 204,
+      "invoiceTotalRm": 642,
+      "file": "invoices/2026-09-11_LSS_LSS-2609-278.pdf"
+    },
+    {
+      "date": "2026-09-11",
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "item": "Susu Segar 1L",
+      "qty": 30,
+      "unit": "btl",
+      "unitPriceRm": 6.8,
+      "totalRm": 204,
+      "invoiceTotalRm": 642,
+      "file": "invoices/2026-09-11_LSS_LSS-2609-278.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "invoiceNo": "TGP 303",
+      "supplier": "Tong Gas Pantas Enterprise",
+      "item": "Isi semula tong gas LPG 14kg",
+      "qty": 4,
+      "unit": "tong",
+      "unitPriceRm": 27,
+      "totalRm": 108,
+      "invoiceTotalRm": 108,
+      "file": "invoices/2026-09-12_TGP_TGP303.pdf"
+    },
+    {
+      "date": "2026-09-18",
+      "invoiceNo": "RML2229",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Roti Benggali",
+      "qty": 60,
+      "unit": "buku",
+      "unitPriceRm": 2.2,
+      "totalRm": 132,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-09-18_RML_RML2229.pdf"
+    },
+    {
+      "date": "2026-09-18",
+      "invoiceNo": "RML2229",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Kaya Homemade 1kg",
+      "qty": 3,
+      "unit": "bekas",
+      "unitPriceRm": 16,
+      "totalRm": 48,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-09-18_RML_RML2229.pdf"
+    },
+    {
+      "date": "2026-09-18",
+      "invoiceNo": "RML2229",
+      "supplier": "Roti & Kaya Mak Long",
+      "item": "Mentega 250g",
+      "qty": 6,
+      "unit": "ketul",
+      "unitPriceRm": 8.5,
+      "totalRm": 51,
+      "invoiceTotalRm": 231,
+      "file": "invoices/2026-09-18_RML_RML2229.pdf"
+    },
+    {
+      "date": "2026-09-23",
+      "invoiceNo": "KCB-26-1236",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "qty": 10,
+      "unit": "kg",
+      "unitPriceRm": 31.36,
+      "totalRm": 313.6,
+      "invoiceTotalRm": 524.6,
+      "file": "invoices/2026-09-23_KCB_KCB-26-1236.pdf"
+    },
+    {
+      "date": "2026-09-23",
+      "invoiceNo": "KCB-26-1236",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Teh Cap Daun 1kg",
+      "qty": 6,
+      "unit": "kg",
+      "unitPriceRm": 22.5,
+      "totalRm": 135,
+      "invoiceTotalRm": 524.6,
+      "file": "invoices/2026-09-23_KCB_KCB-26-1236.pdf"
+    },
+    {
+      "date": "2026-09-23",
+      "invoiceNo": "KCB-26-1236",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Biji Kopi Robusta Panggang 1kg",
+      "qty": 2,
+      "unit": "kg",
+      "unitPriceRm": 38,
+      "totalRm": 76,
+      "invoiceTotalRm": 524.6,
+      "file": "invoices/2026-09-23_KCB_KCB-26-1236.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Susu Pekat Manis 500g",
+      "qty": 6,
+      "unit": "tin",
+      "unitPriceRm": 4.2,
+      "totalRm": 25.2,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Gula Halus 1kg",
+      "qty": 5,
+      "unit": "pek",
+      "unitPriceRm": 2.85,
+      "totalRm": 14.25,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Sabun Pinggan 900ml",
+      "qty": 2,
+      "unit": "btl",
+      "unitPriceRm": 6.5,
+      "totalRm": 13,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Beras Wangi 10kg",
       "qty": 1,
-      "unit": "unit",
-      "unitPriceRm": 2399,
-      "totalRm": 2399,
-      "note": "paid with business account"
+      "unit": "beg",
+      "unitPriceRm": 39.9,
+      "totalRm": 39.9,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
     },
     {
-      "date": "2026-09-15",
-      "invoiceNo": "INV-1140",
-      "supplier": "TNB",
-      "item": "Electricity",
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Lampin Bayi Saiz M (38s)",
       "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 921,
-      "totalRm": 921
+      "unit": "pek",
+      "unitPriceRm": 42.9,
+      "totalRm": 42.9,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
     },
     {
-      "date": "2026-09-15",
-      "invoiceNo": "INV-1141",
-      "supplier": "Air Selangor",
-      "item": "Water",
+      "date": "2026-09-12",
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "item": "Ubat Gigi 175g",
       "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 95,
-      "totalRm": 95
-    },
-    {
-      "date": "2026-09-19",
-      "invoiceNo": "INV-1133",
-      "supplier": "Ladang Segar Dairy Sdn Bhd",
-      "item": "Fresh milk (1L)",
-      "qty": 338,
-      "unit": "L",
-      "unitPriceRm": 8.06,
-      "totalRm": 2724.28
-    },
-    {
-      "date": "2026-09-28",
-      "invoiceNo": "INV-1142",
-      "supplier": "Payroll",
-      "item": "Staff salaries (6 full-time)",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 10200,
-      "totalRm": 10200
-    },
-    {
-      "date": "2026-09-28",
-      "invoiceNo": "INV-1143",
-      "supplier": "KWSP / PERKESO",
-      "item": "EPF + SOCSO employer contribution",
-      "qty": 1,
-      "unit": "month",
-      "unitPriceRm": 1480,
-      "totalRm": 1480
+      "unit": "tiub",
+      "unitPriceRm": 8.9,
+      "totalRm": 8.9,
+      "invoiceTotalRm": 144.15,
+      "file": "invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf"
     }
   ],
   "suppliers": [
     {
-      "name": "Ladang Segar Dairy Sdn Bhd",
-      "category": "Dairy",
-      "contact": "orders@ladangsegar.example",
-      "paymentTerms": "COD"
+      "id": "S01",
+      "name": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "category": "Kopi powder, teh powder, roasted beans",
+      "contact": "Mr. Lim (sales) | orders@kopibintang.example | +60-0-0000-0101 (fictional)",
+      "paymentTerms": "7 days, bank transfer",
+      "notifiedPriceChange": "No"
     },
     {
-      "name": "Kopi Borneo Roasters",
-      "category": "Coffee beans",
-      "contact": "+60 12-345 6789",
-      "paymentTerms": "14 days"
+      "id": "S02",
+      "name": "Ladang Susu Segar Hulu Enterprise",
+      "category": "Condensed milk, evaporated milk, fresh milk",
+      "contact": "Pn. Rosnah | ladangsusu@dairy.example | +60-0-0000-0102 (fictional)",
+      "paymentTerms": "7 days, bank transfer",
+      "notifiedPriceChange": "No"
     },
     {
-      "name": "Kedai Runcit Hock Seng",
-      "category": "Dry goods",
-      "paymentTerms": "Cash"
+      "id": "S03",
+      "name": "Roti & Kaya Mak Long",
+      "category": "Bread, kaya, butter",
+      "contact": "Mak Long | rotimaklong@bakery.example | +60-0-0000-0103 (fictional)",
+      "paymentTerms": "Cash on delivery",
+      "notifiedPriceChange": "No"
     },
     {
-      "name": "PackPro Supplies",
-      "category": "Packaging",
-      "contact": "sales@packpro.example",
-      "paymentTerms": "30 days"
+      "id": "S04",
+      "name": "Borong Runcit Maju Jaya",
+      "category": "Sugar, eggs, cooking oil, dry goods",
+      "contact": "Encik Hafiz | majujaya@wholesale.example | +60-0-0000-0104 (fictional)",
+      "paymentTerms": "14 days, bank transfer",
+      "notifiedPriceChange": "No"
     },
     {
-      "name": "Roti Mesra Bakery",
-      "category": "Bakery",
-      "paymentTerms": "Weekly"
+      "id": "S05",
+      "name": "SP Plastik & Pembungkusan",
+      "category": "Cups, lids, straws, takeaway bags",
+      "contact": "Ms. Kavitha | sales@spplastik.example | +60-0-0000-0105 (fictional)",
+      "paymentTerms": "7 days, bank transfer",
+      "notifiedPriceChange": "No"
     },
     {
-      "name": "Telur Emas Farm",
-      "category": "Eggs",
-      "paymentTerms": "Cash"
+      "id": "S06",
+      "name": "Tong Gas Pantas Enterprise",
+      "category": "LPG cylinder refill",
+      "contact": "Ah Seng | +60-0-0000-0106 (fictional)",
+      "paymentTerms": "Cash on delivery",
+      "notifiedPriceChange": "No"
+    }
+  ],
+  "bank": [
+    {
+      "date": "2026-09-01",
+      "description": "OPENING BALANCE",
+      "balanceRm": 18450
+    },
+    {
+      "date": "2026-09-01",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0901",
+      "creditRm": 240,
+      "balanceRm": 18690
+    },
+    {
+      "date": "2026-09-01",
+      "description": "IBG TRF RENT SEP2026 TAN PROPERTIES (DEMO)",
+      "reference": "RENT0926",
+      "debitRm": 3200,
+      "balanceRm": 15490
+    },
+    {
+      "date": "2026-09-02",
+      "description": "FOOD DELIVERY PLATFORM PAYOUT W/E 3008",
+      "reference": "FDP0902",
+      "creditRm": 573.21,
+      "balanceRm": 16063.21
+    },
+    {
+      "date": "2026-09-02",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 010926",
+      "reference": "QR260901",
+      "creditRm": 238.9,
+      "balanceRm": 16302.11
+    },
+    {
+      "date": "2026-09-02",
+      "description": "CARD MERCHANT SETTLEMENT 010926 NET MDR",
+      "reference": "CM260901",
+      "creditRm": 58.62,
+      "balanceRm": 16360.73
+    },
+    {
+      "date": "2026-09-02",
+      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1222",
+      "reference": "IBG0902S01",
+      "debitRm": 573.4,
+      "balanceRm": 15787.33
+    },
+    {
+      "date": "2026-09-03",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 020926",
+      "reference": "QR260902",
+      "creditRm": 278.07,
+      "balanceRm": 16065.4
+    },
+    {
+      "date": "2026-09-03",
+      "description": "CARD MERCHANT SETTLEMENT 020926 NET MDR",
+      "reference": "CM260902",
+      "creditRm": 69.98,
+      "balanceRm": 16135.38
+    },
+    {
+      "date": "2026-09-04",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0904",
+      "creditRm": 650,
+      "balanceRm": 16785.38
+    },
+    {
+      "date": "2026-09-04",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 030926",
+      "reference": "QR260903",
+      "creditRm": 207.37,
+      "balanceRm": 16992.75
+    },
+    {
+      "date": "2026-09-04",
+      "description": "CARD MERCHANT SETTLEMENT 030926 NET MDR",
+      "reference": "CM260903",
+      "creditRm": 65.19,
+      "balanceRm": 17057.94
+    },
+    {
+      "date": "2026-09-05",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 040926",
+      "reference": "QR260904",
+      "creditRm": 237.76,
+      "balanceRm": 17295.7
+    },
+    {
+      "date": "2026-09-05",
+      "description": "CARD MERCHANT SETTLEMENT 040926 NET MDR",
+      "reference": "CM260904",
+      "creditRm": 57.3,
+      "balanceRm": 17353
+    },
+    {
+      "date": "2026-09-05",
+      "description": "JOMPAY INTERNET FIBRE",
+      "reference": "NET0926",
+      "debitRm": 129,
+      "balanceRm": 17224
+    },
+    {
+      "date": "2026-09-06",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 050926",
+      "reference": "QR260905",
+      "creditRm": 277.4,
+      "balanceRm": 17501.4
+    },
+    {
+      "date": "2026-09-06",
+      "description": "CARD MERCHANT SETTLEMENT 050926 NET MDR",
+      "reference": "CM260905",
+      "creditRm": 56.17,
+      "balanceRm": 17557.57
+    },
+    {
+      "date": "2026-09-07",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 060926",
+      "reference": "QR260906",
+      "creditRm": 317.39,
+      "balanceRm": 17874.96
+    },
+    {
+      "date": "2026-09-07",
+      "description": "CARD MERCHANT SETTLEMENT 060926 NET MDR",
+      "reference": "CM260906",
+      "creditRm": 92,
+      "balanceRm": 17966.96
+    },
+    {
+      "date": "2026-09-08",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0908",
+      "creditRm": 780,
+      "balanceRm": 18746.96
+    },
+    {
+      "date": "2026-09-08",
+      "description": "IBG TRF BORONG RUNCIT MAJU JAYA INV BMJ-0825-27",
+      "reference": "IBG0908S04",
+      "debitRm": 229.3,
+      "balanceRm": 18517.66
+    },
+    {
+      "date": "2026-09-08",
+      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/753",
+      "reference": "IBG0908S02",
+      "debitRm": 486.4,
+      "balanceRm": 18031.26
+    },
+    {
+      "date": "2026-09-09",
+      "description": "FOOD DELIVERY PLATFORM PAYOUT W/E 0609",
+      "reference": "FDP0909",
+      "creditRm": 698.96,
+      "balanceRm": 18730.22
+    },
+    {
+      "date": "2026-09-09",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 080926",
+      "reference": "QR260908",
+      "creditRm": 225.87,
+      "balanceRm": 18956.09
+    },
+    {
+      "date": "2026-09-09",
+      "description": "CARD MERCHANT SETTLEMENT 080926 NET MDR",
+      "reference": "CM260908",
+      "creditRm": 56.8,
+      "balanceRm": 19012.89
+    },
+    {
+      "date": "2026-09-10",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 090926",
+      "reference": "QR260909",
+      "creditRm": 228.37,
+      "balanceRm": 19241.26
+    },
+    {
+      "date": "2026-09-10",
+      "description": "CARD MERCHANT SETTLEMENT 090926 NET MDR",
+      "reference": "CM260909",
+      "creditRm": 45.69,
+      "balanceRm": 19286.95
+    },
+    {
+      "date": "2026-09-10",
+      "description": "IBG TRF SP PLASTIK PEMBUNGKUSAN INV SPP260905",
+      "reference": "IBG0910S05",
+      "debitRm": 193,
+      "balanceRm": 19093.95
+    },
+    {
+      "date": "2026-09-10",
+      "description": "JOMPAY ELECTRICITY UTILITY",
+      "reference": "ELEC0926",
+      "debitRm": 684.35,
+      "balanceRm": 18409.6
+    },
+    {
+      "date": "2026-09-11",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0911",
+      "creditRm": 620,
+      "balanceRm": 19029.6
+    },
+    {
+      "date": "2026-09-11",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 100926",
+      "reference": "QR260910",
+      "creditRm": 218.08,
+      "balanceRm": 19247.68
+    },
+    {
+      "date": "2026-09-11",
+      "description": "CARD MERCHANT SETTLEMENT 100926 NET MDR",
+      "reference": "CM260910",
+      "creditRm": 61.19,
+      "balanceRm": 19308.87
+    },
+    {
+      "date": "2026-09-11",
+      "description": "JOMPAY WATER UTILITY",
+      "reference": "AIR0926",
+      "debitRm": 93.2,
+      "balanceRm": 19215.67
+    },
+    {
+      "date": "2026-09-12",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 110926",
+      "reference": "QR260911",
+      "creditRm": 237.3,
+      "balanceRm": 19452.97
+    },
+    {
+      "date": "2026-09-12",
+      "description": "CARD MERCHANT SETTLEMENT 110926 NET MDR",
+      "reference": "CM260911",
+      "creditRm": 65.48,
+      "balanceRm": 19518.45
+    },
+    {
+      "date": "2026-09-12",
+      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "reference": "POS0912-47731",
+      "debitRm": 144.15,
+      "balanceRm": 19374.3
+    },
+    {
+      "date": "2026-09-13",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 120926",
+      "reference": "QR260912",
+      "creditRm": 308.05,
+      "balanceRm": 19682.35
+    },
+    {
+      "date": "2026-09-13",
+      "description": "CARD MERCHANT SETTLEMENT 120926 NET MDR",
+      "reference": "CM260912",
+      "creditRm": 74.28,
+      "balanceRm": 19756.63
+    },
+    {
+      "date": "2026-09-14",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 130926",
+      "reference": "QR260913",
+      "creditRm": 280.82,
+      "balanceRm": 20037.45
+    },
+    {
+      "date": "2026-09-14",
+      "description": "CARD MERCHANT SETTLEMENT 130926 NET MDR",
+      "reference": "CM260913",
+      "creditRm": 88.67,
+      "balanceRm": 20126.12
+    },
+    {
+      "date": "2026-09-15",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0915",
+      "creditRm": 810,
+      "balanceRm": 20936.12
+    },
+    {
+      "date": "2026-09-15",
+      "description": "EPF CONTRIBUTION AUG2026",
+      "reference": "KWSP0826",
+      "debitRm": 1680,
+      "balanceRm": 19256.12
+    },
+    {
+      "date": "2026-09-15",
+      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/278",
+      "reference": "IBG0915S02",
+      "debitRm": 642,
+      "balanceRm": 18614.12
+    },
+    {
+      "date": "2026-09-15",
+      "description": "SOCSO/EIS CONTRIBUTION AUG2026",
+      "reference": "PERKESO0826",
+      "debitRm": 150.5,
+      "balanceRm": 18463.62
+    },
+    {
+      "date": "2026-09-16",
+      "description": "FOOD DELIVERY PLATFORM PAYOUT W/E 1309",
+      "reference": "FDP0916",
+      "creditRm": 692.3,
+      "balanceRm": 19155.92
+    },
+    {
+      "date": "2026-09-16",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 150926",
+      "reference": "QR260915",
+      "creditRm": 243.4,
+      "balanceRm": 19399.32
+    },
+    {
+      "date": "2026-09-16",
+      "description": "CARD MERCHANT SETTLEMENT 150926 NET MDR",
+      "reference": "CM260915",
+      "creditRm": 73.36,
+      "balanceRm": 19472.68
+    },
+    {
+      "date": "2026-09-16",
+      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1229",
+      "reference": "IBG0916S01",
+      "debitRm": 587.32,
+      "balanceRm": 18885.36
+    },
+    {
+      "date": "2026-09-16",
+      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/278",
+      "reference": "IBG0916S02",
+      "debitRm": 642,
+      "balanceRm": 18243.36
+    },
+    {
+      "date": "2026-09-17",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 160926",
+      "reference": "QR260916",
+      "creditRm": 234.81,
+      "balanceRm": 18478.17
+    },
+    {
+      "date": "2026-09-17",
+      "description": "CARD MERCHANT SETTLEMENT 160926 NET MDR",
+      "reference": "CM260916",
+      "creditRm": 77.05,
+      "balanceRm": 18555.22
+    },
+    {
+      "date": "2026-09-18",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0918",
+      "creditRm": 670,
+      "balanceRm": 19225.22
+    },
+    {
+      "date": "2026-09-18",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 170926",
+      "reference": "QR260917",
+      "creditRm": 252.21,
+      "balanceRm": 19477.43
+    },
+    {
+      "date": "2026-09-18",
+      "description": "CARD MERCHANT SETTLEMENT 170926 NET MDR",
+      "reference": "CM260917",
+      "creditRm": 63.84,
+      "balanceRm": 19541.27
+    },
+    {
+      "date": "2026-09-19",
+      "description": "CARD MERCHANT SETTLEMENT 180926 NET MDR",
+      "reference": "CM260918",
+      "creditRm": 58.26,
+      "balanceRm": 19599.53
+    },
+    {
+      "date": "2026-09-20",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 190926",
+      "reference": "QR260919",
+      "creditRm": 323.81,
+      "balanceRm": 19923.34
+    },
+    {
+      "date": "2026-09-20",
+      "description": "CARD MERCHANT SETTLEMENT 190926 NET MDR",
+      "reference": "CM260919",
+      "creditRm": 84.43,
+      "balanceRm": 20007.77
+    },
+    {
+      "date": "2026-09-21",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 200926",
+      "reference": "QR260920",
+      "creditRm": 329.28,
+      "balanceRm": 20337.05
+    },
+    {
+      "date": "2026-09-21",
+      "description": "CARD MERCHANT SETTLEMENT 200926 NET MDR",
+      "reference": "CM260920",
+      "creditRm": 63.21,
+      "balanceRm": 20400.26
+    },
+    {
+      "date": "2026-09-22",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0922",
+      "creditRm": 820,
+      "balanceRm": 21220.26
+    },
+    {
+      "date": "2026-09-22",
+      "description": "IBG TRF BORONG RUNCIT MAJU JAYA INV BMJ-0908-40",
+      "reference": "IBG0922S04",
+      "debitRm": 229.3,
+      "balanceRm": 20990.96
+    },
+    {
+      "date": "2026-09-23",
+      "description": "FOOD DELIVERY PLATFORM PAYOUT W/E 2009",
+      "reference": "FDP0923",
+      "creditRm": 547.13,
+      "balanceRm": 21538.09
+    },
+    {
+      "date": "2026-09-23",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 220926",
+      "reference": "QR260922",
+      "creditRm": 243.87,
+      "balanceRm": 21781.96
+    },
+    {
+      "date": "2026-09-23",
+      "description": "CARD MERCHANT SETTLEMENT 220926 NET MDR",
+      "reference": "CM260922",
+      "creditRm": 59.49,
+      "balanceRm": 21841.45
+    },
+    {
+      "date": "2026-09-24",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 230926",
+      "reference": "QR260923",
+      "creditRm": 215.26,
+      "balanceRm": 22056.71
+    },
+    {
+      "date": "2026-09-24",
+      "description": "CARD MERCHANT SETTLEMENT 230926 NET MDR",
+      "reference": "CM260923",
+      "creditRm": 52.35,
+      "balanceRm": 22109.06
+    },
+    {
+      "date": "2026-09-25",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0925",
+      "creditRm": 660,
+      "balanceRm": 22769.06
+    },
+    {
+      "date": "2026-09-25",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 240926",
+      "reference": "QR260924",
+      "creditRm": 246.91,
+      "balanceRm": 23015.97
+    },
+    {
+      "date": "2026-09-25",
+      "description": "CARD MERCHANT SETTLEMENT 240926 NET MDR",
+      "reference": "CM260924",
+      "creditRm": 76.61,
+      "balanceRm": 23092.58
+    },
+    {
+      "date": "2026-09-25",
+      "description": "DUITNOW TRF AMINAH BT RAHMAN (OWNER DRAWING)",
+      "reference": "OWN0925",
+      "debitRm": 1500,
+      "balanceRm": 21592.58
+    },
+    {
+      "date": "2026-09-26",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 250926",
+      "reference": "QR260925",
+      "creditRm": 281.52,
+      "balanceRm": 21874.1
+    },
+    {
+      "date": "2026-09-26",
+      "description": "CARD MERCHANT SETTLEMENT 250926 NET MDR",
+      "reference": "CM260925",
+      "creditRm": 81.3,
+      "balanceRm": 21955.4
+    },
+    {
+      "date": "2026-09-27",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 260926",
+      "reference": "QR260926",
+      "creditRm": 314.65,
+      "balanceRm": 22270.05
+    },
+    {
+      "date": "2026-09-27",
+      "description": "CARD MERCHANT SETTLEMENT 260926 NET MDR",
+      "reference": "CM260926",
+      "creditRm": 89.92,
+      "balanceRm": 22359.97
+    },
+    {
+      "date": "2026-09-28",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 270926",
+      "reference": "QR260927",
+      "creditRm": 310.78,
+      "balanceRm": 22670.75
+    },
+    {
+      "date": "2026-09-28",
+      "description": "CARD MERCHANT SETTLEMENT 270926 NET MDR",
+      "reference": "CM260927",
+      "creditRm": 65.66,
+      "balanceRm": 22736.41
+    },
+    {
+      "date": "2026-09-28",
+      "description": "SALARY SEP2026 STAFF A",
+      "reference": "SAL091",
+      "debitRm": 1700,
+      "balanceRm": 21036.41
+    },
+    {
+      "date": "2026-09-28",
+      "description": "SALARY SEP2026 STAFF B",
+      "reference": "SAL092",
+      "debitRm": 1700,
+      "balanceRm": 19336.41
+    },
+    {
+      "date": "2026-09-28",
+      "description": "SALARY SEP2026 STAFF C",
+      "reference": "SAL093",
+      "debitRm": 1800,
+      "balanceRm": 17536.41
+    },
+    {
+      "date": "2026-09-28",
+      "description": "SALARY SEP2026 STAFF D",
+      "reference": "SAL094",
+      "debitRm": 1900,
+      "balanceRm": 15636.41
+    },
+    {
+      "date": "2026-09-29",
+      "description": "CASH DEPOSIT CDM PJ SS2",
+      "reference": "CDM0929",
+      "creditRm": 840,
+      "balanceRm": 16476.41
+    },
+    {
+      "date": "2026-09-30",
+      "description": "FOOD DELIVERY PLATFORM PAYOUT W/E 2709",
+      "reference": "FDP0930",
+      "creditRm": 681.37,
+      "balanceRm": 17157.78
+    },
+    {
+      "date": "2026-09-30",
+      "description": "DUITNOW QR MERCHANT SETTLEMENT 290926",
+      "reference": "QR260929",
+      "creditRm": 262.63,
+      "balanceRm": 17420.41
+    },
+    {
+      "date": "2026-09-30",
+      "description": "CARD MERCHANT SETTLEMENT 290926 NET MDR",
+      "reference": "CM260929",
+      "creditRm": 63.41,
+      "balanceRm": 17483.82
+    },
+    {
+      "date": "2026-09-30",
+      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1236",
+      "reference": "IBG0930S01",
+      "debitRm": 524.6,
+      "balanceRm": 16959.22
+    }
+  ],
+  "payables": [
+    {
+      "invoiceNo": "KCB-26-1187",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-06-17",
+      "amountRm": 547,
+      "paidDate": "2026-06-24",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "KCB-26-1194",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-07-01",
+      "amountRm": 547,
+      "paidDate": "2026-07-08",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "LSS/2607/828",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceDate": "2026-07-03",
+      "amountRm": 486.4,
+      "paidDate": "2026-07-07",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "BMJ-0708-25",
+      "supplier": "Borong Runcit Maju Jaya",
+      "invoiceDate": "2026-07-08",
+      "amountRm": 229.3,
+      "paidDate": "2026-07-22",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "RML2812",
+      "supplier": "Roti & Kaya Mak Long",
+      "invoiceDate": "2026-07-10",
+      "amountRm": 231,
+      "paidDate": "2026-07-10",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "KCB-26-1201",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-07-15",
+      "amountRm": 502,
+      "paidDate": "2026-07-22",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "SPP260720",
+      "supplier": "SP Plastik & Pembungkusan",
+      "invoiceDate": "2026-07-20",
+      "amountRm": 193,
+      "paidDate": "2026-07-25",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "LSS/2607/826",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceDate": "2026-07-24",
+      "amountRm": 445.6,
+      "paidDate": "2026-07-28",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "KCB-26-1208",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-07-29",
+      "amountRm": 531.1,
+      "paidDate": "2026-08-05",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "TGP 363",
+      "supplier": "Tong Gas Pantas Enterprise",
+      "invoiceDate": "2026-08-01",
+      "amountRm": 108,
+      "paidDate": "2026-08-01",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "BMJ-0805-35",
+      "supplier": "Borong Runcit Maju Jaya",
+      "invoiceDate": "2026-08-05",
+      "amountRm": 229.3,
+      "paidDate": "2026-08-19",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "RML2370",
+      "supplier": "Roti & Kaya Mak Long",
+      "invoiceDate": "2026-08-07",
+      "amountRm": 231,
+      "paidDate": "2026-08-07",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "KCB-26-1215",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-08-12",
+      "amountRm": 543.2,
+      "paidDate": "2026-08-19",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "LSS/2608/817",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceDate": "2026-08-14",
+      "amountRm": 560.4,
+      "paidDate": "2026-08-18",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "BMJ-0825-27",
+      "supplier": "Borong Runcit Maju Jaya",
+      "invoiceDate": "2026-08-25",
+      "amountRm": 229.3,
+      "paidDate": "2026-09-08",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "KCB-26-1222",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-08-26",
+      "amountRm": 573.4,
+      "paidDate": "2026-09-02",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "RML2520",
+      "supplier": "Roti & Kaya Mak Long",
+      "invoiceDate": "2026-08-28",
+      "amountRm": 231,
+      "paidDate": "2026-08-28",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "LSS/2609/753",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceDate": "2026-09-04",
+      "amountRm": 486.4,
+      "paidDate": "2026-09-08",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "SPP260905",
+      "supplier": "SP Plastik & Pembungkusan",
+      "invoiceDate": "2026-09-05",
+      "amountRm": 193,
+      "paidDate": "2026-09-10",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "BMJ-0908-40",
+      "supplier": "Borong Runcit Maju Jaya",
+      "invoiceDate": "2026-09-08",
+      "amountRm": 229.3,
+      "paidDate": "2026-09-22",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "KCB-26-1229",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-09-09",
+      "amountRm": 587.32,
+      "paidDate": "2026-09-16",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceDate": "2026-09-11",
+      "amountRm": 642,
+      "paidDate": "2026-09-15",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "TGP 303",
+      "supplier": "Tong Gas Pantas Enterprise",
+      "invoiceDate": "2026-09-12",
+      "amountRm": 108,
+      "paidDate": "2026-09-12",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "RML2229",
+      "supplier": "Roti & Kaya Mak Long",
+      "invoiceDate": "2026-09-18",
+      "amountRm": 231,
+      "paidDate": "2026-09-18",
+      "method": "cash"
+    },
+    {
+      "invoiceNo": "KCB-26-1236",
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "invoiceDate": "2026-09-23",
+      "amountRm": 524.6,
+      "paidDate": "2026-09-30",
+      "method": "transfer"
+    },
+    {
+      "invoiceNo": "R-0912-0047731",
+      "supplier": "Pasaraya Serba Murah (fictional)",
+      "invoiceDate": "2026-09-12",
+      "amountRm": 144.15,
+      "paidDate": "2026-09-12",
+      "method": "debit card (business account)"
     }
   ]
 }

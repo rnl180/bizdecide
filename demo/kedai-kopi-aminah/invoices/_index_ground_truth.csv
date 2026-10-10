@@ -1,0 +1,80 @@
+file,invoice_no,supplier,date,item,qty,unit,unit_price_rm,line_total_rm,invoice_total_rm
+invoices/2026-06-17_KCB_KCB-26-1187.pdf,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-06-17,Serbuk Kopi O Campuran 1kg,12,kg,28.00,336.00,547.00
+invoices/2026-06-17_KCB_KCB-26-1187.pdf,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-06-17,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,547.00
+invoices/2026-06-17_KCB_KCB-26-1187.pdf,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-06-17,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,547.00
+invoices/2026-07-01_KCB_KCB-26-1194.pdf,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-01,Serbuk Kopi O Campuran 1kg,12,kg,28.00,336.00,547.00
+invoices/2026-07-01_KCB_KCB-26-1194.pdf,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-01,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,547.00
+invoices/2026-07-01_KCB_KCB-26-1194.pdf,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-01,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,547.00
+invoices/2026-07-03_LSS_LSS-2607-828.pdf,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,2026-07-03,Susu Pekat Manis 500g (tin),48,tin,3.90,187.20,486.40
+invoices/2026-07-03_LSS_LSS-2607-828.pdf,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,2026-07-03,Susu Sejat 390g (tin),48,tin,3.40,163.20,486.40
+invoices/2026-07-03_LSS_LSS-2607-828.pdf,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,2026-07-03,Susu Segar 1L,20,btl,6.80,136.00,486.40
+invoices/2026-07-08_BMJ_BMJ-0708-25.pdf,BMJ-0708-25,Borong Runcit Maju Jaya,2026-07-08,Gula Pasir 10kg,3,beg,28.50,85.50,229.30
+invoices/2026-07-08_BMJ_BMJ-0708-25.pdf,BMJ-0708-25,Borong Runcit Maju Jaya,2026-07-08,Telur Gred A (30 biji),6,papan,13.80,82.80,229.30
+invoices/2026-07-08_BMJ_BMJ-0708-25.pdf,BMJ-0708-25,Borong Runcit Maju Jaya,2026-07-08,Minyak Masak 5kg,2,botol,30.50,61.00,229.30
+invoices/2026-07-10_RML_RML2812.pdf,RML2812,Roti & Kaya Mak Long,2026-07-10,Roti Benggali,60,buku,2.20,132.00,231.00
+invoices/2026-07-10_RML_RML2812.pdf,RML2812,Roti & Kaya Mak Long,2026-07-10,Kaya Homemade 1kg,3,bekas,16.00,48.00,231.00
+invoices/2026-07-10_RML_RML2812.pdf,RML2812,Roti & Kaya Mak Long,2026-07-10,Mentega 250g,6,ketul,8.50,51.00,231.00
+invoices/2026-07-15_KCB_KCB-26-1201.pdf,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-15,Serbuk Kopi O Campuran 1kg,10,kg,29.10,291.00,502.00
+invoices/2026-07-15_KCB_KCB-26-1201.pdf,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-15,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,502.00
+invoices/2026-07-15_KCB_KCB-26-1201.pdf,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-15,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,502.00
+invoices/2026-07-20_SPP_SPP260720.pdf,SPP260720,SP Plastik & Pembungkusan,2026-07-20,Cawan Plastik 16oz (50pcs),10,pek,9.50,95.00,193.00
+invoices/2026-07-20_SPP_SPP260720.pdf,SPP260720,SP Plastik & Pembungkusan,2026-07-20,Penutup Cawan (50pcs),10,pek,5.50,55.00,193.00
+invoices/2026-07-20_SPP_SPP260720.pdf,SPP260720,SP Plastik & Pembungkusan,2026-07-20,Straw (100pcs),5,pek,3.80,19.00,193.00
+invoices/2026-07-20_SPP_SPP260720.pdf,SPP260720,SP Plastik & Pembungkusan,2026-07-20,Plastik Ikat Tepi 1kg,2,kg,12.00,24.00,193.00
+invoices/2026-07-24_LSS_LSS-2607-826.pdf,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,2026-07-24,Susu Pekat Manis 500g (tin),48,tin,3.90,187.20,445.60
+invoices/2026-07-24_LSS_LSS-2607-826.pdf,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,2026-07-24,Susu Sejat 390g (tin),36,tin,3.40,122.40,445.60
+invoices/2026-07-24_LSS_LSS-2607-826.pdf,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,2026-07-24,Susu Segar 1L,20,btl,6.80,136.00,445.60
+invoices/2026-07-29_KCB_KCB-26-1208.pdf,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-29,Serbuk Kopi O Campuran 1kg,11,kg,29.10,320.10,531.10
+invoices/2026-07-29_KCB_KCB-26-1208.pdf,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-29,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,531.10
+invoices/2026-07-29_KCB_KCB-26-1208.pdf,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-29,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,531.10
+invoices/2026-08-01_TGP_TGP363.pdf,TGP 363,Tong Gas Pantas Enterprise,2026-08-01,Isi semula tong gas LPG 14kg,4,tong,27.00,108.00,108.00
+invoices/2026-08-05_BMJ_BMJ-0805-35.pdf,BMJ-0805-35,Borong Runcit Maju Jaya,2026-08-05,Gula Pasir 10kg,3,beg,28.50,85.50,229.30
+invoices/2026-08-05_BMJ_BMJ-0805-35.pdf,BMJ-0805-35,Borong Runcit Maju Jaya,2026-08-05,Telur Gred A (30 biji),6,papan,13.80,82.80,229.30
+invoices/2026-08-05_BMJ_BMJ-0805-35.pdf,BMJ-0805-35,Borong Runcit Maju Jaya,2026-08-05,Minyak Masak 5kg,2,botol,30.50,61.00,229.30
+invoices/2026-08-07_RML_RML2370.pdf,RML2370,Roti & Kaya Mak Long,2026-08-07,Roti Benggali,60,buku,2.20,132.00,231.00
+invoices/2026-08-07_RML_RML2370.pdf,RML2370,Roti & Kaya Mak Long,2026-08-07,Kaya Homemade 1kg,3,bekas,16.00,48.00,231.00
+invoices/2026-08-07_RML_RML2370.pdf,RML2370,Roti & Kaya Mak Long,2026-08-07,Mentega 250g,6,ketul,8.50,51.00,231.00
+invoices/2026-08-12_KCB_KCB-26-1215.pdf,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-12,Serbuk Kopi O Campuran 1kg,11,kg,30.20,332.20,543.20
+invoices/2026-08-12_KCB_KCB-26-1215.pdf,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-12,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,543.20
+invoices/2026-08-12_KCB_KCB-26-1215.pdf,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-12,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,543.20
+invoices/2026-08-14_LSS_LSS-2608-817.pdf,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,2026-08-14,Susu Pekat Manis 500g (tin),60,tin,3.90,234.00,560.40
+invoices/2026-08-14_LSS_LSS-2608-817.pdf,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,2026-08-14,Susu Sejat 390g (tin),48,tin,3.40,163.20,560.40
+invoices/2026-08-14_LSS_LSS-2608-817.pdf,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,2026-08-14,Susu Segar 1L,24,btl,6.80,163.20,560.40
+invoices/2026-08-25_BMJ_BMJ-0825-27.pdf,BMJ-0825-27,Borong Runcit Maju Jaya,2026-08-25,Gula Pasir 10kg,3,beg,28.50,85.50,229.30
+invoices/2026-08-25_BMJ_BMJ-0825-27.pdf,BMJ-0825-27,Borong Runcit Maju Jaya,2026-08-25,Telur Gred A (30 biji),6,papan,13.80,82.80,229.30
+invoices/2026-08-25_BMJ_BMJ-0825-27.pdf,BMJ-0825-27,Borong Runcit Maju Jaya,2026-08-25,Minyak Masak 5kg,2,botol,30.50,61.00,229.30
+invoices/2026-08-26_KCB_KCB-26-1222.pdf,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-26,Serbuk Kopi O Campuran 1kg,12,kg,30.20,362.40,573.40
+invoices/2026-08-26_KCB_KCB-26-1222.pdf,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-26,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,573.40
+invoices/2026-08-26_KCB_KCB-26-1222.pdf,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-26,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,573.40
+invoices/2026-08-28_RML_RML2520.pdf,RML2520,Roti & Kaya Mak Long,2026-08-28,Roti Benggali,60,buku,2.20,132.00,231.00
+invoices/2026-08-28_RML_RML2520.pdf,RML2520,Roti & Kaya Mak Long,2026-08-28,Kaya Homemade 1kg,3,bekas,16.00,48.00,231.00
+invoices/2026-08-28_RML_RML2520.pdf,RML2520,Roti & Kaya Mak Long,2026-08-28,Mentega 250g,6,ketul,8.50,51.00,231.00
+invoices/2026-09-04_LSS_LSS-2609-753.pdf,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,2026-09-04,Susu Pekat Manis 500g (tin),48,tin,3.90,187.20,486.40
+invoices/2026-09-04_LSS_LSS-2609-753.pdf,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,2026-09-04,Susu Sejat 390g (tin),48,tin,3.40,163.20,486.40
+invoices/2026-09-04_LSS_LSS-2609-753.pdf,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,2026-09-04,Susu Segar 1L,20,btl,6.80,136.00,486.40
+invoices/2026-09-05_SPP_SPP260905.pdf,SPP260905,SP Plastik & Pembungkusan,2026-09-05,Cawan Plastik 16oz (50pcs),10,pek,9.50,95.00,193.00
+invoices/2026-09-05_SPP_SPP260905.pdf,SPP260905,SP Plastik & Pembungkusan,2026-09-05,Penutup Cawan (50pcs),10,pek,5.50,55.00,193.00
+invoices/2026-09-05_SPP_SPP260905.pdf,SPP260905,SP Plastik & Pembungkusan,2026-09-05,Straw (100pcs),5,pek,3.80,19.00,193.00
+invoices/2026-09-05_SPP_SPP260905.pdf,SPP260905,SP Plastik & Pembungkusan,2026-09-05,Plastik Ikat Tepi 1kg,2,kg,12.00,24.00,193.00
+invoices/2026-09-08_BMJ_BMJ-0908-40.pdf,BMJ-0908-40,Borong Runcit Maju Jaya,2026-09-08,Gula Pasir 10kg,3,beg,28.50,85.50,229.30
+invoices/2026-09-08_BMJ_BMJ-0908-40.pdf,BMJ-0908-40,Borong Runcit Maju Jaya,2026-09-08,Telur Gred A (30 biji),6,papan,13.80,82.80,229.30
+invoices/2026-09-08_BMJ_BMJ-0908-40.pdf,BMJ-0908-40,Borong Runcit Maju Jaya,2026-09-08,Minyak Masak 5kg,2,botol,30.50,61.00,229.30
+invoices/2026-09-09_KCB_KCB-26-1229.pdf,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-09,Serbuk Kopi O Campuran 1kg,12,kg,31.36,376.32,587.32
+invoices/2026-09-09_KCB_KCB-26-1229.pdf,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-09,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,587.32
+invoices/2026-09-09_KCB_KCB-26-1229.pdf,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-09,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,587.32
+invoices/2026-09-11_LSS_LSS-2609-278.pdf,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,2026-09-11,Susu Pekat Manis 500g (tin),60,tin,3.90,234.00,642.00
+invoices/2026-09-11_LSS_LSS-2609-278.pdf,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,2026-09-11,Susu Sejat 390g (tin),60,tin,3.40,204.00,642.00
+invoices/2026-09-11_LSS_LSS-2609-278.pdf,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,2026-09-11,Susu Segar 1L,30,btl,6.80,204.00,642.00
+invoices/2026-09-12_TGP_TGP303.pdf,TGP 303,Tong Gas Pantas Enterprise,2026-09-12,Isi semula tong gas LPG 14kg,4,tong,27.00,108.00,108.00
+invoices/2026-09-18_RML_RML2229.pdf,RML2229,Roti & Kaya Mak Long,2026-09-18,Roti Benggali,60,buku,2.20,132.00,231.00
+invoices/2026-09-18_RML_RML2229.pdf,RML2229,Roti & Kaya Mak Long,2026-09-18,Kaya Homemade 1kg,3,bekas,16.00,48.00,231.00
+invoices/2026-09-18_RML_RML2229.pdf,RML2229,Roti & Kaya Mak Long,2026-09-18,Mentega 250g,6,ketul,8.50,51.00,231.00
+invoices/2026-09-23_KCB_KCB-26-1236.pdf,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-23,Serbuk Kopi O Campuran 1kg,10,kg,31.36,313.60,524.60
+invoices/2026-09-23_KCB_KCB-26-1236.pdf,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-23,Serbuk Teh Cap Daun 1kg,6,kg,22.50,135.00,524.60
+invoices/2026-09-23_KCB_KCB-26-1236.pdf,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-23,Biji Kopi Robusta Panggang 1kg,2,kg,38.00,76.00,524.60
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Susu Pekat Manis 500g,6,tin,4.20,25.20,144.15
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Gula Halus 1kg,5,pek,2.85,14.25,144.15
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Sabun Pinggan 900ml,2,btl,6.50,13.00,144.15
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Beras Wangi 10kg,1,beg,39.90,39.90,144.15
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Lampin Bayi Saiz M (38s),1,pek,42.90,42.90,144.15
+invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf,R-0912-0047731,Pasaraya Serba Murah (fictional),2026-09-12,Ubat Gigi 175g,1,tiub,8.90,8.90,144.15

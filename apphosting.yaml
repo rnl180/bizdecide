@@ -5,9 +5,8 @@ runConfig:
   timeoutSeconds: 120   # ask_user waits up to ~50s for an answer
 
 env:
-  - variable: FIREBASE_STORAGE_BUCKET
-    value: your-project.firebasestorage.app
-    availability: [BUILD, RUNTIME]
+  # Storage bucket: the project's default bucket is used automatically.
+  # To use another one, add FIREBASE_STORAGE_BUCKET here.
   - variable: BIZDECIDE_MCP_KEY
     secret: bizdecide-mcp-key        # firebase apphosting:secrets:set bizdecide-mcp-key
     availability: [RUNTIME]

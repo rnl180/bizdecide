@@ -1,0 +1,31 @@
+{
+  "code": "SG",
+  "name": "Singapore",
+  "currency": "SGD",
+  "currencySymbol": "S$",
+  "currencyName": "dollar",
+  "locale": "en-SG",
+  "languages": ["en", "zh", "ms", "ta"],
+  "regionLabel": "Region",
+  "regions": ["Central", "East", "North", "North-East", "West"],
+  "registry": { "name": "ACRA", "fullName": "Accounting and Corporate Regulatory Authority (ACRA)", "sinceLabel": "Registered with ACRA since" },
+  "ownershipFlags": [
+    { "id": "local_30", "label": "At least 30% owned by Singapore Citizens or PRs" }
+  ],
+  "ownershipHelp": "Tick if Singapore Citizens and/or Permanent Residents own at least 30% of the business, counted through to the individual owners. Most Enterprise Singapore grants and loans (EDGE, Energy Efficiency Grant, Enterprise Financing Scheme) require it.",
+  "smeAuthority": "Enterprise Singapore",
+  "files": {
+    "smeRules": "sme_rules.json",
+    "smeDefinition": "sme_definition.md",
+    "fundingDb": "funding_db.csv",
+    "programs": "programs/"
+  },
+  "demo": "/demo/sg/mei-ling-kopi-toast.json",
+  "ms": {
+    "regionLabel": "Wilayah",
+    "currencyName": "dolar",
+    "sinceLabel": "Berdaftar dengan ACRA sejak",
+    "ownershipFlags": { "local_30": "Sekurang-kurangnya 30% milik warganegara atau PR Singapura" },
+    "ownershipHelp": "Tandakan jika warganegara dan/atau Penduduk Tetap Singapura memiliki sekurang-kurangnya 30% perniagaan ini. Kebanyakan geran dan pinjaman Enterprise Singapore (EDGE, Energy Efficiency Grant, Enterprise Financing Scheme) memerlukannya."
+  }
+}

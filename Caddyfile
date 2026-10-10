@@ -1,0 +1,12 @@
+# Automatic HTTPS (Let's Encrypt) for the domain in $DOMAIN
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy app:3100 {
+		# The app rate-limits by X-Real-IP, so never pass on a client-supplied value
+		header_up X-Real-IP {remote_host}
+		# MCP long-polls (wait_for_request / ask_user) hold the request open up to ~55s
+		transport http {
+			read_timeout 120s
+		}
+	}
+}

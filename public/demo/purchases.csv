@@ -1,159 +1,80 @@
-date,invoiceNo,supplier,item,qty,unit,unitPriceRm,totalRm,note
-2025-10-01,INV-1005,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2025-10-01,INV-1006,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2025-10-01,INV-1007,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2025-10-03,INV-1002,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2025-10-03,INV-1003,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2025-10-05,INV-1000,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),275,L,7.2,1980,
-2025-10-08,KB-2510,Kopi Borneo Roasters,Arabica house blend,37,kg,58,2146,
-2025-10-10,INV-1004,PackPro Supplies,Takeaway cups + lids (pack of 50),33,pack,24.5,808.5,
-2025-10-15,INV-1008,TNB,Electricity,1,month,902,902,
-2025-10-15,INV-1009,Air Selangor,Water,1,month,95,95,
-2025-10-19,INV-1001,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),275,L,7.2,1980,
-2025-10-28,INV-1010,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2025-10-28,INV-1011,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2025-11-01,INV-1017,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2025-11-01,INV-1018,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2025-11-01,INV-1019,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2025-11-03,INV-1014,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2025-11-03,INV-1015,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2025-11-05,INV-1012,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),284,L,7.2,2044.8,
-2025-11-08,KB-2511,Kopi Borneo Roasters,Arabica house blend,38,kg,58,2204,
-2025-11-10,INV-1016,PackPro Supplies,Takeaway cups + lids (pack of 50),34,pack,24.5,833,
-2025-11-15,INV-1020,TNB,Electricity,1,month,905,905,
-2025-11-15,INV-1021,Air Selangor,Water,1,month,95,95,
-2025-11-19,INV-1013,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),284,L,7.2,2044.8,
-2025-11-28,INV-1022,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2025-11-28,INV-1023,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2025-12-01,INV-1029,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2025-12-01,INV-1030,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2025-12-01,INV-1031,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2025-12-03,INV-1026,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2025-12-03,INV-1027,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2025-12-05,INV-1024,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),333,L,7.2,2397.6,
-2025-12-08,KB-2512,Kopi Borneo Roasters,Arabica house blend,44,kg,58,2552,
-2025-12-10,INV-1028,PackPro Supplies,Takeaway cups + lids (pack of 50),40,pack,24.5,980,
-2025-12-15,INV-1032,TNB,Electricity,1,month,920,920,
-2025-12-15,INV-1033,Air Selangor,Water,1,month,95,95,
-2025-12-19,INV-1025,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),333,L,7.2,2397.6,
-2025-12-28,INV-1034,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2025-12-28,INV-1035,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-01-01,INV-1041,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-01-01,INV-1042,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-01-01,INV-1043,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-01-03,INV-1038,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-01-03,INV-1039,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-01-05,INV-1036,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),278,L,7.2,2001.6,
-2026-01-08,KB-2601,Kopi Borneo Roasters,Arabica house blend,37,kg,58,2146,
-2026-01-10,INV-1040,PackPro Supplies,Takeaway cups + lids (pack of 50),33,pack,24.5,808.5,
-2026-01-15,INV-1044,TNB,Electricity,1,month,903,903,
-2026-01-15,INV-1045,Air Selangor,Water,1,month,95,95,
-2026-01-19,INV-1037,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),278,L,7.2,2001.6,
-2026-01-28,INV-1046,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-01-28,INV-1047,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-02-01,INV-1053,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-02-01,INV-1054,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-02-01,INV-1055,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-02-03,INV-1050,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-02-03,INV-1051,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-02-05,INV-1048,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),292,L,7.2,2102.4,
-2026-02-08,KB-2602,Kopi Borneo Roasters,Arabica house blend,39,kg,58,2262,
-2026-02-10,INV-1052,PackPro Supplies,Takeaway cups + lids (pack of 50),35,pack,24.5,857.5,
-2026-02-15,INV-1056,TNB,Electricity,1,month,908,908,
-2026-02-15,INV-1057,Air Selangor,Water,1,month,95,95,
-2026-02-19,INV-1049,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),292,L,7.2,2102.4,
-2026-02-28,INV-1058,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-02-28,INV-1059,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-03-01,INV-1065,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-03-01,INV-1066,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-03-01,INV-1067,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-03-03,INV-1062,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-03-03,INV-1063,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-03-05,INV-1060,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),258,L,7.2,1857.6,
-2026-03-08,KB-2603,Kopi Borneo Roasters,Arabica house blend,34,kg,58,1972,
-2026-03-10,INV-1064,PackPro Supplies,Takeaway cups + lids (pack of 50),31,pack,24.5,759.5,
-2026-03-15,INV-1068,TNB,Electricity,1,month,898,898,
-2026-03-15,INV-1069,Air Selangor,Water,1,month,95,95,
-2026-03-19,INV-1061,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),258,L,7.2,1857.6,
-2026-03-28,INV-1070,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-03-28,INV-1071,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-04-01,INV-1077,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-04-01,INV-1078,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-04-01,INV-1079,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-04-03,INV-1074,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-04-03,INV-1075,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-04-05,INV-1072,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),321,L,7.2,2311.2,
-2026-04-08,KB-2604,Kopi Borneo Roasters,Arabica house blend,43,kg,58,2494,
-2026-04-10,INV-1076,PackPro Supplies,Takeaway cups + lids (pack of 50),38,pack,24.5,931,
-2026-04-15,INV-1080,TNB,Electricity,1,month,916,916,
-2026-04-15,INV-1081,Air Selangor,Water,1,month,95,95,
-2026-04-19,INV-1073,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),321,L,7.2,2311.2,
-2026-04-28,INV-1082,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-04-28,INV-1083,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-05-01,INV-1089,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-05-01,INV-1090,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-05-01,INV-1091,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-05-03,INV-1086,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-05-03,INV-1087,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-05-05,INV-1084,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),302,L,7.2,2174.4,
-2026-05-08,KB-2605,Kopi Borneo Roasters,Arabica house blend,40,kg,58,2320,
-2026-05-10,INV-1088,PackPro Supplies,Takeaway cups + lids (pack of 50),36,pack,24.5,882,
-2026-05-15,INV-1092,TNB,Electricity,1,month,911,911,
-2026-05-15,INV-1093,Air Selangor,Water,1,month,95,95,
-2026-05-19,INV-1085,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),302,L,7.2,2174.4,
-2026-05-28,INV-1094,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-05-28,INV-1095,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-06-01,INV-1101,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-06-01,INV-1102,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-06-01,INV-1103,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-06-03,INV-1098,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-06-03,INV-1099,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-06-05,INV-1096,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),310,L,7.2,2232,
-2026-06-08,KB-2606,Kopi Borneo Roasters,Arabica house blend,41,kg,58,2378,
-2026-06-10,INV-1100,PackPro Supplies,Takeaway cups + lids (pack of 50),37,pack,24.5,906.5,
-2026-06-15,INV-1104,TNB,Electricity,1,month,913,913,
-2026-06-15,INV-1105,Air Selangor,Water,1,month,95,95,
-2026-06-19,INV-1097,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),310,L,7.2,2232,
-2026-06-28,INV-1106,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-06-28,INV-1107,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-07-01,INV-1113,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-07-01,INV-1114,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-07-01,INV-1115,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-07-03,INV-1110,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-07-03,INV-1111,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-07-05,INV-1108,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),316,L,7.2,2275.2,
-2026-07-08,KB-2607,Kopi Borneo Roasters,Arabica house blend,42,kg,58,2436,
-2026-07-10,INV-1112,PackPro Supplies,Takeaway cups + lids (pack of 50),38,pack,24.5,931,
-2026-07-15,INV-1116,TNB,Electricity,1,month,915,915,
-2026-07-15,INV-1117,Air Selangor,Water,1,month,95,95,
-2026-07-19,INV-1109,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),316,L,7.2,2275.2,
-2026-07-28,INV-1118,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-07-28,INV-1119,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-08-01,INV-1125,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-08-01,INV-1126,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-08-01,INV-1127,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-08-03,INV-1122,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-08-03,INV-1123,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-08-05,INV-1120,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),324,L,7.7,2494.8,
-2026-08-08,KB-2608,Kopi Borneo Roasters,Arabica house blend,43,kg,58,2494,
-2026-08-10,INV-1124,PackPro Supplies,Takeaway cups + lids (pack of 50),39,pack,24.5,955.5,
-2026-08-15,INV-1128,TNB,Electricity,1,month,917,917,
-2026-08-15,INV-1129,Air Selangor,Water,1,month,95,95,
-2026-08-19,INV-1121,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),324,L,7.7,2494.8,
-2026-08-28,INV-1130,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-08-28,INV-1131,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
-2026-09-01,INV-1137,Roti Mesra Bakery,Bread & buns (weekly standing order),4,week,310,1240,
-2026-09-01,INV-1138,Telur Emas Farm,Eggs (tray of 30),30,tray,15.5,465,
-2026-09-01,INV-1139,Sri Utama Properties,Shop rent,1,month,3500,3500,
-2026-09-03,INV-1134,Kedai Runcit Hock Seng,Sugar (1kg),60,kg,2.85,171,
-2026-09-03,INV-1135,Kedai Runcit Hock Seng,Condensed milk (can),120,can,3.9,468,
-2026-09-05,INV-1132,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),338,L,8.06,2724.28,
-2026-09-08,KB-2609,Kopi Borneo Roasters,Arabica house blend,45,kg,58,2610,
-2026-09-09,KB-2609,Kopi Borneo Roasters,Arabica house blend,45,kg,58,2610,uploaded twice?
-2026-09-10,INV-1136,PackPro Supplies,Takeaway cups + lids (pack of 50),41,pack,24.5,1004.5,
-2026-09-14,HN-88213,Harvey Norman Sunway Pyramid,Electrical appliance,1,unit,2399,2399,paid with business account
-2026-09-15,INV-1140,TNB,Electricity,1,month,921,921,
-2026-09-15,INV-1141,Air Selangor,Water,1,month,95,95,
-2026-09-19,INV-1133,Ladang Segar Dairy Sdn Bhd,Fresh milk (1L),338,L,8.06,2724.28,
-2026-09-28,INV-1142,Payroll,Staff salaries (6 full-time),1,month,10200,10200,
-2026-09-28,INV-1143,KWSP / PERKESO,EPF + SOCSO employer contribution,1,month,1480,1480,
+date,invoiceNo,supplier,item,qty,unit,unitPriceRm,totalRm,invoiceTotalRm,file
+2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,28,336,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,28,336,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-10,RML2812,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-10,RML2812,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-10,RML2812,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,10,kg,29.1,291,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-20,SPP260720,SP Plastik & Pembungkusan,Cawan Plastik 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Plastik & Pembungkusan,Penutup Cawan (50pcs),10,pek,5.5,55,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Plastik & Pembungkusan,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Plastik & Pembungkusan,Plastik Ikat Tepi 1kg,2,kg,12,24,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),36,tin,3.4,122.4,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,11,kg,29.1,320.1,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-08-01,TGP 363,Tong Gas Pantas Enterprise,Isi semula tong gas LPG 14kg,4,tong,27,108,108,invoices/2026-08-01_TGP_TGP363.pdf
+2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-07,RML2370,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-07,RML2370,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-07,RML2370,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,11,kg,30.2,332.2,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),60,tin,3.9,234,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,24,btl,6.8,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,30.2,362.4,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-28,RML2520,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-08-28,RML2520,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-08-28,RML2520,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-05,SPP260905,SP Plastik & Pembungkusan,Cawan Plastik 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Plastik & Pembungkusan,Penutup Cawan (50pcs),10,pek,5.5,55,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Plastik & Pembungkusan,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Plastik & Pembungkusan,Plastik Ikat Tepi 1kg,2,kg,12,24,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,31.36,376.32,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),60,tin,3.9,234,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),60,tin,3.4,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,30,btl,6.8,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-12,TGP 303,Tong Gas Pantas Enterprise,Isi semula tong gas LPG 14kg,4,tong,27,108,108,invoices/2026-09-12_TGP_TGP303.pdf
+2026-09-18,RML2229,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-18,RML2229,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-18,RML2229,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,10,kg,31.36,313.6,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Susu Pekat Manis 500g,6,tin,4.2,25.2,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Gula Halus 1kg,5,pek,2.85,14.25,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Sabun Pinggan 900ml,2,btl,6.5,13,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Beras Wangi 10kg,1,beg,39.9,39.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Lampin Bayi Saiz M (38s),1,pek,42.9,42.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Ubat Gigi 175g,1,tiub,8.9,8.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf

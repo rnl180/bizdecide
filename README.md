@@ -7,9 +7,11 @@ BizDecide is an AI CFO for Malaysian small businesses. Owners upload their sales
 > Built for AI Hackerdorm 2026 · Track 2: WorkBuddy Agentic Solutions
 
 ## The problem
-- Malaysia has ~1.3M MSMEs (96% of all businesses); 77%+ are micro enterprises with no finance staff.
-- 67% of SMEs say rising costs are their top pressure; 42% struggle with cash flow (Airwallex SME Outlook 2026).
-- 60% of owners don't know which financing options exist (SME Corp & Huawei survey).
+- Malaysia has 1,101,725 MSMEs, 96.9% of all businesses, and 7 in 10 are micro enterprises (SME Corp / DOSM, 2023). They produce 39.7% of GDP (DOSM, 2025).
+- 67% of SMEs say rising costs are their top pressure, 42% cite managing cash flow, and 1 in 5 name rising supplier costs as a main cost driver (Airwallex Malaysia SME Business Outlook 2026, n = 415).
+- About 140 financing schemes exist (Entrepreneur Development and Cooperatives Ministry, Aug 2026), yet 50.6% of businesses don't know the development finance institutions that run them, and only 1 in 3 micro firms has any bank facility (ACCCIM M-BECS H1 2026).
+
+Sources for every figure: [research/market_stats.md](research/market_stats.md).
 - Accounting software records the past. Owners need someone to tell them **what to do next**.
 
 ## How it works
@@ -38,9 +40,16 @@ The app and the MCP server **only move data**. All intelligence runs in WorkBudd
 | Delivery | 3 decisions → `submit_results` (+ PDF) | `brief-writer` |
 
 ### MCP tools
-`ping` · `list_pending_requests` · `get_business_data` · `update_request` · `ask_user` · `get_answer` · `submit_results`
+`ping` · `wait_for_request` · `list_pending_requests` · `get_data_link` · `get_business_data` · `update_request` · `ask_user` · `get_answer` · `reply_to_owner` · `submit_results`
 
 `ask_user` powers the live poll: the agent asks, the owner taps an answer (or types "Other") in the app, and the agent continues.
+
+### Beyond the brief
+- **Funding application pack.** For the top programmes the business qualifies for, the agents build the application: a document checklist marked ready / partial / missing against the data already uploaded, pre-filled form answers, a suggested amount, repayment and affordability, and next steps. Printable per programme. No Malaysian accounting tool does this (see [research/competitors.md](research/competitors.md)).
+- **Ask your CFO.** On the brief page the owner asks follow-up questions ("Can I afford the RM40k loan?"). The on-duty WorkBuddy agent picks them up through `wait_for_request` and answers from the owner's own numbers with `reply_to_owner`, with evidence.
+- **Market packs.** Country knowledge (SME definition, funding programmes, required documents, currency, regions) lives in one folder per country: [workbuddy/knowledge/markets/](workbuddy/knowledge/markets/README.md). Adding a country is a folder of data; the agents don't change. Malaysia and Singapore are live; pick the market on the first step and "Try the demo café" loads that market's demo business (Singapore: Mei Ling Kopi & Toast, answer key in [docs/ANSWER_KEY_SG.md](docs/ANSWER_KEY_SG.md)).
+- **Bahasa Melayu.** The intake form switches between English and Bahasa Melayu, and the brief comes back in the owner's language.
+- **POS exports.** StoreHub sales exports (Offline Transactions or Sales Over Time) upload as-is.
 
 ## Run locally
 
@@ -78,7 +87,7 @@ Click **Load demo café: Kedai Kopi Aminah** on the home page. The data (`npm ru
 
 ## Distribution
 1. **The app** for owners who have never heard of WorkBuddy.
-2. **The skills** published to the WorkBuddy Skill Marketplace for accountants and SME consultants who already use it.
+2. **The skills** for accountants and SME consultants who already use WorkBuddy: downloadable from the app at `/skills` (import the `.zip` in WorkBuddy), and published to the WorkBuddy Skill Marketplace.
 
 ## Repo
 ```

@@ -1,0 +1,7 @@
+id,name,category,contact,paymentTerms,notifiedPriceChange
+S01,Chop Seng Huat Coffee Powder (fictional),"Kopi powder, teh dust, chocolate malt powder",Mr. Ong (sales) | orders@senghuat.example | +65-0000-0101 (fictional),"7 days, bank transfer",No
+S02,Sin Hock Dairy Trading (fictional),"Evaporated creamer, sweetened condensed creamer, fresh milk",Ms. Lee | sales@sinhockdairy.example | +65-0000-0102 (fictional),"7 days, bank transfer",No
+S03,Wah Sing Bakery (fictional),"Bread loaves, kaya, butter (daily delivery, fortnightly bill)",Uncle Lim | +65-0000-0103 (fictional),Cash on billing,No
+S04,Ah Kow Eggs & Provisions (fictional),"Eggs, sugar, margarine",Ah Kow | ahkow@provisions.example | +65-0000-0104 (fictional),"14 days, bank transfer",No
+S05,Lim Packaging Supplies (fictional),"Takeaway cups, drink bags, straws",Ms. Priya | sales@limpack.example | +65-0000-0105 (fictional),"7 days, bank transfer",No
+S06,CoolServe Refrigeration Pte Ltd (fictional),Commercial refrigeration equipment (one-off order),Mr. Rizal | quotes@coolserve.example | +65-0000-0106 (fictional),"30% deposit on order, balance on delivery",n/a

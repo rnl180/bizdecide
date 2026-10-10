@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getOpenQuestion, getRequest, getResult } from "@/lib/store";
+import { getOpenQuestion, getRequest, getResult, listMessages } from "@/lib/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,9 +8,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const request = await getRequest(id);
   if (!request) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  const [question, result] = await Promise.all([
+  const done = request.status === "completed";
+  const [question, result, messages] = await Promise.all([
     request.status === "waiting_for_user" ? getOpenQuestion(id) : Promise.resolve(null),
-    request.status === "completed" ? getResult(id) : Promise.resolve(null),
+    done ? getResult(id) : Promise.resolve(null),
+    done ? listMessages(id) : Promise.resolve([]),
   ]);
-  return NextResponse.json({ request, question, result });
+  return NextResponse.json({ request, question, result, messages });
 }

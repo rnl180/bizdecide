@@ -10,3 +10,6 @@ service-account*.json
 .firebase/
 next-env.d.ts
 *.tsbuildinfo
+_to_delete/
+.data/
+!.env.vps.example

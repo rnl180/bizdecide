@@ -1,0 +1,37 @@
+{
+  "code": "MY",
+  "name": "Malaysia",
+  "currency": "MYR",
+  "currencySymbol": "RM",
+  "currencyName": "ringgit",
+  "locale": "en-MY",
+  "languages": ["en", "ms"],
+  "regionLabel": "State",
+  "regions": [
+    "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis", "Pulau Pinang",
+    "Sabah", "Sarawak", "Selangor", "Terengganu", "W.P. Kuala Lumpur", "W.P. Labuan", "W.P. Putrajaya"
+  ],
+  "registry": { "name": "SSM", "fullName": "Companies Commission of Malaysia (SSM)", "sinceLabel": "Registered with SSM since" },
+  "ownershipFlags": [
+    { "id": "bumiputera", "label": "Bumiputera-owned" },
+    { "id": "women_owned", "label": "Women-owned" },
+    { "id": "youth_owned", "label": "Owner under 40" }
+  ],
+  "ownershipHelp": "Tick any that apply. Some Malaysian funding programmes are reserved for these groups.",
+  "smeAuthority": "SME Corp Malaysia",
+  "files": {
+    "smeRules": "sme_rules.json",
+    "smeDefinition": "sme_definition.md",
+    "fundingDb": "funding_db.csv",
+    "programs": "programs/",
+    "glossary": "glossary.md"
+  },
+  "demo": "/demo/kedai-kopi-aminah.json",
+  "ms": {
+    "regionLabel": "Negeri",
+    "currencyName": "ringgit",
+    "sinceLabel": "Berdaftar dengan SSM sejak",
+    "ownershipFlags": { "bumiputera": "Milik Bumiputera", "women_owned": "Milik wanita", "youth_owned": "Pemilik bawah 40 tahun" },
+    "ownershipHelp": "Tandakan yang berkaitan. Sesetengah program pembiayaan Malaysia dikhaskan untuk kumpulan ini."
+  }
+}

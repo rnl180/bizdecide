@@ -13,20 +13,30 @@ function getApp(): App {
   if (b64) {
     const sa = JSON.parse(Buffer.from(b64, "base64").toString("utf8"));
     app = initializeApp({ credential: cert(sa), projectId: sa.project_id, storageBucket });
+  } else if (process.env.FIREBASE_CONFIG && !storageBucket) {
+    // Firebase App Hosting: FIREBASE_CONFIG is injected automatically (project ID + default Storage bucket).
+    app = initializeApp();
   } else {
-    // Firebase App Hosting / Google Cloud: credentials come from the environment.
+    // Other Google Cloud environments: credentials come from the environment.
     app = initializeApp({ credential: applicationDefault(), projectId: process.env.FIREBASE_PROJECT_ID, storageBucket });
   }
   return app;
 }
 
-let firestore: Firestore | undefined;
+// Kept on globalThis: in dev every route bundles its own copy of this module, but firebase-admin hands them all
+// the same Firestore instance, and settings() throws if that instance has already been used.
+const g = globalThis as { __bizdecideFirestore?: Firestore };
 export function db(): Firestore {
-  if (!firestore) {
-    firestore = getFirestore(getApp());
-    firestore.settings({ ignoreUndefinedProperties: true });
+  if (!g.__bizdecideFirestore) {
+    const firestore = getFirestore(getApp());
+    try {
+      firestore.settings({ ignoreUndefinedProperties: true });
+    } catch {
+      // Already configured (same options) by another route's copy of this module.
+    }
+    g.__bizdecideFirestore = firestore;
   }
-  return firestore;
+  return g.__bizdecideFirestore;
 }
 
 export function bucket() {
@@ -38,6 +48,7 @@ export const col = {
   requests: () => db().collection("requests"),
   questions: () => db().collection("questions"),
   results: () => db().collection("results"),
+  messages: () => db().collection("messages"),
 };
 
 export const now = () => new Date().toISOString();
