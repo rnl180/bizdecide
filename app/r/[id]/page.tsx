@@ -637,7 +637,7 @@ const span = (from: string, to: string, locale: string) => {
 };
 
 /** Three small cards under the headline: sales, purchases and the bank balance. */
-function Figures({ s, market, t }: { s: Statements; market: string; t: AppStrings }) {
+function Figures({ s, market, t }: { s: Statements; market?: string; t: AppStrings }) {
   const cur = marketPack(market)?.currencySymbol ?? "RM";
   const cards: [string, number, string][] = [];
   if (s.sales) cards.push([t.figSales, s.sales.total, span(s.sales.from, s.sales.to, t.dateLocale)]);
@@ -659,7 +659,7 @@ function Figures({ s, market, t }: { s: Statements; market: string; t: AppString
 }
 
 /** Sales by channel and the bank check, folded at the foot of the brief. */
-function StatementsFold({ s, market, t }: { s: Statements; market: string; t: AppStrings }) {
+function StatementsFold({ s, market, t }: { s: Statements; market?: string; t: AppStrings }) {
   const cur = marketPack(market)?.currencySymbol ?? "RM";
   const channels = s.sales?.channels ?? [];
   if (!channels.length && !s.bank) return null;
