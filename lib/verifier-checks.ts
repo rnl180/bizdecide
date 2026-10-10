@@ -132,7 +132,7 @@ function settleConfidence(result: Result, lang: Lang) {
 
 /**
  * Facts about each pack that come from the market pack, not the model: the Shariah flag (Y / N; blank stays unknown),
- * the ladder step (never "approved"), the document checklist the Funding lane marked from the data when the Verifier
+ * the ladder step (document_ready at most: the agency decides), the document checklist the Funding lane marked from the data when the Verifier
  * left it empty, and the Budget 2027 lines, always labelled as proposed.
  */
 async function settlePacks(result: Result, ctx: FinalizeContext) {

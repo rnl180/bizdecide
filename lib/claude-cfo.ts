@@ -30,6 +30,7 @@ import {
 import { EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
 import { impactKind } from "./impact";
 import { finalizeResult } from "./verifier-checks";
+import { loadFixture, replayAnswer, replayEnabled, replayRun } from "./replay";
 
 /**
  * BizDecide on the Claude API: the server runs the CFO team itself instead of waiting for WorkBuddy on /api/mcp.
@@ -41,7 +42,8 @@ import { finalizeResult } from "./verifier-checks";
  *   final Result as structured output.
  * - "Ask your CFO" follow-ups are answered the same way, from the lane outputs and the brief.
  *
- * On when ANTHROPIC_API_KEY is set. Without it, requests wait for WorkBuddy as before.
+ * On when ANTHROPIC_API_KEY is set. Without it, requests wait for WorkBuddy as before, unless BIZDECIDE_REPLAY=1
+ * replays the recorded demo run (lib/replay.ts).
  */
 
 const MODEL = "claude-opus-5-5";
@@ -58,7 +60,9 @@ const MAX_TURNS = 12;
 /** A run whose request hasn't changed for this long died with its server; the next poll restarts it. */
 export const STALE_RUN_MS = Math.max(5 * 60_000, ASK_WAIT_MS + 60_000);
 
-export const claudeEnabled = () => Boolean(process.env.ANTHROPIC_API_KEY);
+const hasKey = () => Boolean(process.env.ANTHROPIC_API_KEY);
+/** The server runs requests itself with an API key, or replays the recorded demo run (BIZDECIDE_REPLAY=1, no key needed). */
+export const claudeEnabled = () => hasKey() || replayEnabled();
 
 // globalThis: Next bundles each route separately, and they must share one client and one in-flight set.
 const g = globalThis as unknown as { __bizdecideClaude?: Anthropic; __bizdecideRunning?: Set<string> };
@@ -482,12 +486,18 @@ const clampResult = (r: Json) => ({
 /** Claims a submitted request and runs the Claude CFO team on it. Safe to call more than once. */
 export function processRequest(requestId: string) {
   return once(`request:${requestId}`, async () => {
-    const r = await claimRequest(requestId, `Claude Opus 5.5 started working`, STALE_RUN_MS);
+    const replay = replayEnabled() ? await loadFixture() : null;
+    const r = await claimRequest(requestId, replay ? "Replaying the recorded demo run" : `Claude Opus 5.5 started working`, STALE_RUN_MS);
     if (!r) return;
     const usage = newUsage();
     const started = Date.now();
     let ws: Workspace | undefined;
     try {
+      // BIZDECIDE_REPLAY=1: the demo café replays the recorded run (same numbers every time); other businesses run live.
+      if (replayEnabled()) {
+        if (replay && r.businessName === replay.businessName) return await replayRun(requestId, r, replay, ASK_WAIT_MS);
+        if (!hasKey()) throw new Error(replay ? `Replay mode covers ${replay.businessName} only` : "Replay mode is on but docs/demo-run.fixture.json is missing");
+      }
       ws = await openWorkspace(r.businessId);
       const profile = ws.business.profile;
       const pack = marketPack(r.market ?? profile.market);
@@ -626,6 +636,13 @@ export function answerOwnerMessage(messageId: string) {
   return once(`message:${messageId}`, async () => {
     const m = await claimMessage(messageId);
     if (!m) return;
+    if (!hasKey()) {
+      // Replay without a key: answers recorded with the demo run, matched on the question.
+      const lang = (await getRequest(m.requestId))?.language === "ms" ? "ms" : "en";
+      const reply = replayAnswer(await loadFixture(), m.question, lang);
+      await answerMessage(messageId, reply.answer, reply.evidence);
+      return;
+    }
     const usage = newUsage();
     let ws: Workspace | undefined;
     let language: string | undefined;
@@ -720,6 +737,11 @@ export function processAction(actionId: string) {
   return once(`action:${actionId}`, async () => {
     const a = await claimAction(actionId);
     if (!a) return;
+    if (!hasKey()) {
+      const detail = a.lang === "ms" ? "Larian demo yang dirakam: tindakan ini memerlukan CFO langsung." : "Recorded demo run: this action needs the live CFO.";
+      await completeAction(actionId, { status: "failed", summary: detail, error: detail });
+      return;
+    }
     const usage = newUsage();
     const started = Date.now();
     try {

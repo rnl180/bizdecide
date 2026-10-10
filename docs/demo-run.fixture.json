@@ -1,0 +1,2873 @@
+{
+ "about": "Recorded BizDecide run replayed by BIZDECIDE_REPLAY=1 (lib/replay.ts) and seeded by scripts/seed-demo-run.mjs. Re-record with scripts/capture-demo-run.mjs.",
+ "source": "Scripted fake-model run on the real lane outputs and real demo data, 10 Oct 2026 (no ANTHROPIC_API_KEY was available). The skill scripts, questions, server-side checks and timing are real; the Analysis draft and the Verifier's wording are scripted. Re-record after a real run.",
+ "capturedAt": "2026-10-10T14:13:27.828Z",
+ "requestId": "8b8f440da124461a8fed",
+ "businessName": "Rock Cafe",
+ "service": "cfo_brief",
+ "language": "en",
+ "durationMs": 66478,
+ "progress": [
+  {
+   "offsetMs": 4014,
+   "step": "5 agents working in parallel",
+   "detail": "Bookkeeper · Reconciliation · Procurement · Classifier · Funding"
+  },
+  {
+   "offsetMs": 4026,
+   "step": "Bookkeeper started",
+   "lane": "bookkeeper",
+   "state": "started"
+  },
+  {
+   "offsetMs": 4026,
+   "step": "Reconciliation started",
+   "lane": "reconciliation",
+   "state": "started"
+  },
+  {
+   "offsetMs": 4026,
+   "step": "Procurement started",
+   "lane": "procurement",
+   "state": "started"
+  },
+  {
+   "offsetMs": 4026,
+   "step": "Classifier started",
+   "lane": "classifier",
+   "state": "started"
+  },
+  {
+   "offsetMs": 4026,
+   "step": "Funding started",
+   "lane": "funding",
+   "state": "started"
+  },
+  {
+   "offsetMs": 4036,
+   "step": "Reading 308 days of sales and 85 bank lines",
+   "lane": "bookkeeper",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4045,
+   "step": "Matching 26 invoices to the bank",
+   "lane": "reconciliation",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4051,
+   "step": "Tracking unit prices across 79 purchase lines",
+   "lane": "procurement",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4058,
+   "step": "Applying the official SME definition",
+   "lane": "classifier",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4065,
+   "step": "Screening the programmes in the market pack",
+   "lane": "funding",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4135,
+   "step": "Serbuk Kopi O Campuran 1kg at Syarikat Kopi Cap Bintang Timur Sdn Bhd: +12%",
+   "lane": "procurement",
+   "state": "step",
+   "detail": "about RM986 a year",
+   "impactRm": 985.5
+  },
+  {
+   "offsetMs": 4136,
+   "step": "Bank statement reconciles",
+   "lane": "bookkeeper",
+   "state": "step",
+   "detail": "RM18,450 → RM16,959"
+  },
+  {
+   "offsetMs": 4136,
+   "step": "LSS/2609/278 paid 2 times: RM642",
+   "lane": "reconciliation",
+   "state": "step",
+   "detail": "Ladang Susu Segar Hulu Enterprise",
+   "impactRm": 642
+  },
+  {
+   "offsetMs": 4136,
+   "step": "Declared sales differ from the data",
+   "lane": "classifier",
+   "state": "step",
+   "detail": "RM235,000 declared, RM252,571 in the data"
+  },
+  {
+   "offsetMs": 4142,
+   "step": "Procurement done",
+   "lane": "procurement",
+   "state": "done",
+   "detail": "1 price alert(s)"
+  },
+  {
+   "offsetMs": 4147,
+   "step": "2 seasonal dips found",
+   "lane": "bookkeeper",
+   "state": "step",
+   "detail": "2026-02, 2026-03"
+  },
+  {
+   "offsetMs": 4151,
+   "step": "DuitNow QR for 2026-09-18 never settled: RM312.40",
+   "lane": "reconciliation",
+   "state": "step",
+   "impactRm": 312.4
+  },
+  {
+   "offsetMs": 4157,
+   "step": "e-Invoice: exempt",
+   "lane": "classifier",
+   "state": "step",
+   "detail": "RM2,747,429 below the RM3,000,000 threshold"
+  },
+  {
+   "offsetMs": 4167,
+   "step": "Bookkeeper done",
+   "lane": "bookkeeper",
+   "state": "done",
+   "detail": "12 months, turnover RM252,571"
+  },
+  {
+   "offsetMs": 4172,
+   "step": "6 cash-on-delivery invoices: normal, no bank line expected",
+   "lane": "reconciliation",
+   "state": "step"
+  },
+  {
+   "offsetMs": 4176,
+   "step": "Facts missing for eligibility",
+   "lane": "classifier",
+   "state": "step",
+   "detail": "householdIncomeMonthlyRm"
+  },
+  {
+   "offsetMs": 4187,
+   "step": "Reconciliation done",
+   "lane": "reconciliation",
+   "state": "done",
+   "detail": "1 duplicate payment(s), 1 missing settlement(s), RM954 to recover"
+  },
+  {
+   "offsetMs": 4192,
+   "step": "Classifier done",
+   "lane": "classifier",
+   "state": "done",
+   "detail": "Micro"
+  },
+  {
+   "offsetMs": 4202,
+   "step": "16 programmes pass the code checks",
+   "lane": "funding",
+   "state": "step",
+   "detail": "4 excluded"
+  },
+  {
+   "offsetMs": 4208,
+   "step": "Funding done",
+   "lane": "funding",
+   "state": "done",
+   "detail": "16 programme(s) pass the code checks"
+  },
+  {
+   "offsetMs": 4213,
+   "step": "Choosing your 3 decisions"
+  },
+  {
+   "offsetMs": 10234,
+   "step": "Waiting for your answer",
+   "detail": "RM39.90 beras dari Serba Murah: stok kedai, peribadi, atau campur?",
+   "question": 0
+  },
+  {
+   "offsetMs": 20280,
+   "step": "Answer received",
+   "detail": "Campur (split)",
+   "answerOf": 0
+  },
+  {
+   "offsetMs": 20303,
+   "step": "Waiting for your answer",
+   "detail": "What is your monthly household income?",
+   "question": 1
+  },
+  {
+   "offsetMs": 30353,
+   "step": "Answer received",
+   "detail": "Prefer not to say",
+   "answerOf": 1
+  },
+  {
+   "offsetMs": 44367,
+   "step": "Verifier checking every figure and link",
+   "lane": "verifier",
+   "state": "started"
+  },
+  {
+   "offsetMs": 66390,
+   "step": "12-month turnover re-added",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66402,
+   "step": "Bank statement reconciles",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66414,
+   "step": "Duplicate payment confirmed",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66421,
+   "step": "QR and card settlements matched to sales",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66428,
+   "step": "Card fees and delivery payouts treated as normal",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66435,
+   "step": "Funding URLs taken from the market pack",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66441,
+   "step": "Every figure traced to the data",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66447,
+   "step": "RML2229, TGP 303: cash on delivery, no bank line expected",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "passed"
+  },
+  {
+   "offsetMs": 66452,
+   "step": "Credit record (CCRIS / CTOS)",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "not checked"
+  },
+  {
+   "offsetMs": 66458,
+   "step": "Card and QR fee rates in your merchant agreement",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "not checked"
+  },
+  {
+   "offsetMs": 66463,
+   "step": "Whether your landlord charges SST on rent",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "not checked"
+  },
+  {
+   "offsetMs": 66468,
+   "step": "Supplier contracts and agreed prices",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "not checked"
+  },
+  {
+   "offsetMs": 66473,
+   "step": "Payroll and rent as line items",
+   "lane": "verifier",
+   "state": "step",
+   "detail": "not checked"
+  },
+  {
+   "offsetMs": 66478,
+   "step": "Verifier done",
+   "lane": "verifier",
+   "state": "done",
+   "detail": "8 of 8 checks passed, 5 could not be checked"
+  }
+ ],
+ "questions": [
+  {
+   "question": "RM39.90 beras dari Serba Murah: stok kedai, peribadi, atau campur?",
+   "context": "POS DEBIT PASARAYA SERBA MURAH PJ, RM144.15, 12 Sep",
+   "options": [
+    "Stok kedai",
+    "Peribadi",
+    "Campur (split)"
+   ],
+   "allowOther": true,
+   "defaultOption": "Campur (split)",
+   "answer": "Campur (split)"
+  },
+  {
+   "question": "What is your monthly household income?",
+   "options": [
+    "Up to RM5,880",
+    "More than RM5,880",
+    "Prefer not to say"
+   ],
+   "allowOther": true,
+   "defaultOption": "Prefer not to say",
+   "answer": "Prefer not to say"
+  }
+ ],
+ "result": {
+  "headline": "Profitable, but RM954.40 is stuck in two errors and your kopi powder is up 12% with no notice",
+  "period": "Oct 2025 to Sep 2026 (bank: Sep 2026)",
+  "smeCategory": "Micro (Services, F&B): turnover RM252,571 from 12 months of sales; RM47,429 below the RM300k Small threshold",
+  "keyNumbers": [
+   {
+    "label": "Turnover (12 months)",
+    "value": "RM252,571",
+    "note": "You declared RM235,000; the data shows 7% more"
+   },
+   {
+    "label": "Average month",
+    "value": "RM21,048"
+   },
+   {
+    "label": "Cash to recover",
+    "value": "RM954.40",
+    "note": "RM642.00 duplicate + RM312.40 QR settlement"
+   },
+   {
+    "label": "Bank, 30 Sep",
+    "value": "RM16,959.22",
+    "note": "Reconciles from RM18,450.00"
+   }
+  ],
+  "decisions": [
+   {
+    "priority": "urgent",
+    "title": "Get back the RM642 you paid twice",
+    "action": "Ask Ladang Susu Segar Hulu Enterprise for a refund or credit note for invoice LSS/2609/278.",
+    "impactRm": 642,
+    "impactType": "one_off",
+    "reason": "Invoice LSS/2609/278 (RM642.00) left the bank twice, on 15 Sep (IBG0915S02) and 16 Sep (IBG0916S02). Your payables list shows it once. Paid twice; once is enough.",
+    "evidence": [
+     {
+      "label": "Bank statement, Sep 2026",
+      "detail": "IBG0915S02 and IBG0916S02, RM642.00 each",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "IBG0915S02",
+        "IBG0916S02"
+       ]
+      },
+      "basis": "data"
+     },
+     {
+      "label": "Payables list",
+      "detail": "LSS/2609/278 recorded once, RM642.00",
+      "source": {
+       "table": "payables",
+       "keys": [
+        "LSS/2609/278"
+       ]
+      },
+      "basis": "data"
+     }
+    ],
+    "cta": "Draft the refund request",
+    "confidence": "high",
+    "confidenceNote": "Both bank lines and the invoice are in your files."
+   },
+   {
+    "priority": "important",
+    "title": "Serbuk Kopi O Campuran is up 12% in 8 invoices, with no notice",
+    "action": "Ask Syarikat Kopi Cap Bintang Timur Sdn Bhd (S01) why Serbuk Kopi O Campuran rose from RM28.00 to RM31.36, and get two other quotes.",
+    "impactRm": 82.12,
+    "impactType": "monthly",
+    "reason": "RM28.00/kg on 17 Jun to RM31.36/kg on 23 Sep in three steps (+12%). Teh powder and robusta beans from the same supplier did not change, so this is item-specific. Extra paid so far RM147.62; about RM985 a year at 11.25 kg per order, 26 orders a year.",
+    "evidence": [
+     {
+      "label": "8 invoices from Kopi Cap Bintang",
+      "detail": "RM28.00 to RM31.36 per kg",
+      "source": {
+       "table": "purchases",
+       "keys": [
+        "KCB-26-1187",
+        "KCB-26-1194",
+        "KCB-26-1201",
+        "KCB-26-1208",
+        "KCB-26-1215",
+        "KCB-26-1222",
+        "KCB-26-1229",
+        "KCB-26-1236"
+       ],
+       "item": "Serbuk Kopi O Campuran 1kg"
+      },
+      "formula": "extra/yr = (31.36 - 28) x 11.25 kg/order x 26.07 orders/yr = 985.5",
+      "basis": "data"
+     },
+     {
+      "label": "Supplier list",
+      "detail": "No price-change notice from Kopi Cap Bintang",
+      "basis": "data"
+     }
+    ],
+    "cta": "Request quotes",
+    "confidence": "high",
+    "confidenceNote": "All eight invoices are in your files.",
+    "priceMove": {
+     "item": "Serbuk Kopi O Campuran 1kg",
+     "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+     "series": [
+      {
+       "date": "2026-06-17",
+       "value": 28,
+       "key": "KCB-26-1187"
+      },
+      {
+       "date": "2026-07-01",
+       "value": 28,
+       "key": "KCB-26-1194"
+      },
+      {
+       "date": "2026-07-15",
+       "value": 29.1,
+       "key": "KCB-26-1201"
+      },
+      {
+       "date": "2026-07-29",
+       "value": 29.1,
+       "key": "KCB-26-1208"
+      },
+      {
+       "date": "2026-08-12",
+       "value": 30.2,
+       "key": "KCB-26-1215"
+      },
+      {
+       "date": "2026-08-26",
+       "value": 30.2,
+       "key": "KCB-26-1222"
+      },
+      {
+       "date": "2026-09-09",
+       "value": 31.36,
+       "key": "KCB-26-1229"
+      },
+      {
+       "date": "2026-09-23",
+       "value": 31.36,
+       "key": "KCB-26-1236"
+      }
+     ],
+     "changePct": 12,
+     "extraPaidRm": 147.62,
+     "projectedPerYearRm": 985.5,
+     "notified": false,
+     "sstNote": "SST status not verified for this item"
+    }
+   },
+   {
+    "priority": "important",
+    "title": "Chase the RM312.40 DuitNow QR settlement for 18 Sep",
+    "action": "Ask your QR acquirer where the settlement for 18 Sep 2026 sales went.",
+    "impactRm": 312.4,
+    "impactType": "one_off",
+    "reason": "Your sales show RM312.40 of DuitNow QR on 18 Sep. Every other QR day settles the next day as DUITNOW QR MERCHANT SETTLEMENT; there is no line for 180926.",
+    "evidence": [
+     {
+      "label": "Sales, 18 Sep 2026",
+      "detail": "DuitNow QR RM312.40",
+      "source": {
+       "table": "sales",
+       "keys": [
+        "2026-09-18"
+       ]
+      },
+      "basis": "data"
+     },
+     {
+      "label": "Expected bank line",
+      "detail": "DUITNOW QR MERCHANT SETTLEMENT 180926, not in the statement"
+     }
+    ],
+    "cta": "Write to the QR acquirer",
+    "confidence": "high",
+    "confidenceNote": "The sale and the settled days are in your files."
+   }
+  ],
+  "assumptions": [
+   "Receipt R-0912-0047731 (Pasaraya Serba Murah, RM144.15): RM52.45 business supplies, RM51.80 personal (owner drawings), the RM39.90 rice split per your answer.",
+   "Household income not given: AIM PADURI is left out until you tell us.",
+   "PUNB PROSPER GROW needs RM300,000 turnover; you are RM47,429 short, so it is not shortlisted.",
+   "Repayments are checked against 30% of average monthly profit (our guideline)."
+  ],
+  "verification": [
+   {
+    "check": "12-month turnover re-added",
+    "passed": true,
+    "detail": "Sum of 12 months = RM252,571.08",
+    "status": "passed"
+   },
+   {
+    "check": "Bank statement reconciles",
+    "passed": true,
+    "detail": "RM18,450.00 + RM17,297.74 - RM18,788.52 = RM16,959.22",
+    "status": "passed"
+   },
+   {
+    "check": "Duplicate payment confirmed",
+    "passed": true,
+    "detail": "LSS/2609/278 paid twice; once is enough",
+    "status": "passed"
+   },
+   {
+    "check": "QR and card settlements matched to sales",
+    "passed": true,
+    "detail": "All settled except 18 Sep QR (RM312.40)",
+    "status": "passed"
+   },
+   {
+    "check": "Card fees and delivery payouts treated as normal",
+    "passed": true,
+    "detail": "Card settles about 1.5% below gross; delivery pays about 70% of gross",
+    "status": "passed"
+   },
+   {
+    "check": "Funding URLs taken from the market pack",
+    "passed": true,
+    "status": "passed"
+   },
+   {
+    "check": "Every figure traced to the data",
+    "passed": true,
+    "status": "passed"
+   },
+   {
+    "check": "RML2229, TGP 303: cash on delivery, no bank line expected",
+    "detail": "Checked against the supplier terms and the payables list: settled in cash when delivered, so not flagged.",
+    "passed": true,
+    "status": "passed"
+   },
+   {
+    "check": "Credit record (CCRIS / CTOS)",
+    "passed": false,
+    "status": "not_checked",
+    "detail": "We cannot see your CCRIS or CTOS report. Lenders read it first; pull your free CTOS report before you apply."
+   },
+   {
+    "check": "Card and QR fee rates in your merchant agreement",
+    "passed": false,
+    "status": "not_checked",
+    "detail": "We measured what the bank actually settled, not the rate your acquirer agreed to. Check your merchant agreement."
+   },
+   {
+    "check": "Whether your landlord charges SST on rent",
+    "passed": false,
+    "status": "not_checked",
+    "detail": "Rental is a taxed service (8%) only if the landlord is SST-registered; your files don't say."
+   },
+   {
+    "check": "Supplier contracts and agreed prices",
+    "passed": false,
+    "status": "not_checked",
+    "detail": "We see invoices, not the terms behind them, so we cannot tell whether a price rise breaks an agreement."
+   },
+   {
+    "check": "Payroll and rent as line items",
+    "passed": false,
+    "status": "not_checked",
+    "detail": "No payroll or rent records were uploaded; we only see the months your bank statement covers."
+   }
+  ],
+  "agentsUsed": [
+   "Bookkeeper",
+   "Reconciliation",
+   "Procurement",
+   "Classifier",
+   "Funding",
+   "Verifier"
+  ],
+  "applicationPacks": [
+   {
+    "programId": "TEKUN-NIAGA",
+    "programName": "TEKUN Niaga (SPK)",
+    "agency": "TEKUN Nasional",
+    "verdict": "eligible",
+    "verdictNote": "Bumiputera owner aged 34, SSM-registered, existing business; RM40,000 sits in the SPK range (RM10,001 to RM50,000).",
+    "amountRm": 40000,
+    "purpose": "Kitchen renovation and a second espresso/kopi urn line",
+    "monthlyRepaymentRm": 800,
+    "affordability": "RM667 principal + RM133 profit (4% flat) a month over 5 years; check against 30% of your monthly profit",
+    "prefilled": [
+     {
+      "label": "Business name",
+      "value": "Rock Cafe"
+     },
+     {
+      "label": "SSM number",
+      "value": "202103999901 (FICTIONAL)"
+     },
+     {
+      "label": "Years operating",
+      "value": "5.6"
+     },
+     {
+      "label": "Average monthly sales",
+      "value": "RM21,048"
+     }
+    ],
+    "checklist": [
+     {
+      "item": "Copy of IC of applicant and spouse if applicable (front and back)",
+      "status": "missing"
+     },
+     {
+      "item": "PBT licence/permit or SSM business registration",
+      "status": "ready",
+      "detail": "SSM registration 202103999901 (FICTIONAL)"
+     },
+     {
+      "item": "photos showing the business in operation",
+      "status": "missing"
+     },
+     {
+      "item": "latest 3 months savings/current account bank statements showing applicant/company name, bank name and account number",
+      "status": "partial",
+      "detail": "Sep 2026 only (1 of 3 months); download Jul–Aug 2026 from your bank app"
+     }
+    ],
+    "nextSteps": [
+     "Download Jul and Aug 2026 statements from your bank app",
+     "Photograph the shop in operation",
+     "Apply at tekunonline.tekun.gov.my"
+    ],
+    "howToApply": "TEKUN branch counter near the business, or TEKUN Online (tekunonline.tekun.gov.my); 03-9059 8888",
+    "sourceUrl": "https://www.tekun.gov.my/?page_id=281",
+    "shariah": true,
+    "ladder": "eligible",
+    "proposedNotes": [
+     "Budget 2027 (tabled 9 Oct 2026, not yet law): TEKUN RM1.3bn allocation proposed for microfinance; the programme's own rules are unchanged until the agency announces them"
+    ]
+   },
+   {
+    "programId": "MARA-SEMAI",
+    "programName": "MARA DanaNITA",
+    "agency": "MARA",
+    "verdict": "conditional",
+    "verdictNote": "Bumiputera woman, 18 to 60, trading over 6 months; covers equipment and working capital, not renovation.",
+    "amountRm": 20000,
+    "purpose": "Second espresso/kopi urn line (equipment part only)",
+    "prefilled": [
+     {
+      "label": "Business name",
+      "value": "Rock Cafe"
+     }
+    ],
+    "checklist": [
+     {
+      "item": "SSM registration",
+      "status": "ready",
+      "detail": "SSM registration 202103999901 (FICTIONAL)"
+     },
+     {
+      "item": "PBT licence/permit (waived ≤ RM50k)",
+      "status": "missing"
+     },
+     {
+      "item": "bank statements for 3 months (online statements accepted)",
+      "status": "partial",
+      "detail": "Sep 2026 only (1 of 3 months); download Jul–Aug 2026 from your bank app"
+     },
+     {
+      "item": "quotation for renovation or machinery (waived ≤ RM50k)",
+      "status": "missing"
+     },
+     {
+      "item": "guarantor, land collateral or fixed-deposit documents if > RM50k. Confirm full list with MARA",
+      "status": "missing"
+     }
+    ],
+    "nextSteps": [
+     "Register on MyUsahawan",
+     "Prepare the equipment quotation"
+    ],
+    "sourceUrl": "https://www.mara.gov.my/bm/menu_keusahawanan/kemudahan-sokongan/pembiayaan-perniagaan-2/dananita/",
+    "shariah": true,
+    "ladder": "matched"
+   },
+   {
+    "programId": "BNM-MEF",
+    "programName": "Micro Enterprises Facility (MEF)",
+    "agency": "Bank Negara Malaysia via participating banks",
+    "verdict": "eligible",
+    "verdictNote": "Micro, operating more than 6 months; compare banks by effective rate.",
+    "amountRm": 40000,
+    "purpose": "Kitchen renovation and a second urn line",
+    "prefilled": [
+     {
+      "label": "Business name",
+      "value": "Rock Cafe"
+     }
+    ],
+    "checklist": [
+     {
+      "item": "IC of applicant/owners",
+      "status": "missing"
+     },
+     {
+      "item": "proof of business operations (registration/licence/permit)",
+      "status": "ready",
+      "detail": "SSM registration 202103999901 (FICTIONAL)"
+     },
+     {
+      "item": "proof of income (usually latest 6 months bank statements, sales records, or Form B/BE with tax receipt)",
+      "status": "ready",
+      "detail": "12 months of sales records (Oct 2025 to Sep 2026)"
+     }
+    ],
+    "nextSteps": [
+     "Ask two participating banks for the effective rate"
+    ],
+    "sourceUrl": "https://www.bnm.gov.my/microfinance",
+    "ladder": "eligible"
+   }
+  ],
+  "impactBasis": "One-off recoveries (RM954.40) plus 12 months of the kopi powder rise (RM985.44); the loan is not counted.",
+  "hoursSavedPerMonth": 5,
+  "hoursBasis": "Assumption: about 1.5 minutes per row matched by hand (85 bank lines, 79 purchase lines, 26 payables), rounded down.",
+  "numbers": [
+   {
+    "label": "Turnover, 12 months",
+    "value": 252571.08,
+    "unit": "RM",
+    "formula": "sum of 12 months of sales",
+    "source": {
+     "table": "sales",
+     "keys": [
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09"
+     ]
+    },
+    "basis": "data"
+   },
+   {
+    "label": "Average monthly revenue",
+    "value": 21047.59,
+    "unit": "RM",
+    "formula": "turnover / 12",
+    "basis": "data"
+   },
+   {
+    "label": "Kopi powder, first price",
+    "value": 28,
+    "unit": "RM",
+    "source": {
+     "table": "purchases",
+     "keys": [
+      "KCB-26-1187"
+     ],
+     "item": "Serbuk Kopi O Campuran 1kg"
+    },
+    "basis": "data",
+    "variable": "kopi_price_old"
+   },
+   {
+    "label": "Kopi powder, latest price",
+    "value": 31.36,
+    "unit": "RM",
+    "source": {
+     "table": "purchases",
+     "keys": [
+      "KCB-26-1236"
+     ],
+     "item": "Serbuk Kopi O Campuran 1kg"
+    },
+    "basis": "data",
+    "editable": true,
+    "variable": "kopi_price_new"
+   },
+   {
+    "label": "Kopi powder per order",
+    "value": 11.25,
+    "unit": "kg",
+    "basis": "data",
+    "editable": true,
+    "variable": "kopi_qty_order"
+   },
+   {
+    "label": "Kopi orders per year",
+    "value": 26.07,
+    "unit": "count",
+    "basis": "data",
+    "editable": true,
+    "variable": "kopi_orders_year"
+   },
+   {
+    "label": "Kopi powder extra per year",
+    "value": 985.5,
+    "unit": "RM",
+    "formula": "(kopi_price_new - kopi_price_old) * kopi_qty_order * kopi_orders_year",
+    "basis": "data"
+   },
+   {
+    "label": "Duplicate payment",
+    "value": 642,
+    "unit": "RM",
+    "source": {
+     "table": "bank",
+     "keys": [
+      "IBG0915S02",
+      "IBG0916S02"
+     ]
+    },
+    "basis": "data"
+   },
+   {
+    "label": "Missing QR settlement",
+    "value": 312.4,
+    "unit": "RM",
+    "source": {
+     "table": "sales",
+     "keys": [
+      "2026-09-18"
+     ]
+    },
+    "basis": "data"
+   },
+   {
+    "label": "Bank closing balance",
+    "value": 16959.22,
+    "unit": "RM",
+    "basis": "data"
+   },
+   {
+    "label": "Small category threshold",
+    "value": 300000,
+    "unit": "RM",
+    "basis": "data"
+   },
+   {
+    "label": "Headroom to Small",
+    "value": 47428.92,
+    "unit": "RM",
+    "formula": "300000 - 252571.08",
+    "basis": "data"
+   }
+  ],
+  "einvoice": {
+   "status": "exempt",
+   "thresholdRm": 3000000,
+   "declaredRm": 235000,
+   "bankImpliedRm": 252571.08,
+   "headroomRm": 2747428.92,
+   "nextCheck": "2028-01-01",
+   "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
+   "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+  },
+  "notChecked": [
+   {
+    "item": "Credit record (CCRIS / CTOS)",
+    "reason": "We cannot see your CCRIS or CTOS report. Lenders read it first; pull your free CTOS report before you apply."
+   },
+   {
+    "item": "Card and QR fee rates in your merchant agreement",
+    "reason": "We measured what the bank actually settled, not the rate your acquirer agreed to. Check your merchant agreement."
+   },
+   {
+    "item": "Whether your landlord charges SST on rent",
+    "reason": "Rental is a taxed service (8%) only if the landlord is SST-registered; your files don't say."
+   },
+   {
+    "item": "Supplier contracts and agreed prices",
+    "reason": "We see invoices, not the terms behind them, so we cannot tell whether a price rise breaks an agreement."
+   },
+   {
+    "item": "Payroll and rent as line items",
+    "reason": "No payroll or rent records were uploaded; we only see the months your bank statement covers."
+   }
+  ]
+ },
+ "laneOutputs": {
+  "Procurement": {
+   "thresholdPct": 5,
+   "itemsTracked": 23,
+   "alerts": [
+    {
+     "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+     "item": "Serbuk Kopi O Campuran 1kg",
+     "baseline": {
+      "price": 28,
+      "date": "2026-06-17",
+      "invoice": "KCB-26-1187"
+     },
+     "latest": {
+      "price": 31.36,
+      "date": "2026-09-23",
+      "invoice": "KCB-26-1236"
+     },
+     "changePct": 12,
+     "steps": [
+      {
+       "date": "2026-07-15",
+       "invoice": "KCB-26-1201",
+       "from": 28,
+       "to": 29.1,
+       "pct": 3.9
+      },
+      {
+       "date": "2026-08-12",
+       "invoice": "KCB-26-1215",
+       "from": 29.1,
+       "to": 30.2,
+       "pct": 7.9
+      },
+      {
+       "date": "2026-09-09",
+       "invoice": "KCB-26-1229",
+       "from": 30.2,
+       "to": 31.36,
+       "pct": 12
+      }
+     ],
+     "extraPaidSinceFirstRise": 147.62,
+     "projectedExtraPerYear": 985.5,
+     "projectedExtraPerMonth": 82.12,
+     "supplierNotifiedPriceChange": "No",
+     "evidenceInvoices": [
+      "KCB-26-1187",
+      "KCB-26-1236"
+     ],
+     "series": [
+      {
+       "date": "2026-06-17",
+       "invoice": "KCB-26-1187",
+       "price": 28,
+       "qty": 12
+      },
+      {
+       "date": "2026-07-01",
+       "invoice": "KCB-26-1194",
+       "price": 28,
+       "qty": 12
+      },
+      {
+       "date": "2026-07-15",
+       "invoice": "KCB-26-1201",
+       "price": 29.1,
+       "qty": 10
+      },
+      {
+       "date": "2026-07-29",
+       "invoice": "KCB-26-1208",
+       "price": 29.1,
+       "qty": 11
+      },
+      {
+       "date": "2026-08-12",
+       "invoice": "KCB-26-1215",
+       "price": 30.2,
+       "qty": 11
+      },
+      {
+       "date": "2026-08-26",
+       "invoice": "KCB-26-1222",
+       "price": 30.2,
+       "qty": 12
+      },
+      {
+       "date": "2026-09-09",
+       "invoice": "KCB-26-1229",
+       "price": 31.36,
+       "qty": 12
+      },
+      {
+       "date": "2026-09-23",
+       "invoice": "KCB-26-1236",
+       "price": 31.36,
+       "qty": 10
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     },
+     "averageQtyPerOrder": 11.25,
+     "ordersPerYear": 26.07,
+     "formula": "extra/yr = (31.36 - 28) x 11.25 kg/order x 26.07 orders/yr = 985.5",
+     "source": {
+      "table": "purchases",
+      "keys": [
+       "KCB-26-1187",
+       "KCB-26-1194",
+       "KCB-26-1201",
+       "KCB-26-1208",
+       "KCB-26-1215",
+       "KCB-26-1222",
+       "KCB-26-1229",
+       "KCB-26-1236"
+      ],
+      "item": "Serbuk Kopi O Campuran 1kg"
+     },
+     "scope": "item-specific (other items from this supplier unchanged: Serbuk Teh Cap Daun 1kg, Biji Kopi Robusta Panggang 1kg)"
+    }
+   ],
+   "stableItems": [
+    {
+     "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+     "item": "Serbuk Teh Cap Daun 1kg",
+     "price": 22.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-06-17",
+       "invoice": "KCB-26-1187",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-07-01",
+       "invoice": "KCB-26-1194",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-07-15",
+       "invoice": "KCB-26-1201",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-07-29",
+       "invoice": "KCB-26-1208",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-12",
+       "invoice": "KCB-26-1215",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-26",
+       "invoice": "KCB-26-1222",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-09-09",
+       "invoice": "KCB-26-1229",
+       "price": 22.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-09-23",
+       "invoice": "KCB-26-1236",
+       "price": 22.5,
+       "qty": 6
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+     "item": "Biji Kopi Robusta Panggang 1kg",
+     "price": 38,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-06-17",
+       "invoice": "KCB-26-1187",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-07-01",
+       "invoice": "KCB-26-1194",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-07-15",
+       "invoice": "KCB-26-1201",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-07-29",
+       "invoice": "KCB-26-1208",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-08-12",
+       "invoice": "KCB-26-1215",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-08-26",
+       "invoice": "KCB-26-1222",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-09-09",
+       "invoice": "KCB-26-1229",
+       "price": 38,
+       "qty": 2
+      },
+      {
+       "date": "2026-09-23",
+       "invoice": "KCB-26-1236",
+       "price": 38,
+       "qty": 2
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Ladang Susu Segar Hulu Enterprise",
+     "item": "Susu Pekat Manis 500g (tin)",
+     "price": 3.9,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-03",
+       "invoice": "LSS/2607/828",
+       "price": 3.9,
+       "qty": 48
+      },
+      {
+       "date": "2026-07-24",
+       "invoice": "LSS/2607/826",
+       "price": 3.9,
+       "qty": 48
+      },
+      {
+       "date": "2026-08-14",
+       "invoice": "LSS/2608/817",
+       "price": 3.9,
+       "qty": 60
+      },
+      {
+       "date": "2026-09-04",
+       "invoice": "LSS/2609/753",
+       "price": 3.9,
+       "qty": 48
+      },
+      {
+       "date": "2026-09-11",
+       "invoice": "LSS/2609/278",
+       "price": 3.9,
+       "qty": 60
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Ladang Susu Segar Hulu Enterprise",
+     "item": "Susu Sejat 390g (tin)",
+     "price": 3.4,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-03",
+       "invoice": "LSS/2607/828",
+       "price": 3.4,
+       "qty": 48
+      },
+      {
+       "date": "2026-07-24",
+       "invoice": "LSS/2607/826",
+       "price": 3.4,
+       "qty": 36
+      },
+      {
+       "date": "2026-08-14",
+       "invoice": "LSS/2608/817",
+       "price": 3.4,
+       "qty": 48
+      },
+      {
+       "date": "2026-09-04",
+       "invoice": "LSS/2609/753",
+       "price": 3.4,
+       "qty": 48
+      },
+      {
+       "date": "2026-09-11",
+       "invoice": "LSS/2609/278",
+       "price": 3.4,
+       "qty": 60
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Ladang Susu Segar Hulu Enterprise",
+     "item": "Susu Segar 1L",
+     "price": 6.8,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-03",
+       "invoice": "LSS/2607/828",
+       "price": 6.8,
+       "qty": 20
+      },
+      {
+       "date": "2026-07-24",
+       "invoice": "LSS/2607/826",
+       "price": 6.8,
+       "qty": 20
+      },
+      {
+       "date": "2026-08-14",
+       "invoice": "LSS/2608/817",
+       "price": 6.8,
+       "qty": 24
+      },
+      {
+       "date": "2026-09-04",
+       "invoice": "LSS/2609/753",
+       "price": 6.8,
+       "qty": 20
+      },
+      {
+       "date": "2026-09-11",
+       "invoice": "LSS/2609/278",
+       "price": 6.8,
+       "qty": 30
+      }
+     ],
+     "sst": {
+      "ratePct": 0,
+      "note": {
+       "en": "0% sales tax: this rise is the supplier's margin, not tax",
+       "ms": "Cukai jualan 0%: kenaikan ini margin pembekal, bukan cukai"
+      },
+      "sourceUrl": "https://www.storehub.com/my/blog/sst-expansion-malaysian-businesses-2025"
+     }
+    },
+    {
+     "supplier": "Borong Runcit Maju Jaya",
+     "item": "Gula Pasir 10kg",
+     "price": 28.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-08",
+       "invoice": "BMJ-0708-25",
+       "price": 28.5,
+       "qty": 3
+      },
+      {
+       "date": "2026-08-05",
+       "invoice": "BMJ-0805-35",
+       "price": 28.5,
+       "qty": 3
+      },
+      {
+       "date": "2026-08-25",
+       "invoice": "BMJ-0825-27",
+       "price": 28.5,
+       "qty": 3
+      },
+      {
+       "date": "2026-09-08",
+       "invoice": "BMJ-0908-40",
+       "price": 28.5,
+       "qty": 3
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Borong Runcit Maju Jaya",
+     "item": "Telur Gred A (30 biji)",
+     "price": 13.8,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-08",
+       "invoice": "BMJ-0708-25",
+       "price": 13.8,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-05",
+       "invoice": "BMJ-0805-35",
+       "price": 13.8,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-25",
+       "invoice": "BMJ-0825-27",
+       "price": 13.8,
+       "qty": 6
+      },
+      {
+       "date": "2026-09-08",
+       "invoice": "BMJ-0908-40",
+       "price": 13.8,
+       "qty": 6
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Borong Runcit Maju Jaya",
+     "item": "Minyak Masak 5kg",
+     "price": 30.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-08",
+       "invoice": "BMJ-0708-25",
+       "price": 30.5,
+       "qty": 2
+      },
+      {
+       "date": "2026-08-05",
+       "invoice": "BMJ-0805-35",
+       "price": 30.5,
+       "qty": 2
+      },
+      {
+       "date": "2026-08-25",
+       "invoice": "BMJ-0825-27",
+       "price": 30.5,
+       "qty": 2
+      },
+      {
+       "date": "2026-09-08",
+       "invoice": "BMJ-0908-40",
+       "price": 30.5,
+       "qty": 2
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Roti & Kaya Mak Long",
+     "item": "Roti Benggali",
+     "price": 2.2,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-10",
+       "invoice": "RML2812",
+       "price": 2.2,
+       "qty": 60
+      },
+      {
+       "date": "2026-08-07",
+       "invoice": "RML2370",
+       "price": 2.2,
+       "qty": 60
+      },
+      {
+       "date": "2026-08-28",
+       "invoice": "RML2520",
+       "price": 2.2,
+       "qty": 60
+      },
+      {
+       "date": "2026-09-18",
+       "invoice": "RML2229",
+       "price": 2.2,
+       "qty": 60
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Roti & Kaya Mak Long",
+     "item": "Kaya Homemade 1kg",
+     "price": 16,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-10",
+       "invoice": "RML2812",
+       "price": 16,
+       "qty": 3
+      },
+      {
+       "date": "2026-08-07",
+       "invoice": "RML2370",
+       "price": 16,
+       "qty": 3
+      },
+      {
+       "date": "2026-08-28",
+       "invoice": "RML2520",
+       "price": 16,
+       "qty": 3
+      },
+      {
+       "date": "2026-09-18",
+       "invoice": "RML2229",
+       "price": 16,
+       "qty": 3
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Roti & Kaya Mak Long",
+     "item": "Mentega 250g",
+     "price": 8.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-10",
+       "invoice": "RML2812",
+       "price": 8.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-07",
+       "invoice": "RML2370",
+       "price": 8.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-08-28",
+       "invoice": "RML2520",
+       "price": 8.5,
+       "qty": 6
+      },
+      {
+       "date": "2026-09-18",
+       "invoice": "RML2229",
+       "price": 8.5,
+       "qty": 6
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "SP Plastik & Pembungkusan",
+     "item": "Cawan Plastik 16oz (50pcs)",
+     "price": 9.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-20",
+       "invoice": "SPP260720",
+       "price": 9.5,
+       "qty": 10
+      },
+      {
+       "date": "2026-09-05",
+       "invoice": "SPP260905",
+       "price": 9.5,
+       "qty": 10
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "SP Plastik & Pembungkusan",
+     "item": "Penutup Cawan (50pcs)",
+     "price": 5.5,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-20",
+       "invoice": "SPP260720",
+       "price": 5.5,
+       "qty": 10
+      },
+      {
+       "date": "2026-09-05",
+       "invoice": "SPP260905",
+       "price": 5.5,
+       "qty": 10
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "SP Plastik & Pembungkusan",
+     "item": "Straw (100pcs)",
+     "price": 3.8,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-20",
+       "invoice": "SPP260720",
+       "price": 3.8,
+       "qty": 5
+      },
+      {
+       "date": "2026-09-05",
+       "invoice": "SPP260905",
+       "price": 3.8,
+       "qty": 5
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "SP Plastik & Pembungkusan",
+     "item": "Plastik Ikat Tepi 1kg",
+     "price": 12,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-07-20",
+       "invoice": "SPP260720",
+       "price": 12,
+       "qty": 2
+      },
+      {
+       "date": "2026-09-05",
+       "invoice": "SPP260905",
+       "price": 12,
+       "qty": 2
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    },
+    {
+     "supplier": "Tong Gas Pantas Enterprise",
+     "item": "Isi semula tong gas LPG 14kg",
+     "price": 27,
+     "changePct": 0,
+     "series": [
+      {
+       "date": "2026-08-01",
+       "invoice": "TGP 363",
+       "price": 27,
+       "qty": 4
+      },
+      {
+       "date": "2026-09-12",
+       "invoice": "TGP 303",
+       "price": 27,
+       "qty": 4
+      }
+     ],
+     "sst": {
+      "ratePct": null,
+      "note": {
+       "en": "SST status not verified for this item",
+       "ms": "Status SST item ini belum disahkan"
+      }
+     }
+    }
+   ]
+  },
+  "Bookkeeper": {
+   "business": "Rock Cafe",
+   "turnover12m": 252571.08,
+   "months": 12,
+   "averageMonthlyRevenue": 21047.59,
+   "channelTotals12m": {
+    "cash": 111179.65,
+    "qr": 77285.5,
+    "card": 20373.66,
+    "delivery": 43732.27
+   },
+   "regularClosures": [
+    "Closed (Monday)"
+   ],
+   "seasonalDips": [
+    {
+     "month": "2026-02",
+     "revenue": 15619.43,
+     "vsAverage": "-26%",
+     "note": "Ramadan"
+    },
+    {
+     "month": "2026-03",
+     "revenue": 10740.5,
+     "vsAverage": "-49%",
+     "note": "Closed - Hari Raya Aidilfitri; Ramadan"
+    }
+   ],
+   "monthly": [
+    {
+     "month": "2025-10",
+     "revenue": 22711.83,
+     "openDays": 27,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "+8%",
+     "note": null
+    },
+    {
+     "month": "2025-11",
+     "revenue": 22245.88,
+     "openDays": 26,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "+6%",
+     "note": null
+    },
+    {
+     "month": "2025-12",
+     "revenue": 22592.88,
+     "openDays": 26,
+     "closedDays": 5,
+     "supplierPurchases": null,
+     "vsAverage": "+7%",
+     "note": null
+    },
+    {
+     "month": "2026-01",
+     "revenue": 23640.53,
+     "openDays": 27,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "+12%",
+     "note": null
+    },
+    {
+     "month": "2026-02",
+     "revenue": 15619.43,
+     "openDays": 24,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "-26%",
+     "note": "Ramadan"
+    },
+    {
+     "month": "2026-03",
+     "revenue": 10740.5,
+     "openDays": 21,
+     "closedDays": 10,
+     "supplierPurchases": null,
+     "vsAverage": "-49%",
+     "note": "Closed - Hari Raya Aidilfitri; Ramadan"
+    },
+    {
+     "month": "2026-04",
+     "revenue": 22535.86,
+     "openDays": 26,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "+7%",
+     "note": null
+    },
+    {
+     "month": "2026-05",
+     "revenue": 24100.86,
+     "openDays": 27,
+     "closedDays": 4,
+     "supplierPurchases": null,
+     "vsAverage": "+15%",
+     "note": null
+    },
+    {
+     "month": "2026-06",
+     "revenue": 20747.46,
+     "openDays": 25,
+     "closedDays": 5,
+     "supplierPurchases": 547,
+     "vsAverage": "-1%",
+     "note": null
+    },
+    {
+     "month": "2026-07",
+     "revenue": 22670.34,
+     "openDays": 27,
+     "closedDays": 4,
+     "supplierPurchases": 3165.4,
+     "vsAverage": "+8%",
+     "note": null
+    },
+    {
+     "month": "2026-08",
+     "revenue": 22671.19,
+     "openDays": 26,
+     "closedDays": 5,
+     "supplierPurchases": 2705.6,
+     "vsAverage": "+8%",
+     "note": null
+    },
+    {
+     "month": "2026-09",
+     "revenue": 22294.32,
+     "openDays": 26,
+     "closedDays": 4,
+     "supplierPurchases": 3145.77,
+     "vsAverage": "+6%",
+     "note": null
+    }
+   ],
+   "bank": {
+    "period": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "opening": 18450,
+    "closing": 16959.22,
+    "totalCredits": 17297.74,
+    "totalDebits": 18788.52,
+    "balanceReconciles": true
+   }
+  },
+  "Reconciliation": {
+   "findings": {
+    "duplicatePayments": [
+     {
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceAmount": 642,
+      "timesPaid": 2,
+      "overpaid": 642,
+      "bankLines": [
+       {
+        "date": "2026-09-15",
+        "reference": "IBG0915S02",
+        "amount": 642
+       },
+       {
+        "date": "2026-09-16",
+        "reference": "IBG0916S02",
+        "amount": 642
+       }
+      ],
+      "source": {
+       "table": "bank",
+       "keys": [
+        "IBG0915S02",
+        "IBG0916S02"
+       ]
+      },
+      "ledgerSource": {
+       "table": "payables",
+       "keys": [
+        "LSS/2609/278"
+       ]
+      }
+     }
+    ],
+    "missingQrSettlements": [
+     {
+      "saleDate": "2026-09-18",
+      "expectedAmount": 312.4,
+      "expectedOn": "2026-09-19",
+      "expectedDescription": "DUITNOW QR MERCHANT SETTLEMENT 180926",
+      "source": {
+       "table": "sales",
+       "keys": [
+        "2026-09-18"
+       ]
+      }
+     }
+    ],
+    "missingCardSettlements": [],
+    "ledgerPaymentsNotInBank": [],
+    "nonSupplierCardPurchases": [
+     {
+      "date": "2026-09-12",
+      "amount": 144.15,
+      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "receiptLines": [
+       {
+        "item": "Susu Pekat Manis 500g",
+        "qty": 6,
+        "totalRm": 25.2
+       },
+       {
+        "item": "Gula Halus 1kg",
+        "qty": 5,
+        "totalRm": 14.25
+       },
+       {
+        "item": "Sabun Pinggan 900ml",
+        "qty": 2,
+        "totalRm": 13
+       },
+       {
+        "item": "Beras Wangi 10kg",
+        "qty": 1,
+        "totalRm": 39.9
+       },
+       {
+        "item": "Lampin Bayi Saiz M (38s)",
+        "qty": 1,
+        "totalRm": 42.9
+       },
+       {
+        "item": "Ubat Gigi 175g",
+        "qty": 1,
+        "totalRm": 8.9
+       }
+      ],
+      "why": "Paid from the business account at a shop that is not a registered supplier; may mix business and personal items. Split line by line and ask the owner only about unclear lines.",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "POS0912-47731"
+       ]
+      },
+      "receiptSource": {
+       "table": "purchases",
+       "keys": [
+        "R-0912-0047731"
+       ]
+      }
+     }
+    ],
+    "cashToRecover": 954.4
+   },
+   "normal_do_not_flag": {
+    "cashOnDeliveryInvoices": [
+     "RML2812",
+     "TGP 363",
+     "RML2370",
+     "RML2520",
+     "TGP 303",
+     "RML2229"
+    ],
+    "cashOnDeliverySource": {
+     "table": "payables",
+     "keys": [
+      "RML2812",
+      "TGP 363",
+      "RML2370",
+      "RML2520",
+      "TGP 303",
+      "RML2229"
+     ]
+    },
+    "cashOnDeliveryInStatementPeriod": [
+     "RML2229",
+     "TGP 303"
+    ],
+    "qrSettlingAfterStatementEnd": [
+     {
+      "saleDate": "2026-09-30",
+      "amount": 224.71
+     }
+    ],
+    "cardMerchantDiscountRatePct": 1.5,
+    "deliveryPayoutChecks": [
+     {
+      "weekEnding": "2026-08-30",
+      "gross": 818.87,
+      "payout": 573.21,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-06",
+      "gross": 998.52,
+      "payout": 698.96,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-13",
+      "gross": 989,
+      "payout": 692.3,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-20",
+      "gross": 781.61,
+      "payout": 547.13,
+      "payoutPct": 70
+     },
+     {
+      "weekEnding": "2026-09-27",
+      "gross": 973.39,
+      "payout": 681.37,
+      "payoutPct": 70
+     }
+    ],
+    "ownerDrawings_classifyAsDrawingsNotExpenses": [
+     {
+      "date": "2026-09-25",
+      "amount": 1500,
+      "description": "DUITNOW TRF AMINAH BT RAHMAN (OWNER DRAWING)",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "OWN0925"
+       ]
+      }
+     }
+    ]
+   },
+   "matchedPayables": 8,
+   "bank": {
+    "period": [
+     "2026-09-01",
+     "2026-09-30"
+    ],
+    "opening": 18450,
+    "closing": 16959.22,
+    "totalCredits": 17297.74,
+    "totalDebits": 18788.52,
+    "balanceReconciles": true
+   }
+  },
+  "Classifier": {
+   "sectorGroup": "services_and_other",
+   "bySales": "Micro",
+   "byEmployees": "Micro",
+   "category": "Micro",
+   "basis": "lower of sales and employees",
+   "next": {
+    "nextCategory": "Small",
+    "salesThreshold": 300000,
+    "salesHeadroom": 47428.92
+   },
+   "source": "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf",
+   "salesUsed": 252571.08,
+   "salesSource": "actual sales data, 12 months",
+   "salesRows": {
+    "table": "sales",
+    "keys": [
+     "2025-10",
+     "2025-11",
+     "2025-12",
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ]
+   },
+   "declaredVsActual": {
+    "declared": 235000,
+    "actual": 252571.08,
+    "note": "Declared turnover differs from the data by more than 5%; use the actual figure."
+   },
+   "yearsOperating": 5.6,
+   "ownerFacts": {
+    "age": 34,
+    "gender": "female",
+    "bumiputera": true,
+    "citizenship": "Malaysian"
+   },
+   "unknownForEligibility": [
+    "householdIncomeMonthlyRm"
+   ],
+   "sizeCategory": "Micro",
+   "groupStatus": "independent",
+   "groupBasis": "legal form: Sole proprietorship (Registration of Businesses Act 1956)",
+   "assistanceEligibility": "eligible",
+   "einvoice": {
+    "status": "exempt",
+    "thresholdRm": 3000000,
+    "revenueUsedRm": 252571.08,
+    "headroomRm": 2747428.92,
+    "declaredRm": 235000,
+    "actualRm": 252571.08,
+    "nextCheck": "2028-01-01",
+    "nextCheckReason": "The penalty-free relaxation runs to 31 Dec 2027 (VERIFY against the official text); re-check after every LHDN guideline update and with each year's revenue.",
+    "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
+    "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+   }
+  },
+  "Funding": {
+   "market": "MY",
+   "sme": {
+    "category": "Micro",
+    "sizeCategory": "Micro",
+    "assistanceEligibility": "eligible",
+    "groupStatus": "independent",
+    "groupBasis": "legal form: Sole proprietorship (Registration of Businesses Act 1956)",
+    "salesUsed": 252571.08,
+    "salesSource": "actual sales data, 12 months",
+    "salesRows": {
+     "table": "sales",
+     "keys": [
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09"
+     ]
+    },
+    "declaredVsActual": {
+     "declared": 235000,
+     "actual": 252571.08,
+     "note": "Declared turnover differs from the data by more than 5%; use the actual figure."
+    },
+    "next": {
+     "nextCategory": "Small",
+     "salesThreshold": 300000,
+     "salesHeadroom": 47428.92
+    },
+    "yearsOperating": 5.6,
+    "ownerFacts": {
+     "age": 34,
+     "gender": "female",
+     "bumiputera": true,
+     "citizenship": "Malaysian"
+    },
+    "unknownForEligibility": [
+     "householdIncomeMonthlyRm"
+    ],
+    "einvoice": {
+     "status": "exempt",
+     "thresholdRm": 3000000,
+     "revenueUsedRm": 252571.08,
+     "headroomRm": 2747428.92,
+     "declaredRm": 235000,
+     "actualRm": 252571.08,
+     "nextCheck": "2028-01-01",
+     "nextCheckReason": "The penalty-free relaxation runs to 31 Dec 2027 (VERIFY against the official text); re-check after every LHDN guideline update and with each year's revenue.",
+     "ruleVersion": "LHDN e-Invoice Guideline v4.8, 30 Aug 2026",
+     "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+    },
+    "source": "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf"
+   },
+   "funding": {
+    "source": "knowledge/markets/MY/funding_db.csv",
+    "candidates": [
+     {
+      "id": "TEKUN-NIAGA",
+      "program": "TEKUN Niaga (SPM / SPK / SPS)",
+      "type": "Microfinance loan",
+      "amountRm": [
+       "10001",
+       "100000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Bumiputera Malaysian citizen; not bankrupt; companies 100% Bumiputera- and Malaysian-owned; valid PBT licence/permit or SSM registration; fixed, mobile or onlin",
+      "sectors": "All Shariah-compliant",
+      "source": "https://www.tekun.gov.my/?page_id=281",
+      "shariah": true,
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "Copy of IC of applicant and spouse if applicable (front and back)",
+        "status": "missing"
+       },
+       {
+        "item": "PBT licence/permit or SSM business registration",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       },
+       {
+        "item": "photos showing the business in operation",
+        "status": "missing"
+       },
+       {
+        "item": "latest 3 months savings/current account bank statements showing applicant/company name, bank name and account number",
+        "status": "partial",
+        "detail": "Sep 2026 only (1 of 3 months); download Jul–Aug 2026 from your bank app",
+        "detailMs": "Sep 2026 sahaja (1 daripada 3 bulan); muat turun Jul–Ogos 2026 dari aplikasi bank anda"
+       }
+      ],
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): TEKUN RM1.3bn allocation proposed for microfinance; the programme's own rules are unchanged until the agency announces them"
+      ]
+     },
+     {
+      "id": "TEKUN-SPOT",
+      "program": "TEKUN SPOT (online businesses)",
+      "type": "Microfinance loan",
+      "amountRm": [
+       "1000",
+       "20000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "For online businesses; cap RM5,000 without SSM registration",
+      "sectors": "Online businesses",
+      "verify": "VERIFY on tekun.gov.my",
+      "source": "https://ringgitplus.com/ms/blog/sudut-pakar/nak-modal-bisnes-ini-perbezaan-tekun-aim-dan-bsn-madani-belia-yang-anda-perlu-tahu.html",
+      "ladder": "matched",
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): TEKUN RM1.3bn allocation proposed for microfinance; the programme's own rules are unchanged until the agency announces them"
+      ]
+     },
+     {
+      "id": "AIM-PADURI",
+      "program": "PADURI MADANI (AIM)",
+      "type": "Microfinance loan",
+      "amountRm": [
+       "3000",
+       "30000"
+      ],
+      "screen": "needs info",
+      "notes": [
+       "household income unknown: ASK the owner before deciding"
+      ],
+      "otherCriteria": "Household income ≤ RM5,880/month or per-capita ≤ RM1,470; no guarantor/collateral; blacklisted/bankrupt applicants accepted. Economic category RM3k–30k; social ",
+      "sectors": "All",
+      "verify": "VERIFY on aim.gov.my",
+      "source": "https://www.malaymail.com/news/malaysia/2026/05/16/pm-launches-paduri-madani-scheme-to-empower-b40-women-entrepreneurs-with-loans-up-to-rm30000/220175",
+      "ladder": "matched",
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): AIM RM3bn allocation proposed for microfinance; the programme's own rules are unchanged until the agency announces them"
+      ]
+     },
+     {
+      "id": "MSME-DIGITAL",
+      "program": "MSME Digital Grant MADANI",
+      "type": "Matching grant",
+      "amountRm": [
+       "0",
+       "5000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Up to 3 digital services from MDEC-appointed providers (e-POS, HR/CRM, digital marketing, cybersecurity, ERP/accounting & tax, digital signature, IoT, AI, e-inv",
+      "sectors": "All",
+      "source": "https://bsn.com.my/page/MSMEMadani",
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "Copy of IC or passport of owner/director/partner/appointed representative",
+        "status": "missing"
+       },
+       {
+        "item": "copy of SSM (or equivalent) registration",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       },
+       {
+        "item": "latest audited accounts OR latest management accounts OR last 2 months bank statements",
+        "status": "partial",
+        "detail": "Sep 2026 only (1 of 2 months); download Aug 2026 from your bank app",
+        "detailMs": "Sep 2026 sahaja (1 daripada 2 bulan); muat turun Ogos 2026 dari aplikasi bank anda"
+       },
+       {
+        "item": "quotation or payment invoice from the appointed service provider",
+        "status": "missing"
+       }
+      ]
+     },
+     {
+      "id": "BNM-SRF",
+      "program": "SME Stabilisation Relief Facility (SME SRF)",
+      "type": "Concessionary loan (BNM Fund for SMEs)",
+      "amountRm": [
+       "0",
+       "750000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Viable but materially affected by trade/supply-chain disruption from the Middle East conflict (since Mar 2026); working capital only; no refinancing; up to 80% ",
+      "sectors": "All",
+      "source": "https://www.bnm.gov.my/documents/20124/6025157/20261009-FAQ-SRF-EN.pdf",
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "Bank statements and transaction records",
+        "status": "partial",
+        "detail": "Sep 2026 only (1 of 3 months); download Jul–Aug 2026 from your bank app",
+        "detailMs": "Sep 2026 sahaja (1 daripada 3 bulan); muat turun Jul–Ogos 2026 dari aplikasi bank anda"
+       },
+       {
+        "item": "CCRIS account conduct data",
+        "status": "missing"
+       },
+       {
+        "item": "audited financial statements or management accounts",
+        "status": "missing"
+       },
+       {
+        "item": "sales records, invoices, purchase orders",
+        "status": "ready",
+        "detail": "12 months of sales records (Oct 2025 to Sep 2026)",
+        "detailMs": "12 bulan rekod jualan (Okt 2025 hingga Sep 2026)"
+       },
+       {
+        "item": "supplier contracts/correspondence showing cost increases, delays or cancellations",
+        "status": "missing"
+       },
+       {
+        "item": "stock movement records",
+        "status": "missing"
+       },
+       {
+        "item": "debtor/creditor ageing reports",
+        "status": "missing"
+       },
+       {
+        "item": "final list set by each bank",
+        "status": "missing"
+       }
+      ],
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): RM5bn more for the SME SRF proposed; apply under the facility's current terms and closing date"
+      ]
+     },
+     {
+      "id": "BNM-MEF",
+      "program": "Micro Enterprises Facility (MEF) / Skim Pembiayaan Mikro",
+      "type": "Microfinance loan",
+      "amountRm": [
+       "1000",
+       "100000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Microenterprises, social enterprises, professional service providers, self-employed incl. gig workers; no collateral (third-party guarantee may be required)",
+      "sectors": "All",
+      "source": "https://www.bnm.gov.my/microfinance",
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "IC of applicant/owners",
+        "status": "missing"
+       },
+       {
+        "item": "proof of business operations (registration/licence/permit)",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       },
+       {
+        "item": "proof of income (usually latest 6 months bank statements, sales records, or Form B/BE with tax receipt)",
+        "status": "ready",
+        "detail": "12 months of sales records (Oct 2025 to Sep 2026)",
+        "detailMs": "12 bulan rekod jualan (Okt 2025 hingga Sep 2026)"
+       }
+      ]
+     },
+     {
+      "id": "BNM-PTF",
+      "program": "PENJANA Tourism Financing (PTF)",
+      "type": "Concessionary loan",
+      "amountRm": [
+       "0",
+       "500000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Tourism sectors/activities listed under National Tourism Policy 2020–2030; for expansion/investment (Visit Malaysia Year 2026)",
+      "sectors": "Tourism",
+      "source": "https://www.bnm.gov.my/funds4sme",
+      "ladder": "matched"
+     },
+     {
+      "id": "BNM-RAFT",
+      "program": "Relief and Adaptation Facility (RAFt)",
+      "type": "Concessionary loan",
+      "amountRm": [
+       "0",
+       "1000000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Relief financing after major floods; adaptation financing (flood protection) anytime; up to RM1m each",
+      "sectors": "All",
+      "source": "https://www.bnm.gov.my/funds4sme",
+      "ladder": "matched"
+     },
+     {
+      "id": "SJPP-GGSM4",
+      "program": "Government Guarantee Scheme MADANI 2026 (GGSM4)",
+      "type": "Loan guarantee (bank loan)",
+      "amountRm": [
+       null,
+       "20000000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Guarantee up to 80% (MSME focus sectors: Bumiputera, Halal, Tourism, HGHV, other priority sectors) or 70%; working capital or capex, new financing only (no refi",
+      "sectors": "All",
+      "source": "https://sjpp.com.my/schemes/government-guarantee-scheme-madani-2026-ggsm-4",
+      "ladder": "matched",
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): SJPP and CGC guarantees up to RM32bn proposed; current guarantee terms apply until the new scheme is published"
+      ]
+     },
+     {
+      "id": "SJPP-WCGS-W",
+      "program": "Working Capital Guarantee Scheme – Women (WCGS-Women)",
+      "type": "Loan guarantee",
+      "amountRm": [
+       "100000",
+       "1000000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Guarantee cover 80%; sibling schemes: WCGS (RM100k–10m, 70%), WCGS-Bumiputera (RM100k–3m, 80%), WCGS-Start Up (RM100k–500k, 70%)",
+      "sectors": "All",
+      "verify": "VERIFY still open in 2026",
+      "source": "https://www.sjpp.com.my/",
+      "ladder": "matched",
+      "proposed": [
+       "Budget 2027 (tabled 9 Oct 2026, not yet law): SJPP and CGC guarantees up to RM32bn proposed; current guarantee terms apply until the new scheme is published"
+      ]
+     },
+     {
+      "id": "MARA-SEMAI",
+      "program": "MARA DanaNITA (women) / SEMAi (IPMa graduates) / PUTRA (youth)",
+      "type": "Business loan",
+      "amountRm": [
+       null,
+       "150000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "DanaNITA (up to RM150k, Bumiputera women expanding a business): SSM registration; business premises (except online businesses); PBT licence/permit (waived for ≤",
+      "sectors": "All Shariah-compliant (SPiKE: contractors)",
+      "source": "https://www.mara.gov.my/bm/menu_keusahawanan/kemudahan-sokongan/pembiayaan-perniagaan-2/dananita/",
+      "shariah": true,
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "SSM registration",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       },
+       {
+        "item": "PBT licence/permit (waived ≤ RM50k)",
+        "status": "missing"
+       },
+       {
+        "item": "bank statements for 3 months (online statements accepted)",
+        "status": "partial",
+        "detail": "Sep 2026 only (1 of 3 months); download Jul–Aug 2026 from your bank app",
+        "detailMs": "Sep 2026 sahaja (1 daripada 3 bulan); muat turun Jul–Ogos 2026 dari aplikasi bank anda"
+       },
+       {
+        "item": "quotation for renovation or machinery (waived ≤ RM50k)",
+        "status": "missing"
+       },
+       {
+        "item": "guarantor, land collateral or fixed-deposit documents if > RM50k. Confirm full list with MARA",
+        "status": "missing"
+       }
+      ]
+     },
+     {
+      "id": "AGRO-PENJAJA",
+      "program": "Agro Penjaja-i",
+      "type": "Membership initiative: micro financing + Cashline-i + Ar-Rahnu",
+      "amountRm": [
+       "1000",
+       "100000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Join by opening an Agro Tani Saudagar-i (individual) or Agro Perdana Saudagar-i (non-individual) account; existing Agrobank micro/hawker customers join automati",
+      "sectors": "Hawkers / micro F&B and other Shariah-compliant micro businesses (MRP ",
+      "source": "https://www.agrobank.com.my/product/agro-penjaja-i/",
+      "shariah": true,
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "Membership account (individual): MyKad",
+        "status": "missing"
+       },
+       {
+        "item": "valid PBT business licence. Micro financing (MRP 2.0): completed application form",
+        "status": "missing"
+       },
+       {
+        "item": "copy of IC (and joint applicant's, if any)",
+        "status": "missing"
+       },
+       {
+        "item": "latest 12 months savings account statements or sales records",
+        "status": "ready",
+        "detail": "12 months of sales records (Oct 2025 to Sep 2026)",
+        "detailMs": "12 bulan rekod jualan (Okt 2025 hingga Sep 2026)"
+       },
+       {
+        "item": "copy of business registration or licence (fixed premises)",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       }
+      ]
+     },
+     {
+      "id": "SMEBANK-TECHAD",
+      "program": "Technology Adoption Fund (TECHAD)",
+      "type": "Term financing",
+      "amountRm": [
+       "100000",
+       "10000000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "MSME per SME Corp; Shariah-compliant; for digitalisation/automation; margin up to 80% (assets) / 100% (WC)",
+      "sectors": "All",
+      "source": "https://www.smebank.com.my/technology-adoption-fund-techad",
+      "shariah": true,
+      "ladder": "matched"
+     },
+     {
+      "id": "CRADLE-SPRINT",
+      "program": "CIP Sprint",
+      "type": "Conditional grant",
+      "amountRm": [
+       null,
+       "600000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Sdn Bhd only; owns tech IP; ≥2 directors; paid-up ≥ RM10k; tech-based venture",
+      "sectors": "Technology",
+      "source": "https://cradle.com.my/grants/cip-sprint/",
+      "ladder": "matched"
+     },
+     {
+      "id": "MIDA-DIAF-ESG",
+      "program": "Domestic Investment Accelerator Fund – ESG Adoption (DIAF-ESG)",
+      "type": "Matching grant",
+      "amountRm": [
+       null,
+       "500000"
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "SMEs and Mid-Tier Companies in manufacturing and selected services; ESG adoption",
+      "sectors": "Manufacturing, selected services",
+      "source": "https://www.mida.gov.my/forms-and-guidelines/special-tax-incentives-under-penjana/the-domestic-investment-accelerator-fund-diaf-esg-adoption/",
+      "ladder": "matched"
+     },
+     {
+      "id": "HIJRAH-NIAGAPLUS",
+      "program": "Hijrah Selangor NIAGA PLUS",
+      "type": "Microfinance",
+      "amountRm": [
+       null,
+       null
+      ],
+      "screen": "passes code checks",
+      "otherCriteria": "Must vote and reside in Selangor; guarantor if required; for working capital, asset purchase and business premises renovation. Max RM50,000 reported by RinggitP",
+      "sectors": "All",
+      "verify": "VERIFY max amount and service-charge rate (not on Hijrah site)",
+      "source": "https://hijrahselangor.com/pages/niaga-plus",
+      "ladder": "matched",
+      "checklist": [
+       {
+        "item": "Copy of applicant's IC",
+        "status": "missing"
+       },
+       {
+        "item": "latest 6 months bank statements",
+        "status": "partial",
+        "detail": "Sep 2026 only (1 of 6 months); download Apr–Aug 2026 from your bank app",
+        "detailMs": "Sep 2026 sahaja (1 daripada 6 bulan); muat turun Apr–Ogos 2026 dari aplikasi bank anda"
+       },
+       {
+        "item": "copy of SSM registration / PBT licence / agency or professional-body registration",
+        "status": "ready",
+        "detail": "SSM registration 202103999901 (FICTIONAL)",
+        "detailMs": "Pendaftaran SSM 202103999901 (FICTIONAL)"
+       },
+       {
+        "item": "copy of home or business premises utility bill",
+        "status": "missing"
+       },
+       {
+        "item": "other supporting documents requested by Hijrah Selangor",
+        "status": "missing"
+       }
+      ]
+     }
+    ],
+    "excluded": [
+     "BSN-BELIA: Owner age ≤ 30",
+     "CGC-BIZMULA: Operating < 4 years",
+     "CGC-BIZWANITA: Operating < 4 years",
+     "PUNB-GROW: Turnover ≥ RM300,000 (short by RM47,429)"
+    ]
+   },
+   "rankedCandidateDecisions": [
+    {
+     "type": "supplier_price_creep",
+     "impactRm": 82.12,
+     "perMonth": true,
+     "evidence": [
+      "KCB-26-1187",
+      "KCB-26-1236"
+     ],
+     "source": {
+      "table": "purchases",
+      "keys": [
+       "KCB-26-1187",
+       "KCB-26-1194",
+       "KCB-26-1201",
+       "KCB-26-1208",
+       "KCB-26-1215",
+       "KCB-26-1222",
+       "KCB-26-1229",
+       "KCB-26-1236"
+      ],
+      "item": "Serbuk Kopi O Campuran 1kg"
+     },
+     "detail": {
+      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "item": "Serbuk Kopi O Campuran 1kg",
+      "changePct": 12,
+      "extraPaidSinceFirstRise": 147.62,
+      "projectedExtraPerYear": 985.5,
+      "scope": "item-specific (other items from this supplier unchanged: Serbuk Teh Cap Daun 1kg, Biji Kopi Robusta Panggang 1kg)",
+      "supplierNotifiedPriceChange": "No",
+      "formula": "extra/yr = (31.36 - 28) x 11.25 kg/order x 26.07 orders/yr = 985.5",
+      "series": [
+       {
+        "date": "2026-06-17",
+        "invoice": "KCB-26-1187",
+        "price": 28,
+        "qty": 12
+       },
+       {
+        "date": "2026-07-01",
+        "invoice": "KCB-26-1194",
+        "price": 28,
+        "qty": 12
+       },
+       {
+        "date": "2026-07-15",
+        "invoice": "KCB-26-1201",
+        "price": 29.1,
+        "qty": 10
+       },
+       {
+        "date": "2026-07-29",
+        "invoice": "KCB-26-1208",
+        "price": 29.1,
+        "qty": 11
+       },
+       {
+        "date": "2026-08-12",
+        "invoice": "KCB-26-1215",
+        "price": 30.2,
+        "qty": 11
+       },
+       {
+        "date": "2026-08-26",
+        "invoice": "KCB-26-1222",
+        "price": 30.2,
+        "qty": 12
+       },
+       {
+        "date": "2026-09-09",
+        "invoice": "KCB-26-1229",
+        "price": 31.36,
+        "qty": 12
+       },
+       {
+        "date": "2026-09-23",
+        "invoice": "KCB-26-1236",
+        "price": 31.36,
+        "qty": 10
+       }
+      ],
+      "sst": {
+       "ratePct": null,
+       "note": {
+        "en": "SST status not verified for this item",
+        "ms": "Status SST item ini belum disahkan"
+       }
+      }
+     }
+    },
+    {
+     "type": "duplicate_payment",
+     "impactRm": 642,
+     "oneOff": true,
+     "evidence": [
+      "LSS/2609/278",
+      "IBG0915S02",
+      "IBG0916S02"
+     ],
+     "source": {
+      "table": "bank",
+      "keys": [
+       "IBG0915S02",
+       "IBG0916S02"
+      ]
+     },
+     "detail": {
+      "invoiceNo": "LSS/2609/278",
+      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "invoiceAmount": 642,
+      "timesPaid": 2,
+      "overpaid": 642,
+      "bankLines": [
+       {
+        "date": "2026-09-15",
+        "reference": "IBG0915S02",
+        "amount": 642
+       },
+       {
+        "date": "2026-09-16",
+        "reference": "IBG0916S02",
+        "amount": 642
+       }
+      ],
+      "source": {
+       "table": "bank",
+       "keys": [
+        "IBG0915S02",
+        "IBG0916S02"
+       ]
+      },
+      "ledgerSource": {
+       "table": "payables",
+       "keys": [
+        "LSS/2609/278"
+       ]
+      }
+     }
+    },
+    {
+     "type": "missing_qr_settlement",
+     "impactRm": 312.4,
+     "oneOff": true,
+     "evidence": [
+      "DUITNOW QR MERCHANT SETTLEMENT 180926"
+     ],
+     "source": {
+      "table": "sales",
+      "keys": [
+       "2026-09-18"
+      ]
+     },
+     "detail": {
+      "saleDate": "2026-09-18",
+      "expectedAmount": 312.4,
+      "expectedOn": "2026-09-19",
+      "expectedDescription": "DUITNOW QR MERCHANT SETTLEMENT 180926",
+      "source": {
+       "table": "sales",
+       "keys": [
+        "2026-09-18"
+       ]
+      }
+     }
+    },
+    {
+     "type": "mixed_receipt_ask_owner",
+     "impactRm": 144.15,
+     "oneOff": true,
+     "evidence": [
+      "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "2026-09-12"
+     ],
+     "source": {
+      "table": "purchases",
+      "keys": [
+       "R-0912-0047731"
+      ]
+     },
+     "detail": {
+      "date": "2026-09-12",
+      "amount": 144.15,
+      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "receiptLines": [
+       {
+        "item": "Susu Pekat Manis 500g",
+        "qty": 6,
+        "totalRm": 25.2
+       },
+       {
+        "item": "Gula Halus 1kg",
+        "qty": 5,
+        "totalRm": 14.25
+       },
+       {
+        "item": "Sabun Pinggan 900ml",
+        "qty": 2,
+        "totalRm": 13
+       },
+       {
+        "item": "Beras Wangi 10kg",
+        "qty": 1,
+        "totalRm": 39.9
+       },
+       {
+        "item": "Lampin Bayi Saiz M (38s)",
+        "qty": 1,
+        "totalRm": 42.9
+       },
+       {
+        "item": "Ubat Gigi 175g",
+        "qty": 1,
+        "totalRm": 8.9
+       }
+      ],
+      "why": "Paid from the business account at a shop that is not a registered supplier; may mix business and personal items. Split line by line and ask the owner only about unclear lines.",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "POS0912-47731"
+       ]
+      },
+      "receiptSource": {
+       "table": "purchases",
+       "keys": [
+        "R-0912-0047731"
+       ]
+      }
+     }
+    }
+   ],
+   "verified_ok_do_not_flag": {
+    "cashOnDeliveryInvoices": 6,
+    "cashOnDeliveryInStatementPeriod": [
+     "RML2229",
+     "TGP 303"
+    ],
+    "cardMerchantDiscountRatePct": 1.5,
+    "deliveryPayoutPctOfGross": 70,
+    "ownerDrawings": [
+     {
+      "date": "2026-09-25",
+      "amount": 1500,
+      "description": "DUITNOW TRF AMINAH BT RAHMAN (OWNER DRAWING)",
+      "source": {
+       "table": "bank",
+       "keys": [
+        "OWN0925"
+       ]
+      }
+     }
+    ],
+    "qrSettlingAfterStatementEnd": [
+     {
+      "saleDate": "2026-09-30",
+      "amount": 224.71
+     }
+    ],
+    "seasonalDips_explainNotFlag": [
+     {
+      "month": "2026-02",
+      "revenue": 15619.43,
+      "vsAverage": "-26%",
+      "note": "Ramadan"
+     },
+     {
+      "month": "2026-03",
+      "revenue": 10740.5,
+      "vsAverage": "-49%",
+      "note": "Closed - Hari Raya Aidilfitri; Ramadan"
+     }
+    ]
+   },
+   "errors": {}
+  }
+ },
+ "messages": []
+}

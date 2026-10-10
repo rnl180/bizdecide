@@ -221,7 +221,7 @@ if os.path.exists(db):
             "source": r["source_url"],
             # Shariah-compliant: Y / N in the pack; blank means unknown, never assumed
             "shariah": True if r["shariah"].strip().upper().startswith("Y") else (False if r["shariah"].strip().upper().startswith("N") else None),
-            "ladder": "matched",  # matched -> eligible -> document_ready (the Verifier moves it); never "approved"
+            "ladder": "matched",  # matched -> eligible -> document_ready (the Verifier moves it); the agency makes the decision
             "checklist": checklist(r["documents"]),
             "proposed": proposed_notes(r["id"]),
         })
