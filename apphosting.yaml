@@ -1,0 +1,13 @@
+# Firebase App Hosting config
+runConfig:
+  minInstances: 0
+  maxInstances: 4
+  timeoutSeconds: 120   # ask_user waits up to ~50s for an answer
+
+env:
+  - variable: FIREBASE_STORAGE_BUCKET
+    value: your-project.firebasestorage.app
+    availability: [BUILD, RUNTIME]
+  - variable: BIZDECIDE_MCP_KEY
+    secret: bizdecide-mcp-key        # firebase apphosting:secrets:set bizdecide-mcp-key
+    availability: [RUNTIME]

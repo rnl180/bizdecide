@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "bizdecide": {
+      "url": "https://YOUR-APP-URL/api/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_BIZDECIDE_MCP_KEY"
+      }
+    }
+  }
+}

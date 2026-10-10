@@ -1,0 +1,25 @@
+{
+  "source": "SME Corp Malaysia, Guideline on SME Definition (March 2024)",
+  "source_url": "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf",
+  "rule": "A business is classified by sales turnover OR full-time employees, whichever is LOWER. Must be registered with SSM (or equivalent) and not a subsidiary of a public-listed company, MNC or GLC.",
+  "sectors": {
+    "manufacturing": {
+      "micro": { "sales_rm_lt": 300000, "employees_lt": 5 },
+      "small": { "sales_rm_lt": 15000000, "employees_lt": 75 },
+      "medium": { "sales_rm_lte": 50000000, "employees_lte": 200 }
+    },
+    "services_and_other": {
+      "note": "Includes F&B, retail, distributive trade, hotels and restaurants, professional/ICT services, agriculture, construction",
+      "micro": { "sales_rm_lt": 300000, "employees_lt": 5 },
+      "small": { "sales_rm_lt": 3000000, "employees_lt": 30 },
+      "medium": { "sales_rm_lte": 20000000, "employees_lte": 75 }
+    }
+  },
+  "algorithm": [
+    "sector_group = 'manufacturing' if sector is Manufacturing else 'services_and_other'",
+    "category_by_sales = first of micro/small/medium whose sales limit the turnover satisfies",
+    "category_by_employees = first of micro/small/medium whose employee limit the headcount satisfies",
+    "category = the SMALLER of the two (micro < small < medium)",
+    "if turnover and employees both exceed medium limits -> not an SME"
+  ]
+}

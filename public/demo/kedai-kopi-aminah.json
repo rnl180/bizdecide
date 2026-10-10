@@ -1,0 +1,1697 @@
+{
+  "profile": {
+    "name": "Kedai Kopi Aminah",
+    "sector": "F&B",
+    "state": "Selangor",
+    "employeesFullTime": 6,
+    "ssmNumber": "202301012345 (DEMO)",
+    "registeredSince": "2023-02",
+    "annualSalesDeclaredRm": 240000,
+    "ownershipFlags": [
+      "women_owned",
+      "bumiputera"
+    ],
+    "goal": "Open a second outlet in Subang Jaya next year"
+  },
+  "sales": [
+    {
+      "period": "2025-10",
+      "amountRm": 29040,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2025-11",
+      "amountRm": 30010,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2025-12",
+      "amountRm": 35260,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-01",
+      "amountRm": 29400,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-02",
+      "amountRm": 30870,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-03",
+      "amountRm": 27330,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-04",
+      "amountRm": 33920,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-05",
+      "amountRm": 31960,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-06",
+      "amountRm": 32820,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-07",
+      "amountRm": 33430,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-08",
+      "amountRm": 34280,
+      "channel": "counter + GrabFood"
+    },
+    {
+      "period": "2026-09",
+      "amountRm": 35750,
+      "channel": "counter + GrabFood"
+    }
+  ],
+  "purchases": [
+    {
+      "date": "2025-10-01",
+      "invoiceNo": "INV-1005",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2025-10-01",
+      "invoiceNo": "INV-1006",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2025-10-01",
+      "invoiceNo": "INV-1007",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2025-10-03",
+      "invoiceNo": "INV-1002",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2025-10-03",
+      "invoiceNo": "INV-1003",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2025-10-05",
+      "invoiceNo": "INV-1000",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 275,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 1980
+    },
+    {
+      "date": "2025-10-08",
+      "invoiceNo": "KB-2510",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 37,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2146
+    },
+    {
+      "date": "2025-10-10",
+      "invoiceNo": "INV-1004",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 33,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 808.5
+    },
+    {
+      "date": "2025-10-15",
+      "invoiceNo": "INV-1008",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 902,
+      "totalRm": 902
+    },
+    {
+      "date": "2025-10-15",
+      "invoiceNo": "INV-1009",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2025-10-19",
+      "invoiceNo": "INV-1001",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 275,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 1980
+    },
+    {
+      "date": "2025-10-28",
+      "invoiceNo": "INV-1010",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2025-10-28",
+      "invoiceNo": "INV-1011",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2025-11-01",
+      "invoiceNo": "INV-1017",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2025-11-01",
+      "invoiceNo": "INV-1018",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2025-11-01",
+      "invoiceNo": "INV-1019",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2025-11-03",
+      "invoiceNo": "INV-1014",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2025-11-03",
+      "invoiceNo": "INV-1015",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2025-11-05",
+      "invoiceNo": "INV-1012",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 284,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2044.8
+    },
+    {
+      "date": "2025-11-08",
+      "invoiceNo": "KB-2511",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 38,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2204
+    },
+    {
+      "date": "2025-11-10",
+      "invoiceNo": "INV-1016",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 34,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 833
+    },
+    {
+      "date": "2025-11-15",
+      "invoiceNo": "INV-1020",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 905,
+      "totalRm": 905
+    },
+    {
+      "date": "2025-11-15",
+      "invoiceNo": "INV-1021",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2025-11-19",
+      "invoiceNo": "INV-1013",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 284,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2044.8
+    },
+    {
+      "date": "2025-11-28",
+      "invoiceNo": "INV-1022",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2025-11-28",
+      "invoiceNo": "INV-1023",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2025-12-01",
+      "invoiceNo": "INV-1029",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2025-12-01",
+      "invoiceNo": "INV-1030",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2025-12-01",
+      "invoiceNo": "INV-1031",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2025-12-03",
+      "invoiceNo": "INV-1026",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2025-12-03",
+      "invoiceNo": "INV-1027",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2025-12-05",
+      "invoiceNo": "INV-1024",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 333,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2397.6
+    },
+    {
+      "date": "2025-12-08",
+      "invoiceNo": "KB-2512",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 44,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2552
+    },
+    {
+      "date": "2025-12-10",
+      "invoiceNo": "INV-1028",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 40,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 980
+    },
+    {
+      "date": "2025-12-15",
+      "invoiceNo": "INV-1032",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 920,
+      "totalRm": 920
+    },
+    {
+      "date": "2025-12-15",
+      "invoiceNo": "INV-1033",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2025-12-19",
+      "invoiceNo": "INV-1025",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 333,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2397.6
+    },
+    {
+      "date": "2025-12-28",
+      "invoiceNo": "INV-1034",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2025-12-28",
+      "invoiceNo": "INV-1035",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-01-01",
+      "invoiceNo": "INV-1041",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-01-01",
+      "invoiceNo": "INV-1042",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-01-01",
+      "invoiceNo": "INV-1043",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-01-03",
+      "invoiceNo": "INV-1038",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-01-03",
+      "invoiceNo": "INV-1039",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-01-05",
+      "invoiceNo": "INV-1036",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 278,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2001.6
+    },
+    {
+      "date": "2026-01-08",
+      "invoiceNo": "KB-2601",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 37,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2146
+    },
+    {
+      "date": "2026-01-10",
+      "invoiceNo": "INV-1040",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 33,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 808.5
+    },
+    {
+      "date": "2026-01-15",
+      "invoiceNo": "INV-1044",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 903,
+      "totalRm": 903
+    },
+    {
+      "date": "2026-01-15",
+      "invoiceNo": "INV-1045",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-01-19",
+      "invoiceNo": "INV-1037",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 278,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2001.6
+    },
+    {
+      "date": "2026-01-28",
+      "invoiceNo": "INV-1046",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-01-28",
+      "invoiceNo": "INV-1047",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-02-01",
+      "invoiceNo": "INV-1053",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-02-01",
+      "invoiceNo": "INV-1054",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-02-01",
+      "invoiceNo": "INV-1055",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-02-03",
+      "invoiceNo": "INV-1050",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-02-03",
+      "invoiceNo": "INV-1051",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-02-05",
+      "invoiceNo": "INV-1048",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 292,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2102.4
+    },
+    {
+      "date": "2026-02-08",
+      "invoiceNo": "KB-2602",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 39,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2262
+    },
+    {
+      "date": "2026-02-10",
+      "invoiceNo": "INV-1052",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 35,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 857.5
+    },
+    {
+      "date": "2026-02-15",
+      "invoiceNo": "INV-1056",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 908,
+      "totalRm": 908
+    },
+    {
+      "date": "2026-02-15",
+      "invoiceNo": "INV-1057",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-02-19",
+      "invoiceNo": "INV-1049",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 292,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2102.4
+    },
+    {
+      "date": "2026-02-28",
+      "invoiceNo": "INV-1058",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-02-28",
+      "invoiceNo": "INV-1059",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-03-01",
+      "invoiceNo": "INV-1065",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-03-01",
+      "invoiceNo": "INV-1066",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-03-01",
+      "invoiceNo": "INV-1067",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-03-03",
+      "invoiceNo": "INV-1062",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-03-03",
+      "invoiceNo": "INV-1063",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-03-05",
+      "invoiceNo": "INV-1060",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 258,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 1857.6
+    },
+    {
+      "date": "2026-03-08",
+      "invoiceNo": "KB-2603",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 34,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 1972
+    },
+    {
+      "date": "2026-03-10",
+      "invoiceNo": "INV-1064",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 31,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 759.5
+    },
+    {
+      "date": "2026-03-15",
+      "invoiceNo": "INV-1068",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 898,
+      "totalRm": 898
+    },
+    {
+      "date": "2026-03-15",
+      "invoiceNo": "INV-1069",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-03-19",
+      "invoiceNo": "INV-1061",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 258,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 1857.6
+    },
+    {
+      "date": "2026-03-28",
+      "invoiceNo": "INV-1070",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-03-28",
+      "invoiceNo": "INV-1071",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-04-01",
+      "invoiceNo": "INV-1077",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-04-01",
+      "invoiceNo": "INV-1078",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-04-01",
+      "invoiceNo": "INV-1079",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-04-03",
+      "invoiceNo": "INV-1074",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-04-03",
+      "invoiceNo": "INV-1075",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-04-05",
+      "invoiceNo": "INV-1072",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 321,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2311.2
+    },
+    {
+      "date": "2026-04-08",
+      "invoiceNo": "KB-2604",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 43,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2494
+    },
+    {
+      "date": "2026-04-10",
+      "invoiceNo": "INV-1076",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 38,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 931
+    },
+    {
+      "date": "2026-04-15",
+      "invoiceNo": "INV-1080",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 916,
+      "totalRm": 916
+    },
+    {
+      "date": "2026-04-15",
+      "invoiceNo": "INV-1081",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-04-19",
+      "invoiceNo": "INV-1073",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 321,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2311.2
+    },
+    {
+      "date": "2026-04-28",
+      "invoiceNo": "INV-1082",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-04-28",
+      "invoiceNo": "INV-1083",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-05-01",
+      "invoiceNo": "INV-1089",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-05-01",
+      "invoiceNo": "INV-1090",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-05-01",
+      "invoiceNo": "INV-1091",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-05-03",
+      "invoiceNo": "INV-1086",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-05-03",
+      "invoiceNo": "INV-1087",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-05-05",
+      "invoiceNo": "INV-1084",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 302,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2174.4
+    },
+    {
+      "date": "2026-05-08",
+      "invoiceNo": "KB-2605",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 40,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2320
+    },
+    {
+      "date": "2026-05-10",
+      "invoiceNo": "INV-1088",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 36,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 882
+    },
+    {
+      "date": "2026-05-15",
+      "invoiceNo": "INV-1092",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 911,
+      "totalRm": 911
+    },
+    {
+      "date": "2026-05-15",
+      "invoiceNo": "INV-1093",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-05-19",
+      "invoiceNo": "INV-1085",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 302,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2174.4
+    },
+    {
+      "date": "2026-05-28",
+      "invoiceNo": "INV-1094",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-05-28",
+      "invoiceNo": "INV-1095",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-06-01",
+      "invoiceNo": "INV-1101",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-06-01",
+      "invoiceNo": "INV-1102",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-06-01",
+      "invoiceNo": "INV-1103",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-06-03",
+      "invoiceNo": "INV-1098",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-06-03",
+      "invoiceNo": "INV-1099",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-06-05",
+      "invoiceNo": "INV-1096",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 310,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2232
+    },
+    {
+      "date": "2026-06-08",
+      "invoiceNo": "KB-2606",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 41,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2378
+    },
+    {
+      "date": "2026-06-10",
+      "invoiceNo": "INV-1100",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 37,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 906.5
+    },
+    {
+      "date": "2026-06-15",
+      "invoiceNo": "INV-1104",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 913,
+      "totalRm": 913
+    },
+    {
+      "date": "2026-06-15",
+      "invoiceNo": "INV-1105",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-06-19",
+      "invoiceNo": "INV-1097",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 310,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2232
+    },
+    {
+      "date": "2026-06-28",
+      "invoiceNo": "INV-1106",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-06-28",
+      "invoiceNo": "INV-1107",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-07-01",
+      "invoiceNo": "INV-1113",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-07-01",
+      "invoiceNo": "INV-1114",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-07-01",
+      "invoiceNo": "INV-1115",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-07-03",
+      "invoiceNo": "INV-1110",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-07-03",
+      "invoiceNo": "INV-1111",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-07-05",
+      "invoiceNo": "INV-1108",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 316,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2275.2
+    },
+    {
+      "date": "2026-07-08",
+      "invoiceNo": "KB-2607",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 42,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2436
+    },
+    {
+      "date": "2026-07-10",
+      "invoiceNo": "INV-1112",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 38,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 931
+    },
+    {
+      "date": "2026-07-15",
+      "invoiceNo": "INV-1116",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 915,
+      "totalRm": 915
+    },
+    {
+      "date": "2026-07-15",
+      "invoiceNo": "INV-1117",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-07-19",
+      "invoiceNo": "INV-1109",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 316,
+      "unit": "L",
+      "unitPriceRm": 7.2,
+      "totalRm": 2275.2
+    },
+    {
+      "date": "2026-07-28",
+      "invoiceNo": "INV-1118",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-07-28",
+      "invoiceNo": "INV-1119",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-08-01",
+      "invoiceNo": "INV-1125",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-08-01",
+      "invoiceNo": "INV-1126",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-08-01",
+      "invoiceNo": "INV-1127",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-08-03",
+      "invoiceNo": "INV-1122",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-08-03",
+      "invoiceNo": "INV-1123",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-08-05",
+      "invoiceNo": "INV-1120",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 324,
+      "unit": "L",
+      "unitPriceRm": 7.7,
+      "totalRm": 2494.8
+    },
+    {
+      "date": "2026-08-08",
+      "invoiceNo": "KB-2608",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 43,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2494
+    },
+    {
+      "date": "2026-08-10",
+      "invoiceNo": "INV-1124",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 39,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 955.5
+    },
+    {
+      "date": "2026-08-15",
+      "invoiceNo": "INV-1128",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 917,
+      "totalRm": 917
+    },
+    {
+      "date": "2026-08-15",
+      "invoiceNo": "INV-1129",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-08-19",
+      "invoiceNo": "INV-1121",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 324,
+      "unit": "L",
+      "unitPriceRm": 7.7,
+      "totalRm": 2494.8
+    },
+    {
+      "date": "2026-08-28",
+      "invoiceNo": "INV-1130",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-08-28",
+      "invoiceNo": "INV-1131",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    },
+    {
+      "date": "2026-09-01",
+      "invoiceNo": "INV-1137",
+      "supplier": "Roti Mesra Bakery",
+      "item": "Bread & buns (weekly standing order)",
+      "qty": 4,
+      "unit": "week",
+      "unitPriceRm": 310,
+      "totalRm": 1240
+    },
+    {
+      "date": "2026-09-01",
+      "invoiceNo": "INV-1138",
+      "supplier": "Telur Emas Farm",
+      "item": "Eggs (tray of 30)",
+      "qty": 30,
+      "unit": "tray",
+      "unitPriceRm": 15.5,
+      "totalRm": 465
+    },
+    {
+      "date": "2026-09-01",
+      "invoiceNo": "INV-1139",
+      "supplier": "Sri Utama Properties",
+      "item": "Shop rent",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 3500,
+      "totalRm": 3500
+    },
+    {
+      "date": "2026-09-03",
+      "invoiceNo": "INV-1134",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Sugar (1kg)",
+      "qty": 60,
+      "unit": "kg",
+      "unitPriceRm": 2.85,
+      "totalRm": 171
+    },
+    {
+      "date": "2026-09-03",
+      "invoiceNo": "INV-1135",
+      "supplier": "Kedai Runcit Hock Seng",
+      "item": "Condensed milk (can)",
+      "qty": 120,
+      "unit": "can",
+      "unitPriceRm": 3.9,
+      "totalRm": 468
+    },
+    {
+      "date": "2026-09-05",
+      "invoiceNo": "INV-1132",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 338,
+      "unit": "L",
+      "unitPriceRm": 8.06,
+      "totalRm": 2724.28
+    },
+    {
+      "date": "2026-09-08",
+      "invoiceNo": "KB-2609",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 45,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2610
+    },
+    {
+      "date": "2026-09-09",
+      "invoiceNo": "KB-2609",
+      "supplier": "Kopi Borneo Roasters",
+      "item": "Arabica house blend",
+      "qty": 45,
+      "unit": "kg",
+      "unitPriceRm": 58,
+      "totalRm": 2610,
+      "note": "uploaded twice?"
+    },
+    {
+      "date": "2026-09-10",
+      "invoiceNo": "INV-1136",
+      "supplier": "PackPro Supplies",
+      "item": "Takeaway cups + lids (pack of 50)",
+      "qty": 41,
+      "unit": "pack",
+      "unitPriceRm": 24.5,
+      "totalRm": 1004.5
+    },
+    {
+      "date": "2026-09-14",
+      "invoiceNo": "HN-88213",
+      "supplier": "Harvey Norman Sunway Pyramid",
+      "item": "Electrical appliance",
+      "qty": 1,
+      "unit": "unit",
+      "unitPriceRm": 2399,
+      "totalRm": 2399,
+      "note": "paid with business account"
+    },
+    {
+      "date": "2026-09-15",
+      "invoiceNo": "INV-1140",
+      "supplier": "TNB",
+      "item": "Electricity",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 921,
+      "totalRm": 921
+    },
+    {
+      "date": "2026-09-15",
+      "invoiceNo": "INV-1141",
+      "supplier": "Air Selangor",
+      "item": "Water",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 95,
+      "totalRm": 95
+    },
+    {
+      "date": "2026-09-19",
+      "invoiceNo": "INV-1133",
+      "supplier": "Ladang Segar Dairy Sdn Bhd",
+      "item": "Fresh milk (1L)",
+      "qty": 338,
+      "unit": "L",
+      "unitPriceRm": 8.06,
+      "totalRm": 2724.28
+    },
+    {
+      "date": "2026-09-28",
+      "invoiceNo": "INV-1142",
+      "supplier": "Payroll",
+      "item": "Staff salaries (6 full-time)",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 10200,
+      "totalRm": 10200
+    },
+    {
+      "date": "2026-09-28",
+      "invoiceNo": "INV-1143",
+      "supplier": "KWSP / PERKESO",
+      "item": "EPF + SOCSO employer contribution",
+      "qty": 1,
+      "unit": "month",
+      "unitPriceRm": 1480,
+      "totalRm": 1480
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "Ladang Segar Dairy Sdn Bhd",
+      "category": "Dairy",
+      "contact": "orders@ladangsegar.example",
+      "paymentTerms": "COD"
+    },
+    {
+      "name": "Kopi Borneo Roasters",
+      "category": "Coffee beans",
+      "contact": "+60 12-345 6789",
+      "paymentTerms": "14 days"
+    },
+    {
+      "name": "Kedai Runcit Hock Seng",
+      "category": "Dry goods",
+      "paymentTerms": "Cash"
+    },
+    {
+      "name": "PackPro Supplies",
+      "category": "Packaging",
+      "contact": "sales@packpro.example",
+      "paymentTerms": "30 days"
+    },
+    {
+      "name": "Roti Mesra Bakery",
+      "category": "Bakery",
+      "paymentTerms": "Weekly"
+    },
+    {
+      "name": "Telur Emas Farm",
+      "category": "Eggs",
+      "paymentTerms": "Cash"
+    }
+  ]
+}
