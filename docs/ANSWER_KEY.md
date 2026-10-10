@@ -1,4 +1,4 @@
-# Answer key: what the agent should find in Kedai Kopi Aminah
+# Answer key: what the agent should find in Rock Cafe
 
 **Do not feed this file to the agent.** Use it to test the agent and to script the live demo. Everything here is fictional.
 

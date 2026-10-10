@@ -3,16 +3,257 @@
   "period": "Sep 2026",
   "smeCategory": "Micro (Services, F&B)",
   "keyNumbers": [
-    { "label": "Turnover (12 months)", "value": "RM252,571" },
-    { "label": "SME category", "value": "Micro" },
-    { "label": "Cash to recover", "value": "RM954.40" }
+    {
+      "label": "Turnover (12 months)",
+      "value": "RM252,571"
+    },
+    {
+      "label": "SME category",
+      "value": "Micro"
+    },
+    {
+      "label": "Cash to recover",
+      "value": "RM954.40"
+    }
   ],
   "decisions": [
-    { "priority": "urgent", "title": "Recover a duplicate payment", "action": "Ask Ladang Susu Segar Hulu for a refund or credit note for invoice LSS/2609/278.", "impactRm": 642, "reason": "RM642.00 was paid twice, on 15 Sep (IBG0915S02) and 16 Sep (IBG0916S02). Your ledger shows it once.", "evidence": [{ "label": "Bank statement Sep 2026", "detail": "IBG0915S02, IBG0916S02" }], "cta": "Draft the refund request" },
-    { "priority": "important", "title": "Challenge the coffee powder price rise", "action": "Ask Kopi Cap Bintang to explain the rise on Serbuk Kopi O, or get two alternative quotes.", "impactRm": 82, "reason": "Price went RM28.00 → RM31.36 (+12%) in three steps since 15 Jul with no notice. Teh powder and robusta did not change. ≈ RM983 a year at current volume.", "evidence": [{ "label": "Invoice KCB-26-1187", "detail": "RM28.00/kg" }, { "label": "Invoice KCB-26-1229", "detail": "RM31.36/kg" }], "cta": "Request quotes" },
-    { "priority": "opportunity", "title": "Apply to TEKUN Niaga for the RM40k renovation", "action": "Start a TEKUN Niaga (SPK) application; check BNM SME SRF too.", "reason": "Micro, Bumiputera owner aged 34, SSM-registered since 2021: meets TEKUN criteria. PUNB GROW needs RM300k turnover: you are ~RM47k short. AIM needs household income, which we asked about.", "evidence": [{ "label": "TEKUN Niaga conditions", "url": "https://www.tekun.gov.my/en/tekun-niaga-financing-scheme-conditions/" }], "cta": "Start application" }
+    {
+      "priority": "urgent",
+      "title": "Recover a duplicate payment",
+      "action": "Ask Ladang Susu Segar Hulu for a refund or credit note for invoice LSS/2609/278.",
+      "impactRm": 642,
+      "reason": "RM642.00 was paid twice, on 15 Sep (IBG0915S02) and 16 Sep (IBG0916S02). Your ledger shows it once.",
+      "evidence": [
+        {
+          "label": "Bank statement Sep 2026",
+          "detail": "IBG0915S02, IBG0916S02",
+          "source": {
+            "table": "bank",
+            "keys": [
+              "IBG0915S02",
+              "IBG0916S02"
+            ]
+          },
+          "basis": "data"
+        },
+        {
+          "label": "Payables ledger",
+          "detail": "LSS/2609/278 recorded once, RM642.00",
+          "source": {
+            "table": "payables",
+            "keys": [
+              "LSS/2609/278"
+            ]
+          },
+          "basis": "data"
+        }
+      ],
+      "cta": "Draft the refund request",
+      "impactType": "one_off",
+      "confidence": "high",
+      "confidenceNote": "Both bank lines and the ledger row are in your files."
+    },
+    {
+      "priority": "important",
+      "title": "Challenge the coffee powder price rise",
+      "action": "Ask Kopi Cap Bintang to explain the rise on Serbuk Kopi O, or get two alternative quotes.",
+      "impactRm": 82,
+      "reason": "Price went RM28.00 → RM31.36 (+12%) in three steps since 15 Jul with no notice. Teh powder and robusta did not change. ≈ RM983 a year at current volume.",
+      "evidence": [
+        {
+          "label": "8 invoices from Kopi Cap Bintang",
+          "detail": "RM28.00 → RM31.36/kg",
+          "source": {
+            "table": "purchases",
+            "keys": [
+              "KCB-26-1187",
+              "KCB-26-1194",
+              "KCB-26-1201",
+              "KCB-26-1208",
+              "KCB-26-1215",
+              "KCB-26-1222",
+              "KCB-26-1229",
+              "KCB-26-1236"
+            ],
+            "item": "Serbuk Kopi O Campuran 1kg"
+          },
+          "formula": "extra/yr = (31.36 - 28) x 11.25 kg/order x 26.07 orders/yr = 985.5",
+          "basis": "data"
+        }
+      ],
+      "cta": "Request quotes",
+      "impactType": "monthly",
+      "confidence": "high"
+    },
+    {
+      "priority": "opportunity",
+      "title": "Apply to TEKUN Niaga for the RM40k renovation",
+      "action": "Start a TEKUN Niaga (SPK) application; check BNM SME SRF too.",
+      "reason": "Micro, Bumiputera owner aged 34, SSM-registered since 2021: meets TEKUN criteria. PUNB GROW needs RM300k turnover: you are ~RM47k short. AIM needs household income, which we asked about.",
+      "evidence": [
+        {
+          "label": "TEKUN Niaga conditions",
+          "url": "https://www.tekun.gov.my/en/tekun-niaga-financing-scheme-conditions/"
+        }
+      ],
+      "cta": "Start application",
+      "confidence": "check",
+      "confidenceNote": "Depends on household income, which the owner has not given yet."
+    }
   ],
-  "assumptions": ["Rice on receipt R-0912-0047731 treated as staff meals per owner's answer."],
-  "verification": [{ "check": "Bank closing balance reconciles to RM16,959.22", "passed": true }, { "check": "QR settlement for 18 Sep (RM312.40) found", "passed": false, "detail": "missing, raise with QR acquirer" }],
-  "agentsUsed": ["Bookkeeper", "Reconciliation", "Procurement", "Classifier", "Funding", "Verifier"]
+  "assumptions": [
+    "Rice on receipt R-0912-0047731 treated as staff meals per owner's answer."
+  ],
+  "verification": [
+    {
+      "check": "Bank closing balance reconciles to RM16,959.22",
+      "passed": true,
+      "status": "passed"
+    },
+    {
+      "check": "QR settlement for 18 Sep (RM312.40) found",
+      "passed": false,
+      "detail": "missing, raise with QR acquirer",
+      "status": "failed"
+    },
+    {
+      "check": "RML2229, TGP 303: cash on delivery, no bank line expected",
+      "passed": true,
+      "status": "passed",
+      "detail": "Not flagged"
+    }
+  ],
+  "agentsUsed": [
+    "Bookkeeper",
+    "Reconciliation",
+    "Procurement",
+    "Classifier",
+    "Funding",
+    "Verifier"
+  ],
+  "notChecked": [
+    {
+      "item": "CCRIS / CTOS credit record",
+      "reason": "Not in your files; pull your free CTOS report first"
+    }
+  ],
+  "impactBasis": "One-off recoveries plus 12 months of the coffee powder rise; loans not counted.",
+  "hoursSavedPerMonth": 6.5,
+  "hoursBasis": "Assumption: about 2 minutes per row reconciled by hand (85 bank lines, 79 purchase lines, 26 payables).",
+  "numbers": [
+    {
+      "label": "Turnover, 12 months",
+      "value": 252571.08,
+      "unit": "RM",
+      "source": {
+        "table": "sales",
+        "keys": [
+          "2025-10",
+          "2026-09"
+        ]
+      },
+      "basis": "data"
+    },
+    {
+      "label": "Serbuk Kopi O, average order",
+      "value": 11.25,
+      "unit": "kg",
+      "basis": "assumption",
+      "editable": true,
+      "variable": "kopi_qty_order"
+    },
+    {
+      "label": "Serbuk Kopi O, orders per year",
+      "value": 26.07,
+      "unit": "count",
+      "basis": "assumption",
+      "editable": true,
+      "variable": "kopi_orders_year"
+    },
+    {
+      "label": "Extra paid per year",
+      "value": 985.5,
+      "unit": "RM",
+      "formula": "(31.36 - 28) * kopi_qty_order * kopi_orders_year",
+      "basis": "data"
+    }
+  ],
+  "morningNote": {
+    "lines": [
+      "Minggu ini: jualan RM4,920 (+6%).",
+      "Stok kopi 9 hari.",
+      "Hutang pembekal RM3,200 jatuh tempo Jumaat."
+    ],
+    "lang": "ms"
+  },
+  "followUps": [
+    {
+      "decisionTitle": "Challenge the coffee powder price rise",
+      "forecastRm": 82,
+      "observedRm": 0,
+      "verdict": "not_yet",
+      "detail": "No new Kopi Cap Bintang invoice since the brief."
+    }
+  ],
+  "einvoice": {
+    "status": "exempt",
+    "thresholdRm": 3000000,
+    "bankImpliedRm": 252571.08,
+    "headroomRm": 2747428.92,
+    "nextCheck": "2027-01-01",
+    "ruleVersion": "LHDN timeline, RM3m exemption from 1 Sep 2026",
+    "sourceUrl": "https://www.hasil.gov.my/e-invois/garis-masa-pelaksanaan-e-invois/"
+  },
+  "zakat": {
+    "untungRugiRm": 1900,
+    "nisabRm": 33996,
+    "muslimOwnershipPct": 100,
+    "method": "Untung Rugi (PPZ-MAIWP)",
+    "sourceUrl": "https://www.zakat.com.my/info-zakat/jenis-jenis-zakat/zakat-perniagaan/",
+    "assumptions": [
+      "Costs are supplier purchases only; rent and wages not uploaded."
+    ]
+  },
+  "channels": [
+    {
+      "channel": "card",
+      "grossRm": 15000,
+      "feesRm": 225,
+      "feePct": 1.5,
+      "netRm": 14775,
+      "basis": "data",
+      "note": "Settlements 1.5% below gross"
+    }
+  ],
+  "benchmarks": [
+    {
+      "label": "Teh tarik price",
+      "yours": 2.5,
+      "cohort": 2.2,
+      "unit": "RM",
+      "cohortName": "Demo cohort: 3 Klang Valley kopitiams",
+      "synthetic": true
+    }
+  ],
+  "applicationPacks": [
+    {
+      "programId": "TEKUN-NIAGA",
+      "programName": "TEKUN Niaga (SPK)",
+      "verdict": "conditional",
+      "ladder": "matched",
+      "shariah": true,
+      "proposedNotes": [
+        "Budget 2027 (tabled 9 Oct 2026, not yet law): TEKUN allocation RM1.3bn"
+      ],
+      "checklist": [
+        {
+          "item": "3 months of bank statements",
+          "status": "partial",
+          "detail": "Sep 2026 only; download Jul–Aug from your bank app"
+        }
+      ],
+      "prefilled": [],
+      "nextSteps": []
+    }
+  ]
 }

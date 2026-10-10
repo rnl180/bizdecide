@@ -35,6 +35,7 @@ const profile = {
   sector: "F&B",
   state: p.state,
   employeesFullTime: p.full_time_employees,
+  annualSalesDeclaredRm: p.annual_sales_declared_rm,
   ssmNumber: p.ssm_registration_no,
   registeredSince: p.registered_on?.slice(0, 7),
   ownershipFlags: [p.owner?.bumiputera && "bumiputera", p.owner?.gender === "female" && "women_owned"].filter(Boolean),
@@ -56,8 +57,8 @@ const profileExtras = {
   workingOwnerExcludedFromCount: p.working_owner_excluded_from_count,
 };
 
+// Closed days (Mondays, Hari Raya) stay in with RM0 and their note, so the Raya dip shows in the sales series.
 const sales = read("sales_daily_2025-10_to_2026-09.csv")
-  .filter((r) => r.open === "1")
   .map((r) => ({
     period: r.date,
     amountRm: num(r.total_rm),
@@ -127,4 +128,5 @@ writeFileSync("public/demo/suppliers.csv", toCsv(suppliers));
 writeFileSync("public/demo/bank.csv", toCsv(bank));
 
 const total = sales.reduce((s, x) => s + x.amountRm, 0);
-console.log(`sales days ${sales.length} (RM${total.toFixed(2)}), purchase lines ${purchases.length}, suppliers ${suppliers.length}, bank rows ${bank.length}, payables ${payables.length}`);
+const open = sales.filter((x) => x.amountRm > 0).length;
+console.log(`sales days ${sales.length}, ${open} open (RM${total.toFixed(2)}), purchase lines ${purchases.length}, suppliers ${suppliers.length}, bank rows ${bank.length}, payables ${payables.length}`);

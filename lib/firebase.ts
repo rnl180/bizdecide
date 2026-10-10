@@ -50,6 +50,7 @@ export const col = {
   results: () => db().collection("results"),
   messages: () => db().collection("messages"),
   actions: () => db().collection("actions"),
+  lane_outputs: () => db().collection("lane_outputs"),
 };
 
 export const now = () => new Date().toISOString();

@@ -25,7 +25,7 @@ export const storeMode: "firebase" | "local" =
 const now = () => new Date().toISOString();
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions";
+type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions" | "lane_outputs";
 type Doc = Record<string, unknown>;
 /** Optional server-side pre-filter for Firestore: [field, "==" value] or [field, "in" values]. `match` still decides. */
 type Pre = [string, "==" | "in", unknown];
@@ -46,7 +46,7 @@ type Db = Record<Collection, Record<string, Doc>>;
 let queue: Promise<unknown> = Promise.resolve();
 
 async function loadDb(): Promise<Db> {
-  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {} };
+  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {}, lane_outputs: {} };
   try {
     return { ...empty, ...JSON.parse(await readFile(DB_FILE, "utf8")) };
   } catch {
@@ -178,11 +178,26 @@ export async function getRequest(id: string): Promise<RequestDoc | null> {
   return db.get<RequestDoc>("requests", id);
 }
 
-/** Moves a submitted request to processing. Null if it's gone or someone else already took it. */
-export async function claimRequest(id: string, detail: string): Promise<RequestDoc | null> {
+/** True when a run has gone quiet for staleMs: its server died mid-run (processing or waiting for an answer). */
+export function isStaleRun(r: RequestDoc, staleMs: number) {
+  return (r.status === "processing" || r.status === "waiting_for_user") && Date.now() - Date.parse(r.updatedAt) > staleMs;
+}
+
+/**
+ * Moves a submitted request to processing. With staleMs, also takes over a run that went quiet for that long
+ * (and closes the question it left open). Null if it's gone or someone else has it.
+ */
+export async function claimRequest(id: string, detail: string, staleMs?: number): Promise<RequestDoc | null> {
   const r = await getRequest(id);
-  if (!r || r.status !== "submitted") return null;
-  await updateRequest(id, { status: "processing", progress: { step: "Picked up by your CFO team", detail } });
+  if (!r) return null;
+  if (r.status === "submitted") {
+    await updateRequest(id, { status: "processing", progress: { step: "Picked up by your CFO team", detail } });
+    return r;
+  }
+  if (staleMs === undefined || !isStaleRun(r, staleMs)) return null;
+  const open = await getOpenQuestion(id);
+  if (open) await expireQuestion(open.id);
+  await updateRequest(id, { status: "processing", progress: { step: "Restarted after an interruption", detail } });
   return r;
 }
 
@@ -237,6 +252,23 @@ export async function getResult(requestId: string): Promise<Result | null> {
   if (!r) return null;
   const { id: _id, ...rest } = r;
   return rest as Result;
+}
+
+// ---------- lane outputs (what the skill scripts computed for a brief; follow-up answers read them) ----------
+
+// Stored as one JSON string: script output can hold map keys Firestore won't take as field names.
+export async function saveLaneOutputs(requestId: string, lanes: Record<string, unknown>) {
+  await db.set("lane_outputs", requestId, { json: JSON.stringify(lanes), createdAt: now() });
+}
+
+export async function getLaneOutputs(requestId: string): Promise<Record<string, unknown> | null> {
+  const d = await db.get<{ json?: string }>("lane_outputs", requestId);
+  if (!d?.json) return null;
+  try {
+    return JSON.parse(d.json);
+  } catch {
+    return null;
+  }
 }
 
 // ---------- messages ("Ask your CFO": owner asks on the brief page, the on-duty agent answers) ----------

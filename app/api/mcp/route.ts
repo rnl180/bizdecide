@@ -19,7 +19,7 @@ import {
   sleep,
   updateRequest,
 } from "@/lib/store";
-import { ResultSchema } from "@/lib/types";
+import { LANE_IDS, LANE_STATES, ResultSchema } from "@/lib/types";
 import { impactKind } from "@/lib/impact";
 import { makeDataLink, rememberOrigin } from "@/lib/data-link";
 import { bucket } from "@/lib/firebase";
@@ -197,19 +197,22 @@ const mcp = createMcpHandler(
       {
         title: "Update request",
         description:
-          "Report progress to the owner's screen and/or change status. Call it at every major step (e.g. 'Classifying SME category', 'Verifying funding links') so the owner sees the agents working. Set status 'processing' when you start.",
+          "Report progress to the owner's screen and/or change status. Call it at every major step (e.g. 'Classifying SME category', 'Verifying funding links') so the owner sees the agents working. Set status 'processing' when you start. Tag each step with its lane (bookkeeper, reconciliation, procurement, classifier, funding, verifier) and state, and put the RM amount of a money finding in impactRm.",
         inputSchema: z.object({
           requestId: z.string(),
           status: z.enum(["processing", "failed"]).optional(),
           step: z.string().optional().describe("Short step label shown to the owner"),
           detail: z.string().optional(),
+          lane: z.enum(LANE_IDS).optional().describe("Which agent lane this step belongs to; the app draws each lane separately"),
+          state: z.enum(LANE_STATES).optional().describe("started when a lane begins, step for each finding, done or failed at the end"),
+          impactRm: z.number().optional().describe("A money finding reported in this step (e.g. a duplicate payment); feeds the found-money counter"),
           error: z.string().optional(),
         }),
       },
-      async ({ requestId, status, step, detail, error }) => {
+      async ({ requestId, status, step, detail, lane, state, impactRm, error }) => {
         const r = await getRequest(requestId);
         if (!r) return fail(`Request ${requestId} not found`);
-        await updateRequest(requestId, { status, error, progress: step ? { step, detail } : undefined });
+        await updateRequest(requestId, { status, error, progress: step ? { step, detail, lane, state, impactRm } : undefined });
         return json({ ok: true });
       },
     );
@@ -351,7 +354,7 @@ const mcp = createMcpHandler(
       {
         title: "Submit results",
         description:
-          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran and any assumptions. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
+          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran (status not_checked for what the data can't show) and any assumptions. Give each decision a confidence (high, medium or check). Evidence that cites invoices, bank lines or sale dates carries source {table, keys} with keys copied exactly from the script output. Optional extras: numbers (the figures table with formula, source and basis), impactBasis, hoursSavedPerMonth with hoursBasis. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
         inputSchema: z.object({ requestId: z.string(), result: ResultSchema }),
       },
       async ({ requestId, result }) => {

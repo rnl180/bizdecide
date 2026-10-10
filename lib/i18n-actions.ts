@@ -63,7 +63,7 @@ const en = {
   notFound: "We couldn't find this document.",
   dateLocale: "en-MY",
 
-  // "BizDecide found RM1,626 for Kedai Kopi Aminah": [before amount, between amount and business name]
+  // "BizDecide found RM1,626 for Rock Cafe": [before amount, between amount and business name]
   found: ["BizDecide found ", " for "] as [string, string],
   foundFunding: ["BizDecide found ", " of funding for "] as [string, string],
   // [bold part, rest]

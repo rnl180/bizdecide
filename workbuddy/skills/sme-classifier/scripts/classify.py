@@ -84,6 +84,8 @@ market = p.get("market") or "MY"
 res = classify_market(market, p.get("sector"), actual if actual is not None else declared, emp)
 res["salesUsed"] = r2(actual) if actual is not None else declared
 res["salesSource"] = f"actual sales data, {len(months)} months" if actual is not None else "owner's declared figure"
+if actual is not None:
+    res["salesRows"] = {"table": "sales", "keys": months}  # month keys (YYYY-MM) open every day of that month
 if declared and actual and abs(declared - actual) / actual > 0.05:
     res["declaredVsActual"] = {"declared": declared, "actual": r2(actual), "note": "Declared turnover differs from the data by more than 5%; use the actual figure."}
 since = x.get("registeredOn") or p.get("registeredSince")

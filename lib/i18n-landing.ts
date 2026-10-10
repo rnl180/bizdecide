@@ -66,7 +66,7 @@ const en: LandingStrings = {
     trust: ["No login, no setup", "Every ringgit traced to an invoice", "Nothing is sent without your OK"],
   },
   card: {
-    cafe: "Kedai Kopi Aminah",
+    cafe: "Rock Cafe",
     place: "Petaling Jaya, Selangor",
     badge: "Sample brief · fictional café",
     found: "RM954.40",
@@ -191,7 +191,7 @@ const ms: LandingStrings = {
     trust: ["Tiada log masuk, tiada persediaan", "Setiap ringgit dijejak ke invois", "Tiada apa dihantar tanpa kelulusan anda"],
   },
   card: {
-    cafe: "Kedai Kopi Aminah",
+    cafe: "Rock Cafe",
     place: "Petaling Jaya, Selangor",
     badge: "Contoh laporan · kafe rekaan",
     found: "RM954.40",

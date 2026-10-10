@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """BizDecide: one call for the whole analysis (run from the workbuddy/ folder).
 
-    python3 run_all.py --data "<link from get_data_link>"
+    python3 run_all.py --data "<link from get_data_link>" [--inputs <dir>]
+
+--inputs: a folder holding financial.json, prices.json and sme.json already produced by the three
+skills for the same data; those are read instead of run again (the server's Claude engine does this).
 
 Downloads the data once, runs the three skills in parallel (financial-analyzer,
 supplier-price-tracker, sme-classifier), pre-screens the funding programmes in
@@ -17,6 +20,7 @@ t0 = time.time()
 
 args = sys.argv[1:]
 src = args[args.index("--data") + 1] if "--data" in args else (args[0] if args else None)
+inputs = args[args.index("--inputs") + 1] if "--inputs" in args else None
 if not src:
     sys.exit('usage: python3 run_all.py --data "<link-or-file>"')
 
@@ -39,6 +43,10 @@ SCRIPTS = {
 
 def run(item):
     name, rel = item
+    cached = os.path.join(inputs, f"{name}.json") if inputs else None
+    if cached and os.path.exists(cached):
+        with open(cached, encoding="utf-8") as fh:
+            return name, json.load(fh)
     p = subprocess.run([sys.executable, os.path.join(HERE, rel), "--data", path], capture_output=True, text=True, timeout=60)
     if p.returncode != 0:
         return name, {"error": p.stderr.strip()[-500:]}
@@ -126,15 +134,15 @@ if os.path.exists(db):
 cands = []
 f = fin.get("findings", {}) if isinstance(fin, dict) else {}
 for x in f.get("duplicatePayments", []):
-    cands.append({"type": "duplicate_payment", "impactRm": x["overpaid"], "oneOff": True, "evidence": [x["invoiceNo"]] + [b["reference"] for b in x["bankLines"]], "detail": x})
+    cands.append({"type": "duplicate_payment", "impactRm": x["overpaid"], "oneOff": True, "evidence": [x["invoiceNo"]] + [b["reference"] for b in x["bankLines"]], "source": x.get("source"), "detail": x})
 for x in f.get("missingQrSettlements", []):
-    cands.append({"type": "missing_qr_settlement", "impactRm": x["expectedAmount"], "oneOff": True, "evidence": [x["expectedDescription"]], "detail": x})
+    cands.append({"type": "missing_qr_settlement", "impactRm": x["expectedAmount"], "oneOff": True, "evidence": [x["expectedDescription"]], "source": x.get("source"), "detail": x})
 for x in f.get("missingCardSettlements", []):
-    cands.append({"type": "missing_card_settlement", "impactRm": x["expectedGross"], "oneOff": True, "evidence": [x["saleDate"]], "detail": x})
+    cands.append({"type": "missing_card_settlement", "impactRm": x["expectedGross"], "oneOff": True, "evidence": [x["saleDate"]], "source": x.get("source"), "detail": x})
 for a in (prices.get("alerts", []) if isinstance(prices, dict) else []):
-    cands.append({"type": "supplier_price_creep", "impactRm": a["projectedExtraPerMonth"], "perMonth": True, "evidence": a["evidenceInvoices"], "detail": {k: a[k] for k in ("supplier", "item", "changePct", "extraPaidSinceFirstRise", "projectedExtraPerYear", "scope", "supplierNotifiedPriceChange")}})
+    cands.append({"type": "supplier_price_creep", "impactRm": a["projectedExtraPerMonth"], "perMonth": True, "evidence": a["evidenceInvoices"], "source": a.get("source"), "detail": {k: a.get(k) for k in ("supplier", "item", "changePct", "extraPaidSinceFirstRise", "projectedExtraPerYear", "scope", "supplierNotifiedPriceChange", "formula")}})
 for x in f.get("nonSupplierCardPurchases", []):
-    cands.append({"type": "mixed_receipt_ask_owner", "impactRm": x["amount"], "oneOff": True, "evidence": [x["description"], x["date"]], "detail": x})
+    cands.append({"type": "mixed_receipt_ask_owner", "impactRm": x["amount"], "oneOff": True, "evidence": [x["description"], x["date"]], "source": x.get("receiptSource") or x.get("source"), "detail": x})
 cands.sort(key=lambda c: -(c["impactRm"] * (12 if c.get("perMonth") else 1)))
 
 passing = [x for x in funding if not x["screen"].startswith("fails")]
@@ -145,7 +153,7 @@ out = {
     "market": market,
     "elapsedSeconds": round(time.time() - t0, 2),
     "business": fin.get("business") if isinstance(fin, dict) else None,
-    "sme": {k: sme.get(k) for k in ("category", "salesUsed", "salesSource", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "source") if isinstance(sme, dict) and sme.get(k) is not None},
+    "sme": {k: sme.get(k) for k in ("category", "salesUsed", "salesSource", "salesRows", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "source") if isinstance(sme, dict) and sme.get(k) is not None},
     "keyNumbers": {
         "turnover12m": fin.get("turnover12m"), "averageMonthlyRevenue": fin.get("averageMonthlyRevenue"),
         "cashToRecover": f.get("cashToRecover"), "bankReconciles": (fin.get("bank") or {}).get("balanceReconciles"),

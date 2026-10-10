@@ -1,4 +1,4 @@
-// Generates the demo business "Kedai Kopi Aminah" (a fictional café in Petaling Jaya).
+// Generates the demo business "Rock Cafe" (a fictional café in Petaling Jaya).
 // Planted issues the agents should find:
 //   1. Ladang Segar Dairy quietly raised milk price ~12% over Aug–Sep 2026
 //   2. Invoice KB-0926 from Kopi Borneo Roasters appears twice (duplicate)
@@ -69,7 +69,7 @@ const suppliers = [
 
 const business = {
   profile: {
-    name: "Kedai Kopi Aminah",
+    name: "Rock Cafe",
     sector: "F&B",
     state: "Selangor",
     employeesFullTime: 6,

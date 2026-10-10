@@ -47,7 +47,7 @@ The app and the MCP server **only move data**. All intelligence runs in WorkBudd
 ### Beyond the brief
 - **Funding application pack.** For the top programmes the business qualifies for, the agents build the application: a document checklist marked ready / partial / missing against the data already uploaded, pre-filled form answers, a suggested amount, repayment and affordability, and next steps. Printable per programme. No Malaysian accounting tool does this (see [research/competitors.md](research/competitors.md)).
 - **Ask your CFO.** On the brief page the owner asks follow-up questions ("Can I afford the RM40k loan?"). The on-duty WorkBuddy agent picks them up through `wait_for_request` and answers from the owner's own numbers with `reply_to_owner`, with evidence.
-- **Built for Malaysia.** Malaysian knowledge (SME Corp 2024 definition, 20 funding programmes with required documents, DuitNow/card settlement rules, states, Bahasa Melayu glossary) lives in [workbuddy/knowledge/markets/MY/](workbuddy/knowledge/markets/README.md). The folder layout keeps other countries possible later, but BizDecide covers Malaysia only. "See it on a sample kopitiam" loads the demo business (Kedai Kopi Aminah).
+- **Built for Malaysia.** Malaysian knowledge (SME Corp 2024 definition, 20 funding programmes with required documents, DuitNow/card settlement rules, states, Bahasa Melayu glossary) lives in [workbuddy/knowledge/markets/MY/](workbuddy/knowledge/markets/README.md). The folder layout keeps other countries possible later, but BizDecide covers Malaysia only. "See it on a sample kopitiam" loads the demo business (Rock Cafe).
 - **Bahasa Melayu.** The intake form switches between English and Bahasa Melayu, and the brief comes back in the owner's language.
 - **POS exports.** StoreHub sales exports (Offline Transactions or Sales Over Time) upload as-is.
 
@@ -87,7 +87,7 @@ Needs `python3` on the server (the Docker image installs it). Leave the key empt
 
 ## Demo
 
-Click **Load demo café: Kedai Kopi Aminah** on the home page. The data (`npm run demo:data`) hides four things for the agents to find:
+Click **Load demo café: Rock Cafe** on the home page. The data (`npm run demo:data`) hides four things for the agents to find:
 
 1. Ladang Segar Dairy quietly raised milk ~12% in Aug–Sep 2026.
 2. Invoice `KB-2609` uploaded twice.

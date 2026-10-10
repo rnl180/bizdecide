@@ -579,7 +579,7 @@ function CopyButton({ text, t }: { text: string; t: ActStrings }) {
 const PART_ICON: Record<ImpactKind, IconName> = { one_off: "receipt", monthly: "tag", financing: "landmark" };
 
 /**
- * "BizDecide found RM1,626 for Kedai Kopi Aminah": one-off money plus a year of monthly savings.
+ * "BizDecide found RM1,626 for Rock Cafe": one-off money plus a year of monthly savings.
  * Funding is listed beside it but never added in: it is money you can borrow, not money you keep.
  */
 export function FoundHeadline({

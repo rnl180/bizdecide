@@ -3,6 +3,7 @@
 
 Usage: python3 track.py --data <link-or-file> [--threshold 5]
 Prints a compact JSON summary. Python standard library only.
+Each alert carries series (every invoice of the item, for a sparkline) and source: {table: "purchases", keys: invoiceNo}.
 """
 import sys
 from collections import defaultdict
@@ -57,6 +58,10 @@ for (sup, item), rows in series.items():
             "projectedExtraPerYear": r2(annual_extra), "projectedExtraPerMonth": r2(annual_extra / 12),
             "supplierNotifiedPriceChange": s.get("notifiedPriceChange"),
             "evidenceInvoices": [rows[0].get("invoiceNo"), rows[-1].get("invoiceNo")],
+            "series": [{"date": r["date"], "invoice": r.get("invoiceNo"), "price": r["unitPriceRm"], "qty": r["qty"]} for r in rows],
+            "averageQtyPerOrder": r2(avg_qty), "ordersPerYear": r2(orders_per_year),
+            "formula": f"extra/yr = ({last} - {base}) x {r2(avg_qty)} {rows[0].get('unit') or 'units'}/order x {r2(orders_per_year)} orders/yr = {r2(annual_extra)}",
+            "source": {"table": "purchases", "keys": list(dict.fromkeys(r.get("invoiceNo") for r in rows if r.get("invoiceNo"))), "item": item},
         })
         key["rose"].append(item)
     else:
