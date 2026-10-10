@@ -8,7 +8,8 @@ import type { BusinessInput, Result } from "./types";
  * - notChecked[]: what the data can't show (lane errors, empty tables, the market's not_checkable.json), also added
  *   to verification[] as status "not_checked" so the page lists them without counting them in the score;
  * - the rejected false positive: cash-on-delivery invoices named as checked and not flagged;
- * - confidence: "high" only when the decision's evidence is keyed to rows and rests on no assumption.
+ * - confidence: "high" only when the decision's evidence is keyed to rows and rests on no assumption;
+ * - application packs: Shariah flag, ladder step and proposed-measure lines from the market pack.
  */
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -126,6 +127,41 @@ function settleConfidence(result: Result, lang: Lang) {
   }
 }
 
+// ---------- funding ladder: matched -> eligible -> document_ready, Shariah flag, proposed measures ----------
+
+/**
+ * Facts about each pack that come from the market pack, not the model: the Shariah flag (Y / N; blank stays unknown),
+ * the ladder step (never "approved"), the document checklist the Funding lane marked from the data when the Verifier
+ * left it empty, and the Budget 2027 lines, always labelled as proposed.
+ */
+async function settlePacks(result: Result, ctx: FinalizeContext) {
+  if (!result.applicationPacks?.length) return;
+  const lang = ctx.language;
+  const db = await packFile(ctx.market, "funding_db.json");
+  const proposed = await packFile(ctx.market, "proposed_measures.json");
+  const candidates: Json[] = ctx.laneData?.Funding?.funding?.candidates ?? [];
+  for (const p of result.applicationPacks) {
+    const row = Array.isArray(db) ? (db as Json[]).find((r) => r.id === p.programId) : undefined;
+    const flag = String(row?.shariah ?? "").trim().toUpperCase();
+    if (flag.startsWith("Y")) p.shariah = true;
+    else if (flag.startsWith("N")) p.shariah = false;
+    else delete p.shariah;
+
+    const lane = candidates.find((c) => c.id === p.programId);
+    if (!p.checklist.length && lane?.checklist?.length) {
+      p.checklist = (lane.checklist as Json[]).map((c) => ({ item: c.item, status: c.status, detail: (lang === "ms" ? c.detailMs : c.detail) || undefined }));
+    }
+    const allReady = p.checklist.length > 0 && p.checklist.every((c) => c.status === "ready");
+    p.ladder = p.verdict === "eligible" ? (allReady ? "document_ready" : "eligible") : "matched";
+
+    const notes = ((proposed?.measures ?? []) as Json[])
+      .filter((m) => m.program_ids?.[p.programId])
+      .map((m) => `${proposed!.label[lang]}: ${(m.note?.[lang] ?? m.measure).replace("{share}", m.program_ids[p.programId])}`);
+    if (notes.length) p.proposedNotes = notes;
+    else delete p.proposedNotes;
+  }
+}
+
 // ---------- all together ----------
 
 /** Applies the server's rules to a final brief in place and returns it. Never throws: a rule that fails is skipped. */
@@ -144,6 +180,7 @@ export async function finalizeResult(result: Result, ctx: FinalizeContext): Prom
   }
   await step("cod", () => codCheck(result, ctx));
   await step("confidence", () => settleConfidence(result, ctx.language));
+  await step("packs", () => settlePacks(result, ctx));
   await step("notChecked", async () => {
     const gaps = await notCheckedList(ctx);
     result.notChecked = gaps;

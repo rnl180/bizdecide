@@ -70,9 +70,11 @@ group_unknown = isinstance(sme, dict) and sme.get("groupStatus") == "unknown"  #
 
 # market pack: knowledge/markets/<profile.market>/ (default MY); older flat layout as fallback
 try:
-    market = (json.load(open(path, encoding="utf-8")).get("profile") or {}).get("market") or "MY"
+    data = json.load(open(path, encoding="utf-8"))
 except Exception:
-    market = "MY"
+    data = {}
+profile = data.get("profile") or {}
+market = profile.get("market") or "MY"
 pack = os.path.join(HERE, "knowledge", "markets", market)
 fund_file = "funding_db.csv"
 try:
@@ -83,11 +85,97 @@ db = os.path.join(pack, fund_file)
 if not os.path.exists(db):
     db = os.path.join(HERE, "knowledge", "funding_db.csv")
 
+# Budget 2027 and other tabled measures: proposed, never rules in force. Linked to programmes by id.
+try:
+    proposed = json.load(open(os.path.join(pack, "proposed_measures.json"), encoding="utf-8"))
+except Exception:
+    proposed = {}
+
+def proposed_notes(pid):
+    label = (proposed.get("label") or {}).get("en", "Proposed, not yet law")
+    return [
+        f'{label}: ' + ((m.get("note") or {}).get("en") or m["measure"]).replace("{share}", m["program_ids"][pid])
+        for m in proposed.get("measures", []) if pid in (m.get("program_ids") or {})
+    ]
+
+# Document checklist: each "documents" item of a programme row, marked from the data we hold.
+MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+MONTHS_MS = ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogos", "Sep", "Okt", "Nov", "Dis"]
+NOT_LISTED = re.compile(r"^(not listed|not stated|not published|see |via bank|application form \+ supporting|pitch deck)", re.I)
+EXTRA = re.compile(r"^(additional|other) documents|^others? (on request|per bank)|^any accepted", re.I)
+bank_months = sorted({str(t.get("date", ""))[:7] for t in data.get("bank") or [] if t.get("date")})
+sales_months = sorted({str(s.get("period", ""))[:7] for s in data.get("sales") or [] if s.get("period")})
+
+def month_name(ym, names):
+    return f"{names[int(ym[5:7]) - 1]} {ym[:4]}"
+
+def last_months(end, n):
+    y, m = int(end[:4]), int(end[5:7])
+    out = []
+    for _ in range(n):
+        out.append(f"{y:04d}-{m:02d}")
+        y, m = (y, m - 1) if m > 1 else (y - 1, 12)
+    return out[::-1]
+
+def doc_status(item):
+    """(status, detail en, detail ms) for one required document, from the data we hold. Never ready unless the data has it."""
+    low = item.lower()
+    m = re.search(r"(\d+)\s*months?", low)
+    if "bank statement" in low or "account statement" in low:
+        n = int(m.group(1)) if m else 3
+        if "sales records" in low and len(sales_months) >= n:
+            return "ready", f"{len(sales_months)} months of sales records ({month_name(sales_months[0], MONTHS_EN)} to {month_name(sales_months[-1], MONTHS_EN)})", \
+                f"{len(sales_months)} bulan rekod jualan ({month_name(sales_months[0], MONTHS_MS)} hingga {month_name(sales_months[-1], MONTHS_MS)})"
+        if not bank_months:
+            return "missing", f"Download the latest {n} months from your bank app", f"Muat turun {n} bulan terkini dari aplikasi bank anda"
+        need = last_months(bank_months[-1], n)
+        have = [x for x in need if x in bank_months]
+        lack = [x for x in need if x not in bank_months]
+        if not lack:
+            return "ready", f"{n} months on file ({month_name(need[0], MONTHS_EN)} to {month_name(need[-1], MONTHS_EN)})", \
+                f"{n} bulan dalam fail ({month_name(need[0], MONTHS_MS)} hingga {month_name(need[-1], MONTHS_MS)})"
+        span = lambda xs, names: month_name(xs[0], names) if len(xs) == 1 else f"{names[int(xs[0][5:7]) - 1]}–{month_name(xs[-1], names)}"
+        if not have:
+            return "missing", f"Download {span(lack, MONTHS_EN)} from your bank app", f"Muat turun {span(lack, MONTHS_MS)} dari aplikasi bank anda"
+        return "partial", f"{span(have, MONTHS_EN)} only ({len(have)} of {n} months); download {span(lack, MONTHS_EN)} from your bank app", \
+            f"{span(have, MONTHS_MS)} sahaja ({len(have)} daripada {n} bulan); muat turun {span(lack, MONTHS_MS)} dari aplikasi bank anda"
+    if re.search(r"\bssm\b|registration", low) and not re.search(r"\bic\b|passport|mykad", low):  # SSM counts where registration is accepted
+        ssm = profile.get("ssmNumber")
+        if ssm:
+            return "ready", f"SSM registration {ssm}", f"Pendaftaran SSM {ssm}"
+        return "missing", "Download your SSM certificate from ezBiz", "Muat turun sijil SSM anda dari ezBiz"
+    if "sales records" in low and sales_months:
+        return "ready", f"{len(sales_months)} months of sales records ({month_name(sales_months[0], MONTHS_EN)} to {month_name(sales_months[-1], MONTHS_EN)})", \
+            f"{len(sales_months)} bulan rekod jualan ({month_name(sales_months[0], MONTHS_MS)} hingga {month_name(sales_months[-1], MONTHS_MS)})"
+    return "missing", "", ""
+
+def split_items(text):
+    """Split on ';' outside parentheses: 'a; b (x; y); c' -> ['a', 'b (x; y)', 'c']."""
+    items, depth, cur = [], 0, ""
+    for ch in text:
+        depth += (ch == "(") - (ch == ")")
+        if ch == ";" and depth <= 0:
+            items.append(cur)
+            cur = ""
+        else:
+            cur += ch
+    return [re.sub(r"^no full checklist.*?:\s*", "", i.strip(), flags=re.I) for i in items + [cur] if i.strip()]
+
+def checklist(documents):
+    if not documents.strip() or NOT_LISTED.match(documents.strip()):
+        return []
+    items = [d for d in split_items(documents) if not EXTRA.search(d)]
+    out = []
+    for item in items:
+        status, en, ms = doc_status(item)
+        out.append({k: v for k, v in (("item", item[:160]), ("status", status), ("detail", en), ("detailMs", ms)) if v})
+    return out
+
 funding = []
 if os.path.exists(db):
     for row in csv.DictReader(open(db, encoding="utf-8")):
         r = {k: (v or "") for k, v in row.items()}
-        for k in ("bumi_only", "women_only", "age_rule", "min_operating", "min_turnover", "other_criteria", "notes", "sectors", "status", "verify_flag", "source_url", "id", "program", "type", "min_rm", "max_rm"):
+        for k in ("bumi_only", "women_only", "age_rule", "min_operating", "min_turnover", "other_criteria", "notes", "sectors", "status", "verify_flag", "source_url", "id", "program", "type", "min_rm", "max_rm", "shariah", "documents"):
             r.setdefault(k, "")
         checks, ask = [], []
         if r["bumi_only"].strip().upper().startswith("Y") and bumi is not None:
@@ -131,6 +219,11 @@ if os.path.exists(db):
             "status": r["status"][:50],
             "verify": r["verify_flag"] or None,
             "source": r["source_url"],
+            # Shariah-compliant: Y / N in the pack; blank means unknown, never assumed
+            "shariah": True if r["shariah"].strip().upper().startswith("Y") else (False if r["shariah"].strip().upper().startswith("N") else None),
+            "ladder": "matched",  # matched -> eligible -> document_ready (the Verifier moves it); never "approved"
+            "checklist": checklist(r["documents"]),
+            "proposed": proposed_notes(r["id"]),
         })
 
 # 4) candidate decisions, ranked by RM impact (the agent picks and words the final 3)
@@ -173,7 +266,7 @@ out = {
     },
     "funding": {
         "source": os.path.relpath(db, HERE) if os.path.exists(db) else None,
-        "candidates": [{k: x[k] for k in ("id", "program", "type", "amountRm", "screen", "notes", "otherCriteria", "sectors", "verify", "source")} for x in passing],
+        "candidates": [{k: x[k] for k in ("id", "program", "type", "amountRm", "screen", "notes", "otherCriteria", "sectors", "verify", "source", "shariah", "ladder", "checklist", "proposed") if x[k] not in (None, [])} for x in passing],
         "excluded": excluded,
     },
     "errors": {k: v["error"] for k, v in res.items() if isinstance(v, dict) and "error" in v},
