@@ -2,32 +2,13 @@ import { NextResponse } from "next/server";
 import { rateLimit } from "@/lib/guard";
 import { getBusiness, getRequest } from "@/lib/store";
 import { SOURCE_TABLES, type SourceTable } from "@/lib/types";
+import { sourceRows } from "@/lib/source-rows";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MAX_ROWS = 200;
 const MAX_KEYS = 50;
-
-type Row = Record<string, unknown>;
-
-/** Which field a source key names in each table (see SourceRefSchema in lib/types.ts). */
-function matches(table: SourceTable, row: Row, keys: Set<string>, months: string[]) {
-  const s = (v: unknown) => (typeof v === "string" ? v : "");
-  switch (table) {
-    case "purchases":
-    case "payables":
-      return keys.has(s(row.invoiceNo));
-    case "bank":
-      return keys.has(s(row.reference));
-    case "sales": {
-      const period = s(row.period);
-      return keys.has(period) || months.some((m) => period.startsWith(m)); // "2026-09" opens every day of that month
-    }
-    case "suppliers":
-      return keys.has(s(row.name)) || keys.has(s(row.id));
-  }
-}
 
 /**
  * The data rows behind a figure in the brief: GET /api/requests/[id]/rows?table=purchases&keys=KCB-26-1187,KCB-26-1229
@@ -55,10 +36,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const business = await getBusiness(request.businessId);
   if (!business) return NextResponse.json({ error: "Business not found" }, { status: 404 });
 
-  const keySet = new Set(keys);
-  const months = keys.filter((k) => /^\d{4}-\d{2}$/.test(k));
   const item = table === "purchases" ? url.searchParams.get("item")?.trim() : undefined;
-  const all = ((business[table] ?? []) as Row[]).filter((r) => matches(table, r, keySet, months) && (!item || r.item === item));
+  const all = sourceRows(business, { table, keys, item });
   return NextResponse.json(
     { table, keys, rows: all.slice(0, MAX_ROWS), total: all.length, truncated: all.length > MAX_ROWS },
     { headers: { "cache-control": "no-store" } },

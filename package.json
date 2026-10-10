@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start -p ${PORT:-3100}",
     "typecheck": "tsc --noEmit",
+    "test": "tsc --project tsconfig.test.json && node --test .test-build/tests/*.test.js",
     "demo:data": "node scripts/generate-demo-data.mjs"
   },
   "license": "MIT",

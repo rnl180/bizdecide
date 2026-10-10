@@ -2,7 +2,7 @@ import { after, NextResponse } from "next/server";
 import { z } from "zod";
 import { answerOwnerMessage, claudeEnabled } from "@/lib/claude-cfo";
 import { rateLimit } from "@/lib/guard";
-import { createMessage, getRequest, listMessages } from "@/lib/store";
+import { createMessage, getRequest, listMessages, withoutClaimToken } from "@/lib/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,5 +34,5 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  return NextResponse.json({ messages: await listMessages(id) });
+  return NextResponse.json({ messages: (await listMessages(id)).map(withoutClaimToken) });
 }

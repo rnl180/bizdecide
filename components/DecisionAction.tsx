@@ -596,12 +596,12 @@ export function FoundHeadline({
   businessName: string;
 }) {
   const t = ACT[lang] ?? ACT.en;
-  // Round first so every number on screen adds up (RM82/month is RM984/year, not RM979).
-  const whole = (n: number) => (Number.isFinite(n) && n > 0 ? Math.round(n) : 0);
-  const oneOff = whole(totals.one_off);
-  const monthly = whole(totals.monthly);
-  const financing = whole(totals.financing);
-  const found = oneOff + 12 * monthly;
+  // Preserve verified cents: rounding RM82.13/month to RM82 changes the annual projection.
+  const amount = (n: number) => (Number.isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : 0);
+  const oneOff = amount(totals.one_off);
+  const monthly = amount(totals.monthly);
+  const financing = amount(totals.financing);
+  const found = amount(oneOff + 12 * monthly);
   if (found === 0 && financing === 0) return null;
 
   const [before, after] = found > 0 ? t.found : t.foundFunding;

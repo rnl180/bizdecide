@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { rateLimit } from "@/lib/guard";
-import { answerQuestion, getQuestion } from "@/lib/store";
+import { answerQuestion, getQuestion, QuestionAnswerError } from "@/lib/store";
 
 export const runtime = "nodejs";
 
@@ -22,6 +22,11 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (parsed.data.answer === "__other__" && !parsed.data.otherText?.trim()) {
     return NextResponse.json({ error: "Please type your answer" }, { status: 400 });
   }
-  await answerQuestion(id, parsed.data.answer, parsed.data.otherText?.trim() || undefined);
+  try {
+    await answerQuestion(id, parsed.data.answer, parsed.data.otherText?.trim() || undefined);
+  } catch (error) {
+    if (error instanceof QuestionAnswerError) return NextResponse.json({ error: error.message }, { status: 409 });
+    throw error;
+  }
   return NextResponse.json({ ok: true });
 }

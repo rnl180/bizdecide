@@ -22,3 +22,24 @@ def out(obj):
 
 def r2(x):
     return round(float(x) + 0.0, 2)
+
+
+def annual_sales(rows):
+    """Only use a complete, consecutive 12-month window as annual turnover.
+
+    A monthly total covers its month; daily exports must include each calendar day
+    (zero-sales days included). Missing periods remain unknown, never annualised.
+    """
+    from calendar import monthrange
+    months = sorted({r["period"][:7] for r in rows})[-12:]
+    periods = {r["period"] for r in rows}
+    def serial(month):
+        y, m = map(int, month.split("-"))
+        return y * 12 + m - 1
+    consecutive = len(months) == 12 and serial(months[-1]) - serial(months[0]) == 11
+    def covered(month):
+        y, m = map(int, month.split("-"))
+        return month in periods or all(f"{month}-{day:02}" in periods for day in range(1, monthrange(y, m)[1] + 1))
+    total = sum(r["amountRm"] for r in rows if r["period"][:7] in months)
+    complete = consecutive and all(covered(m) for m in months)
+    return {"months": months, "observedTotal": r2(total), "complete": complete, "annualTotal": r2(total) if complete else None}

@@ -1,5 +1,8 @@
 node_modules/
 .next/
+.test-build/
+__pycache__/
+*.py[cod]
 out/
 .env
 .env.*

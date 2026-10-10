@@ -1,4 +1,4 @@
-import MY from "@/workbuddy/knowledge/markets/MY/market.json";
+import MY from "../workbuddy/knowledge/markets/MY/market.json";
 
 /**
  * BizDecide is built for Malaysia: one market pack, workbuddy/knowledge/markets/MY/ (see the README there).
@@ -44,7 +44,7 @@ export const DEFAULT_MARKET = "MY";
 export const marketPack = (code: string | undefined) => PACKS.find((p) => p.code === (code ?? DEFAULT_MARKET));
 
 /** Money in a market's currency, whole units: RM12,345 or S$12,345. Unknown or missing market → Malaysia. */
-export function money(market?: string) {
+export function money(market?: string, fractionDigits = 0) {
   const p = marketPack(market) ?? marketPack(DEFAULT_MARKET)!;
-  return (n: number) => `${p.currencySymbol}${Math.abs(n).toLocaleString(p.locale, { maximumFractionDigits: 0 })}`;
+  return (n: number) => `${p.currencySymbol}${Math.abs(n).toLocaleString(p.locale, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })}`;
 }

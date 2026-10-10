@@ -64,12 +64,12 @@ const en = {
   dateLocale: "en-MY",
 
   // "BizDecide found RM1,626 for Rock Cafe": [before amount, between amount and business name]
-  found: ["BizDecide found ", " for "] as [string, string],
-  foundFunding: ["BizDecide found ", " of funding for "] as [string, string],
+  found: ["Potential financial benefit: ", " for "] as [string, string],
+  foundFunding: ["Potential funding: ", " for "] as [string, string],
   // [bold part, rest]
-  partOneOff: (x: string): [string, string] => [x, " to recover now"],
-  partMonthly: (perMonth: string, perYear: string): [string, string] => [`${perMonth}/month`, ` (${perYear}/year) to save`],
-  partFinancing: (x: string): [string, string] => [x, " funding you qualify for"],
+  partOneOff: (x: string): [string, string] => [x, " in potential recoveries to confirm"],
+  partMonthly: (perMonth: string, perYear: string): [string, string] => [`${perMonth}/month`, ` (${perYear}/year) in projected savings`],
+  partFinancing: (x: string): [string, string] => [x, " proposed funding, subject to eligibility and approval"],
 };
 export type ActStrings = typeof en;
 
@@ -117,11 +117,11 @@ const ms: ActStrings = {
   notFound: "Dokumen ini tidak ditemui.",
   dateLocale: "ms-MY",
 
-  found: ["BizDecide jumpa ", " untuk "],
-  foundFunding: ["BizDecide jumpa pembiayaan ", " untuk "],
-  partOneOff: (x) => [x, " boleh dituntut sekarang"],
-  partMonthly: (perMonth, perYear) => [`${perMonth}/bulan`, ` (${perYear}/tahun) boleh dijimat`],
-  partFinancing: (x) => [x, " pembiayaan yang anda layak"],
+  found: ["Potensi manfaat kewangan: ", " untuk "],
+  foundFunding: ["Potensi pembiayaan: ", " untuk "],
+  partOneOff: (x) => [x, " potensi tuntutan untuk disahkan"],
+  partMonthly: (perMonth, perYear) => [`${perMonth}/bulan`, ` (${perYear}/tahun) anggaran penjimatan`],
+  partFinancing: (x) => [x, " cadangan pembiayaan, tertakluk pada kelayakan dan kelulusan"],
 };
 
 export const ACT: Record<Lang, ActStrings> = { en, ms };

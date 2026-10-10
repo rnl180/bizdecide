@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     );
   }
   const id = await createRequest(business.id, business.profile.name, parsed.data.service, business.profile.market, business.profile.language);
-  // With a Claude API key the server runs the CFO team itself; without one, WorkBuddy picks the request up via /api/mcp.
+  // WorkBuddy picks this up via /api/mcp unless the operator explicitly selected the Claude engine.
   if (claudeEnabled()) after(() => processRequest(id));
   return NextResponse.json({ id });
 }

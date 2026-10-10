@@ -40,6 +40,8 @@ import {
   type Result,
 } from "./types";
 import { impactKind } from "./impact";
+import { financialImpactChecks, type FinancialImpactCheck } from "./financial-impact";
+import { sourceRows } from "./source-rows";
 
 /**
  * BizDecide on the Claude API: the server runs the CFO team itself instead of waiting for WorkBuddy on /api/mcp.
@@ -51,7 +53,7 @@ import { impactKind } from "./impact";
  *   final Result as structured output.
  * - "Ask your CFO" follow-ups are answered the same way, from the lane outputs and the brief.
  *
- * On when ANTHROPIC_API_KEY is set. Without it, requests wait for WorkBuddy as before.
+ * Opt in with BIZDECIDE_ENGINE=claude and ANTHROPIC_API_KEY. WorkBuddy is the default.
  */
 
 const MODEL = "claude-opus-5-5";
@@ -68,7 +70,7 @@ const MAX_TURNS = 12;
 /** A run whose request hasn't changed for this long died with its server; the next poll restarts it. */
 export const STALE_RUN_MS = Math.max(5 * 60_000, ASK_WAIT_MS + 60_000);
 
-export const claudeEnabled = () => Boolean(process.env.ANTHROPIC_API_KEY);
+export { claudeEnabled } from "./engine";
 
 // globalThis: Next bundles each route separately, and they must share one client and one in-flight set.
 const g = globalThis as unknown as { __bizdecideClaude?: Anthropic; __bizdecideRunning?: Set<string> };
@@ -171,7 +173,7 @@ const LANES: Lane[] = [
         });
       }
       if (data.seasonalDips?.length) await emit(`${plural(data.seasonalDips.length, "seasonal dip")} found`, { detail: data.seasonalDips.map((d: Json) => d.month).join(", ") });
-      return { data, summary: `${data.months ?? "?"} months, turnover ${fmt(data.turnover12m ?? 0)}` };
+      return { data, summary: `${data.months ?? "?"} months, observed sales ${fmt(data.salesTotal ?? data.turnover12m ?? 0)}` };
     },
   },
   {
@@ -256,16 +258,16 @@ const LANES: Lane[] = [
 const noEmit: Emit = async () => {};
 
 /** Progress lines for one lane on the request, so the brief page can draw it as its own lane. */
-function laneProgress(requestId: string, lane: LaneId) {
+function laneProgress(requestId: string, lane: LaneId, claimToken?: string) {
   const write = (state: LaneState, step: string, extra?: { detail?: string; impactRm?: number }) =>
-    updateRequest(requestId, { progress: { step, lane, state, ...extra } }).catch((e) => console.error(`[claude] progress ${requestId}`, e));
+    updateRequest(requestId, { progress: { step, lane, state, ...extra } }, claimToken).catch((e) => console.error(`[claude] progress ${requestId}`, e));
   const emit: Emit = (step, extra) => write("step", step, extra);
   return { write, emit };
 }
 
 /** Runs one lane with started / step / done / failed progress. Returns the data, or { error } if it failed. */
-async function runLane(requestId: string | null, lane: Lane, ws: Workspace, fmt: Fmt): Promise<Json> {
-  const p = requestId ? laneProgress(requestId, lane.id) : null;
+async function runLane(requestId: string | null, lane: Lane, ws: Workspace, fmt: Fmt, claimToken?: string): Promise<Json> {
+  const p = requestId ? laneProgress(requestId, lane.id, claimToken) : null;
   await p?.write("started", `${lane.agent} started`);
   try {
     const { data, summary } = await lane.run(ws, fmt, p?.emit ?? noEmit);
@@ -430,24 +432,24 @@ const ANALYSIS_TOOLS: Anthropic.Beta.BetaTool[] = [
 
 type Asked = { question: string; answer?: string; assumedDefault?: string };
 
-async function askOwner(requestId: string, input: z.infer<typeof AskInput>, asked: Asked[]) {
+async function askOwner(requestId: string, input: z.infer<typeof AskInput>, asked: Asked[], claimToken?: string) {
   if (asked.length >= MAX_QUESTIONS) return { status: "limit_reached", note: "Question limit reached. Use your default and list it under assumptions." };
   const { question, context, options, defaultOption } = input;
-  const questionId = await createQuestion({ requestId, question, context, options, allowOther: true, defaultOption });
-  await updateRequest(requestId, { status: "waiting_for_user", progress: { step: "Waiting for your answer", detail: question } });
+  const questionId = await createQuestion({ requestId, question, context, options, allowOther: true, defaultOption }, claimToken);
+  await updateRequest(requestId, { status: "waiting_for_user", progress: { step: "Waiting for your answer", detail: question } }, claimToken);
   const deadline = Date.now() + ASK_WAIT_MS;
   while (Date.now() < deadline) {
     await sleep(2000);
     const q = await getQuestion(questionId);
     if (q?.status === "answered") {
       const answer = q.answer === "__other__" ? `Other: ${q.otherText ?? ""}` : (q.answer ?? "");
-      await updateRequest(requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } });
+      await updateRequest(requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } }, claimToken);
       asked.push({ question, answer });
       return { status: "answered", answer };
     }
   }
-  await expireQuestion(questionId);
-  await updateRequest(requestId, { status: "processing", progress: { step: "No answer yet, continuing", detail: `Assumed: ${defaultOption}` } });
+  await expireQuestion(questionId, claimToken);
+  await updateRequest(requestId, { status: "processing", progress: { step: "No answer yet, continuing", detail: `Assumed: ${defaultOption}` } }, claimToken);
   asked.push({ question, assumedDefault: defaultOption });
   return { status: "no_answer", usedDefault: defaultOption, note: "Continue with the default and list it under assumptions." };
 }
@@ -499,22 +501,25 @@ const VerifierOutputSchema = ResultSchema.omit({
   channels: true,
   benchmarks: true,
 }).extend({
-  decisions: z.array(DecisionSchema.extend({ evidence: z.array(VerifierEvidence).default([]) })).min(1).max(5),
+  // Required string keeps the structured-output optional-field budget unchanged; empty means no numeric effect.
+  decisions: z.array(DecisionSchema.extend({ impactCheckId: z.string(), evidence: z.array(VerifierEvidence).default([]) })).min(1).max(5),
   verification: z.array(VerificationSchema.omit({ status: true })).default([]),
   applicationPacks: z.array(ApplicationPackSchema.omit({ ladder: true, shariah: true, proposedNotes: true })).max(3).default([]),
 });
 
 /** Turns the Verifier's output into a Result: data basis on keyed evidence, the item on price-rise rows, statuses. */
-function fromVerifier(out: z.infer<typeof VerifierOutputSchema>, laneData: Record<string, Json>): Result {
+function fromVerifier(out: z.infer<typeof VerifierOutputSchema>, laneData: Record<string, Json>, checks: FinancialImpactCheck[]): Result {
   const alerts: Json[] = laneData.Procurement?.alerts ?? [];
   const itemFor = (keys: string[]) => alerts.find((a) => keys.some((k) => a.source?.keys?.includes(k)))?.source?.item as string | undefined;
   return {
     ...out,
     decisions: out.decisions.map((d) => ({
       ...d,
+      impactCheckId: d.impactCheckId || undefined,
       evidence: d.evidence.map((e) => {
         if (!e.source) return e;
-        const item = e.source.table === "purchases" ? itemFor(e.source.keys) : undefined;
+        const checkedSource = checks.find((c) => c.id === d.impactCheckId)?.sources.find((s) => s.table === e.source!.table);
+        const item = e.source.table === "purchases" ? (checkedSource?.item ?? itemFor(e.source.keys)) : undefined;
         return { ...e, source: item ? { ...e.source, item } : e.source, basis: "data" as const };
       }),
     })),
@@ -556,7 +561,7 @@ export function processRequest(requestId: string) {
         const lanes = calls.filter((c) => LANES.some((l) => l.tool === c.name));
         if (lanes.length > 1) {
           const names = lanes.map((c) => LANES.find((l) => l.tool === c.name)!.agent).join(" · ");
-          await updateRequest(requestId, { progress: { step: `${lanes.length} agents working in parallel`, detail: names } });
+          await updateRequest(requestId, { progress: { step: `${lanes.length} agents working in parallel`, detail: names } }, r.claimToken);
         }
         // The app shows one question at a time, so questions asked in the same turn wait their turn.
         let askQueue: Promise<unknown> = Promise.resolve();
@@ -564,21 +569,21 @@ export function processRequest(requestId: string) {
           calls.map(async (c) => {
             const lane = LANES.find((l) => l.tool === c.name);
             if (lane) {
-              const data = await runLane(requestId, lane, ws!, fmt);
+              const data = await runLane(requestId, lane, ws!, fmt, r.claimToken);
               laneData[lane.agent] = data;
               return data.error ? toolResult(c.id, `Lane failed: ${data.error}`, true) : toolResult(c.id, data);
             }
             if (c.name === "ask_owner") {
               const input = AskInput.safeParse(c.input);
               if (!input.success) return toolResult(c.id, `Invalid input: ${z.prettifyError(input.error)}`, true);
-              const asking = askQueue.then(() => askOwner(requestId, input.data, asked));
+              const asking = askQueue.then(() => askOwner(requestId, input.data, asked, r.claimToken));
               askQueue = asking.catch(() => undefined);
               return toolResult(c.id, await asking);
             }
             return toolResult(c.id, `Unknown tool ${c.name}`, true);
           }),
         );
-        if (lanes.length) await updateRequest(requestId, { progress: { step: "Choosing your 3 decisions" } });
+        if (lanes.length) await updateRequest(requestId, { progress: { step: "Choosing your 3 decisions" } }, r.claimToken);
         return results;
       };
       const analysisMessages: Anthropic.Beta.BetaMessageParam[] = [
@@ -603,12 +608,13 @@ export function processRequest(requestId: string) {
       // Lanes the agent skipped still go to the Verifier, so every figure can be checked.
       await Promise.all(
         LANES.filter((l) => !laneData[l.agent]).map(async (l) => {
-          laneData[l.agent] = await runLane(requestId, l, ws!, fmt);
+          laneData[l.agent] = await runLane(requestId, l, ws!, fmt, r.claimToken);
         }),
       );
 
       // 2) Verifier agent: checks the draft against the lane outputs and writes the final Result.
-      const verifier = laneProgress(requestId, "verifier");
+      const impactChecks = financialImpactChecks(ws.business);
+      const verifier = laneProgress(requestId, "verifier", r.claimToken);
       await verifier.write("started", "Verifier checking every figure and link");
       const verifierParams: Params = {
         system: [
@@ -626,13 +632,15 @@ export function processRequest(requestId: string) {
             block("owner_details", ws.business.profileExtras ?? {}),
             block("data_on_file", coverage(ws.business)),
             block("lane_outputs", laneData),
+            block("server_impact_checks", impactChecks),
+            "Every decision impactRm must copy an id as impactCheckId, the exact impactRm/impactType and ALL sources from server_impact_checks. Include every key on purchase evidence (the server restores item). Omit impactRm and set impactCheckId to an empty string for unsupported effects, including proposed financing. These checks verify arithmetic, not guaranteed recovery or savings; preserve their assumptions.",
             block("owner_answers", asked.length ? asked : "No questions were asked."),
             block("draft", textOf(draft)),
           ].join("\n\n"),
         },
       ];
       const final = await converse(verifierParams, verifierMessages, usage);
-      const result: Result = fromVerifier(await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult), laneData);
+      const result: Result = fromVerifier(await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult), laneData, impactChecks);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
       for (const v of result.verification) {
         const status = v.status ?? (v.passed ? "passed" : "failed");
@@ -643,13 +651,12 @@ export function processRequest(requestId: string) {
       });
 
       // Follow-up questions read these instead of running the lanes again.
-      await saveLaneOutputs(requestId, laneData).catch((e) => console.error(`[claude] lane outputs ${requestId}`, e));
-      await saveResult(requestId, result);
-      await updateRequest(requestId, { status: "completed", progress: { step: "CFO brief delivered", detail: result.headline } });
+      await saveLaneOutputs(requestId, laneData, r.claimToken).catch((e) => console.error(`[claude] lane outputs ${requestId}`, e));
+      await saveResult(requestId, result, r.claimToken);
     } catch (e) {
       console.error(`[claude] request ${requestId} failed`, e);
       const detail = e instanceof Anthropic.AuthenticationError ? "The Claude API key was rejected" : (e as Error).message;
-      await updateRequest(requestId, { status: "failed", error: detail, progress: { step: "Something went wrong", detail } }).catch(() => {});
+      await updateRequest(requestId, { status: "failed", error: detail, progress: { step: "Something went wrong", detail } }, r.claimToken).catch(() => {});
     } finally {
       await ws?.close();
       console.log(
@@ -716,14 +723,14 @@ export function answerOwnerMessage(messageId: string) {
         },
       ];
       const reply = await parseStructured(ReplySchema, await converse(params, messages, usage), params, messages, usage);
-      await answerMessage(messageId, reply.answer, reply.evidence);
+      await answerMessage(messageId, reply.answer, reply.evidence, m.claimToken);
     } catch (e) {
       console.error(`[claude] message ${messageId} failed`, e);
       const sorry =
         language === "ms"
           ? "Maaf, saya tidak dapat menjawab soalan ini sekarang. Sila tanya sekali lagi sebentar lagi."
           : "Sorry, I couldn't answer that right now. Please ask again in a moment.";
-      await answerMessage(messageId, sorry).catch(() => {});
+      await answerMessage(messageId, sorry, undefined, m.claimToken).catch(() => {});
     } finally {
       await ws?.close();
       console.log(`[claude] message ${messageId}: ${usage.input + usage.cacheRead + usage.cacheWrite} in / ${usage.output} out tokens, est. $${usd(usage).toFixed(3)}`);
@@ -790,6 +797,7 @@ export function processAction(actionId: string) {
           content: [
             `The owner approved this decision. kind: ${kind}. Write in: ${a.lang === "ms" ? "Bahasa Melayu" : "English"}. Currency ${pack.currencySymbol}.`,
             block("decision", decision),
+            block("source_rows", decision.evidence.filter((e) => e.source).map((e) => ({ source: e.source, rows: sourceRows(business, e.source!) }))),
             block("business", {
               name: business.profile.name,
               sector: business.profile.sector,
@@ -814,11 +822,11 @@ export function processAction(actionId: string) {
         channel: out.email ? "note" : "document",
         email: out.email,
         document: out.document,
-      });
+      }, a.claimToken);
     } catch (e) {
       console.error(`[claude] action ${actionId} failed`, e);
       const detail = e instanceof Anthropic.AuthenticationError ? "The Claude API key was rejected" : (e as Error).message;
-      await completeAction(actionId, { status: "failed", summary: detail, error: detail }).catch(() => {});
+      await completeAction(actionId, { status: "failed", summary: detail, error: detail }, a.claimToken).catch(() => {});
     } finally {
       console.log(`[claude] action ${actionId}: ${Math.round((Date.now() - started) / 1000)}s, est. $${usd(usage).toFixed(3)}`);
     }

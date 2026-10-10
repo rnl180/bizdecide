@@ -2,7 +2,7 @@
 
 **Your AI CFO. Not reports. Decisions.**
 
-BizDecide is an AI CFO for Malaysian small businesses. Owners upload their sales, purchases and suppliers. A team of AI agents running on **Tencent WorkBuddy** analyses the data, verifies its own work, asks the owner only when it must, and delivers **three concrete decisions** with ringgit impact and evidence.
+BizDecide is an AI CFO for Malaysian small businesses. Owners upload their sales, purchases and suppliers. An agent running on **Tencent WorkBuddy** plans the work, calls analysis tools, checks the evidence, asks the owner only when needed, and delivers **up to three concrete decisions** with supported ringgit impact and evidence.
 
 > Built for AI Hackerdorm 2026 · Track 2: WorkBuddy Agentic Solutions
 
@@ -24,25 +24,36 @@ Owner ──► BizDecide app (Next.js, Firebase App Hosting)
               ▲
               │  MCP (Streamable HTTP, bearer auth)  ── /api/mcp
               │
-          Tencent WorkBuddy  ◄── the brain: plans, runs agents + skills in parallel,
+          Tencent WorkBuddy  ◄── the brain: plans, runs skill scripts in parallel,
                                   verifies, asks the owner, delivers the CFO brief
 ```
 
-The app and the MCP server **only move data**. All intelligence runs in WorkBuddy.
+WorkBuddy owns planning, analysis and decisions. The backend independently recalculates supported financial effects before accepting a brief.
 
-| Agent (WorkBuddy) | Job | Skill |
+| Workflow role | Job | Implementation |
 |---|---|---|
-| Bookkeeper | P&L, costs by category, margin, duplicates | `financial-analyzer` |
+| Bookkeeper | Sales, supplier purchases, payment reconciliation, candidate overpayments | `financial-analyzer` |
 | Procurement | Hidden supplier price rises, alternatives | `supplier-price-tracker` |
 | Classifier | Official SME category (SME Corp rules) | `sme-classifier` |
-| Funding | Eligible Malaysian programmes, official links | `funding-matcher` |
+| Funding | Programme pre-screen, remaining eligibility review, official links | `run_all.py` + WorkBuddy |
 | Verifier | Reconcile totals, check every link and figure, replace what fails | — |
-| Delivery | 3 decisions → `submit_results` (+ PDF) | `brief-writer` |
+| Delivery | Supported decisions → `submit_results`; approved emails/documents → `complete_action` | WorkBuddy + printable app output |
+
+These are workflow roles. The WorkBuddy path runs three Python scripts in parallel;
+it does not by itself prove collaboration between multiple independent AI agents.
 
 ### MCP tools
-`ping` · `wait_for_request` · `list_pending_requests` · `get_data_link` · `get_business_data` · `update_request` · `ask_user` · `get_answer` · `reply_to_owner` · `submit_results`
+`ping` · `wait_for_request` · `list_pending_requests` · `claim_request` · `get_data_link` · `get_business_data` · `get_impact_checks` · `update_request` · `ask_user` · `get_answer` · `reply_to_owner` · `submit_results` · `complete_action`
 
 `ask_user` powers the live poll: the agent asks, the owner taps an answer (or types "Other") in the app, and the agent continues.
+
+`wait_for_request` atomically claims new or interrupted work. Keep its `request.claimToken` for progress, questions and delivery; one-off workers use `claim_request` after listing. After ten minutes without progress a run can be reclaimed, and its old token can no longer change the request. Local storage coordinates one Node process (including its route bundles); use Firestore transactions for multiple server instances.
+
+Approved actions and owner messages have separate claim tokens: pass `action.claimToken` to `complete_action` and `message.claimToken` to `reply_to_owner`. Stale workers cannot overwrite recovered work. Concurrent approvals reuse one action per decision. Recovered requests include earlier owner answers. Refund/supplier actions require an email; financing requires an application document.
+
+New briefs require evidence for every decision and at least one passed verification check. Source keys must exist in the same business's uploaded data. Rejected delivery leaves the request in progress and saves no result. Saving the accepted result and marking the request completed happen in one transaction. Historical briefs remain readable.
+
+Every numeric decision `impactRm` also needs an `impactCheckId` from `get_impact_checks`, the exact amount/type and all calculation sources. Delivery recomputes it from the full business records, independently of the agent or Python lane output. Supported checks: overpayment (distinct invoice-linked payments minus one ledger obligation), QR/card settlement query gross amount, and monthly supplier price increase at historical volume/frequency. Amounts must match to the cent; the same effect cannot be counted twice. Unknown effects and proposed financing omit `impactRm`. The server records its calculation and preserves assumptions: a missing settlement is a query, and supplier savings are conditional projections. This validates structured decision effects, not every amount in free text or optional report tables, and cannot prove that uploaded records are complete.
 
 ### Beyond the brief
 - **Funding application pack.** For the top programmes the business qualifies for, the agents build the application: a document checklist marked ready / partial / missing against the data already uploaded, pre-filled form answers, a suggested amount, repayment and affordability, and next steps. Printable per programme. No Malaysian accounting tool does this (see [research/competitors.md](research/competitors.md)).
@@ -61,12 +72,12 @@ npm run dev               # http://localhost:3100
 
 ## Claude engine (optional)
 
-Set `ANTHROPIC_API_KEY` and the server runs the CFO team itself on the Claude API (`lib/claude-cfo.ts`), with no WorkBuddy loop needed:
+WorkBuddy is the default, even when an Anthropic key is present. To opt into the direct API engine, set **both** `BIZDECIDE_ENGINE=claude` and `ANTHROPIC_API_KEY`. The server then runs the CFO team itself on the Claude API (`lib/claude-cfo.ts`), with no WorkBuddy loop needed:
 - **Analysis agent** (Claude Opus 5.5, effort high) calls five lanes in parallel: Bookkeeper, Reconciliation, Procurement, Classifier and Funding. Each lane runs the same Python skill scripts, so every number is computed from the data. The agent asks the owner through the live poll when it must, then drafts the brief.
 - **Verifier agent** (Claude Opus 5.5, effort high) checks every figure against the lane outputs and returns the final brief as structured output.
 - **Ask your CFO** follow-ups are answered the same way.
 
-Needs `python3` on the server (the Docker image installs it). Leave the key empty to keep using WorkBuddy through `/api/mcp`.
+Needs `python3` on the server (the Docker image installs it). Use `BIZDECIDE_ENGINE=workbuddy` for the WorkBuddy workflow through `/api/mcp`.
 
 ## Deploy (Firebase App Hosting)
 
@@ -82,17 +93,28 @@ Needs `python3` on the server (the Docker image installs it). Leave the key empt
 2. Paste `workbuddy/mcp.example.json` with your URL and key → Save → toggle **bizdecide** on.
 3. Test: *"Use the bizdecide ping tool with name Ahmad"* → `Hello Ahmad from BizDecide`.
 4. Add `workbuddy/bizdecide_instructions.md` and `workbuddy/knowledge/` to the WorkBuddy workspace.
-5. Generate the skills in WorkBuddy using the prompts in `workbuddy/skills/README.md`.
+5. Import the three shipped skills and add `run_all.py` to the workspace; see `workbuddy/skills/README.md` for the actual package contents.
 6. Run: **"Process new BizDecide requests"**.
+
+## Track 2 criteria and verification
+
+See [the criteria audit](docs/track2-audit.md) for the mapping to the supplied judging
+slides, implemented checks and the remaining live WorkBuddy demonstration. Passing
+the local tests establishes integration behaviour, not autonomous execution by
+WorkBuddy or final approval by the judges.
 
 ## Demo
 
 Click **Load demo café: Rock Cafe** on the home page. The data (`npm run demo:data`) hides four things for the agents to find:
 
-1. Ladang Segar Dairy quietly raised milk ~12% in Aug–Sep 2026.
-2. Invoice `KB-2609` uploaded twice.
-3. A RM2,399 Harvey Norman purchase: business or personal? → live question to the owner.
-4. Declared sales RM240k, but uploaded sales show ~RM384k → SME category check.
+1. Star Coffee Trading raised coffee powder prices 12%, while its other items stayed flat.
+2. Invoice `LSS/2609/278` (RM642) was paid twice, on 15 and 16 September 2026.
+3. DuitNow QR sales of RM312.40 on 18 September have no matching settlement.
+4. A RM144.15 Value Mart receipt mixes business and personal items → live question to the owner.
+
+The focused demo is **duplicate payment → proof → approve → refund email ready to send**. WorkBuddy receives the uploaded bank and invoice rows when it picks up the approved action. `complete_action` rejects a summary without an actual deliverable; refunds require an email. Nothing is sent automatically.
+
+`npm test` checks the demo findings, evidence selection, engine choice and action completion. `npm run build` checks the production build. Against a fresh local server, `BIZDECIDE_MCP_KEY=<your-local-key> node tests/mcp-refund.smoke.mjs` exercises the HTTP/MCP flow with a simulated WorkBuddy client and leaves a clearly labelled demo brief. This tests the integration, not WorkBuddy's model or Gmail connector.
 
 ## Distribution
 1. **The app** for owners who have never heard of WorkBuddy.

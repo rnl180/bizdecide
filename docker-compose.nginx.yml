@@ -8,6 +8,7 @@ services:
     environment:
       - BIZDECIDE_MCP_KEY=${BIZDECIDE_MCP_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BIZDECIDE_ENGINE=${BIZDECIDE_ENGINE:-workbuddy}
       - BIZDECIDE_STORE=local
     volumes:
       - bizdecide-data:/app/.data

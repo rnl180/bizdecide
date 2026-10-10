@@ -8,6 +8,7 @@ Each alert carries series (every invoice of the item, for a sparkline) and sourc
 import sys
 from collections import defaultdict
 from datetime import date
+from decimal import Decimal, ROUND_HALF_UP
 from _load import load, arg_data, out, r2
 
 d = load(arg_data())
@@ -48,6 +49,9 @@ for (sup, item), rows in series.items():
         orders_per_year = 365 / (span_days / (len(rows) - 1))
         avg_qty = sum(r["qty"] for r in rows) / len(rows)
         annual_extra = (last - base) * avg_qty * orders_per_year
+        # Match the server: decimal unit prices/quantities, round half up only at delivery.
+        exact_annual = (Decimal(str(last)) - Decimal(str(base))) * sum(Decimal(str(r["qty"])) for r in rows) / Decimal(len(rows)) * Decimal(365 * (len(rows) - 1)) / Decimal(span_days)
+        monthly_extra = float((exact_annual / 12).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
         s = suppliers.get(sup.lower(), {})
         alerts.append({
             "supplier": sup, "item": item,
@@ -55,7 +59,7 @@ for (sup, item), rows in series.items():
             "latest": {"price": last, "date": rows[-1]["date"], "invoice": rows[-1].get("invoiceNo")},
             "changePct": round(change, 1), "steps": steps,
             "extraPaidSinceFirstRise": r2(extra_paid),
-            "projectedExtraPerYear": r2(annual_extra), "projectedExtraPerMonth": r2(annual_extra / 12),
+            "projectedExtraPerYear": r2(annual_extra), "projectedExtraPerMonth": monthly_extra,
             "supplierNotifiedPriceChange": s.get("notifiedPriceChange"),
             "evidenceInvoices": [rows[0].get("invoiceNo"), rows[-1].get("invoiceNo")],
             "series": [{"date": r["date"], "invoice": r.get("invoiceNo"), "price": r["unitPriceRm"], "qty": r["qty"]} for r in rows],
