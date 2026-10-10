@@ -49,7 +49,7 @@ export function LandingHero({ lang, onTryDemo }: { lang: Lang; onTryDemo: () => 
   const t = LANDING[lang];
   const h = t.hero;
   return (
-    <section className="hero-band lx-hero">
+    <section className="hero-band lx-hero" data-theme="dark">
       <div className="container lx-hero-grid">
         <div className="lx-copy">
           <div className="lang-toggle" role="group" aria-label={t.langLabel}>
@@ -165,10 +165,11 @@ function FoundCard({ c }: { c: LandingStrings["card"] }) {
   const shown = value.toLocaleString("en-MY", { minimumFractionDigits: found.decimals, maximumFractionDigits: found.decimals });
 
   return (
-    <div className="lx-stage">
+    // The sample brief is a paper document on the night band, so it keeps the light theme.
+    <div className="lx-stage" data-theme="light">
       <div className="lx-sheet lx-sheet-2" aria-hidden="true" />
       <div className="lx-sheet lx-sheet-1" aria-hidden="true" />
-      <figure className="lx-found" data-phase={phase} aria-labelledby="lx-found-name lx-found-badge">
+      <figure className="lx-found double-rule" data-phase={phase} aria-labelledby="lx-found-name lx-found-badge">
         <div className="lx-found-head">
           <span className="lx-avatar">
             <Icon name="store" size={20} />
@@ -253,6 +254,7 @@ export function LandingSections({ lang }: { lang: Lang }) {
       <Capabilities t={t.grid} />
       <HowItWorks t={t.how} />
       <Problem t={t.stats} />
+      <Faq t={t.faq} />
       <CtaBand t={t.cta} />
     </div>
   );
@@ -283,7 +285,10 @@ function WhyNotChatGPT({ t }: { t: LandingStrings["vs"] }) {
             {t.them}
           </div>
           <div className="lx-vs-h lx-vs-h-us" aria-hidden="true">
-            <span className="lx-mark">B</span>
+            <picture>
+              <source srcSet="/brand/mark-dark.svg" media="(prefers-color-scheme: dark)" />
+              <img className="lx-mark" src="/brand/mark.svg" alt="" width={30} height={30} />
+            </picture>
             {t.us}
           </div>
           <ul className="lx-vs-rows">
@@ -430,11 +435,39 @@ function Problem({ t }: { t: LandingStrings["stats"] }) {
   );
 }
 
+/** Plain answers to what owners worry about before uploading: data, sending, accuracy, approval. */
+function Faq({ t }: { t: LandingStrings["faq"] }) {
+  return (
+    <section className="lx-section" aria-labelledby="lx-faq-title">
+      <div className="container lx-faq">
+        <div className="section-head lx-head lx-faq-head">
+          <div className="kicker">{t.kicker}</div>
+          <h2 id="lx-faq-title">{t.title}</h2>
+          <a className="lx-faq-link" href="/privacy">
+            <Icon name="shield" size={16} /> {t.privacyLink}
+          </a>
+        </div>
+        <div className="lx-faq-list">
+          {t.items.map(([q, a], i) => (
+            <details key={q} className="lx-qa" open={i === 0}>
+              <summary>
+                <span>{q}</span>
+                <Icon name="plus" size={18} className="lx-qa-ico" />
+              </summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CtaBand({ t }: { t: LandingStrings["cta"] }) {
   return (
     <section className="lx-section lx-cta-wrap" aria-labelledby="lx-cta-title">
       <div className="container">
-        <div className="lx-cta">
+        <div className="lx-cta" data-theme="dark">
           <div className="lx-cta-copy">
             <h2 className="lx-cta-title" id="lx-cta-title">
               {t.title}

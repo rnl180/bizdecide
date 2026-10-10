@@ -16,6 +16,9 @@ const en = {
   demoLoaded: (name: string) => `Sample loaded: ${name}, a fictional kopitiam with 12 months of books. Press "Get my 3 decisions".`,
   found: "What we found",
   filesCount: (n: number) => `${n} file${n === 1 ? "" : "s"}`,
+  dockReady: "ready to send",
+  camera: "Take a photo of an invoice or receipt",
+  dockButton: "Review and send",
   kinds: { sales: "Sales", purchases: "Purchases", suppliers: "Suppliers", bank: "Bank statement", payables: "Bills paid" } as Record<CsvKind, string>,
   kindWhy: {
     sales: "revenue, SME category, DuitNow and card checks",
@@ -95,6 +98,9 @@ const ms: QuickStrings = {
   demoLoaded: (name: string) => `Contoh dimuatkan: ${name}, kopitiam rekaan dengan 12 bulan buku akaun. Tekan "Dapatkan 3 keputusan saya".`,
   found: "Apa yang kami jumpa",
   filesCount: (n: number) => `${n} fail`,
+  dockReady: "sedia untuk dihantar",
+  camera: "Ambil gambar invois atau resit",
+  dockButton: "Semak dan hantar",
   kinds: { sales: "Jualan", purchases: "Belian", suppliers: "Pembekal", bank: "Penyata bank", payables: "Bil dibayar" },
   kindWhy: {
     sales: "hasil, kategori PKS, semakan DuitNow dan kad",

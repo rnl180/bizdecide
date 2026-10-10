@@ -31,6 +31,7 @@ export type LandingStrings = {
   grid: { kicker: string; title: string; tiles: { title: string; body: string }[] };
   how: { kicker: string; title: string; steps: { title: string; body: string }[]; agents: string[]; running: string };
   stats: { kicker: string; title: string; newTab: string; items: { value: string; label: string; source: string; href: string }[] };
+  faq: { kicker: string; title: string; privacyLink: string; items: [string, string][] };
   cta: { title: string; sub: string; button: string };
 };
 
@@ -143,6 +144,35 @@ const en: LandingStrings = {
       { value: "~140", label: "government financing schemes, hard to navigate", ...SOURCES[3] },
     ],
   },
+  faq: {
+    kicker: "Questions owners ask",
+    title: "Before you upload anything.",
+    privacyLink: "Read the privacy notice",
+    items: [
+      [
+        "What do I need to upload?",
+        "Only your business name and one sales or purchases file. Everything else helps but is optional: POS sales, supplier invoices, a bank statement, bills paid. CSV, PDF or photos all work, and we work out which file is which.",
+      ],
+      [
+        "Who can see my numbers?",
+        "Your data is stored on BizDecide's server and used only to prepare your brief. We don't sell it or use it for advertising. Our AI agents process the numbers your brief needs, which may happen outside Malaysia. Anyone with your brief's link can open it, so share the link only with people you trust.",
+      ],
+      [
+        "Does BizDecide send emails or applications for me?",
+        "Not without your OK. When you tap Approve, your CFO team drafts the email or letter. You read it, then send it yourself from your own Gmail, or print it.",
+      ],
+      [
+        "How do I know the numbers are right?",
+        "Every figure is computed in code from your own files, not guessed by a chatbot. A Verifier agent reconciles the totals and checks every figure and link before you see the brief, and each decision shows the invoice or bank line behind it.",
+      ],
+      [
+        "Will BizDecide get my loan approved?",
+        "No. BizDecide tells you which programmes fit your numbers and prepares the documents. The agency or bank makes the final decision.",
+      ],
+      ["Which languages does it speak?", "English and Bahasa Melayu. Your brief comes back in the language you choose."],
+      ["Can I delete my data?", "Yes. Ask the BizDecide team at masarsoftware.com to see, correct or delete your data at any time."],
+    ],
+  },
   cta: {
     title: "Your books already know where the money is.",
     sub: "Let your CFO team find it.",
@@ -237,6 +267,35 @@ const ms: LandingStrings = {
       { value: "67%", label: "kata kenaikan kos ialah tekanan utama; 1 daripada 5 menyebut kenaikan harga pembekal", ...SOURCES[1] },
       { value: "50.6%", label: "tidak tahu institusi kewangan pembangunan yang boleh membiayai mereka", ...SOURCES[2] },
       { value: "~140", label: "skim pembiayaan kerajaan, sukar diteroka", ...SOURCES[3] },
+    ],
+  },
+  faq: {
+    kicker: "Soalan lazim pemilik",
+    title: "Sebelum anda muat naik apa-apa.",
+    privacyLink: "Baca notis privasi",
+    items: [
+      [
+        "Apa yang perlu saya muat naik?",
+        "Hanya nama perniagaan dan satu fail jualan atau belian. Selebihnya membantu tetapi pilihan: jualan POS, invois pembekal, penyata bank, bil yang dibayar. CSV, PDF atau gambar boleh digunakan, dan kami kenal pasti setiap fail.",
+      ],
+      [
+        "Siapa yang boleh melihat angka saya?",
+        "Data anda disimpan di pelayan BizDecide dan digunakan hanya untuk menyediakan ringkasan anda. Kami tidak menjualnya atau menggunakannya untuk pengiklanan. Ejen AI kami memproses angka yang diperlukan untuk ringkasan anda, yang mungkin berlaku di luar Malaysia. Sesiapa yang mempunyai pautan ringkasan anda boleh membukanya, jadi kongsi pautan hanya dengan orang yang anda percayai.",
+      ],
+      [
+        "Adakah BizDecide menghantar e-mel atau permohonan untuk saya?",
+        "Tidak tanpa kebenaran anda. Apabila anda tekan Lulus, pasukan CFO anda menyediakan draf e-mel atau surat. Anda membacanya, kemudian menghantarnya sendiri dari Gmail anda, atau mencetaknya.",
+      ],
+      [
+        "Bagaimana saya tahu angkanya betul?",
+        "Setiap angka dikira dengan kod daripada fail anda sendiri, bukan diteka oleh chatbot. Ejen Penyemak menyelaraskan jumlah dan menyemak setiap angka serta pautan sebelum anda melihat ringkasan, dan setiap keputusan menunjukkan invois atau baris bank di sebaliknya.",
+      ],
+      [
+        "Adakah BizDecide akan meluluskan pinjaman saya?",
+        "Tidak. BizDecide memberitahu program yang sesuai dengan angka anda dan menyediakan dokumennya. Agensi atau bank yang membuat keputusan akhir.",
+      ],
+      ["Bahasa apa yang digunakan?", "Bahasa Inggeris dan Bahasa Melayu. Ringkasan anda dihantar dalam bahasa yang anda pilih."],
+      ["Bolehkah saya memadam data saya?", "Boleh. Hubungi pasukan BizDecide di masarsoftware.com untuk melihat, membetulkan atau memadam data anda pada bila-bila masa."],
     ],
   },
   cta: {

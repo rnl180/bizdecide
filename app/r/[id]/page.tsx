@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { Icon, type IconName } from "@/components/Icon";
 import { STATUS } from "@/components/RequestMeta";
 import { INTAKE, useLang } from "@/lib/i18n";
@@ -150,6 +150,9 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
           <section className="card" aria-live="polite">
             <h3 className="card-title">
               <Icon name="zap" size={18} /> {t.liveActivity}
+              {request.progress.length > 0 && (
+                <span className="steps-done">{t.stepsDone(Math.max(0, request.progress.length - (running ? 1 : 0)))}</span>
+              )}
             </h3>
             <ol className="timeline">
               {request.progress.map((p, i) => {
@@ -259,7 +262,32 @@ function NowCard({ request, hasQuestion, t }: { request: RequestDoc; hasQuestion
         <strong>{v.title}</strong>
         <p>{v.body}</p>
       </div>
+      {request.status !== "failed" && <Elapsed since={request.createdAt} label={t.elapsed} />}
     </section>
+  );
+}
+
+/** A ticking "Elapsed 02:14" so the owner can see the agents are still going. */
+function Elapsed({ since, label }: { since: string; label: string }) {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    setNow(Date.now());
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  const start = Date.parse(since);
+  if (now === null || !Number.isFinite(start)) return null;
+  const s = Math.max(0, Math.floor((now - start) / 1000));
+  const h = Math.floor(s / 3600);
+  const mm = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
+  const ss = String(s % 60).padStart(2, "0");
+  return (
+    <span className="now-clock">
+      <span className="now-clock-l">{label}</span>
+      <span className="now-clock-v" aria-hidden="true">
+        {h > 0 ? `${h}:${mm}:${ss}` : `${mm}:${ss}`}
+      </span>
+    </span>
   );
 }
 
@@ -343,7 +371,10 @@ function QuestionCard({ q, t }: { q: QuestionDoc; t: AppStrings }) {
               <label key={value} className="option" data-on={choice === value}>
                 <input type="radio" name={`q-${q.id}`} className="sr-only" checked={choice === value} onChange={() => setChoice(value!)} />
                 <span className="radio" />
-                {label}
+                <span className="option-text">
+                  {label}
+                  {value === q.defaultOption && <span className="option-tag">{t.qAssumed}</span>}
+                </span>
               </label>
             ))}
           </div>
@@ -432,6 +463,27 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   const { byIndex, approve } = useActions(request.id);
   const passed = result.verification.filter((v) => v.passed).length;
   const [headline, subhead] = splitDash(result.headline);
+  const { done, toggle } = useDone(request.id, result.decisions.length);
+  // Evidence starts open on wide screens and folded on phones; printing opens everything.
+  const [evidenceOpen, setEvidenceOpen] = useState(true);
+  useEffect(() => {
+    setEvidenceOpen(!window.matchMedia("(max-width: 640px)").matches);
+    const openAll = () => document.querySelectorAll("details").forEach((el) => (el.open = true));
+    window.addEventListener("beforeprint", openAll);
+    return () => window.removeEventListener("beforeprint", openAll);
+  }, []);
+  const isDone = (d: Decision) => done.includes(result.decisions.indexOf(d));
+  const doneN = decisions.filter(isDone).length;
+  const meter = <DoneMeter done={doneN} total={decisions.length} label={t.doneCount(doneN, decisions.length)} />;
+  const sections = [
+    { id: "summary", label: t.navSummary },
+    { id: "decisions", label: t.navDecisions, count: String(decisions.length) },
+    ...(result.applicationPacks?.length ? [{ id: "funding", label: t.navFunding, count: String(result.applicationPacks.length) }] : []),
+    { id: "ask", label: t.askTitle },
+    ...(result.verification.length || result.assumptions.length
+      ? [{ id: "checks", label: t.checked, count: result.verification.length ? `${passed}/${result.verification.length}` : undefined }]
+      : []),
+  ];
   const facts: [string, string][] = [];
   if (result.period) facts.push([t.period, result.period]);
   if (result.smeCategory) facts.push([t.smeCategory, result.smeCategory]);
@@ -455,13 +507,26 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         </div>
       </div>
       <ShareNote t={t} />
+      <BriefNav items={sections} label={t.navLabel} meter={meter} />
 
-      <header className="card brief-hero">
+      <header className="card brief-hero double-rule brief-sec" id="summary">
+        {/* Decision ready: the emblem presses in once. */}
+        <span className="chop-seal" aria-hidden="true">
+          <picture>
+            <source srcSet="/brand/emblem-light.svg" media="(prefers-color-scheme: dark)" />
+            <img src="/brand/emblem.svg" alt="" width={196} height={124} />
+          </picture>
+        </span>
         <div className="meta-row">
           <span className="status done">
             <Icon name="clipboard" size={14} /> {t.cfoBrief}
           </span>
           <span className="chip">{request.businessName}</span>
+          {result.verification.length > 0 && (
+            <a className={`status ${passed === result.verification.length ? "done" : "waiting"} checks-chip`} href="#checks">
+              <Icon name="shield" size={14} /> {t.checksChip(passed, result.verification.length)}
+            </a>
+          )}
         </div>
         <h1>{headline}</h1>
         {subhead && (
@@ -489,12 +554,15 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
 
         <FoundHeadline totals={totals} rm={rm} lang={lang} businessName={request.businessName} />
         <div className="glance">
-          <div className="mini-label">{t.atGlance}</div>
+          <div className="glance-head">
+            <div className="mini-label">{t.atGlance}</div>
+            {meter}
+          </div>
           <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {decisions.map((d, i) => (
-              <li key={i}>
+              <li key={i} data-done={isDone(d) || undefined}>
                 <a href={`#decision-${i + 1}`}>
-                  <span className="decision-n">{i + 1}</span>
+                  <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
                   <span>{d.title}</span>
                   <span className={`tag ${d.priority}`}>{t.priority[d.priority]}</span>
                   {d.impactRm ? (
@@ -525,17 +593,29 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         </div>
       )}
 
-      <div className="section-head">
+      <div className="section-head brief-sec" id="decisions">
         <div className="kicker">{t.nextKicker}</div>
         <h2>{t.decisionsTitle(decisions.length)}</h2>
       </div>
 
       <section className="decisions">
         {decisions.map((d, i) => (
-          <div className={`card decision ${d.priority}`} key={i} id={`decision-${i + 1}`}>
+          <div className={`card decision ${d.priority}`} key={i} id={`decision-${i + 1}`} data-done={isDone(d) || undefined}>
             <div className="decision-top">
-              <span className="decision-n">{i + 1}</span>
+              <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
               <span className={`tag ${d.priority}`}>{t.priority[d.priority]}</span>
+              <button
+                type="button"
+                className="done-toggle no-print"
+                aria-pressed={isDone(d)}
+                title={t.doneNote}
+                onClick={() => toggle(result.decisions.indexOf(d))}
+              >
+                <span className="done-box" aria-hidden="true">
+                  <Icon name="check" size={12} strokeWidth={3} />
+                </span>
+                {isDone(d) ? t.markedDone : t.markDone}
+              </button>
               {d.impactRm ? (
                 <span className={`decision-impact ${impactKind(d)}${d.impactRm < 0 ? " neg" : ""}`}>
                   <span className="l">{t.impactKindLabel[impactKind(d)]}</span>
@@ -576,8 +656,12 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
               </div>
 
               {d.evidence.length > 0 && (
-                <aside className="evidence">
-                  <div className="evidence-label">{t.evidence}</div>
+                <details className="evidence" open={evidenceOpen}>
+                  <summary className="evidence-label">
+                    {t.evidence}
+                    <span className="evidence-n">{d.evidence.length}</span>
+                    <Icon name="chevronDown" size={14} className="evidence-chev" />
+                  </summary>
                   <ul>
                     {d.evidence.map((e, j) => (
                       <li key={j}>
@@ -601,7 +685,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
                       </li>
                     ))}
                   </ul>
-                </aside>
+                </details>
               )}
             </div>
             <DecisionAction
@@ -621,7 +705,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
       <AskCfo requestId={request.id} initial={messages} t={t} />
 
       {(result.verification.length > 0 || result.assumptions.length > 0) && (
-        <div className="grid-2">
+        <div className="grid-2 brief-sec" id="checks">
           {result.verification.length > 0 && (
             <section className="card">
               <h3 className="card-title">
@@ -692,6 +776,8 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
 }
 
 const CHECK_ICON: Record<ApplicationPack["checklist"][number]["status"], IconName> = { ready: "check", partial: "clock", missing: "x" };
+/** Gaps first: what's missing is what the owner has to act on. */
+const CHECK_ORDER: Record<ApplicationPack["checklist"][number]["status"], number> = { missing: 0, partial: 1, ready: 2 };
 
 /** Prints one pack on its own: hides everything else for the duration of the print dialog. */
 function printPack(programId: string) {
@@ -710,7 +796,7 @@ function printPack(programId: string) {
 
 function ApplicationPacks({ packs, rm, t }: { packs: ApplicationPack[]; rm: (n: number) => string; t: AppStrings }) {
   return (
-    <div className="packs-wrap">
+    <div className="packs-wrap brief-sec" id="funding">
       <div className="section-head">
         <div className="kicker">{t.packKicker}</div>
         <h2>{t.packTitle}</h2>
@@ -754,7 +840,7 @@ function ApplicationPacks({ packs, rm, t }: { packs: ApplicationPack[]; rm: (n: 
                     <span style={{ width: `${p.checklist.length ? (ready / p.checklist.length) * 100 : 0}%` }} />
                   </div>
                   <ul className="checks">
-                    {p.checklist.map((c, i) => (
+                    {[...p.checklist].sort((a, b) => CHECK_ORDER[a.status] - CHECK_ORDER[b.status]).map((c, i) => (
                       <li key={i}>
                         <span className={`check-i ${c.status}`} aria-label={t.checkStatus[c.status]}>
                           <Icon name={CHECK_ICON[c.status]} size={12} strokeWidth={3} />
@@ -882,7 +968,7 @@ function AskCfo({ requestId, initial, t }: { requestId: string; initial: ChatMes
   }
 
   return (
-    <section className="card ask no-print" aria-labelledby="ask-title">
+    <section className="card ask no-print brief-sec" id="ask" aria-labelledby="ask-title">
       <h3 className="card-title" id="ask-title">
         <Icon name="question" size={18} /> {t.askTitle}
       </h3>
@@ -965,5 +1051,103 @@ function AskCfo({ requestId, initial, t }: { requestId: string; initial: ChatMes
         </p>
       )}
     </section>
+  );
+}
+
+/** Which decisions the owner has ticked off. A per-viewer convenience kept in this browser only. */
+function useDone(requestId: string, count: number) {
+  const key = `bizdecide.done.${requestId}`;
+  const [done, setDone] = useState<number[]>([]);
+  useEffect(() => {
+    try {
+      const saved: unknown = JSON.parse(window.localStorage.getItem(key) ?? "[]");
+      if (Array.isArray(saved)) setDone(saved.filter((n): n is number => Number.isInteger(n) && n >= 0 && n < count));
+    } catch {
+      /* storage blocked or bad value: start empty */
+    }
+  }, [key, count]);
+  const toggle = (i: number) =>
+    setDone((d) => {
+      const next = d.includes(i) ? d.filter((x) => x !== i) : [...d, i];
+      try {
+        window.localStorage.setItem(key, JSON.stringify(next));
+      } catch {
+        /* storage blocked: the tick lasts until the page is closed */
+      }
+      return next;
+    });
+  return { done, toggle };
+}
+
+/** "1 of 3 done" with one segment per decision. */
+function DoneMeter({ done, total, label }: { done: number; total: number; label: string }) {
+  return (
+    <span className="done-meter" data-complete={total > 0 && done === total ? true : undefined}>
+      <span className="done-segs" aria-hidden="true">
+        {Array.from({ length: total }, (_, i) => (
+          <i key={i} data-on={i < done || undefined} />
+        ))}
+      </span>
+      {label}
+    </span>
+  );
+}
+
+/** Sticky bar of the brief's sections; the one you are reading is marked. */
+function BriefNav({ items, label, meter }: { items: { id: string; label: string; count?: string }[]; label: string; meter: React.ReactNode }) {
+  const [active, setActive] = useState(items[0]?.id);
+  const ids = items.map((i) => i.id).join(" ");
+  useEffect(() => {
+    const list = ids.split(" ");
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      let current = list[0];
+      for (const id of list) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 160) current = id;
+      }
+      setActive(bottom ? list[list.length - 1] : current);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [ids]);
+
+  // Keep the current section's link visible when the bar scrolls sideways (phones).
+  const listRef = useRef<HTMLOListElement>(null);
+  useEffect(() => {
+    const ol = listRef.current;
+    const link = ol?.querySelector<HTMLElement>("a[aria-current]");
+    if (!ol || !link || ol.scrollWidth <= ol.clientWidth) return;
+    const li = link.parentElement!;
+    if (li.offsetLeft < ol.scrollLeft || li.offsetLeft + li.offsetWidth > ol.scrollLeft + ol.clientWidth) {
+      ol.scrollTo({ left: li.offsetLeft - 12, behavior: "smooth" });
+    }
+  }, [active]);
+
+  return (
+    <nav className="brief-nav no-print" aria-label={label}>
+      <ol ref={listRef}>
+        {items.map((it) => (
+          <li key={it.id}>
+            <a href={`#${it.id}`} aria-current={active === it.id ? "location" : undefined}>
+              {it.label}
+              {it.count && <span className="brief-nav-n">{it.count}</span>}
+            </a>
+          </li>
+        ))}
+      </ol>
+      <div className="brief-nav-meter">{meter}</div>
+    </nav>
   );
 }

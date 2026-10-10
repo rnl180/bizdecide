@@ -36,6 +36,7 @@ const PATHS = {
   clock: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "M12 6v6l4 2"],
   zap: ["M13 2 3 14h9l-1 8 10-12h-9Z"],
   spinner: ["M21 12a9 9 0 1 1-6.22-8.56"],
+  camera: ["M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z", "M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"],
 } as const;
 
 export type IconName = keyof typeof PATHS;

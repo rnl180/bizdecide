@@ -6,11 +6,12 @@ import type { ImpactKind } from "./impact";
 
 const en = {
   // site header and footer
+  skipLink: "Skip to content",
+  language: "Language",
   myRequests: "My requests",
   skills: "WorkBuddy skills",
-  powered: "Powered by Claude",
   newRequest: "New request",
-  tagline: "Not reports. Decisions.",
+  tagline: "Decided. Stamped. Submitted.",
   builtFor: "Built for Malaysian SMEs",
   privacy: "Privacy",
 
@@ -136,6 +137,22 @@ const en = {
   askPh: "e.g. Can I afford to hire one more staff?",
   askButton: "Ask",
 
+  // brief section bar and decision progress (saved on this device)
+  navLabel: "Sections of this brief",
+  navSummary: "Summary",
+  navDecisions: "Decisions",
+  navFunding: "Funding",
+  doneCount: (a: number, b: number) => `${a} of ${b} done`,
+  markDone: "Mark as done",
+  markedDone: "Done",
+  doneNote: "Saved on this device only.",
+  checksChip: (a: number, b: number) => `${a} of ${b} checks passed`,
+
+  // request page progress
+  elapsed: "Elapsed",
+  stepsDone: (n: number) => `${n} step${n === 1 ? "" : "s"} done`,
+  qAssumed: "Our assumption",
+
   // my requests
   welcomeBack: "Welcome back",
   recentTitle: "Your recent requests",
@@ -154,11 +171,12 @@ const en = {
 export type AppStrings = typeof en;
 
 const ms: AppStrings = {
+  skipLink: "Langkau ke kandungan",
+  language: "Bahasa",
   myRequests: "Permintaan saya",
   skills: "Skill WorkBuddy",
-  powered: "Dikuasakan oleh Claude",
   newRequest: "Permintaan baharu",
-  tagline: "Bukan laporan. Keputusan.",
+  tagline: "Diputuskan. Dicop. Dihantar.",
   builtFor: "Dibina untuk PKS Malaysia",
   privacy: "Privasi",
 
@@ -278,6 +296,20 @@ const ms: AppStrings = {
   askLabel: "Soalan anda",
   askPh: "cth. Mampukah saya ambil seorang lagi pekerja?",
   askButton: "Tanya",
+
+  navLabel: "Bahagian ringkasan ini",
+  navSummary: "Ringkasan",
+  navDecisions: "Keputusan",
+  navFunding: "Pembiayaan",
+  doneCount: (a, b) => `${a} daripada ${b} selesai`,
+  markDone: "Tandakan selesai",
+  markedDone: "Selesai",
+  doneNote: "Disimpan pada peranti ini sahaja.",
+  checksChip: (a, b) => `${a} daripada ${b} semakan lulus`,
+
+  elapsed: "Masa berlalu",
+  stepsDone: (n) => `${n} langkah selesai`,
+  qAssumed: "Andaian kami",
 
   welcomeBack: "Selamat kembali",
   recentTitle: "Permintaan terkini anda",

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon, type IconName } from "@/components/Icon";
 import { LandingHero, LandingSections } from "@/components/Landing";
+import { LANDING } from "@/lib/i18n-landing";
 import { RecentRequests } from "@/components/MyRequests";
 import { SERVICE_ICONS } from "@/components/RequestMeta";
 import { saveRequest } from "@/lib/myRequests";
@@ -127,6 +128,35 @@ export default function IntakePage() {
   const ready = hasName && hasNumbers;
   const anything = Boolean(profileFile || documents.length || unknown.length || KINDS.some((k) => data[k]));
   const fileCount = KINDS.filter((k) => data[k]).length + (profileFile ? 1 : 0) + documents.length;
+
+  // Once files are in, keep the send step one tap away: a bar at the bottom of the screen while the owner is
+  // in the form but the send card is out of view.
+  const startRef = useRef<HTMLElement>(null);
+  const sendRef = useRef<HTMLDivElement>(null);
+  const [inForm, setInForm] = useState(false);
+  const [sendInView, setSendInView] = useState(false);
+  useEffect(() => {
+    const start = startRef.current;
+    const send = sendRef.current;
+    if (!start || !send || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.target === start) setInForm(e.isIntersecting);
+        if (e.target === send) setSendInView(e.isIntersecting);
+      }
+    });
+    io.observe(start);
+    io.observe(send);
+    return () => io.disconnect();
+  }, []);
+  // Phones: past the hero, a "Drop your files" button follows the reader until the form is on screen.
+  const [pastHero, setPastHero] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.9);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const turnover = data.sales ? annualSales(data.sales.rows as SaleRow[]) : null;
   const toggleFlag = (f: string) => setFlags((x) => (x.includes(f) ? x.filter((y) => y !== f) : [...x, f]));
   const date = (d: string) =>
@@ -450,7 +480,7 @@ export default function IntakePage() {
 
       <LandingSections lang={lang} />
 
-      <section id="start" className="container section qx-section">
+      <section id="start" ref={startRef} className="container section qx-section">
         <div className="section-head">
           <div className="kicker">{q.kicker}</div>
           <h2>{q.title}</h2>
@@ -507,6 +537,21 @@ export default function IntakePage() {
                 ))}
               </span>
             </div>
+
+            {/* Phones: straight to the camera for paper invoices and receipts. */}
+            <label className="btn btn-secondary btn-lg qx-camera">
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="sr-only"
+                onChange={(e) => {
+                  void ingest(e.target.files);
+                  e.target.value = "";
+                }}
+              />
+              <Icon name="camera" /> {q.camera}
+            </label>
 
             {!demoLoaded && (
               <p className="qx-sample">
@@ -784,7 +829,7 @@ export default function IntakePage() {
               </div>
             )}
 
-            <div className="card qx-send">
+            <div className="card qx-send" ref={sendRef}>
               <h3>{q.serviceTitle}</h3>
               <div className="qx-svcs" role="radiogroup" aria-label={t.serviceAria}>
                 {SERVICES.map((s) => (
@@ -881,6 +926,37 @@ export default function IntakePage() {
           </aside>
         </div>
       </section>
+
+      {!anything && pastHero && !inForm && (
+        <div className="qx-pill no-print">
+          <a href="#start" className="btn btn-primary btn-lg">
+            <Icon name="upload" /> {LANDING[lang].hero.ctaFiles}
+          </a>
+        </div>
+      )}
+
+      {hasNumbers && inForm && !sendInView && !busy && (
+        <div className="qx-dock no-print">
+          <div className="container qx-dock-inner">
+            <p className="qx-dock-text">
+              <span className="qx-dock-ok" aria-hidden="true">
+                <Icon name="check" size={14} strokeWidth={3} />
+              </span>
+              <span>
+                <b>{q.filesCount(fileCount)}</b> {q.dockReady}
+                {name.trim() && <span className="qx-dock-name"> · {name.trim()}</span>}
+              </span>
+            </p>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => sendRef.current?.scrollIntoView({ behavior: smooth(), block: "center" })}
+            >
+              {q.dockButton} <Icon name="chevronDown" size={16} />
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
