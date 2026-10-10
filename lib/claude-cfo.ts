@@ -27,7 +27,18 @@ import {
   sleep,
   updateRequest,
 } from "./store";
-import { EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
+import {
+  ApplicationPackSchema,
+  DecisionSchema,
+  EvidenceSchema,
+  ResultSchema,
+  SERVICE_LABELS,
+  SourceRefSchema,
+  VerificationSchema,
+  type LaneId,
+  type LaneState,
+  type Result,
+} from "./types";
 import { impactKind } from "./impact";
 
 /**
@@ -463,22 +474,53 @@ const block = (tag: string, data: unknown) => `<${tag}>\n${typeof data === "stri
 // ---------- a request, end to end ----------
 
 /**
- * What the Verifier writes. Structured outputs allow at most 24 optional fields in the main schema (the API
- * answers 400 above that; fields inside shared sub-schemas such as a decision or a pack don't count), so this
- * leaves out what the model shouldn't write: the server fills notChecked and reportUrl, and the later-phase
- * blocks (morning note, follow-ups, e-invoice, zakat, channels, benchmarks) come from code, not the model.
- * Check the count when adding an optional field to Result.
+ * What the Verifier writes. Structured outputs refuse a schema that is too big: more than 24 optional fields in
+ * the main schema ("too many optional parameters"), or a compiled grammar that is too large (tested against the
+ * API on 10 Oct 2026: the full Result fails, this shape passes, this shape plus the numbers table fails). So the
+ * model writes only what needs its judgement and the server fills the rest after parsing (fromVerifier):
+ * evidence source without item, no formula or basis; verification without status; packs without ladder,
+ * shariah or proposedNotes; no numbers table and none of the later-phase blocks. Test against the API before
+ * adding a field here.
  */
+const VerifierEvidence = z.object({
+  label: z.string(),
+  detail: z.string().optional(),
+  url: z.string().optional(),
+  source: SourceRefSchema.omit({ item: true }).optional(),
+});
 const VerifierOutputSchema = ResultSchema.omit({
   reportUrl: true,
   notChecked: true,
+  numbers: true,
   morningNote: true,
   followUps: true,
   einvoice: true,
   zakat: true,
   channels: true,
   benchmarks: true,
+}).extend({
+  decisions: z.array(DecisionSchema.extend({ evidence: z.array(VerifierEvidence).default([]) })).min(1).max(5),
+  verification: z.array(VerificationSchema.omit({ status: true })).default([]),
+  applicationPacks: z.array(ApplicationPackSchema.omit({ ladder: true, shariah: true, proposedNotes: true })).max(3).default([]),
 });
+
+/** Turns the Verifier's output into a Result: data basis on keyed evidence, the item on price-rise rows, statuses. */
+function fromVerifier(out: z.infer<typeof VerifierOutputSchema>, laneData: Record<string, Json>): Result {
+  const alerts: Json[] = laneData.Procurement?.alerts ?? [];
+  const itemFor = (keys: string[]) => alerts.find((a) => keys.some((k) => a.source?.keys?.includes(k)))?.source?.item as string | undefined;
+  return {
+    ...out,
+    decisions: out.decisions.map((d) => ({
+      ...d,
+      evidence: d.evidence.map((e) => {
+        if (!e.source) return e;
+        const item = e.source.table === "purchases" ? itemFor(e.source.keys) : undefined;
+        return { ...e, source: item ? { ...e.source, item } : e.source, basis: "data" as const };
+      }),
+    })),
+    verification: out.verification.map((v) => ({ ...v, status: v.passed ? ("passed" as const) : ("failed" as const) })),
+  };
+}
 const ResultFormat = zodOutputFormat(VerifierOutputSchema);
 const clampResult = (r: Json) => ({
   ...r,
@@ -590,7 +632,7 @@ export function processRequest(requestId: string) {
         },
       ];
       const final = await converse(verifierParams, verifierMessages, usage);
-      const result: Result = await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult);
+      const result: Result = fromVerifier(await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult), laneData);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
       for (const v of result.verification) {
         const status = v.status ?? (v.passed ? "passed" : "failed");
