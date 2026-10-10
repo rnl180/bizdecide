@@ -236,7 +236,7 @@ for x in f.get("missingQrSettlements", []):
 for x in f.get("missingCardSettlements", []):
     cands.append({"type": "missing_card_settlement", "impactRm": x["expectedGross"], "oneOff": True, "evidence": [x["saleDate"]], "source": x.get("source"), "detail": x})
 for a in (prices.get("alerts", []) if isinstance(prices, dict) else []):
-    cands.append({"type": "supplier_price_creep", "impactRm": a["projectedExtraPerMonth"], "perMonth": True, "evidence": a["evidenceInvoices"], "source": a.get("source"), "detail": {k: a.get(k) for k in ("supplier", "item", "changePct", "extraPaidSinceFirstRise", "projectedExtraPerYear", "scope", "supplierNotifiedPriceChange", "formula")}})
+    cands.append({"type": "supplier_price_creep", "impactRm": a["projectedExtraPerMonth"], "perMonth": True, "evidence": a["evidenceInvoices"], "source": a.get("source"), "detail": {k: a.get(k) for k in ("supplier", "item", "changePct", "extraPaidSinceFirstRise", "projectedExtraPerYear", "scope", "supplierNotifiedPriceChange", "formula", "series", "sst")}})
 for x in f.get("nonSupplierCardPurchases", []):
     cands.append({"type": "mixed_receipt_ask_owner", "impactRm": x["amount"], "oneOff": True, "evidence": [x["description"], x["date"]], "source": x.get("receiptSource") or x.get("source"), "detail": x})
 cands.sort(key=lambda c: -(c["impactRm"] * (12 if c.get("perMonth") else 1)))

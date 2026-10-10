@@ -9,7 +9,8 @@ import type { BusinessInput, Result } from "./types";
  *   to verification[] as status "not_checked" so the page lists them without counting them in the score;
  * - the rejected false positive: cash-on-delivery invoices named as checked and not flagged;
  * - confidence: "high" only when the decision's evidence is keyed to rows and rests on no assumption;
- * - application packs: Shariah flag, ladder step and proposed-measure lines from the market pack.
+ * - application packs: Shariah flag, ladder step and proposed-measure lines from the market pack;
+ * - price rises: the exact unit-price series and the item's SST line (Price Movers card).
  */
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -162,6 +163,33 @@ async function settlePacks(result: Result, ctx: FinalizeContext) {
   }
 }
 
+// ---------- Price Movers: the series and the SST line behind a supplier price rise ----------
+
+/** Attaches the Procurement lane's series and sales-tax line to the decision about that price rise (exact data for the sparkline). */
+function settlePriceMoves(result: Result, ctx: FinalizeContext) {
+  const alerts: Json[] = ctx.laneData?.Procurement?.alerts ?? [];
+  if (!alerts.length) return;
+  for (const d of result.decisions) {
+    const keyed = d.evidence.find((e) => e.source?.table === "purchases" && e.source.item)?.source?.item;
+    const text = `${d.title} ${d.action} ${d.reason}`.toLowerCase();
+    const a = alerts.find((x) => x.item === keyed) ?? alerts.find((x) => typeof x.item === "string" && text.includes(x.item.toLowerCase()));
+    if (!a) continue;
+    const notified = String(a.supplierNotifiedPriceChange ?? "").toLowerCase();
+    d.priceMove = {
+      item: a.item,
+      supplier: a.supplier,
+      series: ((a.series ?? []) as Json[]).slice(0, 60).map((p) => ({ date: p.date, value: p.price, ...(p.invoice ? { key: p.invoice } : {}) })),
+      changePct: a.changePct,
+      extraPaidRm: a.extraPaidSinceFirstRise,
+      projectedPerYearRm: a.projectedExtraPerYear,
+      notified: notified.startsWith("y") ? true : notified.startsWith("n") ? false : undefined,
+      sstRatePct: a.sst?.ratePct ?? undefined,
+      sstNote: a.sst?.note?.[ctx.language] ?? a.sst?.note?.en ?? (ctx.language === "ms" ? "Status SST item ini belum disahkan" : "SST status not verified for this item"),
+      sstSourceUrl: a.sst?.sourceUrl,
+    };
+  }
+}
+
 // ---------- all together ----------
 
 /** Applies the server's rules to a final brief in place and returns it. Never throws: a rule that fails is skipped. */
@@ -181,6 +209,7 @@ export async function finalizeResult(result: Result, ctx: FinalizeContext): Prom
   await step("cod", () => codCheck(result, ctx));
   await step("confidence", () => settleConfidence(result, ctx.language));
   await step("packs", () => settlePacks(result, ctx));
+  await step("priceMoves", () => settlePriceMoves(result, ctx));
   await step("notChecked", async () => {
     const gaps = await notCheckedList(ctx);
     result.notChecked = gaps;

@@ -1,0 +1,46 @@
+{
+  "about": "Sales tax (SST) on the goods a small business buys, by keyword in the item name. Only items a source confirms are listed; anything else is 'not verified', never assumed. Matching: any keyword as a whole word, case-insensitive, and none of the exclude words. Used to say whether a price rise could be tax passed on, or is the supplier's margin.",
+  "checked": "2026-10-10",
+  "rules": [
+    {
+      "id": "fresh-milk",
+      "keywords": ["susu segar", "fresh milk"],
+      "exclude": ["pekat", "sejat", "condensed", "evaporated", "perisa", "flavoured"],
+      "ratePct": 0,
+      "note": {
+        "en": "0% sales tax: this rise is the supplier's margin, not tax",
+        "ms": "Cukai jualan 0%: kenaikan ini margin pembekal, bukan cukai"
+      },
+      "source_url": "https://www.storehub.com/my/blog/sst-expansion-malaysian-businesses-2025",
+      "source_type": "Secondary (StoreHub on the 1 Jul 2025 SST expansion: rice, vegetables and milk stay 0%)"
+    },
+    {
+      "id": "rice",
+      "keywords": ["beras", "rice"],
+      "exclude": [],
+      "ratePct": 0,
+      "note": {
+        "en": "0% sales tax: this rise is the supplier's margin, not tax",
+        "ms": "Cukai jualan 0%: kenaikan ini margin pembekal, bukan cukai"
+      },
+      "source_url": "https://www.storehub.com/my/blog/sst-expansion-malaysian-businesses-2025",
+      "source_type": "Secondary (StoreHub on the 1 Jul 2025 SST expansion: rice, vegetables and milk stay 0%)"
+    },
+    {
+      "id": "vegetables",
+      "keywords": ["sayur", "sayuran", "vegetable", "vegetables"],
+      "exclude": ["minyak", "oil"],
+      "ratePct": 0,
+      "note": {
+        "en": "0% sales tax: this rise is the supplier's margin, not tax",
+        "ms": "Cukai jualan 0%: kenaikan ini margin pembekal, bukan cukai"
+      },
+      "source_url": "https://www.storehub.com/my/blog/sst-expansion-malaysian-businesses-2025",
+      "source_type": "Secondary (StoreHub on the 1 Jul 2025 SST expansion: rice, vegetables and milk stay 0%)"
+    }
+  ],
+  "unknown": {
+    "en": "SST status not verified for this item",
+    "ms": "Status SST item ini belum disahkan"
+  }
+}

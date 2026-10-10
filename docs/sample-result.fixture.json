@@ -83,7 +83,58 @@
       ],
       "cta": "Request quotes",
       "impactType": "monthly",
-      "confidence": "high"
+      "confidence": "high",
+      "priceMove": {
+        "item": "Serbuk Kopi O Campuran 1kg",
+        "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+        "series": [
+          {
+            "date": "2026-06-17",
+            "value": 28,
+            "key": "KCB-26-1187"
+          },
+          {
+            "date": "2026-07-01",
+            "value": 28,
+            "key": "KCB-26-1194"
+          },
+          {
+            "date": "2026-07-15",
+            "value": 29.1,
+            "key": "KCB-26-1201"
+          },
+          {
+            "date": "2026-07-29",
+            "value": 29.1,
+            "key": "KCB-26-1208"
+          },
+          {
+            "date": "2026-08-12",
+            "value": 30.2,
+            "key": "KCB-26-1215"
+          },
+          {
+            "date": "2026-08-26",
+            "value": 30.2,
+            "key": "KCB-26-1222"
+          },
+          {
+            "date": "2026-09-09",
+            "value": 31.36,
+            "key": "KCB-26-1229"
+          },
+          {
+            "date": "2026-09-23",
+            "value": 31.36,
+            "key": "KCB-26-1236"
+          }
+        ],
+        "changePct": 12.0,
+        "extraPaidRm": 147.62,
+        "projectedPerYearRm": 985.5,
+        "notified": false,
+        "sstNote": "SST status not verified for this item"
+      }
     },
     {
       "priority": "opportunity",

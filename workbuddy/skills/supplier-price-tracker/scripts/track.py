@@ -4,11 +4,25 @@
 Usage: python3 track.py --data <link-or-file> [--threshold 5]
 Prints a compact JSON summary. Python standard library only.
 Each alert carries series (every invoice of the item, for a sparkline) and source: {table: "purchases", keys: invoiceNo}.
+Every tracked item (alerts and stable items) carries its series and sst: the sales-tax rate from
+references/sst_rates.json with its source, or "not verified" when the item isn't listed.
 """
-import sys
+import json, os, re, sys
 from collections import defaultdict
 from datetime import date
 from _load import load, arg_data, out, r2
+
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references", "sst_rates.json"), encoding="utf-8") as fh:
+    SST = json.load(fh)
+
+def sst(item):
+    """{ratePct, note: {en, ms}, sourceUrl} for a listed item; ratePct None (not verified) otherwise."""
+    name = (item or "").lower()
+    has = lambda words: any(re.search(rf"\b{re.escape(w)}\b", name) for w in words)
+    for rule in SST["rules"]:
+        if has(rule["keywords"]) and not has(rule.get("exclude", [])):
+            return {"ratePct": rule["ratePct"], "note": rule["note"], "sourceUrl": rule["source_url"]}
+    return {"ratePct": None, "note": SST["unknown"]}
 
 d = load(arg_data())
 threshold = float(sys.argv[sys.argv.index("--threshold") + 1]) if "--threshold" in sys.argv else 5.0
@@ -35,6 +49,7 @@ for (sup, item), rows in series.items():
     last = rows[-1]["unitPriceRm"]
     change = (last / base - 1) * 100 if base else 0
     key = by_supplier[sup]
+    points = [{"date": r["date"], "invoice": r.get("invoiceNo"), "price": r["unitPriceRm"], "qty": r["qty"]} for r in rows]
     if change > threshold:
         steps, prev = [], base
         for r in rows:
@@ -58,7 +73,8 @@ for (sup, item), rows in series.items():
             "projectedExtraPerYear": r2(annual_extra), "projectedExtraPerMonth": r2(annual_extra / 12),
             "supplierNotifiedPriceChange": s.get("notifiedPriceChange"),
             "evidenceInvoices": [rows[0].get("invoiceNo"), rows[-1].get("invoiceNo")],
-            "series": [{"date": r["date"], "invoice": r.get("invoiceNo"), "price": r["unitPriceRm"], "qty": r["qty"]} for r in rows],
+            "series": points,
+            "sst": sst(item),
             "averageQtyPerOrder": r2(avg_qty), "ordersPerYear": r2(orders_per_year),
             "formula": f"extra/yr = ({last} - {base}) x {r2(avg_qty)} {rows[0].get('unit') or 'units'}/order x {r2(orders_per_year)} orders/yr = {r2(annual_extra)}",
             "source": {"table": "purchases", "keys": list(dict.fromkeys(r.get("invoiceNo") for r in rows if r.get("invoiceNo"))), "item": item},
@@ -66,7 +82,7 @@ for (sup, item), rows in series.items():
         key["rose"].append(item)
     else:
         key["flat"].append(item)
-        stable.append({"supplier": sup, "item": item, "price": last, "changePct": round(change, 1)})
+        stable.append({"supplier": sup, "item": item, "price": last, "changePct": round(change, 1), "series": points, "sst": sst(item)})
 
 for a in alerts:
     other = by_supplier[a["supplier"]]["flat"]

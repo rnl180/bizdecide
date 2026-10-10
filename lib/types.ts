@@ -227,6 +227,21 @@ const BenchmarkSchema = z.object({
   synthetic: z.literal(true), // the demo cohort is labelled synthetic, always
 });
 
+/** A supplier price rise as data for the Price Movers card: the unit price on every invoice, and the item's sales tax. */
+export const PriceMoveSchema = z.object({
+  item: z.string(),
+  supplier: z.string(),
+  series: z.array(z.object({ date: z.string(), value: z.number(), key: z.string().optional() })).max(60), // key = invoice number
+  changePct: z.number(),
+  extraPaidRm: z.number().optional(), // paid above the first price since the first rise
+  projectedPerYearRm: z.number().optional(),
+  notified: z.boolean().optional(), // did the supplier announce the change
+  sstRatePct: z.number().optional(), // left out when the item's SST status is not verified
+  sstNote: z.string(), // "0% sales tax: this rise is the supplier's margin, not tax" or "SST status not verified"
+  sstSourceUrl: z.string().optional(),
+});
+export type PriceMove = z.infer<typeof PriceMoveSchema>;
+
 /** What WorkBuddy delivers. Every decision must carry its evidence. */
 export const DecisionSchema = z.object({
   priority: z.enum(["urgent", "important", "opportunity"]),
@@ -239,6 +254,7 @@ export const DecisionSchema = z.object({
   cta: z.string().optional(), // button text, e.g. "Draft the order", "Start application"
   confidence: z.enum(CONFIDENCE).optional(), // set by the Verifier; shown as a worded badge
   confidenceNote: z.string().optional(),
+  priceMove: PriceMoveSchema.optional(), // supplier price rises only; filled from the Procurement lane
 });
 export type Decision = z.infer<typeof DecisionSchema>;
 
