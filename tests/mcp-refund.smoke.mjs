@@ -46,6 +46,13 @@ assert.equal(picked.request.language, business.profile.language || "en");
 const claimToken = picked.request.claimToken;
 assert.ok(claimToken);
 assert.equal((await api(`/api/requests/${requestId}`)).request.claimToken, undefined);
+await tool("update_request", { requestId, claimToken, step: "Plan", detail: "Check uploaded payments against invoices, verify the effect, then prepare the approved refund email." });
+const poll = await tool("ask_user", { requestId, claimToken, question: "Is the mixed receipt business or personal?",
+  options: ["Business", "Personal"], allowOther: false, waitSeconds: 0 });
+assert.equal(poll.status, "pending");
+await api(`/api/questions/${poll.questionId}/answer`, { answer: "Business" });
+assert.equal((await tool("get_answer", { questionId: poll.questionId, claimToken })).answer, "Business");
+assert.equal((await api(`/api/requests/${requestId}`)).request.status, "processing");
 const link = await tool("get_data_link", { businessId });
 const analysis = JSON.parse(execFileSync(process.env.PYTHON_BIN || "python3", [
   "workbuddy/run_all.py", "--data", link.url,
@@ -83,14 +90,25 @@ assert.equal((await api(`/api/requests/${requestId}`)).request.status, "processi
 assert.equal((await api(`/api/requests/${requestId}`)).result, null);
 await tool("submit_results", { requestId, claimToken, result });
 assert.ok((await api(`/api/requests/${requestId}`)).result.verification.some((v) => v.check === "Server recalculated financial impacts from uploaded data" && v.passed));
-const { action } = await api(`/api/requests/${requestId}/actions`, { decisionIndex: 0, lang: "en" });
+const approvals = await Promise.all([
+  api(`/api/requests/${requestId}/actions`, { decisionIndex: 0, lang: "en" }),
+  api(`/api/requests/${requestId}/actions`, { decisionIndex: 0, lang: "en" }),
+]);
+const { action } = approvals[0];
+assert.equal(approvals[1].action.id, action.id);
 assert.equal(action.status, "queued");
 const work = await tool("wait_for_request", { waitSeconds: 5 });
 assert.equal(work.action.id, action.id);
+assert.ok(work.action.claimToken);
+assert.equal((await api(`/api/requests/${requestId}/actions`)).actions[0].claimToken, undefined);
+const staleAction = await rpc("tools/call", { name: "complete_action", arguments: { actionId: action.id,
+  claimToken: "old-action-worker", status: "failed", summary: "Stale worker output" } });
+assert.equal(staleAction.isError, true);
+assert.match(staleAction.content[0].text, /not owned/);
 const ownerProof = await api(`/api/requests/${requestId}/rows?table=bank&keys=${finding.source.keys.join(",")}`);
 assert.deepEqual(work.sourceRows[0].rows, ownerProof.rows);
 assert.equal(work.sourceRows[1].rows.length, 1);
-const rejected = await rpc("tools/call", { name: "complete_action", arguments: { actionId: action.id, summary: "Ready" } });
+const rejected = await rpc("tools/call", { name: "complete_action", arguments: { actionId: action.id, claimToken: work.action.claimToken, summary: "Ready" } });
 assert.equal(rejected.isError, true);
 assert.match(rejected.content[0].text, /Attach/);
 assert.equal((await api(`/api/requests/${requestId}/actions`)).actions[0].status, "working");
@@ -98,9 +116,20 @@ const email = {
   subject: "Refund request: invoice LSS/2609/278",
   body: "Dear Fresh Dairy Farm Enterprise,\n\nWe paid invoice LSS/2609/278 (RM642) twice: 15 September 2026, reference IBG0915S02, and 16 September 2026, reference IBG0916S02. Please arrange a refund or credit note for the additional RM642.\n\nThank you,\nRock Cafe",
 };
-await tool("complete_action", { actionId: action.id, summary: "Demo refund request ready to send", channel: "note", email });
+await tool("complete_action", { actionId: action.id, claimToken: work.action.claimToken, summary: "Demo refund request ready to send", channel: "note", email });
 const saved = (await api(`/api/requests/${requestId}/actions`)).actions[0];
 assert.equal(saved.status, "done");
 assert.deepEqual(saved.email, email);
 assert.equal((await api(`/api/requests/${requestId}`)).request.status, "completed");
+const { id: messageId } = await api(`/api/requests/${requestId}/messages`, { question: "Why is the refund RM642?" });
+const ownerQuestion = await tool("wait_for_request", { waitSeconds: 5 });
+assert.equal(ownerQuestion.message.id, messageId);
+assert.ok(ownerQuestion.message.claimToken);
+assert.equal((await api(`/api/requests/${requestId}/messages`)).messages[0].claimToken, undefined);
+assert.equal((await api(`/api/requests/${requestId}`)).messages[0].claimToken, undefined);
+const staleReply = await rpc("tools/call", { name: "reply_to_owner", arguments: { messageId, claimToken: "old-message-worker", answer: "A stale answer" } });
+assert.equal(staleReply.isError, true);
+await tool("reply_to_owner", { messageId, claimToken: ownerQuestion.message.claimToken,
+  answer: "The two payments total RM1,284 against an invoice for RM642. The potential overpayment is RM642." });
+assert.equal((await api(`/api/requests/${requestId}/messages`)).messages[0].status, "answered");
 console.log(`MCP refund workflow passed. Local demo: ${base}/r/${requestId}`);

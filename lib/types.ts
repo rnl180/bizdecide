@@ -308,6 +308,7 @@ export type ApplicationPack = z.infer<typeof ApplicationPackSchema>;
 /** Follow-up question the owner asks on the brief page; the on-duty WorkBuddy agent answers it. */
 export interface ChatMessageDoc {
   id: string;
+  claimToken?: string; // private worker lease; exclude from owner responses
   requestId: string;
   businessId: string;
   question: string;
@@ -353,6 +354,7 @@ export interface ActionDocument {
 
 export interface ActionDoc {
   id: string;
+  claimToken?: string; // private worker lease; exclude from owner responses
   requestId: string;
   businessId: string;
   decisionIndex: number; // index into result.decisions as delivered (not the sorted order on screen)

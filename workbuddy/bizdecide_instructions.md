@@ -20,13 +20,21 @@ that run's output and return to the duty loop; do not retry with a guessed token
 ## New request
 
 1. **Understand and plan.** Read `request.service`, `request.goal`, `request.market`
-   and `request.language`. Malaysia (`MY`) only. Write one short plan and report
-   `update_request(step="Reading your data")`.
+   and `request.language`. Malaysia (`MY`) only. Save one short goal-specific plan
+   in `update_request(step="Plan", detail="...")` so the owner can see it.
+   Read `earlierAnswers` on recovered requests: use answered facts, distinguish
+   expired defaults from answers, and do not ask the same answered question again.
 2. **Execute.** `get_data_link(businessId)`, then
    `python3 run_all.py --data "<url>"`. This runs the financial, procurement and SME
    scripts in parallel and returns ranked candidates, funding pre-screen and errors.
    Use the computed figures. If a lane failed, retry that lane or report its limitation;
    never represent missing output as a passed check.
+   Read `limitations` too: monthly sales cannot support daily settlement checks,
+   and incomplete sales coverage is not annual turnover. If the classifier uses a
+   declared annual figure, keep it labelled declared. Funding is only a partial
+   screen: check the remaining criteria before calling a programme eligible.
+   If no useful conclusion is supported, report `update_request(status="failed",
+   error="<specific missing data or failed step>")` instead of inventing a decision.
 3. **Ask only if it changes a decision.** At most two questions: unclear receipt
    lines or missing funding eligibility facts. Use `ask_user` with 2–4 options,
    `allowOther=true`, `defaultOption`, `waitSeconds: 45`. Record any assumed answer.
@@ -71,6 +79,7 @@ that run's output and return to the duty loop; do not retry with a guessed token
      (`source`) or a source URL. A label or an assumption alone is insufficient.
      Delivery checks every source key against this business's uploaded data.
    - Record assumptions and only the agents or stages actually used in `agentsUsed`.
+     Parallel Python scripts are analysis stages, not proof of independent AI agents.
    - Funding packs, if relevant: eligibility conditions, suggested amount,
      prefilled answers, document checklist ready/partial/missing, and next steps.
      Never call a loan approved or mark a missing document ready.
@@ -81,6 +90,11 @@ If `submit_results` rejects evidence or verification, repair the stated problem
 and retry with the same claim token. The brief stays in progress until accepted.
 
 ## Approved action (`owner_action`)
+
+Keep `action.claimToken` and pass it to `complete_action`. A replacement worker
+gets a new token after an interruption; stop if yours is rejected. This token is
+separate from the original request token. Prepare the output within the five-minute
+action lease; if reclaimed, discard the old output instead of completing the new run.
 
 Use `decision`, `sourceRows`, business details, supplier contacts and application
 packs returned by `wait_for_request`. `sourceRows` contains the same uploaded rows
@@ -106,12 +120,14 @@ only after the connector confirms saving. Otherwise use `channel: "note"` for an
 email or `"document"` for a document. Never send anything on the owner's behalf.
 
 Call `complete_action` with the actual `email` and/or `document` and a one-line
-summary of what is ready. A refund requires an email. A summary or links alone
+summary of what is ready. A refund or supplier action requires an email; financing
+requires the application document. A cover email is not the application pack. A summary or links alone
 cannot complete an action. If the tool rejects the output, fix the stated problem
 and retry the same action. Do not abandon it or claim success in the chat.
 
 ## Owner question (`owner_message`)
 
+Pass `message.claimToken` to `reply_to_owner`; discard output if the claim is rejected.
 Answer in 2–5 sentences from this business's brief and earlier answers. Use
 `get_data_link` and the scripts only if a needed figure is missing. Reply through
 `reply_to_owner` with evidence. If the data cannot answer it, say what is missing.

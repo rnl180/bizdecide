@@ -1,6 +1,6 @@
 import { after, NextResponse } from "next/server";
 import { answerOwnerMessage, claudeEnabled, processRequest, STALE_RUN_MS } from "@/lib/claude-cfo";
-import { getBusiness, getOpenQuestion, getRequest, getResult, isStaleRun, listMessages } from "@/lib/store";
+import { getBusiness, getOpenQuestion, getRequest, getResult, isStaleRun, listMessages, withoutClaimToken } from "@/lib/store";
 import { buildStatements } from "@/lib/statements";
 
 export const runtime = "nodejs";
@@ -33,5 +33,5 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     }
   }
   const { claimToken: _claimToken, ...publicRequest } = request;
-  return NextResponse.json({ request: publicRequest, question, result, messages, statements });
+  return NextResponse.json({ request: publicRequest, question, result, messages: messages.map(withoutClaimToken), statements });
 }

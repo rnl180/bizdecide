@@ -21,6 +21,8 @@ export function actionCompletionProblem(out: ActionCompletion, decision?: Decisi
   }
   if (!email && !document) return "Attach the completed email or document before marking this action done. A summary or links alone are not a deliverable.";
   if (decision && impactKind(decision) === "one_off" && !email) return "Attach the refund or settlement query email promised to the owner.";
+  if (decision && impactKind(decision) === "monthly" && !email) return "Attach the supplier email promised to the owner.";
+  if (decision && impactKind(decision) === "financing" && !document) return "Attach the funding application document promised to the owner; a cover email alone is not the application pack.";
   if (out.channel === "gmail_draft" && !email) return "Include the email saved as a Gmail draft.";
   if (out.channel === "document" && !document) return "Include the document for channel document.";
   return null;

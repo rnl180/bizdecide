@@ -61,6 +61,8 @@ export function financialImpactChecks(b: BusinessInput): FinancialImpactCheck[] 
     if (b.payables.filter((p) => p.invoiceNo.toUpperCase().replace(/[^A-Z0-9]/g, "") === normalizedInvoice).length !== 1) continue;
     const payments = b.bank.filter((t) => positive(t.debitRm) && mentionsInvoice(`${t.description} ${t.reference ?? ""}`, invoice.invoiceNo));
     if (payments.length < 2 || payments.some((t) => !t.reference || referenceCounts.get(t.reference) !== 1)) continue;
+    // A combined transfer covering several invoices cannot be allocated to each invoice in full.
+    if (payments.some((t) => b.payables.filter((p) => mentionsInvoice(`${t.description} ${t.reference ?? ""}`, p.invoiceNo)).length !== 1)) continue;
     // Require a supplier match as well as the invoice number. Ignore corporate suffixes.
     const supplierWords = (invoice.supplier.toUpperCase().match(/[A-Z0-9]+/g) ?? [])
       .filter((w) => !["SDN", "BHD", "ENTERPRISE", "TRADING", "LTD", "LIMITED", "INC", "CO"].includes(w)).slice(0, 2);

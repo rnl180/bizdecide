@@ -2,7 +2,7 @@ import { after, NextResponse } from "next/server";
 import { claudeEnabled, processAction } from "@/lib/claude-cfo";
 import { z } from "zod";
 import { rateLimit } from "@/lib/guard";
-import { createAction, getRequest, getResult, listActions } from "@/lib/store";
+import { createAction, getRequest, getResult, listActions, withoutClaimToken } from "@/lib/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,7 +34,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const existing = all.filter((a) => a.decisionIndex === parsed.data.decisionIndex && a.status !== "failed").at(-1);
   if (existing) {
     if (claudeEnabled() && existing.status !== "done") after(() => processAction(existing.id));
-    return NextResponse.json({ action: existing });
+    return NextResponse.json({ action: withoutClaimToken(existing) });
   }
   if (all.filter((a) => a.status === "queued" || a.status === "working").length >= MAX_ACTIVE) {
     return NextResponse.json({ error: "Your CFO team is still on the others. Approve this one when they're done." }, { status: 429 });
@@ -49,7 +49,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     lang: parsed.data.lang,
   });
   if (claudeEnabled()) after(() => processAction(action.id));
-  return NextResponse.json({ action });
+  return NextResponse.json({ action: withoutClaimToken(action) });
 }
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -64,5 +64,5 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       }
     }
   }
-  return NextResponse.json({ actions });
+  return NextResponse.json({ actions: actions.map(withoutClaimToken) });
 }

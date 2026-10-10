@@ -8,7 +8,7 @@ SG (Enterprise Singapore): SME if group sales <= S$100m OR group employees <= 20
 """
 import sys
 from datetime import date
-from _load import load, out, r2
+from _load import load, out, r2, annual_sales
 
 SOURCE = "https://smecorp.gov.my/images/pdf/2024/Guideline_on_SME_Definition_March_2024_Final.pdf"
 RULES = {
@@ -76,14 +76,17 @@ d = load(a[a.index("--data") + 1] if "--data" in a else a[0])
 p = d.get("profile", {})
 x = d.get("profileExtras") or {}
 sales_rows = d.get("sales", [])
-months = sorted({s["period"][:7] for s in sales_rows})[-12:]
-actual = sum(s["amountRm"] for s in sales_rows if s["period"][:7] in months) if sales_rows else None
+coverage = annual_sales(sales_rows)
+months = coverage["months"]
+actual = coverage["annualTotal"]
 declared = p.get("annualSalesDeclaredRm")
 emp = p.get("employeesFullTime")
 market = p.get("market") or "MY"
 res = classify_market(market, p.get("sector"), actual if actual is not None else declared, emp)
 res["salesUsed"] = r2(actual) if actual is not None else declared
-res["salesSource"] = f"actual sales data, {len(months)} months" if actual is not None else "owner's declared figure"
+res["salesSource"] = "actual sales data, 12 complete months" if actual is not None else ("owner's declared annual figure (not verified against a complete year)" if declared is not None else "unknown: a complete year or declared annual turnover is required")
+res["observedSales"] = {"months": len(months), "total": coverage["observedTotal"], "completeYear": coverage["complete"]}
+res["limitations"] = [] if coverage["complete"] else ["Incomplete annual sales coverage; do not use the observed total as annual turnover or infer funding turnover eligibility from it."]
 if actual is not None:
     res["salesRows"] = {"table": "sales", "keys": months}  # month keys (YYYY-MM) open every day of that month
 if declared and actual and abs(declared - actual) / actual > 0.05:
@@ -95,7 +98,9 @@ if since:
     res["yearsOperating"] = round((t.year - y) + (t.month - m) / 12, 1)
 owner = x.get("owner") or {}
 res["ownerFacts"] = {k: owner.get(k) for k in ("age", "gender", "bumiputera", "citizenship") if k in owner}
-res["unknownForEligibility"] = [k for k in ("householdIncomeMonthlyRm",) if x.get(k) is None and k in x]
+res["unknownForEligibility"] = [k for k in ("householdIncomeMonthlyRm",) if x.get(k) is None]
+if actual is None and declared is None:
+    res["unknownForEligibility"].append("annualSales")
 if market == "SG":
     # Scheme conditions that sit outside the size test: local ownership and local (CPF-paid) staff.
     staff = x.get("staff") or []

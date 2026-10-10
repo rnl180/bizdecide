@@ -430,7 +430,7 @@ function Brief({
   t: AppStrings;
   lang: "en" | "ms";
 }) {
-  const rm = money(request.market);
+  const rm = money(request.market, 2);
   const order = { urgent: 0, important: 1, opportunity: 2 } as const;
   const decisions = [...result.decisions].sort((a, b) => order[a.priority] - order[b.priority]);
   const totals = impactTotals(decisions);
@@ -600,11 +600,12 @@ function Brief({
               <ul className="checks">
                 {result.verification.map((v, i) => (
                   <li key={i}>
-                    <span className={`check-i${v.passed ? "" : " fail"}`} aria-label={v.passed ? t.passedAria : t.failedAria}>
-                      <Icon name={v.passed ? "check" : "x"} size={12} strokeWidth={3} />
+                    <span className={`check-i${v.status === "not_checked" ? " partial" : v.passed ? "" : " fail"}`} aria-label={v.status === "not_checked" ? t.notCheckedAria : v.passed ? t.passedAria : t.failedAria}>
+                      <Icon name={v.status === "not_checked" ? "info" : v.passed ? "check" : "x"} size={12} strokeWidth={3} />
                     </span>
                     <div>
                       <div className="c-title">{v.check}</div>
+                      {v.status === "not_checked" && <div className="d">{t.notCheckedAria}</div>}
                       {v.detail && (
                         <div className="d">
                           <Nums text={v.detail} />

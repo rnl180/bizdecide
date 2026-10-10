@@ -9,7 +9,7 @@ sales: period date). Copy those keys as they are; the app opens the rows from th
 import re
 from collections import defaultdict
 from datetime import date, timedelta
-from _load import load, arg_data, out, r2
+from _load import load, arg_data, out, r2, annual_sales
 
 d = load(arg_data())
 sales = d.get("sales", [])
@@ -126,6 +126,8 @@ card_lines = settlement_lines("CARD")
 missing_qr, missing_card, qr_after_period = [], [], []
 card_gross = card_net = 0.0
 for s in sales:
+    if len(s["period"]) != 10:
+        continue  # monthly totals cannot identify a missing daily settlement
     day = D(s["period"])
     if not period_start or not (period_start - timedelta(days=1) <= day <= period_end):
         continue
@@ -156,7 +158,7 @@ for t in delivery_payouts:
     if not m or not period_end:
         continue
     we = date(period_end.year, int(m.group(2)), int(m.group(1)))
-    gross = sum((s.get("deliveryGrossRm") or 0) for s in sales if we - timedelta(days=6) <= D(s["period"]) <= we)
+    gross = sum((s.get("deliveryGrossRm") or 0) for s in sales if len(s["period"]) == 10 and we - timedelta(days=6) <= D(s["period"]) <= we)
     if gross:
         delivery_checks.append({"weekEnding": we.isoformat(), "gross": r2(gross), "payout": t["creditRm"], "payoutPct": round(t["creditRm"] / gross * 100, 1)})
 
@@ -176,9 +178,20 @@ for t in debit_lines:
             "receiptSource": src("purchases", [p.get("invoiceNo") for p in lines]),
         })
 
+coverage = annual_sales(sales)
+limitations = []
+if not coverage["complete"]:
+    limitations.append("Annual turnover is unknown: fewer than 12 consecutive complete months of sales. Use salesTotal only for the observed period.")
+if any(len(s["period"]) != 10 for s in sales):
+    limitations.append("Daily QR/card/delivery reconciliation is unavailable for monthly sales rows.")
+if not bank:
+    limitations.append("No bank statement: payment and settlement reconciliation not checked.")
+
 out({
     "business": (d.get("profile") or {}).get("name"),
-    "turnover12m": r2(turnover),
+    "turnover12m": coverage["annualTotal"],
+    "salesTotal": r2(turnover),
+    "limitations": limitations,
     "months": len(months),
     "averageMonthlyRevenue": r2(avg_month),
     "channelTotals12m": channel_totals,

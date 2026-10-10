@@ -1,6 +1,6 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { ActionCompletionError, actionCompletionProblem, type ActionCompletion } from "./action-completion";
 import { validateResultDelivery } from "./result-delivery";
 import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
@@ -26,6 +26,10 @@ export const storeMode: "firebase" | "local" =
 
 const now = () => new Date().toISOString();
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+export const withoutClaimToken = <T extends { claimToken?: string }>(record: T): Omit<T, "claimToken"> => {
+  const { claimToken: _token, ...publicRecord } = record;
+  return publicRecord;
+};
 
 type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions" | "lane_outputs";
 type Doc = Record<string, unknown>;
@@ -294,13 +298,27 @@ export async function getQuestion(id: string): Promise<QuestionDoc | null> {
   return db.get<QuestionDoc>("questions", id);
 }
 
+export async function listQuestions(requestId: string): Promise<QuestionDoc[]> {
+  const rows = await db.where<QuestionDoc>("questions", (d) => d.requestId === requestId, 100, ["requestId", "==", requestId]);
+  return rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+}
+
 export async function getOpenQuestion(requestId: string): Promise<QuestionDoc | null> {
   const rows = await db.where<QuestionDoc>("questions", (d) => d.requestId === requestId && d.status === "open", 1, ["requestId", "==", requestId]);
   return rows[0] ?? null;
 }
 
+export class QuestionAnswerError extends Error {}
+
 export async function answerQuestion(id: string, answer: string, otherText?: string) {
-  await db.update("questions", id, { status: "answered", answer, otherText, answeredAt: now() });
+  await db.transaction(async (tx) => {
+    const q = await tx.get<QuestionDoc>("questions", id);
+    if (!q || q.status !== "open") throw new QuestionAnswerError("This question is already closed");
+    if (answer === "__other__" ? !q.allowOther || !otherText?.trim() : !q.options.includes(answer)) {
+      throw new QuestionAnswerError("Choose one of the offered answers or provide an allowed Other answer");
+    }
+    tx.update("questions", id, { status: "answered", answer, otherText, answeredAt: now() });
+  });
 }
 
 export async function expireQuestion(id: string, claimToken?: string) {
@@ -390,7 +408,7 @@ export async function claimMessage(id: string): Promise<ChatMessageDoc | null> {
     const m = await tx.get<ChatMessageDoc>("messages", id);
     const stale = new Date(Date.now() - 3 * 60_000).toISOString();
     if (!m || !(m.status === "open" || (m.status === "claimed" && String(m.claimedAt) < stale))) return null;
-    const patch = { status: "claimed" as const, claimedAt: now() };
+    const patch = { status: "claimed" as const, claimedAt: now(), claimToken: randomUUID() };
     tx.update("messages", id, patch);
     return { ...m, ...patch };
   });
@@ -400,16 +418,31 @@ export async function getMessage(id: string): Promise<ChatMessageDoc | null> {
   return db.get<ChatMessageDoc>("messages", id);
 }
 
-export async function answerMessage(id: string, answer: string, evidence?: ChatMessageDoc["evidence"]) {
-  await db.update("messages", id, { status: "answered", answer, evidence, answeredAt: now() });
+export async function answerMessage(id: string, answer: string, evidence?: ChatMessageDoc["evidence"], claimToken?: string) {
+  await db.transaction(async (tx) => {
+    const m = await tx.get<ChatMessageDoc>("messages", id);
+    if (!m || m.status !== "claimed" || !claimToken || m.claimToken !== claimToken) {
+      throw new RequestClaimError("This message is not owned by this run. Discard output from an expired run.");
+    }
+    if (!answer.trim()) throw new RequestClaimError("Provide an answer with actual text.");
+    tx.update("messages", id, { status: "answered", answer, evidence, answeredAt: now() });
+  });
 }
 
 // ---------- actions ("Approve & act": the owner approves a decision, the on-duty agent carries it out) ----------
 
 export async function createAction(a: Pick<ActionDoc, "requestId" | "businessId" | "decisionIndex" | "decisionTitle" | "lang">) {
-  const doc = { ...a, status: "queued" as const, createdAt: now() };
-  const id = await db.add("actions", doc);
-  return { id, ...doc } as ActionDoc;
+  // Simultaneous approvals for the same decision must queue only one action.
+  // Adopt any pre-existing action from older versions before using a stable ID.
+  const legacy = (await listActions(a.requestId)).filter((x) => x.decisionIndex === a.decisionIndex && x.status !== "failed").at(-1);
+  const id = legacy?.id ?? createHash("sha256").update(JSON.stringify([a.requestId, a.decisionIndex])).digest("hex").slice(0, 32);
+  return db.transaction(async (tx) => {
+    const existing = await tx.get<ActionDoc>("actions", id);
+    if (existing && existing.status !== "failed") return existing;
+    const doc = { ...a, status: "queued" as const, createdAt: now() };
+    tx.set("actions", id, doc); // a retry clears the previous lease and failed output
+    return { id, ...doc } as ActionDoc;
+  });
 }
 
 export async function listActions(requestId: string): Promise<ActionDoc[]> {
@@ -443,7 +476,7 @@ export async function claimAction(id: string): Promise<ActionDoc | null> {
     const a = await tx.get<ActionDoc>("actions", id);
     const stale = new Date(Date.now() - 5 * 60_000).toISOString();
     if (!a || !(a.status === "queued" || (a.status === "working" && String(a.claimedAt) < stale))) return null;
-    const patch = { status: "working" as const, claimedAt: now() };
+    const patch = { status: "working" as const, claimedAt: now(), claimToken: randomUUID() };
     tx.update("actions", id, patch);
     return { ...a, ...patch };
   });
@@ -452,11 +485,15 @@ export async function claimAction(id: string): Promise<ActionDoc | null> {
 export async function completeAction(
   id: string,
   out: ActionCompletion,
+  claimToken?: string,
 ) {
   await db.transaction(async (tx) => {
     const action = await tx.get<ActionDoc>("actions", id);
     if (!action) throw new ActionCompletionError(`Action ${id} not found`);
     if (action.status === "done") throw new ActionCompletionError("This action is already done");
+    if (action.status !== "working" || !claimToken || action.claimToken !== claimToken) {
+      throw new ActionCompletionError("This action is not owned by this run. Discard output from an expired run.");
+    }
     const result = out.status === "done" ? await tx.get<Result>("results", action.requestId) : null;
     const decision = result?.decisions[action.decisionIndex];
     if (out.status === "done" && !decision) throw new ActionCompletionError("The decision is missing. Restore the brief before completing this action.");

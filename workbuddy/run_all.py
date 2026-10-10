@@ -12,7 +12,7 @@ knowledge/funding_db.csv with the rules that can be checked in code, and prints
 one compact JSON with candidate decisions ranked by RM impact.
 The agent writes the decisions; this script only computes. Standard library only.
 """
-import csv, json, os, re, subprocess, sys, tempfile, time, urllib.request
+import atexit, csv, json, os, re, subprocess, sys, tempfile, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -29,8 +29,9 @@ if src.startswith("http"):
     with urllib.request.urlopen(src, timeout=30) as r:
         raw = r.read()
     fd, path = tempfile.mkstemp(suffix=".json")
-    os.write(fd, raw)
-    os.close(fd)
+    with os.fdopen(fd, "wb") as downloaded:
+        downloaded.write(raw)
+    atexit.register(lambda: os.path.exists(path) and os.unlink(path))
 else:
     path = src
 
@@ -43,14 +44,22 @@ SCRIPTS = {
 
 def run(item):
     name, rel = item
-    cached = os.path.join(inputs, f"{name}.json") if inputs else None
-    if cached and os.path.exists(cached):
-        with open(cached, encoding="utf-8") as fh:
-            return name, json.load(fh)
-    p = subprocess.run([sys.executable, os.path.join(HERE, rel), "--data", path], capture_output=True, text=True, timeout=60)
-    if p.returncode != 0:
-        return name, {"error": p.stderr.strip()[-500:]}
-    return name, json.loads(p.stdout)
+    try:
+        cached = os.path.join(inputs, f"{name}.json") if inputs else None
+        if cached and os.path.exists(cached):
+            with open(cached, encoding="utf-8") as fh:
+                data = json.load(fh)
+        else:
+            p = subprocess.run([sys.executable, os.path.join(HERE, rel), "--data", path], capture_output=True, text=True, timeout=60)
+            if p.returncode != 0:
+                return name, {"error": p.stderr.strip()[-500:] or f"Script exited with code {p.returncode}"}
+            data = json.loads(p.stdout)
+        if not isinstance(data, dict):
+            raise ValueError("Expected a JSON object from this analysis stage")
+        return name, data
+    except (OSError, ValueError, subprocess.TimeoutExpired) as error:
+        # Preserve successful lanes so WorkBuddy can retry only the failed stage.
+        return name, {"error": f"{type(error).__name__}: {str(error)[:400]}"}
 
 with ThreadPoolExecutor(max_workers=3) as ex:
     res = dict(ex.map(run, SCRIPTS.items()))
@@ -89,11 +98,19 @@ if os.path.exists(db):
         for k in ("bumi_only", "women_only", "age_rule", "min_operating", "min_turnover", "other_criteria", "notes", "sectors", "status", "verify_flag", "source_url", "id", "program", "type", "min_rm", "max_rm"):
             r.setdefault(k, "")
         checks, ask = [], []
-        if r["bumi_only"].strip().upper().startswith("Y") and bumi is not None:
-            checks.append(("Bumiputera owner", bool(bumi)))
-        if r["women_only"].strip().upper().startswith("Y") and gender:
-            checks.append(("Women-owned", gender == "female"))
+        if r["bumi_only"].strip().upper().startswith("Y"):
+            if bumi is None:
+                ask.append("Bumiputera ownership unknown")
+            else:
+                checks.append(("Bumiputera owner", bool(bumi)))
+        if r["women_only"].strip().upper().startswith("Y"):
+            if not gender:
+                ask.append("Owner gender unknown")
+            else:
+                checks.append(("Women-owned", gender == "female"))
         rule = r["age_rule"]
+        if rule and age is None:
+            ask.append("Owner age unknown")
         if age is not None:
             m = re.search(r"≤\s?(\d+)", rule)
             if m:
@@ -102,6 +119,8 @@ if os.path.exists(db):
             if m and "≤" not in rule:
                 checks.append((f"Owner age {m.group(1)}–{m.group(2)}", int(m.group(1)) <= age <= int(m.group(2))))
         op = r["min_operating"]
+        if op and years is None:
+            ask.append("Operating history unknown")
         if years is not None:
             m = re.search(r"less than (\d+) years", op, re.I)
             if m:
@@ -110,6 +129,8 @@ if os.path.exists(db):
             if m and "to" not in op:
                 checks.append((f"Operating ≥ {m.group(1)} months", years * 12 >= int(m.group(1))))
         mt = money(r["min_turnover"])
+        if mt and turnover is None:
+            ask.append("Annual turnover unknown: a partial sales period cannot establish eligibility")
         if mt and turnover is not None and "≤" not in r["min_turnover"]:
             checks.append((f"Turnover ≥ RM{mt:,.0f}", turnover >= mt))
             if turnover < mt:
@@ -120,9 +141,9 @@ if os.path.exists(db):
         funding.append({
             "id": r["id"], "program": r["program"], "type": r["type"],
             "amountRm": [r["min_rm"] or None, r["max_rm"] or None],
-            "screen": "fails: " + "; ".join(failed) if failed else ("needs info" if ask else "passes code checks"),
+            "screen": "fails: " + "; ".join(failed) if failed else ("needs info" if ask else "needs review"),
             "checks": [f"{'✓' if ok else '✗'} {c}" for c, ok in checks],
-            "notes": ask,
+            "notes": ask + ["Partial screen only: check sector, ownership, registration, live availability and all programme conditions before claiming eligibility."],
             "otherCriteria": r["other_criteria"][:160],
             "sectors": r["sectors"][:70],
             "status": r["status"][:50],
@@ -153,9 +174,9 @@ out = {
     "market": market,
     "elapsedSeconds": round(time.time() - t0, 2),
     "business": fin.get("business") if isinstance(fin, dict) else None,
-    "sme": {k: sme.get(k) for k in ("category", "salesUsed", "salesSource", "salesRows", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "source") if isinstance(sme, dict) and sme.get(k) is not None},
+    "sme": {k: sme.get(k) for k in ("category", "salesUsed", "salesSource", "salesRows", "observedSales", "limitations", "declaredVsActual", "next", "yearsOperating", "ownerFacts", "unknownForEligibility", "source") if isinstance(sme, dict) and sme.get(k) is not None},
     "keyNumbers": {
-        "turnover12m": fin.get("turnover12m"), "averageMonthlyRevenue": fin.get("averageMonthlyRevenue"),
+        "turnover12m": fin.get("turnover12m"), "salesTotal": fin.get("salesTotal"), "averageMonthlyRevenue": fin.get("averageMonthlyRevenue"),
         "cashToRecover": f.get("cashToRecover"), "bankReconciles": (fin.get("bank") or {}).get("balanceReconciles"),
     },
     "candidateDecisions": cands,
@@ -169,9 +190,10 @@ out = {
     },
     "funding": {
         "source": os.path.relpath(db, HERE) if os.path.exists(db) else None,
-        "candidates": [{k: x[k] for k in ("id", "program", "type", "amountRm", "screen", "notes", "otherCriteria", "sectors", "verify", "source")} for x in passing],
+        "candidates": [{k: x[k] for k in ("id", "program", "type", "amountRm", "screen", "checks", "notes", "otherCriteria", "sectors", "status", "verify", "source")} for x in passing],
         "excluded": excluded,
     },
     "errors": {k: v["error"] for k, v in res.items() if isinstance(v, dict) and "error" in v},
+    "limitations": {k: v["limitations"] for k, v in res.items() if isinstance(v, dict) and v.get("limitations")},
 }
 print(json.dumps(out, ensure_ascii=False, separators=(",", ":")))

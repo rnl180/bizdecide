@@ -4,6 +4,7 @@ import test from "node:test";
 import { financialImpactChecks, type FinancialImpactCheck } from "../lib/financial-impact";
 import { validateResultDelivery } from "../lib/result-delivery";
 import { BusinessInputSchema, ResultSchema, type BusinessInput } from "../lib/types";
+import { money } from "../lib/markets";
 
 const demo = BusinessInputSchema.parse(JSON.parse(readFileSync("public/demo/kedai-kopi-aminah.json", "utf8")));
 const checks = financialImpactChecks(demo);
@@ -23,6 +24,7 @@ test("server independently computes demo amounts and records the conditions behi
   assert.equal(refund.impactRm, 642);
   assert.equal(checks.find((c) => c.kind === "missing_qr_settlement")!.impactRm, 312.4);
   assert.equal(checks.find((c) => c.kind === "supplier_price_increase")!.impactRm, 82.13);
+  assert.equal(money("MY", 2)(82.13), "RM82.13");
   for (const check of checks) {
     const saved = validateResultDelivery(report(check), demo);
     assert.ok(saved.verification.some((v) => v.check === "Server recalculated financial impacts from uploaded data" && v.passed));
@@ -69,6 +71,11 @@ test("overpayment subtracts the invoice and rejects ambiguous, refunded or unrel
     { ...b, bank: [...b.bank, { date: "2026-01-03", description: "REFUND INV-1", reference: "R1", creditRm: 20 }] },
   ];
   for (const variant of variants) assert.deepEqual(financialImpactChecks(variant), []);
+  const combined = { ...b,
+    payables: [...b.payables, { ...b.payables[0]!, invoiceNo: "INV-2" }],
+    bank: b.bank.map((t) => ({ ...t, description: "ACME DAIRY INV-1 AND INV-2", debitRm: 100 })),
+  };
+  assert.deepEqual(financialImpactChecks(combined), [], "a combined transfer cannot be counted in full against both invoices");
 });
 
 test("supplier projections use complete history, exact cents and the monthly period", () => {

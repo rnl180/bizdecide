@@ -20,7 +20,7 @@ export const SKILLS = [
   {
     id: "financial-analyzer",
     title: "Financial analyzer",
-    blurb: "Monthly profit and loss, costs by category, margin, and duplicate invoices removed.",
+    blurb: "Sales and supplier purchases by month, payment reconciliation, and potential duplicate payments.",
     input: "Sales and purchases",
     icon: "calculator",
   },
@@ -34,7 +34,7 @@ export const SKILLS = [
   {
     id: "funding-matcher",
     title: "Funding matcher",
-    blurb: "The top five funding programmes a business qualifies for in its market, with official links.",
+    blurb: "Funding candidates for eligibility review, with official links. No standalone package yet.",
     input: "Business profile",
     icon: "landmark",
   },

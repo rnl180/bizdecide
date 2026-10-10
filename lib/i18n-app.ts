@@ -105,6 +105,7 @@ const en = {
   passed: (a: number, b: number) => `${a}/${b} passed`,
   passedAria: "Passed",
   failedAria: "Failed",
+  notCheckedAria: "Not checked",
   assumptions: "Assumptions",
 
   // funding application pack
@@ -251,6 +252,7 @@ const ms: AppStrings = {
   passed: (a, b) => `${a}/${b} lulus`,
   passedAria: "Lulus",
   failedAria: "Gagal",
+  notCheckedAria: "Belum disemak",
   assumptions: "Andaian",
 
   packKicker: "Pek pembiayaan",

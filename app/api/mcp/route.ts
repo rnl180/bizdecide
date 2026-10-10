@@ -18,6 +18,7 @@ import {
   getRequest,
   getResult,
   listMessages,
+  listQuestions,
   listRequestsByStatus,
   saveResult,
   sleep,
@@ -81,7 +82,9 @@ const mcp = createMcpHandler(
       },
       async ({ requestId }) => {
         const request = await claimRequest(requestId, "BizDecide agents on WorkBuddy started working", REQUEST_STALE_MS);
-        return request ? json({ request }) : fail("This request is already owned by another run, completed, or missing.");
+        if (!request) return fail("This request is already owned by another run, completed, or missing.");
+        const business = await getBusiness(request.businessId);
+        return json({ request: { ...request, goal: business?.profile.goal }, earlierAnswers: await listQuestions(requestId) });
       },
     );
 
@@ -102,7 +105,7 @@ const mcp = createMcpHandler(
             const [result, thread] = await Promise.all([getResult(msg.requestId), listMessages(msg.requestId)]);
             return json({
               status: "owner_message",
-              message: { id: msg.id, requestId: msg.requestId, businessId: msg.businessId, question: msg.question },
+              message: { id: msg.id, claimToken: msg.claimToken, requestId: msg.requestId, businessId: msg.businessId, question: msg.question },
               brief: result && {
                 headline: result.headline,
                 keyNumbers: result.keyNumbers,
@@ -110,7 +113,7 @@ const mcp = createMcpHandler(
                 applicationPacks: (result.applicationPacks ?? []).map(({ programId, programName, verdict, amountRm }) => ({ programId, programName, verdict, amountRm })),
               },
               earlierInThread: thread.filter((m) => m.status === "answered").map((m) => ({ question: m.question, answer: m.answer })),
-              next: "Answer from this business's own data (get_data_link + the skill scripts) and the brief above. Then reply_to_owner(messageId, answer, evidence), then call wait_for_request again.",
+              next: "Answer from this business's own data (get_data_link + the skill scripts) and the brief above. Then reply_to_owner(messageId, claimToken: message.claimToken, answer, evidence), then call wait_for_request again. An old message claim cannot deliver after another worker takes over.",
             });
           }
           // Then approved decisions: the owner tapped Approve and is watching the card.
@@ -119,7 +122,7 @@ const mcp = createMcpHandler(
             const [result, business] = await Promise.all([getResult(act.requestId), getBusiness(act.businessId)]);
             const decision = result?.decisions[act.decisionIndex];
             if (!decision || !business) {
-              await completeAction(act.id, { status: "failed", error: "The brief or business data is missing" });
+              await completeAction(act.id, { status: "failed", error: "The brief or business data is missing" }, act.claimToken);
               continue;
             }
             const kind = impactKind(decision);
@@ -128,7 +131,7 @@ const mcp = createMcpHandler(
             const owner = (x.owner ?? {}) as Record<string, unknown>;
             return json({
               status: "owner_action",
-              action: { id: act.id, requestId: act.requestId, decisionIndex: act.decisionIndex, writeIn: act.lang === "ms" ? "Bahasa Melayu" : "English" },
+              action: { id: act.id, claimToken: act.claimToken, requestId: act.requestId, businessId: act.businessId, decisionIndex: act.decisionIndex, writeIn: act.lang === "ms" ? "Bahasa Melayu" : "English" },
               kind, // one_off: get money back · monthly: supplier price / cost · financing: funding application
               decision,
               sourceRows: decision.evidence.filter((e) => e.source).map((e) => {
@@ -148,14 +151,14 @@ const mcp = createMcpHandler(
               suppliers: (business.suppliers ?? []).map(({ name, contact, category, paymentTerms }) => ({ name, contact, category, paymentTerms })),
               applicationPacks: kind === "financing" ? (result?.applicationPacks ?? []) : undefined,
               next:
-                "Carry out this decision for the owner, in action.writeIn. one_off: a short, polite email to the counterparty (supplier, or the bank/QR acquirer) asking for the money back, quoting the invoice numbers, dates, amounts and bank references from decision.evidence. monthly: an email to the supplier asking why the price rose and for the old price, plus one line asking 2 alternative suppliers for a quote. financing: a document (the application pack: why the business qualifies, amount and purpose, prefilled answers, document checklist) and a short cover email to the agency. Use the supplier's email from suppliers[].contact when there is one. Sign as the owner. If your Gmail connector is available, save the email as a Gmail DRAFT (never send). Then complete_action(actionId, summary, channel, email and/or document). Then call wait_for_request again.",
+                "Carry out this decision for the owner, in action.writeIn. one_off: a short email quoting the source amounts, dates and references; a missing settlement is a query, not a confirmed refund. monthly: a supplier email requesting an explanation and the baseline price. financing: an application document (eligibility conditions, amount/purpose, prefilled answers, document checklist) and a cover email. Leave unknown recipient addresses empty. If Gmail confirms saving a draft, report gmail_draft; never send. Then complete_action(actionId, claimToken: action.claimToken, summary, channel, email and/or document). If the claim is rejected, discard this run's output. Then call wait_for_request again.",
             });
           }
           const next = await claimNextRequest("BizDecide agents on WorkBuddy started working");
           if (next) {
             const { id, businessId, businessName, service, market, createdAt } = next;
             const business = await getBusiness(businessId);
-            return json({ status: "new_request", request: { id, businessId, businessName, service, claimToken: next.claimToken, market: market ?? "MY", language: next.language ?? business?.profile.language ?? "en", goal: business?.profile.goal, createdAt }, next: "Keep request.claimToken for update_request, ask_user, get_answer and submit_results. Read get_data_link(businessId), run python3 run_all.py --data <url>, ask_user only if needed, verify the selected evidence, then submit_results. An interrupted request restarts from its own data; never reuse unchecked output from an expired run. Then call wait_for_request again." });
+            return json({ status: "new_request", request: { id, businessId, businessName, service, claimToken: next.claimToken, market: market ?? "MY", language: next.language ?? business?.profile.language ?? "en", goal: business?.profile.goal, createdAt }, earlierAnswers: await listQuestions(id), next: "Keep request.claimToken for update_request, ask_user, get_answer and submit_results. Record your goal-specific plan in update_request detail. Read get_data_link(businessId), run python3 run_all.py --data <url>, use earlierAnswers and ask_user only if needed, call get_impact_checks, verify evidence, then submit_results. An interrupted request restarts from its own data; preserve answered owner facts and distinguish expired defaults from answers. Then call wait_for_request again." });
           }
           await sleep(2000);
         }
@@ -323,6 +326,7 @@ const mcp = createMcpHandler(
           "Answer a follow-up question the owner asked on their brief page (from wait_for_request status 'owner_message'). 2-5 plain sentences in the owner's language, using figures from their own data and brief. Add evidence for each figure (invoice numbers, months, official URLs). Never invent numbers; if the data can't answer it, say what is missing.",
         inputSchema: z.object({
           messageId: z.string(),
+          claimToken: z.string().min(1),
           answer: z.string().min(1).max(2000),
           evidence: z
             .array(z.object({ label: z.string(), detail: z.string().optional(), url: z.string().optional() }))
@@ -330,11 +334,16 @@ const mcp = createMcpHandler(
             .optional(),
         }),
       },
-      async ({ messageId, answer, evidence }) => {
+      async ({ messageId, claimToken, answer, evidence }) => {
         const m = await getMessage(messageId);
         if (!m) return fail(`Message ${messageId} not found`);
         if (m.status === "answered") return fail("This question already has an answer");
-        await answerMessage(messageId, answer, evidence);
+        try {
+          await answerMessage(messageId, answer, evidence, claimToken);
+        } catch (error) {
+          if (error instanceof RequestClaimError) return fail(error.message);
+          throw error;
+        }
         return json({ ok: true, next: "Call wait_for_request again." });
       },
     );
@@ -347,6 +356,7 @@ const mcp = createMcpHandler(
           "Report the result of a decision the owner approved (wait_for_request status 'owner_action'). To finish with status done, attach the actual email {to, subject, body} and/or document {title, sections[]} plus a short summary. Refunds require an email. A summary or links alone will be rejected: repair the output and retry the same action. channel: 'gmail_draft' ONLY if you really saved it as a Gmail draft, 'document' for a pack or letter, else 'note'. Never send emails. If you could not do it, status 'failed' with error.",
         inputSchema: z.object({
           actionId: z.string(),
+          claimToken: z.string().min(1),
           status: z.enum(["done", "failed"]).default("done"),
           summary: z.string().min(1).max(300),
           channel: z.enum(["gmail_draft", "document", "note"]).optional(),
@@ -368,7 +378,7 @@ const mcp = createMcpHandler(
           error: z.string().max(500).optional(),
         }),
       },
-      async ({ actionId, status, summary, channel, email, document, links, error }) => {
+      async ({ actionId, claimToken, status, summary, channel, email, document, links, error }) => {
         const a = await getAction(actionId);
         if (!a) return fail(`Action ${actionId} not found`);
         if (a.status === "done") return fail("This action is already done");
@@ -381,7 +391,7 @@ const mcp = createMcpHandler(
             document,
             links,
             error: status === "failed" ? (error ?? summary) : undefined,
-          });
+          }, claimToken);
         } catch (error) {
           if (error instanceof ActionCompletionError) return fail(error.message);
           throw error;

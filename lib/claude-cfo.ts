@@ -41,6 +41,7 @@ import {
 } from "./types";
 import { impactKind } from "./impact";
 import { financialImpactChecks, type FinancialImpactCheck } from "./financial-impact";
+import { sourceRows } from "./source-rows";
 
 /**
  * BizDecide on the Claude API: the server runs the CFO team itself instead of waiting for WorkBuddy on /api/mcp.
@@ -172,7 +173,7 @@ const LANES: Lane[] = [
         });
       }
       if (data.seasonalDips?.length) await emit(`${plural(data.seasonalDips.length, "seasonal dip")} found`, { detail: data.seasonalDips.map((d: Json) => d.month).join(", ") });
-      return { data, summary: `${data.months ?? "?"} months, turnover ${fmt(data.turnover12m ?? 0)}` };
+      return { data, summary: `${data.months ?? "?"} months, observed sales ${fmt(data.salesTotal ?? data.turnover12m ?? 0)}` };
     },
   },
   {
@@ -722,14 +723,14 @@ export function answerOwnerMessage(messageId: string) {
         },
       ];
       const reply = await parseStructured(ReplySchema, await converse(params, messages, usage), params, messages, usage);
-      await answerMessage(messageId, reply.answer, reply.evidence);
+      await answerMessage(messageId, reply.answer, reply.evidence, m.claimToken);
     } catch (e) {
       console.error(`[claude] message ${messageId} failed`, e);
       const sorry =
         language === "ms"
           ? "Maaf, saya tidak dapat menjawab soalan ini sekarang. Sila tanya sekali lagi sebentar lagi."
           : "Sorry, I couldn't answer that right now. Please ask again in a moment.";
-      await answerMessage(messageId, sorry).catch(() => {});
+      await answerMessage(messageId, sorry, undefined, m.claimToken).catch(() => {});
     } finally {
       await ws?.close();
       console.log(`[claude] message ${messageId}: ${usage.input + usage.cacheRead + usage.cacheWrite} in / ${usage.output} out tokens, est. $${usd(usage).toFixed(3)}`);
@@ -796,6 +797,7 @@ export function processAction(actionId: string) {
           content: [
             `The owner approved this decision. kind: ${kind}. Write in: ${a.lang === "ms" ? "Bahasa Melayu" : "English"}. Currency ${pack.currencySymbol}.`,
             block("decision", decision),
+            block("source_rows", decision.evidence.filter((e) => e.source).map((e) => ({ source: e.source, rows: sourceRows(business, e.source!) }))),
             block("business", {
               name: business.profile.name,
               sector: business.profile.sector,
@@ -820,11 +822,11 @@ export function processAction(actionId: string) {
         channel: out.email ? "note" : "document",
         email: out.email,
         document: out.document,
-      });
+      }, a.claimToken);
     } catch (e) {
       console.error(`[claude] action ${actionId} failed`, e);
       const detail = e instanceof Anthropic.AuthenticationError ? "The Claude API key was rejected" : (e as Error).message;
-      await completeAction(actionId, { status: "failed", summary: detail, error: detail }).catch(() => {});
+      await completeAction(actionId, { status: "failed", summary: detail, error: detail }, a.claimToken).catch(() => {});
     } finally {
       console.log(`[claude] action ${actionId}: ${Math.round((Date.now() - started) / 1000)}s, est. $${usd(usage).toFixed(3)}`);
     }

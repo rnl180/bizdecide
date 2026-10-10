@@ -48,6 +48,9 @@ test("done requires useful content, a matching channel and an email for a refund
   assert.ok(actionCompletionProblem({ ...done, document: { ...document, sections: [{ heading: "Request", body: " " }] } }));
   assert.equal(actionCompletionProblem({ ...done, document, channel: "document" }), null);
   assert.equal(actionCompletionProblem({ ...done, email, channel: "note" }, refund), null);
+  assert.match(actionCompletionProblem({ ...done, email }, { ...refund, impactType: "financing" })!, /application document/);
+  assert.equal(actionCompletionProblem({ ...done, document }, { ...refund, impactType: "financing" }), null);
+  assert.match(actionCompletionProblem({ ...done, document }, { ...refund, impactType: "monthly" })!, /supplier email/);
   assert.equal(actionCompletionProblem({ status: "failed", error: "Source data missing" }), null);
   assert.ok(actionCompletionProblem({ status: "failed", error: " " }));
 });
@@ -96,11 +99,12 @@ test("demo analysis finds the refund; rejected completion stays working and a re
   const run = await store.claimRequest(requestId, "Test worker");
   await store.saveResult(requestId, ResultSchema.parse({ headline: "Recover RM642", decisions: [refund], verification: [{ check: "Bank payments matched", passed: true }] }), run!.claimToken);
   const action = await store.createAction({ requestId, businessId, decisionIndex: 0, decisionTitle: refund.title, lang: "en" });
-  assert.equal((await store.claimNextAction())?.id, action.id);
-  await assert.rejects(store.completeAction(action.id, { status: "done", summary: "Done" }), /Attach/);
+  const actionRun = (await store.claimNextAction())!;
+  assert.equal(actionRun.id, action.id);
+  await assert.rejects(store.completeAction(action.id, { status: "done", summary: "Done" }, actionRun.claimToken), /Attach/);
   assert.equal((await store.getAction(action.id))?.status, "working");
   assert.equal((await store.getAction(action.id))?.completedAt, undefined);
-  await store.completeAction(action.id, { status: "done", summary: "Refund request ready to send", channel: "note", email });
+  await store.completeAction(action.id, { status: "done", summary: "Refund request ready to send", channel: "note", email }, actionRun.claimToken);
   const saved = await store.getAction(action.id);
   assert.equal(saved?.status, "done");
   assert.deepEqual(saved?.email, email);
@@ -108,7 +112,8 @@ test("demo analysis finds the refund; rejected completion stays working and a re
   await assert.rejects(store.completeAction(action.id, { status: "failed", error: "Late response" }), /already done/);
   assert.equal((await store.getAction(action.id))?.status, "done");
   const missing = await store.createAction({ requestId: "missing-brief", businessId, decisionIndex: 0, decisionTitle: refund.title, lang: "en" });
-  await assert.rejects(store.completeAction(missing.id, { status: "done", summary: "Ready", email }), /decision is missing/);
-  await store.completeAction(missing.id, { status: "failed", error: "The brief is missing" });
+  const missingRun = (await store.claimAction(missing.id))!;
+  await assert.rejects(store.completeAction(missing.id, { status: "done", summary: "Ready", email }, missingRun.claimToken), /decision is missing/);
+  await store.completeAction(missing.id, { status: "failed", error: "The brief is missing" }, missingRun.claimToken);
   assert.equal((await store.getAction(missing.id))?.status, "failed");
 });

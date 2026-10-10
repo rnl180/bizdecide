@@ -143,4 +143,52 @@ test("claims, interruption recovery and delivery are atomic", async (t) => {
     const messages = await Promise.all([store.claimNextMessage(), store.claimNextMessage()]);
     assert.equal(messages.filter(Boolean).length, 1);
   });
+
+  await t.test("duplicate approvals and expired action/message workers cannot overwrite a recovered outcome", async () => {
+    const id = await create();
+    const run = (await store.claimRequest(id, "Worker"))!;
+    await store.saveResult(id, brief, run.claimToken);
+    const input = { requestId: id, businessId, decisionIndex: 0, decisionTitle: "Refund", lang: "en" as const };
+    const approvals = await Promise.all([store.createAction(input), store.createAction(input)]);
+    assert.equal(approvals[0]!.id, approvals[1]!.id);
+    assert.equal((await store.listActions(id)).length, 1);
+    const action = (await store.claimAction(approvals[0]!.id))!;
+    const messageId = await store.createMessage(id, businessId, "Why this amount?");
+    const message = (await store.claimMessage(messageId))!;
+    const file = path.join(dir, ".data/db.json");
+    const data = JSON.parse(readFileSync(file, "utf8"));
+    const old = new Date(Date.now() - 6 * 60_000).toISOString();
+    data.actions[action.id].claimedAt = old;
+    data.messages[messageId].claimedAt = old;
+    writeFileSync(file, JSON.stringify(data));
+    const recovered = (await store.claimAction(action.id))!;
+    const recoveredMessage = (await store.claimMessage(messageId))!;
+    assert.notEqual(recovered.claimToken, action.claimToken);
+    const output = { status: "done" as const, summary: "Refund email ready", email: { subject: "Refund", body: "Please refund RM642 for the duplicate payment." } };
+    await assert.rejects(store.completeAction(action.id, output, action.claimToken), /not owned/);
+    await assert.rejects(store.answerMessage(messageId, "Stale answer", undefined, message.claimToken), /not owned/);
+    assert.equal((await store.getAction(action.id))?.status, "working");
+    await store.completeAction(action.id, output, recovered.claimToken);
+    await store.answerMessage(messageId, "Current answer", undefined, recoveredMessage.claimToken);
+    await assert.rejects(store.answerMessage(messageId, "Second answer", undefined, recoveredMessage.claimToken), /not owned/);
+    assert.equal((await store.getMessage(messageId))?.answer, "Current answer");
+    assert.equal((store.withoutClaimToken(recovered) as { claimToken?: string }).claimToken, undefined);
+    assert.equal((store.withoutClaimToken(recoveredMessage) as { claimToken?: string }).claimToken, undefined);
+  });
+
+  await t.test("owner facts survive request recovery and a closed question cannot be answered again", async () => {
+    const id = await create();
+    const run = (await store.claimRequest(id, "Worker"))!;
+    const qid = await store.createQuestion({ requestId: id, question: "Receipt?", options: ["Business", "Personal"], allowOther: false }, run.claimToken);
+    await assert.rejects(store.answerQuestion(qid, "Invented option"), /offered answers/);
+    await store.answerQuestion(qid, "Business");
+    age(id);
+    const recovered = (await store.claimRequest(id, "Replacement", store.REQUEST_STALE_MS))!;
+    assert.equal((await store.listQuestions(id))[0]?.answer, "Business");
+    await assert.rejects(store.answerQuestion(qid, "Personal"), /closed/);
+    const pending = await store.createQuestion({ requestId: id, question: "More?", options: ["Yes", "No"], allowOther: false }, recovered.claimToken);
+    await store.expireQuestion(pending, recovered.claimToken);
+    await assert.rejects(store.answerQuestion(pending, "Yes"), /closed/);
+    await store.saveResult(id, brief, recovered.claimToken);
+  });
 });

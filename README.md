@@ -2,7 +2,7 @@
 
 **Your AI CFO. Not reports. Decisions.**
 
-BizDecide is an AI CFO for Malaysian small businesses. Owners upload their sales, purchases and suppliers. A team of AI agents running on **Tencent WorkBuddy** analyses the data, verifies its own work, asks the owner only when it must, and delivers **three concrete decisions** with ringgit impact and evidence.
+BizDecide is an AI CFO for Malaysian small businesses. Owners upload their sales, purchases and suppliers. An agent running on **Tencent WorkBuddy** plans the work, calls analysis tools, checks the evidence, asks the owner only when needed, and delivers **up to three concrete decisions** with supported ringgit impact and evidence.
 
 > Built for AI Hackerdorm 2026 · Track 2: WorkBuddy Agentic Solutions
 
@@ -24,20 +24,23 @@ Owner ──► BizDecide app (Next.js, Firebase App Hosting)
               ▲
               │  MCP (Streamable HTTP, bearer auth)  ── /api/mcp
               │
-          Tencent WorkBuddy  ◄── the brain: plans, runs agents + skills in parallel,
+          Tencent WorkBuddy  ◄── the brain: plans, runs skill scripts in parallel,
                                   verifies, asks the owner, delivers the CFO brief
 ```
 
 WorkBuddy owns planning, analysis and decisions. The backend independently recalculates supported financial effects before accepting a brief.
 
-| Agent (WorkBuddy) | Job | Skill |
+| Workflow role | Job | Implementation |
 |---|---|---|
-| Bookkeeper | P&L, costs by category, margin, duplicates | `financial-analyzer` |
+| Bookkeeper | Sales, supplier purchases, payment reconciliation, candidate overpayments | `financial-analyzer` |
 | Procurement | Hidden supplier price rises, alternatives | `supplier-price-tracker` |
 | Classifier | Official SME category (SME Corp rules) | `sme-classifier` |
-| Funding | Eligible Malaysian programmes, official links | `funding-matcher` |
+| Funding | Programme pre-screen, remaining eligibility review, official links | `run_all.py` + WorkBuddy |
 | Verifier | Reconcile totals, check every link and figure, replace what fails | — |
-| Delivery | 3 decisions → `submit_results` (+ PDF) | `brief-writer` |
+| Delivery | Supported decisions → `submit_results`; approved emails/documents → `complete_action` | WorkBuddy + printable app output |
+
+These are workflow roles. The WorkBuddy path runs three Python scripts in parallel;
+it does not by itself prove collaboration between multiple independent AI agents.
 
 ### MCP tools
 `ping` · `wait_for_request` · `list_pending_requests` · `claim_request` · `get_data_link` · `get_business_data` · `get_impact_checks` · `update_request` · `ask_user` · `get_answer` · `reply_to_owner` · `submit_results` · `complete_action`
@@ -45,6 +48,8 @@ WorkBuddy owns planning, analysis and decisions. The backend independently recal
 `ask_user` powers the live poll: the agent asks, the owner taps an answer (or types "Other") in the app, and the agent continues.
 
 `wait_for_request` atomically claims new or interrupted work. Keep its `request.claimToken` for progress, questions and delivery; one-off workers use `claim_request` after listing. After ten minutes without progress a run can be reclaimed, and its old token can no longer change the request. Local storage coordinates one Node process (including its route bundles); use Firestore transactions for multiple server instances.
+
+Approved actions and owner messages have separate claim tokens: pass `action.claimToken` to `complete_action` and `message.claimToken` to `reply_to_owner`. Stale workers cannot overwrite recovered work. Concurrent approvals reuse one action per decision. Recovered requests include earlier owner answers. Refund/supplier actions require an email; financing requires an application document.
 
 New briefs require evidence for every decision and at least one passed verification check. Source keys must exist in the same business's uploaded data. Rejected delivery leaves the request in progress and saves no result. Saving the accepted result and marking the request completed happen in one transaction. Historical briefs remain readable.
 
@@ -88,8 +93,15 @@ Needs `python3` on the server (the Docker image installs it). Use `BIZDECIDE_ENG
 2. Paste `workbuddy/mcp.example.json` with your URL and key → Save → toggle **bizdecide** on.
 3. Test: *"Use the bizdecide ping tool with name Ahmad"* → `Hello Ahmad from BizDecide`.
 4. Add `workbuddy/bizdecide_instructions.md` and `workbuddy/knowledge/` to the WorkBuddy workspace.
-5. Generate the skills in WorkBuddy using the prompts in `workbuddy/skills/README.md`.
+5. Import the three shipped skills and add `run_all.py` to the workspace; see `workbuddy/skills/README.md` for the actual package contents.
 6. Run: **"Process new BizDecide requests"**.
+
+## Track 2 criteria and verification
+
+See [the criteria audit](docs/track2-audit.md) for the mapping to the supplied judging
+slides, implemented checks and the remaining live WorkBuddy demonstration. Passing
+the local tests establishes integration behaviour, not autonomous execution by
+WorkBuddy or final approval by the judges.
 
 ## Demo
 
