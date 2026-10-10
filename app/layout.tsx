@@ -4,6 +4,7 @@ import "./globals.css";
 import "./landing.css";
 import "./actions.css";
 import "./quick.css";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SiteHeader />
+        <OfflineBanner />
         <main id="main" tabIndex={-1}>
           {children}
         </main>

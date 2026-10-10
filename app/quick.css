@@ -108,6 +108,7 @@
 }
 /* bottom bar once files are in and the send card is out of view */
 .qx-dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--card) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--rule); box-shadow: 0 -2px 0 rgba(30, 33, 73, 0.04); }
+.qx-dock-hint { margin: 0 auto 8px; font-size: 0.8125rem; color: var(--important); }
 .qx-dock-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .qx-dock-text { display: flex; align-items: center; gap: 10px; min-width: 0; margin: 0; font-size: 0.9375rem; color: var(--ink-2); }
 .qx-dock-text b { color: var(--ink); }

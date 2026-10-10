@@ -13,11 +13,11 @@ const when = (iso: string, locale: string) =>
   new Date(iso).toLocaleString(locale, { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
 
 /** Top-bar link with a count of the requests saved on this device. */
-export function MyRequestsLink() {
+export function MyRequestsLink({ current }: { current?: "page" }) {
   const list = useMyRequests();
   const t = APP[useLang()];
   return (
-    <a href="/requests" className="nav-link my-req-link">
+    <a href="/requests" className="nav-link my-req-link" aria-current={current} aria-label={list.length ? `${t.myRequests} (${list.length})` : undefined}>
       <Icon name="clipboard" size={16} />
       <span className="label">{t.myRequests}</span>
       {list.length > 0 && <span className="count">{list.length}</span>}

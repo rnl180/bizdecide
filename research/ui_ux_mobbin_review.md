@@ -46,3 +46,59 @@ Effort: S is under half a day, M is one to two days, L is three days or more. "B
 - Reusing the agent-question card for anything that isn't a real question ([Emergent](https://mobbin.com/screens/821ee5aa-8dbc-4885-ac84-265a17a7cc9b) uses it to sell credits).
 - A grey "AI can make mistakes" footer in place of evidence ([Midday](https://mobbin.com/screens/30ba6439-a7e3-4b60-9e0a-744bdbab1234)).
 - Testimonials or customer logos BizDecide doesn't have. The honest stand-in is the sample brief.
+
+## Second pass: phones, missing states, headers and icons
+
+About 55 more searches: an iOS-only pass on the three phone screens (upload, progress, brief), a pass on empty, error, offline and dark-mode states across web and iOS, and a pass on site headers, page headers and icon use.
+
+### Shipped
+
+| Area | Change | Pattern it follows |
+|---|---|---|
+| Header | Icons on every nav item, the current page marked, "New request" with a plus icon | [Deel](https://mobbin.com/screens/594a2e48-8cc1-4466-a8eb-8f92bca12873), [Anchor](https://mobbin.com/sites/sections/364d08e0-4872-41a3-9f7f-8746831c4333) |
+| Header, phones and tablets | Menu button opens a panel: Home, My requests, WorkBuddy skills, Privacy and the language switch. Escape and outside clicks close it; focus moves into it and back | [Cash App](https://mobbin.com/screens/77de2d02-d1c9-4717-8940-7397f6e325fe), [CVS Health](https://mobbin.com/screens/acf36d11-4956-466d-a58b-17b0f1d9ea25) |
+| Header, desktop | English and Bahasa Melayu switch in the header, so the brief and request pages can change language | [Coda](https://mobbin.com/sites/sections/5267d6c6-eeca-4050-bbae-119af1bb9106), [GetYourGuide](https://mobbin.com/screens/35db6784-f3c0-475b-9acd-321bb179e68f) |
+| Page headers | Back link on the brief and request pages now goes to "My requests"; "Copy link" becomes "Share" (system share sheet) on phones | [Deputy](https://mobbin.com/screens/21f9c737-e539-4e9c-ab44-3ad5ecab0678), [Xero](https://mobbin.com/screens/9494b39d-0962-4253-81ce-bb0a8fcaab6f) |
+| Icons | Brand stroke (1.75px). Priority tags, funding verdicts and request statuses show an icon with the word instead of a coloured dot: urgent alarm clock, important flag, opportunity trend, eligible check-circle, conditional triangle, need info help-circle, failed x-circle | [Stripe](https://mobbin.com/screens/80054ec0-bb9d-4438-9a66-4f7bcd8f103f), [Motion](https://mobbin.com/screens/0629e19f-e02e-4ce7-a674-22ada7cf970d), [Jira](https://mobbin.com/screens/d0bc0aa9-c933-435f-9e71-6f6a2ec78344) |
+| States | Branded 404 page inside the normal header and footer, with "Back to home" and "My requests" | [Coinbase](https://mobbin.com/screens/7484e648-c0ba-4ffa-888c-30c36d53ab32), [Sketch](https://mobbin.com/screens/a99a2151-9161-4ded-b152-3e641beba398) |
+| States | App error page with "Try again", "Back to home" and a reference code to quote | [PayPal](https://mobbin.com/screens/71044211-2f4a-4b72-a66f-867a5ea94b35), [Acctual](https://mobbin.com/screens/e9cb3c9c-8b9d-458e-9bc5-54af312ca2da) |
+| States | Offline bar under the header, then "Back online" for three seconds | [Revolut Business](https://mobbin.com/screens/b719158e-0a19-4b2e-8cc0-5217648ea20a), [Alta](https://mobbin.com/screens/2b00c4b9-d2a6-4a6a-9d95-2aba49348be1) |
+| Request page | Lost connection now reads "Reconnecting… Your CFO team keeps working on our side" instead of a grey line | [Alta](https://mobbin.com/screens/2b00c4b9-d2a6-4a6a-9d95-2aba49348be1) |
+| Request page | After a minute: "You can close this page. It's saved in My requests" | [Starling](https://mobbin.com/screens/17ce71f4-c5a7-4019-b0ef-f18a18d6a651), [Zing](https://mobbin.com/screens/5c7abbc9-76e3-47fa-a98e-ec95291cd628) |
+| Request page | Failed card opens with what is safe: "Your files are saved and nothing was sent" | [GoPay](https://mobbin.com/screens/bfe3c74e-626b-45e9-809c-e67594c1a7d6), [Zomato](https://mobbin.com/screens/2225c0f4-21e4-4ebb-a71f-1cf8aa070700) |
+| Agent question | "Use our assumption" answers in one tap | [Unify](https://mobbin.com/screens/66df7194-18ef-479e-9679-03955deba055), [Perplexity](https://mobbin.com/screens/f721480e-fc00-48b9-b7c8-230aa6a526a2) |
+| Brief | "Still loading your brief…" if the page takes more than six seconds | [Square](https://mobbin.com/screens/09371ef3-f0d0-4fc9-8ab1-607ab3d0e4ab) |
+| Upload bar | One hint naming the most useful missing file, e.g. "Add your bank statement too: it checks double payments and missing settlements" | [foodpanda](https://mobbin.com/screens/15649b1f-c060-4106-a273-f137f3c8d83b), [Wise](https://mobbin.com/screens/fb27f401-1fd6-412f-95a9-72d4e2f044c1) |
+
+### Proposed next from the second pass
+
+14. **Question docked at the bottom on phones (S–M).** When the agents need an answer, slide the question card up from the bottom so it can't be missed below the fold. Seen in [Claude](https://mobbin.com/screens/3dee74bc-68cb-41f4-9a7c-ffed15d7ac9b).
+15. **Guided camera for invoices (M).** Full-screen camera with corner guides, a tip line and "Done (3)" for several pages. Seen in [GoPay](https://mobbin.com/screens/02c2c4f6-6fb3-4aa0-a0d3-7a2d2ef53e09) and [Apple Mail](https://mobbin.com/screens/b7c5eff7-39fb-4edd-8387-674027bf7c47).
+16. **One status card with a segment per agent (M, backend).** Needs the agents to report which of the six is working. Seen in [Grab](https://mobbin.com/screens/f35fb2cc-a9f1-42ee-b8e2-889f5ab93b22) and [Bolt Food](https://mobbin.com/screens/9509b853-f44c-425e-81c0-c6e96efffe2c).
+17. **Run summary line at the top of the brief (S).** "6 agents · 6 files · 8 checks passed · 3m 12s", opening the timeline and checks in a sheet. Seen in [Perplexity](https://mobbin.com/flows/5984eeb7-0566-4511-9fec-eb6d3a777ced).
+18. **File errors on the file row itself (M).** Name the columns found and the fix, with "Choose another file" and "Continue without this file". Seen in [Buffer](https://mobbin.com/screens/32d4f39d-b5cd-438a-96a7-cff322196c12) and [Perplexity](https://mobbin.com/screens/0882801e-93e2-49d0-89ee-dfcbc18ea95b).
+19. **Starter questions built from the owner's data in Ask your CFO (M, backend).** Seen in [Deel](https://mobbin.com/screens/db357932-0e83-43e7-89ff-5f47a06ef246).
+20. **"Not yet" verdicts that list what would change the answer (M, backend).** Seen in [KOHO](https://mobbin.com/screens/97416436-95bf-4d43-97eb-3b183a33fc45).
+21. **My requests tabs with counts (S).** All, In progress, Needs you, Ready. Seen in [PlanetScale](https://mobbin.com/screens/be0ec4c5-4a49-4f4a-8a29-179143a514c5).
+22. **Two icon sizes across the app (S).** 20px for nav, buttons and rows; 16px for pills and chips. Today there are about ten sizes.
+
+### Proposed next from the step-by-step flows
+
+Seven journeys were traced screen by screen. Mobbin has no complete Square, Shopify or Stripe loan offer flow, so the loan steps come from [Cleo × Engine](https://mobbin.com/flows/9ead25ab-3184-4aed-8928-2ca5c9719cc4) and [GoPay Pinjam](https://mobbin.com/flows/0cde6ce1-1a99-4c21-a0ff-64f93b66d29e).
+
+| Flow | Steps to finish | What it ends on |
+|---|---|---|
+| [Square Loans, not eligible](https://mobbin.com/flows/1b666116-0bf2-4a03-9f9f-4fea564dbffa) | 2 taps, no way to apply | Eligibility factors with "Needs work" badges and a tip each |
+| [Cleo × Engine loan offer](https://mobbin.com/flows/9ead25ab-3184-4aed-8928-2ca5c9719cc4) | About 13 | Offer cards with amount, Continue and See details |
+| [Mercury onboarding](https://mobbin.com/flows/f46b27fd-c406-44ec-ab64-d2e0b7219966) | About 12 | "You're nearly there!" with a timeline and "No action is needed on your end" |
+| [Origin CSV import](https://mobbin.com/flows/4221274e-c4ab-4fbc-8262-a5ac2f6df9ad) | About 9 | "20 transactions matched · 12 categories imported", then a confirm |
+| [ChatGPT deep research](https://mobbin.com/flows/a5de6a0c-30a2-4246-a291-aa6453a2b410) | About 4 | "Research completed in 5m · 23 sources" |
+| [Cash App dispute](https://mobbin.com/flows/ed196adf-a6fd-47a1-bd5f-75f3a3f112a3) | About 11 | "We'll take it from here" with a status timeline and expected update |
+| [Brex receipt capture](https://mobbin.com/flows/47ce9154-2898-4635-ac62-4fbfd306f65c) | About 5 | "We matched your receipts", then a thumbs prompt |
+
+23. **Ask the agents' question before they start (M, backend).** ChatGPT asks clarifying questions first, then works without stopping. BizDecide could ask about known gaps, such as a personal purchase on the business file, right after upload.
+24. **Approve as a plan review (M, backend).** Before drafting, show who the email goes to, what it asks for and the amount, with "I'll write it myself" as an option. Seen in [GitHub Copilot](https://mobbin.com/flows/b94dd09a-25d1-486a-9611-aaa52e52db37).
+25. **Track a draft after it leaves (M).** Drafted, Sent, then a reply-expected date, moved on by a "Did you send it?" button. Seen in [Mercury](https://mobbin.com/flows/f46b27fd-c406-44ec-ab64-d2e0b7219966) and [Cash App](https://mobbin.com/flows/ed196adf-a6fd-47a1-bd5f-75f3a3f112a3).
+26. **Say up front that the supplier may refuse (S).** Cash App says "we can't guarantee you'll get your money back" before submit. One honest line under Approve on refund decisions.
+27. **Rate range and term before the funding pack (S, backend).** GoPay shows the monthly rate range, the term and "No hidden fees" before anything else.
+28. **Feedback at the end of the brief (S).** A thumbs up or down and three follow-up actions. Seen in [Manus](https://mobbin.com/flows/b88fda5b-7301-4997-a90e-0b214232db99) and [Perplexity](https://mobbin.com/flows/4c515c96-02a5-41df-82d4-c35bdf252e88).

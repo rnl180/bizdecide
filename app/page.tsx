@@ -470,6 +470,8 @@ export default function IntakePage() {
   );
 
   const missing = KINDS.filter((k) => !data[k]);
+  // The one missing file that adds the most, named in the bottom bar.
+  const dockHint = (["bank", "purchases", "sales", "payables", "suppliers"] as const).find((k) => !data[k]);
   const nameError = tried && hasNumbers && !hasName;
 
   return (
@@ -937,6 +939,7 @@ export default function IntakePage() {
 
       {hasNumbers && inForm && !sendInView && !busy && (
         <div className="qx-dock no-print">
+          {dockHint && <p className="container qx-dock-hint">{q.dockHint(q.kinds[dockHint], q.kindWhy[dockHint])}</p>}
           <div className="container qx-dock-inner">
             <p className="qx-dock-text">
               <span className="qx-dock-ok" aria-hidden="true">

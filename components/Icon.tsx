@@ -1,4 +1,4 @@
-// Inline stroke icons (24px grid, currentColor). Keeps the app dependency-free.
+// Inline Lucide outline icons (24px grid, currentColor, 1.75px stroke per the brand guide). Keeps the app dependency-free.
 const PATHS = {
   check: ["M20 6 9 17l-5-5"],
   x: ["M18 6 6 18", "M6 6l12 12"],
@@ -36,12 +36,27 @@ const PATHS = {
   clock: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "M12 6v6l4 2"],
   zap: ["M13 2 3 14h9l-1 8 10-12h-9Z"],
   spinner: ["M21 12a9 9 0 1 1-6.22-8.56"],
+  checkCircle: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "m9 12 2 2 4-4"],
+  xCircle: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "m15 9-6 6", "m9 9 6 6"],
+  alertTriangle: ["m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z", "M12 9v4", "M12 17h.01"],
+  helpCircle: ["M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z", "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", "M12 17h.01"],
+  flag: ["M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1Z", "M4 22v-7"],
+  trendingUp: ["M22 7 13.5 15.5 8.5 10.5 2 17", "M16 7h6v6"],
+  menu: ["M4 6h16", "M4 12h16", "M4 18h16"],
+  home: ["M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", "M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"],
+  refresh: ["M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8", "M21 3v5h-5"],
+  wifiOff: ["M12 20h.01", "M8.5 16.43a5 5 0 0 1 7 0", "M5 12.86a10 10 0 0 1 5.17-2.69", "M19 12.86a10 10 0 0 0-2-1.52", "M2 8.82a15 15 0 0 1 4.18-2.64", "M22 8.82a15 15 0 0 0-11.29-3.76", "m2 2 20 20"],
+  languages: ["m5 8 6 6", "m4 14 6-6 2-3", "M2 5h12", "M7 2h1", "m22 22-5-10-5 10", "M14 18h6"],
+  stamp: ["M5 22h14", "M19.27 13.73A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.66-.26-1.3-.73-1.77Z", "M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-3-3c-1.66 0-3 1-3 3s1 2 1 3.5V13"],
+  package: ["M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73Z", "M12 22V12", "m3.3 7 7.7 4.73a2 2 0 0 0 2 0L20.7 7", "m7.5 4.27 9 5.15"],
+  alarmClock: ["M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z", "M12 9v4l2 2", "M5 3 2 6", "m22 6-3-3", "M6.38 18.7 4 21", "M17.64 18.67 20 21"],
+  share: ["M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z", "m8.59 13.51 6.83 3.98", "m15.41 6.51-6.82 3.98"],
   camera: ["M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z", "M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"],
 } as const;
 
 export type IconName = keyof typeof PATHS;
 
-export function Icon({ name, size = 18, className, strokeWidth = 2 }: { name: IconName; size?: number; className?: string; strokeWidth?: number }) {
+export function Icon({ name, size = 18, className, strokeWidth = 1.75 }: { name: IconName; size?: number; className?: string; strokeWidth?: number }) {
   return (
     <svg
       className={className}

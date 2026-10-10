@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useRef, useState, type RefObject } from "react";
 import { Icon, type IconName } from "@/components/Icon";
+import { PRIORITY_ICON } from "@/components/RequestMeta";
 import { LANGS, setLang, type Lang } from "@/lib/i18n";
 import { LANDING, type LandingStrings } from "@/lib/i18n-landing";
 
@@ -209,7 +210,9 @@ function FoundCard({ c }: { c: LandingStrings["card"] }) {
               <p className="lx-row-title">{r.title}</p>
               {r.amount && <span className="lx-row-amt">{r.amount}</span>}
               <div className="lx-row-meta">
-                <span className={`tag ${r.priority}`}>{r.tag}</span>
+                <span className={`tag ${r.priority}`}>
+                  <Icon name={PRIORITY_ICON[r.priority as keyof typeof PRIORITY_ICON] ?? "flag"} size={12} /> {r.tag}
+                </span>
                 {r.done ? (
                   // While the figure counts, this shows as pending (dot) and then gets checked off.
                   <span className="lx-status lx-done">

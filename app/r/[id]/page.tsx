@@ -2,7 +2,7 @@
 
 import { use, useEffect, useRef, useState } from "react";
 import { Icon, type IconName } from "@/components/Icon";
-import { STATUS } from "@/components/RequestMeta";
+import { PRIORITY_ICON, STATUS, StatusIcon, VERDICT_ICON } from "@/components/RequestMeta";
 import { INTAKE, useLang } from "@/lib/i18n";
 import { APP, ago, type AppStrings } from "@/lib/i18n-app";
 import { impactKind, impactTotals } from "@/lib/impact";
@@ -105,6 +105,7 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
           </div>
         ) : (
           <div aria-busy="true" aria-label={t.loading}>
+            <SlowHint text={t.slowLoad} />
             <div className="skeleton" style={{ width: 120, height: 14, marginBottom: 24 }} />
             <div className="skeleton" style={{ width: "55%", height: 36, marginBottom: 12 }} />
             <div className="skeleton" style={{ width: "40%", height: 16, marginBottom: 32 }} />
@@ -124,8 +125,8 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
 
   return (
     <div className="container container-narrow page">
-      <a href="/" className="back-link">
-        <Icon name="arrowLeft" size={16} /> {t.newRequest}
+      <a href="/requests" className="back-link">
+        <Icon name="arrowLeft" size={16} /> {t.myRequests}
       </a>
 
       <header className="page-head">
@@ -133,7 +134,7 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
           <div className="meta-row">
             <span className="chip">{serviceTitle(lang, request.service)}</span>
             <span className={`status ${status.cls}`}>
-              <span className="dot" /> {t.status[request.status]}
+              <StatusIcon status={request.status} /> {t.status[request.status]}
             </span>
           </div>
           <h1>{request.businessName}</h1>
@@ -175,9 +176,10 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
               })}
             </ol>
           </section>
-          {error && (
-            <p className="muted" style={{ marginTop: 12, fontSize: "0.875rem" }}>
-              {error || t.connRetry}
+          {error !== null && (
+            <p className="notice warn reconnect" role="status">
+              <Icon name="wifiOff" size={16} />
+              <span>{t.reconnecting}</span>
             </p>
           )}
         </div>
@@ -240,12 +242,12 @@ function NowCard({ request, hasQuestion, t }: { request: RequestDoc; hasQuestion
     },
     failed: {
       cls: "failed",
-      icon: "alert",
+      icon: "xCircle",
       label: c.failedLabel,
       title: c.failedTitle,
       body: (
         <>
-          {request.error ?? c.unknownError}. <a href="/">{c.startNew}</a>
+          <strong className="now-safe">{c.failedSafe}</strong> {request.error ?? c.unknownError}. <a href="/">{c.startNew}</a>
         </>
       ),
     },
@@ -263,7 +265,24 @@ function NowCard({ request, hasQuestion, t }: { request: RequestDoc; hasQuestion
         <p>{v.body}</p>
       </div>
       {request.status !== "failed" && <Elapsed since={request.createdAt} label={t.elapsed} />}
+      {(request.status === "submitted" || request.status === "processing") && <LeaveNote since={request.createdAt} text={t.canLeave} />}
     </section>
+  );
+}
+
+/** After a minute of waiting, tell the owner they don't have to watch. */
+function LeaveNote({ since, text }: { since: string; text: string }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const wait = Math.max(0, 60_000 - (Date.now() - Date.parse(since)));
+    const t = setTimeout(() => setShow(true), Number.isFinite(wait) ? wait : 60_000);
+    return () => clearTimeout(t);
+  }, [since]);
+  if (!show) return null;
+  return (
+    <p className="now-leave">
+      <Icon name="info" size={14} /> {text}
+    </p>
   );
 }
 
@@ -301,11 +320,24 @@ function ShareNote({ t }: { t: AppStrings }) {
 
 function CopyLink({ t }: { t: AppStrings }) {
   const [copied, setCopied] = useState(false);
+  // Phones get the system share sheet (WhatsApp, email…); everything else copies the link.
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => {
+    setCanShare(typeof navigator.share === "function" && window.matchMedia("(pointer: coarse)").matches);
+  }, []);
   return (
     <button
       type="button"
       className="btn btn-secondary btn-sm no-print"
       onClick={async () => {
+        if (canShare) {
+          try {
+            await navigator.share({ title: document.title, url: window.location.href });
+            return;
+          } catch {
+            /* cancelled or blocked: fall back to copying */
+          }
+        }
         try {
           await navigator.clipboard.writeText(window.location.href);
           setCopied(true);
@@ -315,7 +347,7 @@ function CopyLink({ t }: { t: AppStrings }) {
         }
       }}
     >
-      <Icon name={copied ? "check" : "copy"} size={16} /> {copied ? t.linkCopied : t.copyLink}
+      <Icon name={copied ? "check" : canShare ? "share" : "copy"} size={16} /> {copied ? t.linkCopied : canShare ? t.share : t.copyLink}
     </button>
   );
 }
@@ -327,15 +359,16 @@ function QuestionCard({ q, t }: { q: QuestionDoc; t: AppStrings }) {
   const [sending, setSending] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  async function send() {
-    if (!choice) return;
+  async function send(answer = choice) {
+    if (!answer) return;
+    setChoice(answer);
     setErr(null);
     setSending(true);
     try {
       const res = await fetch(`/api/questions/${q.id}/answer`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ answer: choice, otherText: choice === "__other__" ? other : undefined }),
+        body: JSON.stringify({ answer, otherText: answer === "__other__" ? other : undefined }),
       });
       const json = await res.json();
       if (!res.ok) setErr(json.error ?? t.sendErr);
@@ -394,11 +427,16 @@ function QuestionCard({ q, t }: { q: QuestionDoc; t: AppStrings }) {
             </p>
           )}
           <div className="row">
-            <button className="btn btn-primary" type="button" disabled={!choice || sending || (choice === "__other__" && !other.trim())} onClick={send}>
+            <button className="btn btn-primary" type="button" disabled={!choice || sending || (choice === "__other__" && !other.trim())} onClick={() => send()}>
               {sending ? <Icon name="spinner" className="spin" /> : <Icon name="send" size={16} />} {t.qSend}
             </button>
-            {q.defaultOption && <span className="default-note">{t.qDefault(q.defaultOption)}</span>}
+            {q.defaultOption && (
+              <button className="btn btn-secondary" type="button" disabled={sending} onClick={() => send(q.defaultOption)}>
+                <Icon name="checkCircle" size={16} /> {t.qUseAssumed}
+              </button>
+            )}
           </div>
+          {q.defaultOption && <p className="default-note">{t.qDefault(q.defaultOption)}</p>}
         </>
       )}
     </section>
@@ -491,8 +529,8 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   return (
     <article className="container container-narrow page">
       <div className="brief-top">
-        <a href="/" className="back-link no-print">
-          <Icon name="arrowLeft" size={16} /> {t.newRequest}
+        <a href="/requests" className="back-link no-print">
+          <Icon name="arrowLeft" size={16} /> {t.myRequests}
         </a>
         <div className="row no-print">
           <CopyLink t={t} />
@@ -519,7 +557,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         </span>
         <div className="meta-row">
           <span className="status done">
-            <Icon name="clipboard" size={14} /> {t.cfoBrief}
+            <Icon name="stamp" size={14} /> {t.cfoBrief}
           </span>
           <span className="chip">{request.businessName}</span>
           {result.verification.length > 0 && (
@@ -564,7 +602,9 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
                 <a href={`#decision-${i + 1}`}>
                   <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
                   <span>{d.title}</span>
-                  <span className={`tag ${d.priority}`}>{t.priority[d.priority]}</span>
+                  <span className={`tag ${d.priority}`}>
+                <Icon name={PRIORITY_ICON[d.priority]} size={13} /> {t.priority[d.priority]}
+              </span>
                   {d.impactRm ? (
                     <span className={`amt ${impactKind(d)}${d.impactRm < 0 ? " neg" : ""}`}>{impactText(d, rm, t)}</span>
                   ) : (
@@ -603,7 +643,9 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
           <div className={`card decision ${d.priority}`} key={i} id={`decision-${i + 1}`} data-done={isDone(d) || undefined}>
             <div className="decision-top">
               <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
-              <span className={`tag ${d.priority}`}>{t.priority[d.priority]}</span>
+              <span className={`tag ${d.priority}`}>
+                <Icon name={PRIORITY_ICON[d.priority]} size={13} /> {t.priority[d.priority]}
+              </span>
               <button
                 type="button"
                 className="done-toggle no-print"
@@ -814,8 +856,14 @@ function ApplicationPacks({ packs, rm, t }: { packs: ApplicationPack[]; rm: (n: 
               <div className="pack-top">
                 <div>
                   <div className="meta-row">
-                    <span className={`tag ${p.verdict}`}>{t.verdict[p.verdict]}</span>
-                    {p.unverified && <span className="tag unverified">{t.unverified}</span>}
+                    <span className={`tag ${p.verdict}`}>
+                      <Icon name={VERDICT_ICON[p.verdict]} size={13} /> {t.verdict[p.verdict]}
+                    </span>
+                    {p.unverified && (
+                      <span className="tag unverified">
+                        <Icon name="info" size={13} /> {t.unverified}
+                      </span>
+                    )}
                   </div>
                   <h3>{p.programName}</h3>
                   {p.agency && <div className="muted pack-agency">{p.agency}</div>}
@@ -1150,4 +1198,18 @@ function BriefNav({ items, label, meter }: { items: { id: string; label: string;
       <div className="brief-nav-meter">{meter}</div>
     </nav>
   );
+}
+
+/** Shown under the loading skeleton if the brief takes more than a few seconds. */
+function SlowHint({ text }: { text: string }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 6000);
+    return () => clearTimeout(t);
+  }, []);
+  return show ? (
+    <p className="slow-hint" role="status">
+      <Icon name="spinner" size={14} className="spin" /> {text}
+    </p>
+  ) : null;
 }
