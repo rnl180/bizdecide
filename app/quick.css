@@ -1,6 +1,6 @@
 /* One-drop intake (#start on the home page). Every class is prefixed qx-. */
 .qx-section { padding-top: 96px; padding-bottom: 32px; }
-.qx-section .section-head { max-width: 46rem; }
+.qx-section .section-head { max-width: 46rem; margin-inline: auto; text-align: center; }
 .qx-section .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -0.015em; }
 .qx { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
 .qx-main { display: grid; gap: 16px; min-width: 0; }

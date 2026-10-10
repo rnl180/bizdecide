@@ -3,20 +3,30 @@
 
 /* ---------- hero ---------- */
 .lx-hero { overflow: clip; }
-.lx-hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-top: 44px; padding-bottom: 80px; }
-.lx-copy { min-width: 0; }
+/* a row of shophouses along the foot of the hero, where Malaysian SMEs do business (tile: public/brand/shophouses.svg) */
+.lx-hero::after { content: ""; position: absolute; inset: auto 0 0; z-index: -1; height: 88px; background: var(--brand); opacity: 0.12; pointer-events: none; -webkit-mask: url("/brand/shophouses.svg") repeat-x left bottom / auto 100%; mask: url("/brand/shophouses.svg") repeat-x left bottom / auto 100%; }
+/* the brand pattern (globals.css .hero-band::before) shows at both edges, clear behind the centered copy, and stops above the roofs */
+.lx-hero::before {
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000), linear-gradient(to top, transparent 88px, #000 150px);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000), linear-gradient(to top, transparent 88px, #000 150px);
+  mask-composite: intersect;
+}
+.lx-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 48px; padding-top: 56px; padding-bottom: 112px; text-align: center; }
+.lx-copy { min-width: 0; max-width: 46rem; }
 .lx-h1 { font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 22px; }
 .lx-h1 > span { display: block; text-wrap: balance; }
 .lx-h1 .lx-h1-hl { color: var(--brand); }
-.lede.lx-lede { max-width: 52ch; }
+.lede.lx-lede { max-width: 52ch; margin-inline: auto; }
+.row.lx-ctas { justify-content: center; }
 .lx-ctas .btn-lg { padding: 0 22px; }
 /* wrap units (sentences, eyebrow halves) whole before breaking inside them */
 .lx-unit { display: inline-block; }
-.lx-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.lx-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; }
 .lx-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--ink-2); }
 
 /* ---------- the sample brief ---------- */
-.lx-stage { position: relative; isolation: isolate; min-width: 0; padding-bottom: 24px; }
+.lx-stage { position: relative; isolation: isolate; width: 100%; max-width: 560px; min-width: 0; padding-bottom: 24px; text-align: left; }
 /* the months of books underneath the brief */
 .lx-sheet { position: absolute; z-index: -1; inset: 0 0 24px; border-radius: var(--r-chop); background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--shadow-sm); transform-origin: 50% 100%; }
 .lx-sheet-1 { transform: translateY(12px) scale(0.955); }
@@ -91,36 +101,36 @@
 @keyframes lx-ping { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 35%, transparent); } to { box-shadow: 0 0 0 10px transparent; } }
 
 @media (max-width: 960px) {
-  .lx-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 40px; padding-bottom: 56px; }
-  .lx-stage { width: 100%; max-width: 560px; }
+  .lx-hero-grid { gap: 40px; padding-top: 40px; padding-bottom: 72px; }
+  .lx-hero::after { height: 56px; }
 }
 @media (max-width: 520px) {
   .eyebrow.lx-eyebrow { border-radius: var(--r-chop); line-height: 1.4; }
   .lede.lx-lede { font-size: 1.0625rem; }
   .lx-ctas .btn { width: 100%; }
-  .lx-trust { flex-direction: column; gap: 10px; }
+  .lx-trust { flex-direction: column; align-items: center; gap: 10px; }
 }
 
 /* ---------- how it works: a white band with a numbered track ---------- */
-.section-head.lx-head { max-width: 46rem; margin-bottom: 40px; }
+.section-head.lx-head { max-width: 46rem; margin: 0 auto 40px; text-align: center; }
 .section-head.lx-head h2 { margin: 0; font-size: clamp(2.125rem, 4.4vw, 3.25rem); line-height: 1; letter-spacing: -0.015em; text-wrap: balance; }
 .lx-section.lx-band { padding-top: 88px; padding-bottom: 88px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .lx-steps { --lx-gap: 32px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--lx-gap); }
-.lx-step { position: relative; min-width: 0; }
-.lx-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; left: 64px; right: calc(16px - var(--lx-gap)); height: 2px; background-image: linear-gradient(90deg, var(--line-strong) 55%, transparent 0); background-size: 8px 2px; }
-.lx-step-node { position: relative; display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 20px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--line-strong); color: var(--ink-2); }
+.lx-step { position: relative; min-width: 0; text-align: center; }
+.lx-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; left: calc(50% + 40px); right: calc(40px - 50% - var(--lx-gap)); height: 2px; background-image: linear-gradient(90deg, var(--line-strong) 55%, transparent 0); background-size: 8px 2px; }
+.lx-step-node { position: relative; display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto 20px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--line-strong); color: var(--ink-2); }
 .lx-step:last-child .lx-step-node { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); box-shadow: var(--press); }
 .lx-step-n { position: absolute; top: -6px; right: -8px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 0.6875rem; font-weight: 700; border: 2px solid var(--surface); }
 .lx-step-title { margin: 0 0 6px; font-size: 1.25rem; line-height: 1.3; text-wrap: balance; }
 .lx-step-body { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--muted); }
-.lx-running { display: inline-flex; align-items: center; gap: 10px; margin-top: 48px; padding: 10px 16px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+.lx-running { display: flex; width: fit-content; align-items: center; gap: 10px; margin: 48px auto 0; padding: 10px 16px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-size: 0.875rem; font-weight: 700; color: var(--ink); }
 .lx-running:hover { text-decoration: none; border-color: var(--brand-line); color: var(--brand); }
 .lx-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
 @media (max-width: 760px) {
   .section-head.lx-head { margin-bottom: 28px; }
   .lx-section.lx-band { padding-top: 64px; padding-bottom: 64px; }
   .lx-steps { --lx-gap: 28px; grid-template-columns: minmax(0, 1fr); }
-  .lx-step { padding-left: 68px; min-height: 48px; }
+  .lx-step { padding-left: 68px; min-height: 48px; text-align: left; }
   .lx-step-node { position: absolute; top: 0; left: 0; margin: 0; }
   .lx-step:not(:last-child)::after { top: 60px; bottom: calc(10px - var(--lx-gap)); left: 23px; right: auto; width: 2px; height: auto; background-image: linear-gradient(180deg, var(--line-strong) 55%, transparent 0); background-size: 2px 8px; }
   .lx-step-title { padding-top: 10px; }

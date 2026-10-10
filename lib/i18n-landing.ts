@@ -40,7 +40,7 @@ const en: LandingStrings = {
   },
   card: {
     cafe: "Rock Cafe",
-    place: "Coffee shop",
+    place: "Coffee shop · Petaling Jaya",
     badge: "Sample brief",
     found: "RM954.40",
     foundLabel: "to recover",
@@ -48,9 +48,9 @@ const en: LandingStrings = {
     savedLabel: "overcharge stopped",
     rows: [
       { priority: "urgent", tag: "Urgent", title: "Invoice paid twice", amount: "RM642", status: "Refund drafted", done: true },
-      { priority: "urgent", tag: "Urgent", title: "QR payment never arrived", amount: "RM312.40", status: "Bank query ready" },
+      { priority: "urgent", tag: "Urgent", title: "DuitNow QR payment never arrived", amount: "RM312.40", status: "Bank query ready" },
       { priority: "important", tag: "Important", title: "Coffee powder up 12%", amount: "RM985/yr", status: "Ask for quotes" },
-      { priority: "opportunity", tag: "Opportunity", title: "Business loan fits your plan", amount: "", status: "Pack ready" },
+      { priority: "opportunity", tag: "Opportunity", title: "TEKUN loan fits your plan", amount: "", status: "Pack ready" },
     ],
   },
   how: {
