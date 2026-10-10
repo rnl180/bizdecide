@@ -27,7 +27,7 @@ import {
   sleep,
   updateRequest,
 } from "./store";
-import { EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
+import { ApplicationPackSchema, DecisionSchema, EvidenceSchema, ResultSchema, SERVICE_LABELS, type LaneId, type LaneState, type Result } from "./types";
 import { impactKind } from "./impact";
 import { finalizeResult } from "./verifier-checks";
 import { loadFixture, replayAnswer, replayEnabled, replayRun } from "./replay";
@@ -475,7 +475,29 @@ const block = (tag: string, data: unknown) => `<${tag}>\n${typeof data === "stri
 
 // ---------- a request, end to end ----------
 
-const ResultFormat = zodOutputFormat(ResultSchema);
+/**
+ * What the Verifier writes. Structured outputs allow at most 24 optional fields in the main schema (the API
+ * answers 400 above that; fields inside shared sub-schemas such as a decision or a pack don't count), so this
+ * leaves out what the model shouldn't write: the server fills notChecked, einvoice (Classifier lane), each
+ * decision's priceMove (Procurement lane) and each pack's ladder, shariah and proposedNotes (market pack) in
+ * finalizeResult; reportUrl and the later-phase blocks (morning note, follow-ups, zakat, channels, benchmarks)
+ * come from code, not the model. Count the optional properties of ResultFormat.schema (outside $defs) when adding
+ * a field; keep it at about 20 or fewer.
+ */
+export const VerifierOutputSchema = ResultSchema.omit({
+  reportUrl: true,
+  notChecked: true,
+  morningNote: true,
+  followUps: true,
+  einvoice: true,
+  zakat: true,
+  channels: true,
+  benchmarks: true,
+}).extend({
+  decisions: z.array(DecisionSchema.omit({ priceMove: true })).min(1).max(5),
+  applicationPacks: z.array(ApplicationPackSchema.omit({ ladder: true, shariah: true, proposedNotes: true })).max(3).default([]),
+});
+export const ResultFormat = zodOutputFormat(VerifierOutputSchema);
 const clampResult = (r: Json) => ({
   ...r,
   keyNumbers: Array.isArray(r.keyNumbers) ? r.keyNumbers.slice(0, 4) : r.keyNumbers,
@@ -592,10 +614,10 @@ export function processRequest(requestId: string) {
         },
       ];
       const final = await converse(verifierParams, verifierMessages, usage);
-      const result: Result = await parseStructured(ResultSchema, final, verifierParams, verifierMessages, usage, clampResult);
+      const result: Result = await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
       // What could not be checked, the rejected false positive and the confidence rule don't depend on the model.
-      await finalizeResult(result, { market: pack.code, language: language === "ms" ? "ms" : "en", business: ws.business, laneData });
+      await finalizeResult(result, { market: pack.code, language: language === "ms" ? "ms" : "en", business: ws.business, laneData, ownerAnswers: asked });
       for (const v of result.verification) {
         const status = v.status ?? (v.passed ? "passed" : "failed");
         await verifier.emit(v.check, { detail: status === "not_checked" ? "not checked" : status });
@@ -629,7 +651,7 @@ const ReplySchema = z.object({
   answer: z.string().min(1).max(2000),
   evidence: z.array(EvidenceSchema).max(5),
 });
-const ReplyFormat = zodOutputFormat(ReplySchema);
+export const ReplyFormat = zodOutputFormat(ReplySchema);
 
 /** Claims an owner's follow-up question and answers it from the business's data and brief. Safe to call more than once. */
 export function answerOwnerMessage(messageId: string) {
@@ -730,7 +752,7 @@ const ActionOutSchema = z.object({
     })
     .optional(),
 });
-const ActionOutFormat = zodOutputFormat(ActionOutSchema);
+export const ActionOutFormat = zodOutputFormat(ActionOutSchema);
 
 /** Claims an approved action and writes the email or pack for the owner. Safe to call more than once. */
 export function processAction(actionId: string) {

@@ -10,7 +10,9 @@ import type { BusinessInput, Result } from "./types";
  * - the rejected false positive: cash-on-delivery invoices named as checked and not flagged;
  * - confidence: "high" only when the decision's evidence is keyed to rows and rests on no assumption;
  * - application packs: Shariah flag, ladder step and proposed-measure lines from the market pack;
- * - price rises: the exact unit-price series and the item's SST line (Price Movers card).
+ * - price rises: the exact unit-price series and the item's SST line (Price Movers card);
+ * - e-invoice status from the Classifier lane, with the owner's group answer applied.
+ * Fields set here stay out of the Verifier's structured-output schema (lib/claude-cfo.ts, 24 optional fields at most).
  */
 
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -22,6 +24,7 @@ export interface FinalizeContext {
   language: Lang;
   business: (BusinessInput & { documents?: string[] }) | null; // for empty tables and rows that cover a gap
   laneData?: Record<string, Json>; // the Claude engine's lane outputs, keyed by agent name; WorkBuddy has none
+  ownerAnswers?: { question: string; answer?: string }[]; // the owner's answers to this run's questions
 }
 
 const MARKETS = path.join(process.cwd(), "workbuddy", "knowledge", "markets");
@@ -190,6 +193,48 @@ function settlePriceMoves(result: Result, ctx: FinalizeContext) {
   }
 }
 
+// ---------- e-invoice status from the Classifier lane ----------
+
+const EINVOICE_BASIS: Record<Lang, { form: (f: string) => string; answer: string; unknown: string }> = {
+  en: { form: (f) => `Legal form: ${f}`, answer: "Your answer: the business is independent", unknown: "Group ties unknown: a related company with RM3m+ revenue removes the exemption" },
+  ms: { form: (f) => `Bentuk perniagaan: ${f}`, answer: "Jawapan anda: perniagaan ini bebas", unknown: "Hubungan kumpulan tidak diketahui: syarikat berkaitan dengan hasil RM3j+ membatalkan pengecualian" },
+};
+
+/**
+ * The Verifier doesn't write einvoice (it would only copy it); the server takes it from the Classifier lane. cannot_determine
+ * turns into exempt only when the owner answered the group question "independent" and revenue is under the threshold.
+ */
+async function settleEinvoice(result: Result, ctx: FinalizeContext) {
+  const cls: Json = ctx.laneData?.Classifier ?? {};
+  const e = cls.einvoice;
+  if (result.einvoice || !e?.status) return;
+  const basis = EINVOICE_BASIS[ctx.language];
+  let status = e.status as "exempt" | "required" | "cannot_determine";
+  let why = cls.groupStatus === "independent" && cls.groupBasis?.startsWith("legal form") ? basis.form(String(cls.groupBasis).slice(12)) : undefined;
+  if (status === "cannot_determine" && e.revenueUsedRm != null && e.revenueUsedRm < e.thresholdRm) {
+    const ask = (await packFile(ctx.market, "sme_rules.json"))?.group_rule?.ask;
+    const yes = [ask?.en?.options?.[0], ask?.ms?.options?.[0]].filter(Boolean).map((s: string) => s.toLowerCase());
+    const independent = (ctx.ownerAnswers ?? []).some(
+      (a) => a.answer && yes.includes(a.answer.trim().toLowerCase()) && /group|kumpulan|independent|bebas/i.test(a.question),
+    );
+    if (independent) {
+      status = "exempt";
+      why = basis.answer;
+    } else why = basis.unknown;
+  }
+  result.einvoice = {
+    status,
+    thresholdRm: e.thresholdRm,
+    declaredRm: e.declaredRm,
+    bankImpliedRm: e.actualRm,
+    headroomRm: e.headroomRm,
+    nextCheck: e.nextCheck,
+    ruleVersion: e.ruleVersion,
+    sourceUrl: e.sourceUrl,
+    ...(why ? { basis: why } : {}),
+  };
+}
+
 // ---------- all together ----------
 
 /** Applies the server's rules to a final brief in place and returns it. Never throws: a rule that fails is skipped. */
@@ -210,6 +255,7 @@ export async function finalizeResult(result: Result, ctx: FinalizeContext): Prom
   await step("confidence", () => settleConfidence(result, ctx.language));
   await step("packs", () => settlePacks(result, ctx));
   await step("priceMoves", () => settlePriceMoves(result, ctx));
+  await step("einvoice", () => settleEinvoice(result, ctx));
   await step("notChecked", async () => {
     const gaps = await notCheckedList(ctx);
     result.notChecked = gaps;

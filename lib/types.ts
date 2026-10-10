@@ -207,6 +207,7 @@ const EinvoiceSchema = z.object({
   nextCheck: z.string(),
   ruleVersion: z.string(),
   sourceUrl: z.string(),
+  basis: z.string().optional(), // why the group test passes or can't be decided: legal form, or the owner's answer
 });
 
 const ZakatSchema = z.object({
