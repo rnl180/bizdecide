@@ -1,0 +1,226 @@
+/* BizDecide landing: hero, sample brief and marketing sections (components/Landing.tsx).
+   Builds on the tokens and classes in globals.css. Every class here is prefixed lx-. */
+
+/* ---------- hero ---------- */
+.lx-hero { overflow: clip; }
+.lx-hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-top: 44px; padding-bottom: 80px; }
+.lx-copy { min-width: 0; }
+.lx-h1 { font-size: clamp(2.25rem, 4.3vw, 3.25rem); line-height: 1.05; letter-spacing: -0.04em; margin: 0 0 20px; }
+.lx-h1 > span { display: block; text-wrap: balance; }
+.lx-h1 .lx-h1-hl { color: var(--brand); }
+.lede.lx-lede { max-width: 52ch; }
+.lx-ctas .btn-lg { padding: 0 22px; }
+/* wrap units (sentences, eyebrow halves) whole before breaking inside them */
+.lx-unit { display: inline-block; }
+.lx-trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.lx-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--ink-2); }
+
+/* ---------- the sample brief ---------- */
+.lx-stage { position: relative; isolation: isolate; min-width: 0; padding-bottom: 24px; }
+/* the months of books underneath the brief */
+.lx-sheet { position: absolute; z-index: -1; inset: 0 0 24px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); transform-origin: 50% 100%; }
+.lx-sheet-1 { transform: translateY(12px) scale(0.955); }
+.lx-sheet-2 { transform: translateY(24px) scale(0.91); background: var(--surface-2); }
+
+.lx-found { position: relative; margin: 0; container: lx-found / inline-size; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 28px 56px -24px rgba(6, 64, 44, 0.3); overflow: hidden; }
+
+.lx-found-head { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.lx-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--brand-soft); border: 1px solid var(--brand-line); color: var(--brand); }
+.lx-found-who { min-width: 0; }
+.lx-found-name { margin: 0; font-size: 0.9375rem; font-weight: 700; line-height: 1.3; color: var(--ink); }
+.lx-found-place { margin: 0; font-size: 0.8125rem; line-height: 1.35; color: var(--muted); }
+.lx-badge { justify-self: end; font-size: 0.6875rem; font-weight: 600; line-height: 1.3; color: var(--muted); background: var(--surface-2); border: 1px dashed var(--line-strong); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+
+.lx-figs { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 24px; align-items: end; padding: 22px 20px 20px; background: linear-gradient(180deg, rgba(232, 246, 239, 0.8), rgba(232, 246, 239, 0)); }
+.lx-fig { min-width: 0; }
+.lx-big { margin: 0; font-size: clamp(2.5rem, 12.5cqi, 3.625rem); font-weight: 800; line-height: 1; letter-spacing: -0.045em; color: var(--brand); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lx-countup { display: inline-flex; align-items: flex-start; }
+.lx-big-cur { font-size: 0.4em; font-weight: 700; letter-spacing: -0.01em; margin: 0.14em 0.1em 0 0; }
+.lx-fig-label { margin: 8px 0 0; font-size: 0.875rem; font-weight: 600; line-height: 1.35; color: var(--ink-2); }
+.lx-fig-side { padding: 0 0 2px 20px; border-left: 1px solid var(--brand-line); }
+.lx-mid { margin: 0; font-size: 1.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lx-fig-side .lx-fig-label { max-width: 17ch; font-weight: 500; color: var(--muted); }
+
+.lx-rows { list-style: none; margin: 0; padding: 2px 20px 6px; }
+.lx-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 16px; align-items: baseline; padding: 12px 0 12px 14px; }
+.lx-row + .lx-row { border-top: 1px solid var(--line); }
+.lx-row::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--line-strong); }
+.lx-p-urgent::before { background: var(--urgent); }
+.lx-p-important::before { background: var(--important); }
+.lx-p-opportunity::before { background: var(--opportunity); }
+.lx-row-title { margin: 0; font-size: 0.875rem; font-weight: 600; line-height: 1.4; color: var(--ink); }
+.lx-row-amt { font-size: 0.9375rem; font-weight: 700; line-height: 1.4; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lx-row-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.lx-row-meta .tag { font-size: 0.6875rem; padding: 2px 8px; }
+.lx-status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; line-height: 1.35; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px 10px 2px 8px; transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
+.lx-status-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--subtle); }
+.lx-status.lx-done { color: var(--brand); background: var(--brand-soft); border-color: var(--brand-line); }
+.lx-status svg { flex: none; }
+.lx-status .lx-status-was { display: none; margin: 0 2px; } /* same 12px footprint as the check */
+
+.lx-found-chips { list-style: none; margin: 0; padding: 14px 20px 0; display: flex; flex-wrap: wrap; gap: 6px; border-top: 1px solid var(--line); }
+.lx-chip.lx-chip-ok { color: var(--brand); background: var(--brand-soft); border-color: var(--brand-line); }
+.lx-note { display: flex; align-items: flex-start; gap: 8px; margin: 0; padding: 12px 20px 18px; font-size: 0.8125rem; line-height: 1.45; color: var(--muted); }
+.lx-note svg { flex: none; margin-top: 1px; color: var(--brand); }
+
+@container lx-found (max-width: 440px) {
+  .lx-found-head { grid-template-columns: 40px minmax(0, 1fr); padding: 14px 16px; }
+  .lx-badge { grid-column: 2; justify-self: start; }
+  .lx-figs { grid-template-columns: minmax(0, 1fr); padding: 18px 16px 16px; }
+  .lx-fig-side { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 12px 0 0; border-left: 0; border-top: 1px solid var(--brand-line); }
+  .lx-fig-side .lx-fig-label { margin: 0; max-width: none; }
+  .lx-mid { font-size: 1.25rem; }
+  .lx-rows { padding: 2px 16px 6px; }
+  .lx-found-chips { padding: 12px 16px 0; }
+  .lx-note { padding: 10px 16px 16px; }
+}
+
+/* One page-load moment: the brief rises onto the stack, the figure counts up, then the first finding is marked done. */
+@media (prefers-reduced-motion: no-preference) {
+  .lx-found { animation: lx-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both; }
+  .lx-sheet-1 { animation: lx-sheet-1 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s both; }
+  .lx-sheet-2 { animation: lx-sheet-2 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s both; }
+  /* Until the script takes over, keep the server-rendered final figure hidden so it doesn't flash before counting. */
+  .lx-found[data-phase="still"] .lx-countup { animation: lx-hold 0s linear 2.5s both; }
+  .lx-found[data-phase="counting"] .lx-status.lx-done { color: var(--ink-2); background: var(--surface); border-color: var(--line-strong); }
+  .lx-found[data-phase="counting"] .lx-status.lx-done svg { display: none; }
+  .lx-found[data-phase="counting"] .lx-status.lx-done .lx-status-was { display: block; }
+  .lx-found[data-phase="done"] .lx-status.lx-done { animation: lx-ping 1s ease-out 0.15s; }
+  .lx-found[data-phase="done"] .lx-status.lx-done path { stroke-dasharray: 24; animation: lx-draw 0.45s ease-out 0.1s both; }
+}
+@keyframes lx-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes lx-sheet-1 { from { opacity: 0; transform: translateY(0) scale(0.955); } to { opacity: 1; transform: translateY(12px) scale(0.955); } }
+@keyframes lx-sheet-2 { from { opacity: 0; transform: translateY(0) scale(0.91); } to { opacity: 1; transform: translateY(24px) scale(0.91); } }
+@keyframes lx-hold { from { visibility: hidden; } to { visibility: visible; } }
+@keyframes lx-draw { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+@keyframes lx-ping { from { box-shadow: 0 0 0 0 rgba(11, 122, 85, 0.35); } to { box-shadow: 0 0 0 10px rgba(11, 122, 85, 0); } }
+
+@media (max-width: 960px) {
+  .lx-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 40px; padding-bottom: 56px; }
+  .lx-stage { width: 100%; max-width: 560px; }
+}
+@media (max-width: 520px) {
+  .eyebrow.lx-eyebrow { border-radius: 14px; line-height: 1.4; }
+  .lede.lx-lede { font-size: 1.0625rem; }
+  .lx-ctas .btn { width: 100%; }
+  .lx-trust { flex-direction: column; gap: 10px; }
+}
+
+/* ---------- sections ---------- */
+.lx-section { padding-top: 104px; }
+.section-head.lx-head { max-width: 46rem; margin-bottom: 40px; }
+.section-head.lx-head h2 { margin: 0; font-size: clamp(1.75rem, 3.4vw, 2.5rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.035em; text-wrap: balance; }
+
+/* Why not ChatGPT: the BizDecide column is one raised card behind every row */
+.lx-vs { --lx-vs-cols: minmax(0, 1fr) minmax(0, 1.2fr); display: grid; grid-template-columns: var(--lx-vs-cols); column-gap: 32px; }
+.lx-vs::before { content: ""; grid-column: 2; grid-row: 1 / 3; background: var(--surface); border: 1.5px solid var(--brand-line); border-radius: 20px; box-shadow: 0 28px 56px -32px rgba(11, 122, 85, 0.4), var(--shadow-sm); }
+.lx-vs-h { display: flex; align-items: center; gap: 10px; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; }
+.lx-vs-h-them { grid-column: 1; grid-row: 1; padding: 24px 0 16px; color: var(--muted); }
+.lx-vs-h-us { grid-column: 2; grid-row: 1; padding: 24px 28px 16px; color: var(--ink); }
+.lx-mark { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--brand); color: var(--brand-ink); font-size: 0.875rem; font-weight: 800; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12); }
+.lx-vs-rows { grid-column: 1 / -1; grid-row: 2; list-style: none; margin: 0; padding: 0 0 8px; }
+.lx-vs-row { display: grid; grid-template-columns: var(--lx-vs-cols); column-gap: 32px; }
+.lx-vs-them, .lx-vs-us { display: flex; align-items: flex-start; gap: 12px; margin: 0; font-size: 1rem; line-height: 1.5; }
+.lx-vs-them { padding: 18px 0; color: var(--muted); border-top: 1px dashed var(--line-strong); }
+.lx-vs-us { padding: 18px 28px; color: var(--ink); font-weight: 600; background: linear-gradient(var(--line), var(--line)) no-repeat top center / calc(100% - 56px) 1px; }
+.lx-vs-ico { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--line); color: var(--subtle); }
+.lx-vs-ico.lx-vs-ok { background: var(--brand); color: var(--brand-ink); }
+
+@media (max-width: 720px) {
+  .lx-vs { display: flex; flex-wrap: wrap; gap: 0 20px; }
+  .lx-vs::before { content: none; }
+  .lx-vs-h { padding: 0 0 14px; font-size: 0.9375rem; }
+  .lx-vs-h .lx-mark { width: 22px; height: 22px; font-size: 0.75rem; border-radius: 7px; }
+  .lx-vs-rows { flex: 1 1 100%; display: grid; gap: 10px; padding: 0; }
+  .lx-vs-row { grid-template-columns: minmax(0, 1fr); padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-xs); }
+  .lx-vs-them { padding: 12px 12px 12px; border-top: 0; font-size: 0.9375rem; }
+  .lx-vs-us { padding: 12px; border-radius: 12px; background: var(--brand-soft); font-size: 0.9375rem; }
+}
+
+/* Built for Malaysia: one spec sheet with hairline cells */
+.lx-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-xs); }
+.lx-tile { min-width: 0; padding: 26px 24px 28px; background: var(--surface); }
+.lx-tile-ico { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 18px; border-radius: 11px; background: var(--brand-soft); color: var(--brand); }
+.lx-tile-title { margin: 0 0 6px; font-size: 1rem; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; }
+.lx-tile-body { margin: 0; font-size: 0.875rem; line-height: 1.55; color: var(--muted); }
+.lx-tile.lx-tile-link { padding: 0; background: var(--brand-soft); }
+.lx-tile-link a { position: relative; display: block; height: 100%; padding: 26px 24px 28px; color: inherit; transition: background-color 0.15s; }
+.lx-tile-link a:hover { text-decoration: none; background: #dcf1e6; }
+.lx-tile-link a:focus-visible { outline-offset: -4px; }
+.lx-tile-link .lx-tile-ico { background: var(--brand); color: var(--brand-ink); }
+.lx-tile-link .lx-tile-body { color: var(--ink-2); }
+.lx-tile-go { position: absolute; top: 28px; right: 24px; color: var(--brand); transition: transform 0.15s; }
+.lx-tile-link a:hover .lx-tile-go { transform: translateX(3px); }
+@media (max-width: 1000px) { .lx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .lx-grid { grid-template-columns: minmax(0, 1fr); }
+  .lx-tile:not(.lx-tile-link), .lx-tile-link a { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: start; padding: 20px 18px; }
+  .lx-tile-ico { grid-row: 1 / span 2; margin: 0; }
+  .lx-tile-title { padding-top: 9px; padding-right: 24px; }
+  .lx-tile-go { top: 30px; right: 18px; }
+}
+
+/* How it works: a white band with a numbered track */
+.lx-section.lx-band { margin-top: 104px; padding-top: 88px; padding-bottom: 88px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.lx-steps { --lx-gap: 32px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--lx-gap); }
+.lx-step { position: relative; min-width: 0; }
+.lx-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; left: 64px; right: calc(16px - var(--lx-gap)); height: 2px; background-image: linear-gradient(90deg, var(--line-strong) 55%, transparent 0); background-size: 8px 2px; }
+.lx-step-node { position: relative; display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 20px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--line-strong); color: var(--ink-2); }
+.lx-step:last-child .lx-step-node { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); box-shadow: 0 0 0 6px var(--brand-ring); }
+.lx-step-n { position: absolute; top: -6px; right: -8px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.6875rem; font-weight: 700; border: 2px solid var(--surface); }
+.lx-step-title { margin: 0 0 6px; font-size: 1.0625rem; line-height: 1.3; text-wrap: balance; }
+.lx-step-body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--muted); }
+.lx-agents { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 48px; padding: 16px 20px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); }
+.lx-running { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+.lx-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px var(--brand-ring); }
+.lx-agent-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip.lx-agent { padding: 5px 12px; font-size: 0.8125rem; background: var(--surface); }
+@media (max-width: 1000px) and (min-width: 761px) {
+  .lx-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .lx-step:nth-child(2n)::after { content: none; }
+}
+@media (max-width: 760px) {
+  .lx-section.lx-band { margin-top: 72px; padding-top: 64px; padding-bottom: 64px; }
+  .lx-steps { --lx-gap: 28px; grid-template-columns: minmax(0, 1fr); }
+  .lx-step { padding-left: 68px; min-height: 48px; }
+  .lx-step-node { position: absolute; top: 0; left: 0; margin: 0; }
+  .lx-step:not(:last-child)::after { top: 60px; bottom: calc(10px - var(--lx-gap)); left: 23px; right: auto; width: 2px; height: auto; background-image: linear-gradient(180deg, var(--line-strong) 55%, transparent 0); background-size: 2px 8px; }
+  .lx-step-title { padding-top: 12px; }
+  .lx-agents { margin-top: 36px; padding: 16px; }
+}
+
+/* The problem: figures on a ruled line, each with its source */
+.lx-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
+.lx-stat { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 28px 24px 4px; }
+.lx-stat:first-child { padding-left: 0; }
+.lx-stat + .lx-stat { border-left: 1px solid var(--line); }
+.lx-stat-v { margin: 0; font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lx-stat-unit { font-size: 0.5em; letter-spacing: -0.02em; }
+.lx-stat-l { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
+.lx-src { display: block; width: fit-content; margin-top: auto; padding-top: 6px; font-size: 0.75rem; font-weight: 600; line-height: 1.45; color: var(--muted); }
+.lx-src-end { white-space: nowrap; }
+.lx-src svg { display: inline-block; margin-left: 4px; vertical-align: -1px; }
+.lx-src:hover { color: var(--brand); }
+@media (max-width: 1000px) {
+  .lx-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lx-stat:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .lx-stat:nth-child(n + 3) { border-top: 1px solid var(--line); margin-top: 24px; }
+}
+@media (max-width: 560px) {
+  .lx-stats { grid-template-columns: minmax(0, 1fr); }
+  .lx-stat:nth-child(n) { padding: 24px 0; border-left: 0; margin-top: 0; }
+  .lx-stat + .lx-stat { border-top: 1px solid var(--line); }
+}
+
+/* Closing call to action, on ledger lines */
+.lx-cta { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; padding: 52px 56px; border-radius: 24px; background: var(--brand-soft); border: 1px solid var(--brand-line); }
+.lx-cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: repeating-linear-gradient(180deg, transparent 0 31px, rgba(11, 122, 85, 0.1) 31px 32px); -webkit-mask-image: linear-gradient(90deg, transparent 10%, #000 75%); mask-image: linear-gradient(90deg, transparent 10%, #000 75%); }
+.lx-cta-copy { min-width: 0; max-width: 34rem; }
+.lx-cta-title { margin: 0 0 8px; font-size: clamp(1.625rem, 3vw, 2.25rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.035em; text-wrap: balance; }
+.lx-cta-sub { margin: 0; font-size: 1.125rem; color: var(--ink-2); }
+@media (max-width: 760px) {
+  .lx-section { padding-top: 72px; }
+  .section-head.lx-head { margin-bottom: 28px; }
+  .lx-cta { padding: 32px 20px; border-radius: 20px; }
+  .lx-cta .lx-cta-btn { width: 100%; }
+}

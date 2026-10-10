@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./landing.css";
+import "./actions.css";
+import "./quick.css";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "BizDecide · Your AI CFO",
-  description: "AI CFO for Malaysian small businesses. Upload your sales and purchases, get three decisions. Powered by Tencent WorkBuddy.",
+  description: "AI CFO for Malaysian small businesses. Upload your sales and purchases, get three decisions. CFO skills also available for Tencent WorkBuddy.",
 };
 
 export const viewport: Viewport = {

@@ -8,7 +8,7 @@ const en = {
   // site header and footer
   myRequests: "My requests",
   skills: "WorkBuddy skills",
-  powered: "Powered by Tencent WorkBuddy",
+  powered: "Powered by Claude",
   newRequest: "New request",
   tagline: "Not reports. Decisions.",
   builtFor: "Built for Malaysian SMEs",
@@ -42,7 +42,7 @@ const en = {
     ["Verifier", "Reconciles totals, checks every figure and link"],
     ["Delivery", "Writes your three decisions"],
   ],
-  runningOn: "Running on Tencent WorkBuddy.",
+  runningOn: "Six agents working in parallel.",
   now: {
     queuedLabel: "In the queue",
     queuedTitle: "Waiting for the agents to pick up your request",
@@ -106,7 +106,7 @@ const en = {
   passedAria: "Passed",
   failedAria: "Failed",
   assumptions: "Assumptions",
-  preparedBy: "Prepared on Tencent WorkBuddy by",
+  preparedBy: "Prepared by",
 
   // funding application pack
   packKicker: "Funding application pack",
@@ -156,7 +156,7 @@ export type AppStrings = typeof en;
 const ms: AppStrings = {
   myRequests: "Permintaan saya",
   skills: "Skill WorkBuddy",
-  powered: "Dikuasakan oleh Tencent WorkBuddy",
+  powered: "Dikuasakan oleh Claude",
   newRequest: "Permintaan baharu",
   tagline: "Bukan laporan. Keputusan.",
   builtFor: "Dibina untuk PKS Malaysia",
@@ -189,7 +189,7 @@ const ms: AppStrings = {
     ["Penyemak", "Menyelaraskan jumlah, menyemak setiap angka dan pautan"],
     ["Penghantaran", "Menulis tiga keputusan anda"],
   ],
-  runningOn: "Berjalan di Tencent WorkBuddy.",
+  runningOn: "Enam ejen bekerja serentak.",
   now: {
     queuedLabel: "Dalam giliran",
     queuedTitle: "Menunggu ejen mengambil permintaan anda",
@@ -251,7 +251,7 @@ const ms: AppStrings = {
   passedAria: "Lulus",
   failedAria: "Gagal",
   assumptions: "Andaian",
-  preparedBy: "Disediakan di Tencent WorkBuddy oleh",
+  preparedBy: "Disediakan oleh",
 
   packKicker: "Pek permohonan pembiayaan",
   packTitle: "Mohon dengan apa yang anda sudah ada",

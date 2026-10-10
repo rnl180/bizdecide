@@ -21,7 +21,7 @@ const COPY = {
       ],
       [
         "Who processes it",
-        "Your data is stored on BizDecide's server. Our AI agents run on Tencent WorkBuddy and read your data through a private link that expires after 15 minutes. WorkBuddy's AI services may process it outside Malaysia.",
+        "Your data is stored on BizDecide's server. Our AI agents run on Anthropic's Claude API: the numbers needed for your brief are sent to it for processing, which may happen outside Malaysia.",
       ],
       [
         "Who can see your brief",
@@ -53,7 +53,7 @@ const COPY = {
       ],
       [
         "Siapa yang memprosesnya",
-        "Data anda disimpan di pelayan BizDecide. Ejen AI kami berjalan di Tencent WorkBuddy dan membaca data anda melalui pautan peribadi yang tamat selepas 15 minit. Perkhidmatan AI WorkBuddy mungkin memprosesnya di luar Malaysia.",
+        "Data anda disimpan di pelayan BizDecide. Ejen AI kami berjalan di Claude API milik Anthropic: angka yang diperlukan untuk ringkasan anda dihantar kepadanya untuk diproses, yang mungkin berlaku di luar Malaysia.",
       ],
       [
         "Siapa yang boleh melihat ringkasan anda",

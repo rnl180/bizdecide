@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     environment:
       - BIZDECIDE_MCP_KEY=${BIZDECIDE_MCP_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - BIZDECIDE_STORE=local
     volumes:
       - bizdecide-data:/app/.data

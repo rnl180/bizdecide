@@ -1,13 +1,13 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import type { BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
+import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
 
 /**
  * Storage for the BizDecide app.
  *
  * - Firebase (Firestore) when credentials are configured or when running on Firebase App Hosting / Cloud Run.
- * - A local JSON file (.data/db.json) otherwise, so the whole flow (app + MCP + WorkBuddy) can be tested
+ * - A local JSON file (.data/db.json) otherwise, so the whole flow (app + agents) can be tested
  *   on a laptop with no cloud setup.
  * Force one with BIZDECIDE_STORE=firebase|local.
  */
@@ -25,7 +25,7 @@ export const storeMode: "firebase" | "local" =
 const now = () => new Date().toISOString();
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-type Collection = "businesses" | "requests" | "questions" | "results" | "messages";
+type Collection = "businesses" | "requests" | "questions" | "results" | "messages" | "actions";
 type Doc = Record<string, unknown>;
 /** Optional server-side pre-filter for Firestore: [field, "==" value] or [field, "in" values]. `match` still decides. */
 type Pre = [string, "==" | "in", unknown];
@@ -46,7 +46,7 @@ type Db = Record<Collection, Record<string, Doc>>;
 let queue: Promise<unknown> = Promise.resolve();
 
 async function loadDb(): Promise<Db> {
-  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {} };
+  const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {} };
   try {
     return { ...empty, ...JSON.parse(await readFile(DB_FILE, "utf8")) };
   } catch {
@@ -169,13 +169,21 @@ export async function createRequest(businessId: string, businessName: string, se
     status: "submitted",
     createdAt: now(),
     updatedAt: now(),
-    progress: [{ at: now(), step: "Request received", detail: "Waiting for BizDecide agents on WorkBuddy to pick it up" }],
+    progress: [{ at: now(), step: "Request received", detail: "Waiting for the BizDecide CFO team to pick it up" }],
   };
   return db.add("requests", doc as unknown as Doc);
 }
 
 export async function getRequest(id: string): Promise<RequestDoc | null> {
   return db.get<RequestDoc>("requests", id);
+}
+
+/** Moves a submitted request to processing. Null if it's gone or someone else already took it. */
+export async function claimRequest(id: string, detail: string): Promise<RequestDoc | null> {
+  const r = await getRequest(id);
+  if (!r || r.status !== "submitted") return null;
+  await updateRequest(id, { status: "processing", progress: { step: "Picked up by your CFO team", detail } });
+  return r;
 }
 
 export async function listRequestsByStatus(statuses: RequestStatus[], limit = 20): Promise<RequestDoc[]> {
@@ -257,10 +265,69 @@ export async function claimNextMessage(): Promise<ChatMessageDoc | null> {
   return next;
 }
 
+/** Claims one question if it's open (or its claim went stale). Null otherwise. */
+export async function claimMessage(id: string): Promise<ChatMessageDoc | null> {
+  const m = await getMessage(id);
+  const stale = new Date(Date.now() - 3 * 60_000).toISOString();
+  if (!m || !(m.status === "open" || (m.status === "claimed" && String(m.claimedAt) < stale))) return null;
+  await db.update("messages", id, { status: "claimed", claimedAt: now() });
+  return m;
+}
+
 export async function getMessage(id: string): Promise<ChatMessageDoc | null> {
   return db.get<ChatMessageDoc>("messages", id);
 }
 
 export async function answerMessage(id: string, answer: string, evidence?: ChatMessageDoc["evidence"]) {
   await db.update("messages", id, { status: "answered", answer, evidence, answeredAt: now() });
+}
+
+// ---------- actions ("Approve & act": the owner approves a decision, the on-duty agent carries it out) ----------
+
+export async function createAction(a: Pick<ActionDoc, "requestId" | "businessId" | "decisionIndex" | "decisionTitle" | "lang">) {
+  const doc = { ...a, status: "queued" as const, createdAt: now() };
+  const id = await db.add("actions", doc);
+  return { id, ...doc } as ActionDoc;
+}
+
+export async function listActions(requestId: string): Promise<ActionDoc[]> {
+  const rows = await db.where<ActionDoc>("actions", (d) => d.requestId === requestId, 100, ["requestId", "==", requestId]);
+  return rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+}
+
+export async function getAction(id: string): Promise<ActionDoc | null> {
+  return db.get<ActionDoc>("actions", id);
+}
+
+/** Oldest approved action. A claim re-opens after 5 minutes so a crashed agent can't strand it. */
+export async function claimNextAction(): Promise<ActionDoc | null> {
+  const stale = new Date(Date.now() - 5 * 60_000).toISOString();
+  const rows = await db.where<ActionDoc>(
+    "actions",
+    (d) => d.status === "queued" || (d.status === "working" && String(d.claimedAt) < stale),
+    50,
+    ["status", "in", ["queued", "working"]],
+  );
+  const next = rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
+  if (!next) return null;
+  const claimedAt = now();
+  await db.update("actions", next.id, { status: "working", claimedAt });
+  return { ...next, status: "working", claimedAt };
+}
+
+/** Claims one action if it's queued (or its claim went stale). Null otherwise. */
+export async function claimAction(id: string): Promise<ActionDoc | null> {
+  const a = await getAction(id);
+  const stale = new Date(Date.now() - 5 * 60_000).toISOString();
+  if (!a || !(a.status === "queued" || (a.status === "working" && String(a.claimedAt) < stale))) return null;
+  const claimedAt = now();
+  await db.update("actions", id, { status: "working", claimedAt });
+  return { ...a, status: "working", claimedAt };
+}
+
+export async function completeAction(
+  id: string,
+  out: Pick<ActionDoc, "status" | "summary" | "channel" | "email" | "document" | "links" | "error">,
+) {
+  await db.update("actions", id, { ...out, completedAt: now() } as Record<string, unknown>);
 }

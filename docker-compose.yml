@@ -1,6 +1,6 @@
 # Usage on the VPS:
 #   1) point a DNS A record (e.g. bizdecide.yourdomain.com) to this server
-#   2) create .env with DOMAIN and BIZDECIDE_MCP_KEY (see .env.vps.example)
+#   2) create .env with DOMAIN, BIZDECIDE_MCP_KEY and ANTHROPIC_API_KEY (see .env.vps.example)
 #   3) docker compose up -d --build
 services:
   app:
@@ -8,6 +8,7 @@ services:
     restart: unless-stopped
     environment:
       - BIZDECIDE_MCP_KEY=${BIZDECIDE_MCP_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - BIZDECIDE_STORE=local
     volumes:
       - bizdecide-data:/app/.data      # businesses, requests, answers, results, uploads survive restarts

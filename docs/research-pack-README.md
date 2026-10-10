@@ -11,6 +11,8 @@ research/
   market_stats.md              every number with source link; 2 numbers from the brief corrected (items 4–5)
   competitors.md               Bukku, AutoCount, SQL Account from vendor pages (item 6)
   interviews.md                5-minute script + capture sheet (item 7: you must do these)
+  product_wow_strategy.md      10 Oct 2026 synthesis: why loved products are loved (US/EU/CN/SEA/emerging), the "wow" blueprint, Malaysia hooks, 3-min demo, engine choice, brand, pricing, who else is trying
+  sources/                     the 11 cited research reports behind product_wow_strategy.md
 demo/kedai-kopi-aminah/        fictional business (items 8–12)
   business_profile.json
   sales_daily_2025-10_to_2026-09.csv, sales_2025-10_to_2026-09.xlsx (Daily + Monthly)

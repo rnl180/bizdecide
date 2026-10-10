@@ -5,6 +5,9 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/api/skills/**": ["./workbuddy/skills/**/*"],
     "/skills": ["./workbuddy/skills/**/*"],
+    // The Claude CFO team runs the skill scripts and reads the market packs from these routes.
+    "/api/requests": ["./workbuddy/run_all.py", "./workbuddy/skills/**/*", "./workbuddy/knowledge/**/*"],
+    "/api/requests/**": ["./workbuddy/run_all.py", "./workbuddy/skills/**/*", "./workbuddy/knowledge/**/*"],
   },
 };
 export default nextConfig;

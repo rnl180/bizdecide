@@ -7,6 +7,8 @@ COPY . .
 RUN npm run build
 
 FROM node:22-alpine
+# python3 runs the BizDecide skill scripts for the Claude CFO team
+RUN apk add --no-cache python3
 WORKDIR /app
 ENV NODE_ENV=production \
     PORT=3100 \

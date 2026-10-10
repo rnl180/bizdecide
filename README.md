@@ -47,7 +47,7 @@ The app and the MCP server **only move data**. All intelligence runs in WorkBudd
 ### Beyond the brief
 - **Funding application pack.** For the top programmes the business qualifies for, the agents build the application: a document checklist marked ready / partial / missing against the data already uploaded, pre-filled form answers, a suggested amount, repayment and affordability, and next steps. Printable per programme. No Malaysian accounting tool does this (see [research/competitors.md](research/competitors.md)).
 - **Ask your CFO.** On the brief page the owner asks follow-up questions ("Can I afford the RM40k loan?"). The on-duty WorkBuddy agent picks them up through `wait_for_request` and answers from the owner's own numbers with `reply_to_owner`, with evidence.
-- **Market packs.** Country knowledge (SME definition, funding programmes, required documents, currency, regions) lives in one folder per country: [workbuddy/knowledge/markets/](workbuddy/knowledge/markets/README.md). Adding a country is a folder of data; the agents don't change. Malaysia and Singapore are live; pick the market on the first step and "Try the demo café" loads that market's demo business (Singapore: Mei Ling Kopi & Toast, answer key in [docs/ANSWER_KEY_SG.md](docs/ANSWER_KEY_SG.md)).
+- **Built for Malaysia.** Malaysian knowledge (SME Corp 2024 definition, 20 funding programmes with required documents, DuitNow/card settlement rules, states, Bahasa Melayu glossary) lives in [workbuddy/knowledge/markets/MY/](workbuddy/knowledge/markets/README.md). The folder layout keeps other countries possible later, but BizDecide covers Malaysia only. "See it on a sample kopitiam" loads the demo business (Kedai Kopi Aminah).
 - **Bahasa Melayu.** The intake form switches between English and Bahasa Melayu, and the brief comes back in the owner's language.
 - **POS exports.** StoreHub sales exports (Offline Transactions or Sales Over Time) upload as-is.
 
@@ -55,9 +55,18 @@ The app and the MCP server **only move data**. All intelligence runs in WorkBudd
 
 ```bash
 npm install
-cp .env.example .env      # fill in Firebase service account (base64) + BIZDECIDE_MCP_KEY
-npm run dev               # http://localhost:3000
+cp .env.example .env      # fill in Firebase service account (base64) + BIZDECIDE_MCP_KEY (+ ANTHROPIC_API_KEY)
+npm run dev               # http://localhost:3100
 ```
+
+## Claude engine (optional)
+
+Set `ANTHROPIC_API_KEY` and the server runs the CFO team itself on the Claude API (`lib/claude-cfo.ts`), with no WorkBuddy loop needed:
+- **Analysis agent** (Claude Opus 5.5, effort high) calls five lanes in parallel: Bookkeeper, Reconciliation, Procurement, Classifier and Funding. Each lane runs the same Python skill scripts, so every number is computed from the data. The agent asks the owner through the live poll when it must, then drafts the brief.
+- **Verifier agent** (Claude Opus 5.5, effort high) checks every figure against the lane outputs and returns the final brief as structured output.
+- **Ask your CFO** follow-ups are answered the same way.
+
+Needs `python3` on the server (the Docker image installs it). Leave the key empty to keep using WorkBuddy through `/api/mcp`.
 
 ## Deploy (Firebase App Hosting)
 

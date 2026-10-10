@@ -13,7 +13,7 @@ export const SKILLS = [
   {
     id: "sme-classifier",
     title: "SME classifier",
-    blurb: "Official SME category from annual sales and full-time employees: SME Corp Malaysia or Enterprise Singapore rules.",
+    blurb: "Official SME Corp Malaysia category (2024 definition) from annual sales and full-time employees.",
     input: "Sector, annual sales, employees",
     icon: "tag",
   },

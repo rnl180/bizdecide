@@ -201,3 +201,42 @@ export interface ChatMessageDoc {
   claimedAt?: string;
   answeredAt?: string;
 }
+
+/**
+ * "Approve & act": the owner approves one decision on the brief page, the on-duty WorkBuddy agent carries it out
+ * (writes the refund request, supplier email or funding application, saves it as a Gmail draft when Gmail is
+ * connected) and reports back with complete_action. Nothing is ever sent without the owner.
+ */
+export type ActionStatus = "queued" | "working" | "done" | "failed";
+
+export interface ActionEmail {
+  to?: string;
+  cc?: string;
+  subject: string;
+  body: string;
+}
+
+export interface ActionDocument {
+  title: string;
+  sections: { heading: string; body: string }[];
+}
+
+export interface ActionDoc {
+  id: string;
+  requestId: string;
+  businessId: string;
+  decisionIndex: number; // index into result.decisions as delivered (not the sorted order on screen)
+  decisionTitle: string;
+  lang: "en" | "ms"; // language the agent writes in
+  status: ActionStatus;
+  createdAt: string;
+  claimedAt?: string;
+  completedAt?: string;
+  // Filled in by the agent (complete_action)
+  summary?: string; // one line: "Refund request saved to your Gmail drafts"
+  channel?: "gmail_draft" | "document" | "note"; // where the result lives
+  email?: ActionEmail;
+  document?: ActionDocument;
+  links?: { label: string; url: string }[];
+  error?: string; // why it failed (status "failed")
+}

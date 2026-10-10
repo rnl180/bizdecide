@@ -57,7 +57,7 @@ export default async function SkillsPage() {
         </div>
 
         <div className="skill-grid">
-          {skills.map((s) => (
+          {skills.filter((s) => s.meta).map((s) => (
             <article className="card skill" key={s.id}>
               <div className="skill-top">
                 <span className="service-icon">

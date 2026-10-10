@@ -6,6 +6,7 @@ import { STATUS } from "@/components/RequestMeta";
 import { INTAKE, useLang } from "@/lib/i18n";
 import { APP, ago, type AppStrings } from "@/lib/i18n-app";
 import { impactKind, impactTotals } from "@/lib/impact";
+import { DecisionAction, FoundHeadline, useActions } from "@/components/DecisionAction";
 import { money } from "@/lib/markets";
 import { saveRequest, toSaved } from "@/lib/myRequests";
 import {
@@ -428,6 +429,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   const order = { urgent: 0, important: 1, opportunity: 2 } as const;
   const decisions = [...result.decisions].sort((a, b) => order[a.priority] - order[b.priority]);
   const totals = impactTotals(decisions);
+  const { byIndex, approve } = useActions(request.id);
   const passed = result.verification.filter((v) => v.passed).length;
   const [headline, subhead] = splitDash(result.headline);
   const facts: [string, string][] = [];
@@ -485,31 +487,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
           </dl>
         )}
 
-        {totals.monthly + totals.one_off + totals.financing > 0 && (
-          <div className="impact-banner">
-            <div className="mini-label">{t.impactTitle}</div>
-            <div className="impact-items">
-              {totals.monthly > 0 && (
-                <div>
-                  <span className="big">{rm(totals.monthly)}</span>
-                  <span className="what">{t.impactWhat.monthly}</span>
-                </div>
-              )}
-              {totals.one_off > 0 && (
-                <div>
-                  <span className="big">{rm(totals.one_off)}</span>
-                  <span className="what">{t.impactWhat.one_off}</span>
-                </div>
-              )}
-              {totals.financing > 0 && (
-                <div>
-                  <span className="big">{rm(totals.financing)}</span>
-                  <span className="what">{t.impactWhat.financing}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        <FoundHeadline totals={totals} rm={rm} lang={lang} businessName={request.businessName} />
         <div className="glance">
           <div className="mini-label">{t.atGlance}</div>
           <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -626,6 +604,14 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
                 </aside>
               )}
             </div>
+            <DecisionAction
+              requestId={request.id}
+              index={result.decisions.indexOf(d)}
+              decision={d}
+              action={byIndex[result.decisions.indexOf(d)]}
+              onApprove={(l) => approve(result.decisions.indexOf(d), l)}
+              lang={lang}
+            />
           </div>
         ))}
       </section>

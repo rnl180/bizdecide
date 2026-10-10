@@ -49,6 +49,7 @@ export const col = {
   questions: () => db().collection("questions"),
   results: () => db().collection("results"),
   messages: () => db().collection("messages"),
+  actions: () => db().collection("actions"),
 };
 
 export const now = () => new Date().toISOString();

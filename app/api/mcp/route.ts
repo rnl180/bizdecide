@@ -2,7 +2,10 @@ import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 import {
   answerMessage,
+  claimNextAction,
   claimNextMessage,
+  completeAction,
+  getAction,
   createQuestion,
   expireQuestion,
   getBusiness,
@@ -17,6 +20,7 @@ import {
   updateRequest,
 } from "@/lib/store";
 import { ResultSchema } from "@/lib/types";
+import { impactKind } from "@/lib/impact";
 import { makeDataLink, rememberOrigin } from "@/lib/data-link";
 import { bucket } from "@/lib/firebase";
 
@@ -66,7 +70,7 @@ const mcp = createMcpHandler(
       {
         title: "Wait for the next request",
         description:
-          "On-duty mode. Blocks until there is work (or waitSeconds pass), CLAIMS it and returns it. status 'owner_message': an owner asked a follow-up question on their brief page; answer it with reply_to_owner (quick, under 30 seconds). status 'new_request': process the request fully, then submit_results. status 'idle': nothing yet. After each, call wait_for_request again. Never stop the loop unless the user tells you to.",
+          "On-duty mode. Blocks until there is work (or waitSeconds pass), CLAIMS it and returns it. status 'owner_message': an owner asked a follow-up question on their brief page; answer it with reply_to_owner (quick, under 30 seconds). status 'owner_action': the owner tapped Approve on a decision; write the email or document now, save it as a Gmail DRAFT if your Gmail connector is available (never send), then complete_action. status 'new_request': process the request fully, then submit_results. status 'idle': nothing yet. After each, call wait_for_request again. Never stop the loop unless the user tells you to.",
         inputSchema: z.object({ waitSeconds: z.number().int().min(5).max(55).default(45) }),
       },
       async ({ waitSeconds }) => {
@@ -89,6 +93,40 @@ const mcp = createMcpHandler(
               next: "Answer from this business's own data (get_data_link + the skill scripts) and the brief above. Then reply_to_owner(messageId, answer, evidence), then call wait_for_request again.",
             });
           }
+          // Then approved decisions: the owner tapped Approve and is watching the card.
+          const act = await claimNextAction();
+          if (act) {
+            const [result, business] = await Promise.all([getResult(act.requestId), getBusiness(act.businessId)]);
+            const decision = result?.decisions[act.decisionIndex];
+            if (!decision || !business) {
+              await completeAction(act.id, { status: "failed", error: "The brief or business data is missing" });
+              continue;
+            }
+            const kind = impactKind(decision);
+            const p = business.profile;
+            const x = (business.profileExtras ?? {}) as Record<string, unknown>;
+            const owner = (x.owner ?? {}) as Record<string, unknown>;
+            return json({
+              status: "owner_action",
+              action: { id: act.id, requestId: act.requestId, decisionIndex: act.decisionIndex, writeIn: act.lang === "ms" ? "Bahasa Melayu" : "English" },
+              kind, // one_off: get money back · monthly: supplier price / cost · financing: funding application
+              decision,
+              business: {
+                name: p.name,
+                sector: p.sector,
+                state: p.state,
+                city: x.city,
+                ssmNumber: p.ssmNumber,
+                registeredSince: p.registeredSince,
+                owner: owner.name,
+                goal: p.goal,
+              },
+              suppliers: (business.suppliers ?? []).map(({ name, contact, category, paymentTerms }) => ({ name, contact, category, paymentTerms })),
+              applicationPacks: kind === "financing" ? (result?.applicationPacks ?? []) : undefined,
+              next:
+                "Carry out this decision for the owner, in action.writeIn. one_off: a short, polite email to the counterparty (supplier, or the bank/QR acquirer) asking for the money back, quoting the invoice numbers, dates, amounts and bank references from decision.evidence. monthly: an email to the supplier asking why the price rose and for the old price, plus one line asking 2 alternative suppliers for a quote. financing: a document (the application pack: why the business qualifies, amount and purpose, prefilled answers, document checklist) and a short cover email to the agency. Use the supplier's email from suppliers[].contact when there is one. Sign as the owner. If your Gmail connector is available, save the email as a Gmail DRAFT (never send). Then complete_action(actionId, summary, channel, email and/or document). Then call wait_for_request again.",
+            });
+          }
           const [next] = await listRequestsByStatus(["submitted"], 1);
           if (next) {
             await updateRequest(next.id, {
@@ -96,7 +134,7 @@ const mcp = createMcpHandler(
               progress: { step: "Picked up by your CFO team", detail: "BizDecide agents on WorkBuddy started working" },
             });
             const { id, businessId, businessName, service, market, createdAt } = next;
-            return json({ status: "new_request", request: { id, businessId, businessName, service, market: market ?? "MY", createdAt }, next: "Call get_business_data(businessId), plan, run the agents, then submit_results. Then call wait_for_request again." });
+            return json({ status: "new_request", request: { id, businessId, businessName, service, market: market ?? "MY", createdAt }, next: "Follow the RECIPE: get_data_link(businessId), then python3 run_all.py --data <url>, ask_user only if needed, then submit_results. Then call wait_for_request again." });
           }
           await sleep(2000);
         }
@@ -263,6 +301,52 @@ const mcp = createMcpHandler(
     );
 
     server.registerTool(
+      "complete_action",
+      {
+        title: "Complete an approved action",
+        description:
+          "Report the result of a decision the owner approved (wait_for_request status 'owner_action'). Pass what you wrote: email {to, subject, body} and/or document {title, sections[]}, plus a one-line summary for the owner (e.g. 'Refund request to Ladang Susu Segar saved to your Gmail drafts'). channel: 'gmail_draft' ONLY if you really saved it as a Gmail draft, 'document' for a pack or letter, else 'note'. Never send emails. If you could not do it, status 'failed' with error.",
+        inputSchema: z.object({
+          actionId: z.string(),
+          status: z.enum(["done", "failed"]).default("done"),
+          summary: z.string().min(1).max(300),
+          channel: z.enum(["gmail_draft", "document", "note"]).optional(),
+          email: z
+            .object({
+              to: z.string().max(200).optional(),
+              cc: z.string().max(200).optional(),
+              subject: z.string().min(1).max(200),
+              body: z.string().min(1).max(6000),
+            })
+            .optional(),
+          document: z
+            .object({
+              title: z.string().min(1).max(200),
+              sections: z.array(z.object({ heading: z.string().max(200), body: z.string().max(4000) })).min(1).max(12),
+            })
+            .optional(),
+          links: z.array(z.object({ label: z.string().max(100), url: z.string().max(500) })).max(5).optional(),
+          error: z.string().max(500).optional(),
+        }),
+      },
+      async ({ actionId, status, summary, channel, email, document, links, error }) => {
+        const a = await getAction(actionId);
+        if (!a) return fail(`Action ${actionId} not found`);
+        if (a.status === "done") return fail("This action is already done");
+        await completeAction(actionId, {
+          status,
+          summary,
+          channel: channel ?? (document ? "document" : "note"),
+          email,
+          document,
+          links,
+          error: status === "failed" ? (error ?? summary) : undefined,
+        });
+        return json({ ok: true, next: "Call wait_for_request again." });
+      },
+    );
+
+    server.registerTool(
       "submit_results",
       {
         title: "Submit results",
@@ -282,7 +366,7 @@ const mcp = createMcpHandler(
   {
     serverInfo: { name: "bizdecide", version: "0.1.0" },
     instructions:
-      "BizDecide backend. Use list_pending_requests, then get_business_data, then report progress with update_request, ask the owner with ask_user only when needed, and finish with submit_results. In on-duty mode, wait_for_request also returns owner follow-up questions; answer those with reply_to_owner. These tools move data only; do all analysis yourself with the BizDecide skills.",
+      "BizDecide backend. Use list_pending_requests, then get_business_data, then report progress with update_request, ask the owner with ask_user only when needed, and finish with submit_results. In on-duty mode, wait_for_request also returns owner follow-up questions (answer with reply_to_owner) and approved decisions (carry them out, Gmail drafts only, then complete_action). These tools move data only; do all analysis yourself with the BizDecide skills.",
   },
 );
 

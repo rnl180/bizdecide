@@ -1,10 +1,9 @@
 import MY from "@/workbuddy/knowledge/markets/MY/market.json";
-import SG from "@/workbuddy/knowledge/markets/SG/market.json";
 
 /**
- * Market packs: one folder per country in workbuddy/knowledge/markets/<CODE>/ (see the README there).
- * The app reads only market.json; the agents read the rest. To turn a market on, import its
- * market.json here and add it to PACKS.
+ * BizDecide is built for Malaysia: one market pack, workbuddy/knowledge/markets/MY/ (see the README there).
+ * The app reads only market.json; the agents read the rest. The pack layout keeps other countries possible
+ * later (import its market.json here and add it to PACKS), but nothing outside Malaysia is offered today.
  */
 export interface MarketPack {
   code: string;
@@ -37,21 +36,9 @@ export function localize(pack: MarketPack, lang: "en" | "ms"): MarketPack {
   };
 }
 
-const PACKS: MarketPack[] = [MY, SG];
+const PACKS: MarketPack[] = [MY];
 
-// Shown greyed out with "Soon" until their pack exists.
-const SOON = [
-  { code: "SG", name: "Singapore" },
-  { code: "ID", name: "Indonesia" },
-  { code: "TH", name: "Thailand" },
-  { code: "PH", name: "Philippines" },
-  { code: "VN", name: "Vietnam" },
-];
-
-export const MARKETS: { code: string; name: string; pack?: MarketPack }[] = [
-  ...PACKS.map((p) => ({ code: p.code, name: p.name, pack: p })),
-  ...SOON.filter((s) => !PACKS.some((p) => p.code === s.code)),
-];
+export const MARKETS: { code: string; name: string; pack?: MarketPack }[] = PACKS.map((p) => ({ code: p.code, name: p.name, pack: p }));
 
 export const DEFAULT_MARKET = "MY";
 export const marketPack = (code: string | undefined) => PACKS.find((p) => p.code === (code ?? DEFAULT_MARKET));
