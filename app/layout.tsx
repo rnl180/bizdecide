@@ -23,12 +23,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#2A67A8",
-  colorScheme: "light dark",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // Light mode only: data-theme="light" keeps tokens.css on its light values whatever the OS setting.
+    <html lang="en" data-theme="light">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

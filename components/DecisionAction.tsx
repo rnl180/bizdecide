@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Icon, type IconName } from "@/components/Icon";
-import type { Lang } from "@/lib/i18n";
+import { LANGS, type Lang } from "@/lib/i18n";
 import { ACT, type ActStrings } from "@/lib/i18n-actions";
 import { impactKind, type ImpactKind } from "@/lib/impact";
 import type { ActionDoc, ActionDocument, ActionEmail, ActionStatus, Decision } from "@/lib/types";
@@ -15,7 +15,7 @@ import type { ActionDoc, ActionDocument, ActionEmail, ActionStatus, Decision } f
 
 const POLL_MS = 2000;
 const NETWORK_ERROR = "NetworkError";
-const LANGS: Lang[] = ["en", "ms"];
+const WRITE_LANGS: Lang[] = LANGS.map((l) => l.code); // "Write it in" shows only when there is a choice
 const GMAIL_DRAFTS = "https://mail.google.com/mail/u/0/#drafts";
 
 // ---------- data ----------
@@ -419,27 +419,29 @@ export function DecisionAction({
           {busy ? <Icon name="spinner" size={18} className="spin" /> : <Icon name="check" size={18} strokeWidth={2.5} />}
           {t.approve}
         </button>
-        <div className="ax-seg" role="radiogroup" aria-labelledby={`${uid}-lang`}>
-          <span className="ax-seg-label" id={`${uid}-lang`}>
-            {t.writeIn}
-          </span>
-          <span className="ax-seg-track">
-            {LANGS.map((l) => (
-              <label key={l} data-on={writeLang === l}>
-                <input
-                  className="sr-only"
-                  type="radio"
-                  name={`${uid}-lang`}
-                  value={l}
-                  checked={writeLang === l}
-                  disabled={busy}
-                  onChange={() => setPick(l)}
-                />
-                {t.langName[l]}
-              </label>
-            ))}
-          </span>
-        </div>
+        {WRITE_LANGS.length > 1 && (
+          <div className="ax-seg" role="radiogroup" aria-labelledby={`${uid}-lang`}>
+            <span className="ax-seg-label" id={`${uid}-lang`}>
+              {t.writeIn}
+            </span>
+            <span className="ax-seg-track">
+              {WRITE_LANGS.map((l) => (
+                <label key={l} data-on={writeLang === l}>
+                  <input
+                    className="sr-only"
+                    type="radio"
+                    name={`${uid}-lang`}
+                    value={l}
+                    checked={writeLang === l}
+                    disabled={busy}
+                    onChange={() => setPick(l)}
+                  />
+                  {t.langName[l]}
+                </label>
+              ))}
+            </span>
+          </div>
+        )}
         <p className="ax-what" id={`${uid}-what`}>
           <Icon name="shield" size={16} />
           <span>{t.what[kind]}</span>

@@ -11,7 +11,7 @@ type Impactful = Pick<Decision, "impactRm" | "impactType" | "title" | "action">;
 export function impactKind(d: Impactful): ImpactKind {
   if (d.impactType) return d.impactType;
   const text = `${d.title} ${d.action}`.toLowerCase();
-  if (/\b(fund|funding|financ\w*|loan|grant|pinjaman|pembiayaan|geran)\b/.test(text)) return "financing";
+  if (/\b(fund|funding|financ\w*|loan|grant|apply|application|pinjaman|pembiayaan|geran|mohon)\b/.test(text)) return "financing";
   if (/\b(recover|reclaim|refund|one[- ](off|time)|claim back|tuntut)/.test(text)) return "one_off";
   return "monthly";
 }

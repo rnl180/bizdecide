@@ -12,7 +12,7 @@
       "bumiputera",
       "women_owned"
     ],
-    "goal": "RM40,000 to renovate kitchen and buy a second espresso/kopi urn line"
+    "goal": "RM40,000 to renovate kitchen and buy a second espresso/coffee urn line"
   },
   "profileExtras": {
     "legalForm": "Sole proprietorship (Registration of Businesses Act 1956)",
@@ -1782,7 +1782,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-20",
@@ -1793,7 +1793,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-21",
@@ -1804,7 +1804,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-22",
@@ -1815,7 +1815,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-23",
@@ -1826,7 +1826,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-24",
@@ -1837,7 +1837,7 @@
       "cardRm": 0,
       "deliveryGrossRm": 0,
       "transactions": 0,
-      "note": "Closed - Hari Raya Aidilfitri"
+      "note": "Closed - Eid holiday"
     },
     {
       "period": "2026-03-25",
@@ -3771,8 +3771,8 @@
     {
       "date": "2026-06-17",
       "invoiceNo": "KCB-26-1187",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 12,
       "unit": "kg",
       "unitPriceRm": 28,
@@ -3783,8 +3783,8 @@
     {
       "date": "2026-06-17",
       "invoiceNo": "KCB-26-1187",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -3795,8 +3795,8 @@
     {
       "date": "2026-06-17",
       "invoiceNo": "KCB-26-1187",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -3807,8 +3807,8 @@
     {
       "date": "2026-07-01",
       "invoiceNo": "KCB-26-1194",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 12,
       "unit": "kg",
       "unitPriceRm": 28,
@@ -3819,8 +3819,8 @@
     {
       "date": "2026-07-01",
       "invoiceNo": "KCB-26-1194",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -3831,8 +3831,8 @@
     {
       "date": "2026-07-01",
       "invoiceNo": "KCB-26-1194",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -3843,8 +3843,8 @@
     {
       "date": "2026-07-03",
       "invoiceNo": "LSS/2607/828",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Pekat Manis 500g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Sweetened Condensed Milk 500g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.9,
@@ -3855,8 +3855,8 @@
     {
       "date": "2026-07-03",
       "invoiceNo": "LSS/2607/828",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Sejat 390g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Evaporated Milk 390g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.4,
@@ -3867,8 +3867,8 @@
     {
       "date": "2026-07-03",
       "invoiceNo": "LSS/2607/828",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Segar 1L",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Fresh Milk 1L",
       "qty": 20,
       "unit": "btl",
       "unitPriceRm": 6.8,
@@ -3879,8 +3879,8 @@
     {
       "date": "2026-07-08",
       "invoiceNo": "BMJ-0708-25",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Gula Pasir 10kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Sugar 10kg",
       "qty": 3,
       "unit": "beg",
       "unitPriceRm": 28.5,
@@ -3891,8 +3891,8 @@
     {
       "date": "2026-07-08",
       "invoiceNo": "BMJ-0708-25",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Telur Gred A (30 biji)",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Grade A Eggs (30 pcs)",
       "qty": 6,
       "unit": "papan",
       "unitPriceRm": 13.8,
@@ -3903,8 +3903,8 @@
     {
       "date": "2026-07-08",
       "invoiceNo": "BMJ-0708-25",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Minyak Masak 5kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Cooking Oil 5kg",
       "qty": 2,
       "unit": "botol",
       "unitPriceRm": 30.5,
@@ -3915,8 +3915,8 @@
     {
       "date": "2026-07-10",
       "invoiceNo": "RML2812",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Roti Benggali",
+      "supplier": "Golden Bakery",
+      "item": "Bread Loaf",
       "qty": 60,
       "unit": "buku",
       "unitPriceRm": 2.2,
@@ -3927,8 +3927,8 @@
     {
       "date": "2026-07-10",
       "invoiceNo": "RML2812",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Kaya Homemade 1kg",
+      "supplier": "Golden Bakery",
+      "item": "Coconut Jam 1kg",
       "qty": 3,
       "unit": "bekas",
       "unitPriceRm": 16,
@@ -3939,8 +3939,8 @@
     {
       "date": "2026-07-10",
       "invoiceNo": "RML2812",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Mentega 250g",
+      "supplier": "Golden Bakery",
+      "item": "Butter 250g",
       "qty": 6,
       "unit": "ketul",
       "unitPriceRm": 8.5,
@@ -3951,8 +3951,8 @@
     {
       "date": "2026-07-15",
       "invoiceNo": "KCB-26-1201",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 10,
       "unit": "kg",
       "unitPriceRm": 29.1,
@@ -3963,8 +3963,8 @@
     {
       "date": "2026-07-15",
       "invoiceNo": "KCB-26-1201",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -3975,8 +3975,8 @@
     {
       "date": "2026-07-15",
       "invoiceNo": "KCB-26-1201",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -3987,8 +3987,8 @@
     {
       "date": "2026-07-20",
       "invoiceNo": "SPP260720",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Cawan Plastik 16oz (50pcs)",
+      "supplier": "SP Packaging Supplies",
+      "item": "Plastic Cups 16oz (50pcs)",
       "qty": 10,
       "unit": "pek",
       "unitPriceRm": 9.5,
@@ -3999,8 +3999,8 @@
     {
       "date": "2026-07-20",
       "invoiceNo": "SPP260720",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Penutup Cawan (50pcs)",
+      "supplier": "SP Packaging Supplies",
+      "item": "Cup Lids (50pcs)",
       "qty": 10,
       "unit": "pek",
       "unitPriceRm": 5.5,
@@ -4011,7 +4011,7 @@
     {
       "date": "2026-07-20",
       "invoiceNo": "SPP260720",
-      "supplier": "SP Plastik & Pembungkusan",
+      "supplier": "SP Packaging Supplies",
       "item": "Straw (100pcs)",
       "qty": 5,
       "unit": "pek",
@@ -4023,8 +4023,8 @@
     {
       "date": "2026-07-20",
       "invoiceNo": "SPP260720",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Plastik Ikat Tepi 1kg",
+      "supplier": "SP Packaging Supplies",
+      "item": "Takeaway Bags 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 12,
@@ -4035,8 +4035,8 @@
     {
       "date": "2026-07-24",
       "invoiceNo": "LSS/2607/826",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Pekat Manis 500g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Sweetened Condensed Milk 500g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.9,
@@ -4047,8 +4047,8 @@
     {
       "date": "2026-07-24",
       "invoiceNo": "LSS/2607/826",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Sejat 390g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Evaporated Milk 390g (tin)",
       "qty": 36,
       "unit": "tin",
       "unitPriceRm": 3.4,
@@ -4059,8 +4059,8 @@
     {
       "date": "2026-07-24",
       "invoiceNo": "LSS/2607/826",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Segar 1L",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Fresh Milk 1L",
       "qty": 20,
       "unit": "btl",
       "unitPriceRm": 6.8,
@@ -4071,8 +4071,8 @@
     {
       "date": "2026-07-29",
       "invoiceNo": "KCB-26-1208",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 11,
       "unit": "kg",
       "unitPriceRm": 29.1,
@@ -4083,8 +4083,8 @@
     {
       "date": "2026-07-29",
       "invoiceNo": "KCB-26-1208",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -4095,8 +4095,8 @@
     {
       "date": "2026-07-29",
       "invoiceNo": "KCB-26-1208",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -4107,8 +4107,8 @@
     {
       "date": "2026-08-01",
       "invoiceNo": "TGP 363",
-      "supplier": "Tong Gas Pantas Enterprise",
-      "item": "Isi semula tong gas LPG 14kg",
+      "supplier": "Quick Gas Enterprise",
+      "item": "LPG Gas Refill 14kg",
       "qty": 4,
       "unit": "tong",
       "unitPriceRm": 27,
@@ -4119,8 +4119,8 @@
     {
       "date": "2026-08-05",
       "invoiceNo": "BMJ-0805-35",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Gula Pasir 10kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Sugar 10kg",
       "qty": 3,
       "unit": "beg",
       "unitPriceRm": 28.5,
@@ -4131,8 +4131,8 @@
     {
       "date": "2026-08-05",
       "invoiceNo": "BMJ-0805-35",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Telur Gred A (30 biji)",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Grade A Eggs (30 pcs)",
       "qty": 6,
       "unit": "papan",
       "unitPriceRm": 13.8,
@@ -4143,8 +4143,8 @@
     {
       "date": "2026-08-05",
       "invoiceNo": "BMJ-0805-35",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Minyak Masak 5kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Cooking Oil 5kg",
       "qty": 2,
       "unit": "botol",
       "unitPriceRm": 30.5,
@@ -4155,8 +4155,8 @@
     {
       "date": "2026-08-07",
       "invoiceNo": "RML2370",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Roti Benggali",
+      "supplier": "Golden Bakery",
+      "item": "Bread Loaf",
       "qty": 60,
       "unit": "buku",
       "unitPriceRm": 2.2,
@@ -4167,8 +4167,8 @@
     {
       "date": "2026-08-07",
       "invoiceNo": "RML2370",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Kaya Homemade 1kg",
+      "supplier": "Golden Bakery",
+      "item": "Coconut Jam 1kg",
       "qty": 3,
       "unit": "bekas",
       "unitPriceRm": 16,
@@ -4179,8 +4179,8 @@
     {
       "date": "2026-08-07",
       "invoiceNo": "RML2370",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Mentega 250g",
+      "supplier": "Golden Bakery",
+      "item": "Butter 250g",
       "qty": 6,
       "unit": "ketul",
       "unitPriceRm": 8.5,
@@ -4191,8 +4191,8 @@
     {
       "date": "2026-08-12",
       "invoiceNo": "KCB-26-1215",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 11,
       "unit": "kg",
       "unitPriceRm": 30.2,
@@ -4203,8 +4203,8 @@
     {
       "date": "2026-08-12",
       "invoiceNo": "KCB-26-1215",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -4215,8 +4215,8 @@
     {
       "date": "2026-08-12",
       "invoiceNo": "KCB-26-1215",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -4227,8 +4227,8 @@
     {
       "date": "2026-08-14",
       "invoiceNo": "LSS/2608/817",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Pekat Manis 500g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Sweetened Condensed Milk 500g (tin)",
       "qty": 60,
       "unit": "tin",
       "unitPriceRm": 3.9,
@@ -4239,8 +4239,8 @@
     {
       "date": "2026-08-14",
       "invoiceNo": "LSS/2608/817",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Sejat 390g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Evaporated Milk 390g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.4,
@@ -4251,8 +4251,8 @@
     {
       "date": "2026-08-14",
       "invoiceNo": "LSS/2608/817",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Segar 1L",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Fresh Milk 1L",
       "qty": 24,
       "unit": "btl",
       "unitPriceRm": 6.8,
@@ -4263,8 +4263,8 @@
     {
       "date": "2026-08-25",
       "invoiceNo": "BMJ-0825-27",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Gula Pasir 10kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Sugar 10kg",
       "qty": 3,
       "unit": "beg",
       "unitPriceRm": 28.5,
@@ -4275,8 +4275,8 @@
     {
       "date": "2026-08-25",
       "invoiceNo": "BMJ-0825-27",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Telur Gred A (30 biji)",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Grade A Eggs (30 pcs)",
       "qty": 6,
       "unit": "papan",
       "unitPriceRm": 13.8,
@@ -4287,8 +4287,8 @@
     {
       "date": "2026-08-25",
       "invoiceNo": "BMJ-0825-27",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Minyak Masak 5kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Cooking Oil 5kg",
       "qty": 2,
       "unit": "botol",
       "unitPriceRm": 30.5,
@@ -4299,8 +4299,8 @@
     {
       "date": "2026-08-26",
       "invoiceNo": "KCB-26-1222",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 12,
       "unit": "kg",
       "unitPriceRm": 30.2,
@@ -4311,8 +4311,8 @@
     {
       "date": "2026-08-26",
       "invoiceNo": "KCB-26-1222",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -4323,8 +4323,8 @@
     {
       "date": "2026-08-26",
       "invoiceNo": "KCB-26-1222",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -4335,8 +4335,8 @@
     {
       "date": "2026-08-28",
       "invoiceNo": "RML2520",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Roti Benggali",
+      "supplier": "Golden Bakery",
+      "item": "Bread Loaf",
       "qty": 60,
       "unit": "buku",
       "unitPriceRm": 2.2,
@@ -4347,8 +4347,8 @@
     {
       "date": "2026-08-28",
       "invoiceNo": "RML2520",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Kaya Homemade 1kg",
+      "supplier": "Golden Bakery",
+      "item": "Coconut Jam 1kg",
       "qty": 3,
       "unit": "bekas",
       "unitPriceRm": 16,
@@ -4359,8 +4359,8 @@
     {
       "date": "2026-08-28",
       "invoiceNo": "RML2520",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Mentega 250g",
+      "supplier": "Golden Bakery",
+      "item": "Butter 250g",
       "qty": 6,
       "unit": "ketul",
       "unitPriceRm": 8.5,
@@ -4371,8 +4371,8 @@
     {
       "date": "2026-09-04",
       "invoiceNo": "LSS/2609/753",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Pekat Manis 500g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Sweetened Condensed Milk 500g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.9,
@@ -4383,8 +4383,8 @@
     {
       "date": "2026-09-04",
       "invoiceNo": "LSS/2609/753",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Sejat 390g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Evaporated Milk 390g (tin)",
       "qty": 48,
       "unit": "tin",
       "unitPriceRm": 3.4,
@@ -4395,8 +4395,8 @@
     {
       "date": "2026-09-04",
       "invoiceNo": "LSS/2609/753",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Segar 1L",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Fresh Milk 1L",
       "qty": 20,
       "unit": "btl",
       "unitPriceRm": 6.8,
@@ -4407,8 +4407,8 @@
     {
       "date": "2026-09-05",
       "invoiceNo": "SPP260905",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Cawan Plastik 16oz (50pcs)",
+      "supplier": "SP Packaging Supplies",
+      "item": "Plastic Cups 16oz (50pcs)",
       "qty": 10,
       "unit": "pek",
       "unitPriceRm": 9.5,
@@ -4419,8 +4419,8 @@
     {
       "date": "2026-09-05",
       "invoiceNo": "SPP260905",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Penutup Cawan (50pcs)",
+      "supplier": "SP Packaging Supplies",
+      "item": "Cup Lids (50pcs)",
       "qty": 10,
       "unit": "pek",
       "unitPriceRm": 5.5,
@@ -4431,7 +4431,7 @@
     {
       "date": "2026-09-05",
       "invoiceNo": "SPP260905",
-      "supplier": "SP Plastik & Pembungkusan",
+      "supplier": "SP Packaging Supplies",
       "item": "Straw (100pcs)",
       "qty": 5,
       "unit": "pek",
@@ -4443,8 +4443,8 @@
     {
       "date": "2026-09-05",
       "invoiceNo": "SPP260905",
-      "supplier": "SP Plastik & Pembungkusan",
-      "item": "Plastik Ikat Tepi 1kg",
+      "supplier": "SP Packaging Supplies",
+      "item": "Takeaway Bags 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 12,
@@ -4455,8 +4455,8 @@
     {
       "date": "2026-09-08",
       "invoiceNo": "BMJ-0908-40",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Gula Pasir 10kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Sugar 10kg",
       "qty": 3,
       "unit": "beg",
       "unitPriceRm": 28.5,
@@ -4467,8 +4467,8 @@
     {
       "date": "2026-09-08",
       "invoiceNo": "BMJ-0908-40",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Telur Gred A (30 biji)",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Grade A Eggs (30 pcs)",
       "qty": 6,
       "unit": "papan",
       "unitPriceRm": 13.8,
@@ -4479,8 +4479,8 @@
     {
       "date": "2026-09-08",
       "invoiceNo": "BMJ-0908-40",
-      "supplier": "Borong Runcit Maju Jaya",
-      "item": "Minyak Masak 5kg",
+      "supplier": "Bright Wholesale Grocers",
+      "item": "Cooking Oil 5kg",
       "qty": 2,
       "unit": "botol",
       "unitPriceRm": 30.5,
@@ -4491,8 +4491,8 @@
     {
       "date": "2026-09-09",
       "invoiceNo": "KCB-26-1229",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 12,
       "unit": "kg",
       "unitPriceRm": 31.36,
@@ -4503,8 +4503,8 @@
     {
       "date": "2026-09-09",
       "invoiceNo": "KCB-26-1229",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -4515,8 +4515,8 @@
     {
       "date": "2026-09-09",
       "invoiceNo": "KCB-26-1229",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -4527,8 +4527,8 @@
     {
       "date": "2026-09-11",
       "invoiceNo": "LSS/2609/278",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Pekat Manis 500g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Sweetened Condensed Milk 500g (tin)",
       "qty": 60,
       "unit": "tin",
       "unitPriceRm": 3.9,
@@ -4539,8 +4539,8 @@
     {
       "date": "2026-09-11",
       "invoiceNo": "LSS/2609/278",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Sejat 390g (tin)",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Evaporated Milk 390g (tin)",
       "qty": 60,
       "unit": "tin",
       "unitPriceRm": 3.4,
@@ -4551,8 +4551,8 @@
     {
       "date": "2026-09-11",
       "invoiceNo": "LSS/2609/278",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
-      "item": "Susu Segar 1L",
+      "supplier": "Fresh Dairy Farm Enterprise",
+      "item": "Fresh Milk 1L",
       "qty": 30,
       "unit": "btl",
       "unitPriceRm": 6.8,
@@ -4563,8 +4563,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "TGP 303",
-      "supplier": "Tong Gas Pantas Enterprise",
-      "item": "Isi semula tong gas LPG 14kg",
+      "supplier": "Quick Gas Enterprise",
+      "item": "LPG Gas Refill 14kg",
       "qty": 4,
       "unit": "tong",
       "unitPriceRm": 27,
@@ -4575,8 +4575,8 @@
     {
       "date": "2026-09-18",
       "invoiceNo": "RML2229",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Roti Benggali",
+      "supplier": "Golden Bakery",
+      "item": "Bread Loaf",
       "qty": 60,
       "unit": "buku",
       "unitPriceRm": 2.2,
@@ -4587,8 +4587,8 @@
     {
       "date": "2026-09-18",
       "invoiceNo": "RML2229",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Kaya Homemade 1kg",
+      "supplier": "Golden Bakery",
+      "item": "Coconut Jam 1kg",
       "qty": 3,
       "unit": "bekas",
       "unitPriceRm": 16,
@@ -4599,8 +4599,8 @@
     {
       "date": "2026-09-18",
       "invoiceNo": "RML2229",
-      "supplier": "Roti & Kaya Mak Long",
-      "item": "Mentega 250g",
+      "supplier": "Golden Bakery",
+      "item": "Butter 250g",
       "qty": 6,
       "unit": "ketul",
       "unitPriceRm": 8.5,
@@ -4611,8 +4611,8 @@
     {
       "date": "2026-09-23",
       "invoiceNo": "KCB-26-1236",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Kopi O Campuran 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Black Coffee Powder Blend 1kg",
       "qty": 10,
       "unit": "kg",
       "unitPriceRm": 31.36,
@@ -4623,8 +4623,8 @@
     {
       "date": "2026-09-23",
       "invoiceNo": "KCB-26-1236",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Serbuk Teh Cap Daun 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Tea Powder 1kg",
       "qty": 6,
       "unit": "kg",
       "unitPriceRm": 22.5,
@@ -4635,8 +4635,8 @@
     {
       "date": "2026-09-23",
       "invoiceNo": "KCB-26-1236",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "item": "Biji Kopi Robusta Panggang 1kg",
+      "supplier": "Star Coffee Trading Sdn Bhd",
+      "item": "Roasted Robusta Coffee Beans 1kg",
       "qty": 2,
       "unit": "kg",
       "unitPriceRm": 38,
@@ -4647,8 +4647,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Susu Pekat Manis 500g",
+      "supplier": "Value Mart (fictional)",
+      "item": "Sweetened Condensed Milk 500g",
       "qty": 6,
       "unit": "tin",
       "unitPriceRm": 4.2,
@@ -4659,8 +4659,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Gula Halus 1kg",
+      "supplier": "Value Mart (fictional)",
+      "item": "Fine Sugar 1kg",
       "qty": 5,
       "unit": "pek",
       "unitPriceRm": 2.85,
@@ -4671,8 +4671,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Sabun Pinggan 900ml",
+      "supplier": "Value Mart (fictional)",
+      "item": "Dish Soap 900ml",
       "qty": 2,
       "unit": "btl",
       "unitPriceRm": 6.5,
@@ -4683,8 +4683,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Beras Wangi 10kg",
+      "supplier": "Value Mart (fictional)",
+      "item": "Fragrant Rice 10kg",
       "qty": 1,
       "unit": "beg",
       "unitPriceRm": 39.9,
@@ -4695,8 +4695,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Lampin Bayi Saiz M (38s)",
+      "supplier": "Value Mart (fictional)",
+      "item": "Baby Diapers Size M (38s)",
       "qty": 1,
       "unit": "pek",
       "unitPriceRm": 42.9,
@@ -4707,8 +4707,8 @@
     {
       "date": "2026-09-12",
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
-      "item": "Ubat Gigi 175g",
+      "supplier": "Value Mart (fictional)",
+      "item": "Toothpaste 175g",
       "qty": 1,
       "unit": "tiub",
       "unitPriceRm": 8.9,
@@ -4720,49 +4720,49 @@
   "suppliers": [
     {
       "id": "S01",
-      "name": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
-      "category": "Kopi powder, teh powder, roasted beans",
-      "contact": "Mr. Lim (sales) | orders@kopibintang.example | +60-0-0000-0101 (fictional)",
+      "name": "Star Coffee Trading Sdn Bhd",
+      "category": "Coffee powder, tea powder, roasted beans",
+      "contact": "Mr. Lim (sales) | orders@starcoffee.example | +60-0-0000-0101 (fictional)",
       "paymentTerms": "7 days, bank transfer",
       "notifiedPriceChange": "No"
     },
     {
       "id": "S02",
-      "name": "Ladang Susu Segar Hulu Enterprise",
+      "name": "Fresh Dairy Farm Enterprise",
       "category": "Condensed milk, evaporated milk, fresh milk",
-      "contact": "Pn. Rosnah | ladangsusu@dairy.example | +60-0-0000-0102 (fictional)",
+      "contact": "Ms. Rose | freshdairy@dairy.example | +60-0-0000-0102 (fictional)",
       "paymentTerms": "7 days, bank transfer",
       "notifiedPriceChange": "No"
     },
     {
       "id": "S03",
-      "name": "Roti & Kaya Mak Long",
-      "category": "Bread, kaya, butter",
-      "contact": "Mak Long | rotimaklong@bakery.example | +60-0-0000-0103 (fictional)",
+      "name": "Golden Bakery",
+      "category": "Bread, coconut jam, butter",
+      "contact": "Ms. Lee | goldenbakery@bakery.example | +60-0-0000-0103 (fictional)",
       "paymentTerms": "Cash on delivery",
       "notifiedPriceChange": "No"
     },
     {
       "id": "S04",
-      "name": "Borong Runcit Maju Jaya",
+      "name": "Bright Wholesale Grocers",
       "category": "Sugar, eggs, cooking oil, dry goods",
-      "contact": "Encik Hafiz | majujaya@wholesale.example | +60-0-0000-0104 (fictional)",
+      "contact": "Mr. Hafiz | bright@wholesale.example | +60-0-0000-0104 (fictional)",
       "paymentTerms": "14 days, bank transfer",
       "notifiedPriceChange": "No"
     },
     {
       "id": "S05",
-      "name": "SP Plastik & Pembungkusan",
+      "name": "SP Packaging Supplies",
       "category": "Cups, lids, straws, takeaway bags",
-      "contact": "Ms. Kavitha | sales@spplastik.example | +60-0-0000-0105 (fictional)",
+      "contact": "Ms. Kavitha | sales@sppackaging.example | +60-0-0000-0105 (fictional)",
       "paymentTerms": "7 days, bank transfer",
       "notifiedPriceChange": "No"
     },
     {
       "id": "S06",
-      "name": "Tong Gas Pantas Enterprise",
+      "name": "Quick Gas Enterprise",
       "category": "LPG cylinder refill",
-      "contact": "Ah Seng | +60-0-0000-0106 (fictional)",
+      "contact": "Mr. Seng | +60-0-0000-0106 (fictional)",
       "paymentTerms": "Cash on delivery",
       "notifiedPriceChange": "No"
     }
@@ -4810,7 +4810,7 @@
     },
     {
       "date": "2026-09-02",
-      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1222",
+      "description": "IBG TRF STAR COFFEE TRADING INV KCB-26-1222",
       "reference": "IBG0902S01",
       "debitRm": 573.4,
       "balanceRm": 15787.33
@@ -4908,14 +4908,14 @@
     },
     {
       "date": "2026-09-08",
-      "description": "IBG TRF BORONG RUNCIT MAJU JAYA INV BMJ-0825-27",
+      "description": "IBG TRF BRIGHT WHOLESALE GROCERS INV BMJ-0825-27",
       "reference": "IBG0908S04",
       "debitRm": 229.3,
       "balanceRm": 18517.66
     },
     {
       "date": "2026-09-08",
-      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/753",
+      "description": "IBG TRF FRESH DAIRY FARM INV LSS/2609/753",
       "reference": "IBG0908S02",
       "debitRm": 486.4,
       "balanceRm": 18031.26
@@ -4957,7 +4957,7 @@
     },
     {
       "date": "2026-09-10",
-      "description": "IBG TRF SP PLASTIK PEMBUNGKUSAN INV SPP260905",
+      "description": "IBG TRF SP PACKAGING SUPPLIES INV SPP260905",
       "reference": "IBG0910S05",
       "debitRm": 193,
       "balanceRm": 19093.95
@@ -5013,7 +5013,7 @@
     },
     {
       "date": "2026-09-12",
-      "description": "POS DEBIT PASARAYA SERBA MURAH PJ",
+      "description": "POS DEBIT VALUE MART PJ",
       "reference": "POS0912-47731",
       "debitRm": 144.15,
       "balanceRm": 19374.3
@@ -5062,7 +5062,7 @@
     },
     {
       "date": "2026-09-15",
-      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/278",
+      "description": "IBG TRF FRESH DAIRY FARM INV LSS/2609/278",
       "reference": "IBG0915S02",
       "debitRm": 642,
       "balanceRm": 18614.12
@@ -5097,14 +5097,14 @@
     },
     {
       "date": "2026-09-16",
-      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1229",
+      "description": "IBG TRF STAR COFFEE TRADING INV KCB-26-1229",
       "reference": "IBG0916S01",
       "debitRm": 587.32,
       "balanceRm": 18885.36
     },
     {
       "date": "2026-09-16",
-      "description": "IBG TRF LADANG SUSU SEGAR HULU INV LSS/2609/278",
+      "description": "IBG TRF FRESH DAIRY FARM INV LSS/2609/278",
       "reference": "IBG0916S02",
       "debitRm": 642,
       "balanceRm": 18243.36
@@ -5188,7 +5188,7 @@
     },
     {
       "date": "2026-09-22",
-      "description": "IBG TRF BORONG RUNCIT MAJU JAYA INV BMJ-0908-40",
+      "description": "IBG TRF BRIGHT WHOLESALE GROCERS INV BMJ-0908-40",
       "reference": "IBG0922S04",
       "debitRm": 229.3,
       "balanceRm": 20990.96
@@ -5356,7 +5356,7 @@
     },
     {
       "date": "2026-09-30",
-      "description": "IBG TRF KOPI CAP BINTANG TIMUR INV KCB-26-1236",
+      "description": "IBG TRF STAR COFFEE TRADING INV KCB-26-1236",
       "reference": "IBG0930S01",
       "debitRm": 524.6,
       "balanceRm": 16959.22
@@ -5365,7 +5365,7 @@
   "payables": [
     {
       "invoiceNo": "KCB-26-1187",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-06-17",
       "amountRm": 547,
       "paidDate": "2026-06-24",
@@ -5373,7 +5373,7 @@
     },
     {
       "invoiceNo": "KCB-26-1194",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-07-01",
       "amountRm": 547,
       "paidDate": "2026-07-08",
@@ -5381,7 +5381,7 @@
     },
     {
       "invoiceNo": "LSS/2607/828",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "supplier": "Fresh Dairy Farm Enterprise",
       "invoiceDate": "2026-07-03",
       "amountRm": 486.4,
       "paidDate": "2026-07-07",
@@ -5389,7 +5389,7 @@
     },
     {
       "invoiceNo": "BMJ-0708-25",
-      "supplier": "Borong Runcit Maju Jaya",
+      "supplier": "Bright Wholesale Grocers",
       "invoiceDate": "2026-07-08",
       "amountRm": 229.3,
       "paidDate": "2026-07-22",
@@ -5397,7 +5397,7 @@
     },
     {
       "invoiceNo": "RML2812",
-      "supplier": "Roti & Kaya Mak Long",
+      "supplier": "Golden Bakery",
       "invoiceDate": "2026-07-10",
       "amountRm": 231,
       "paidDate": "2026-07-10",
@@ -5405,7 +5405,7 @@
     },
     {
       "invoiceNo": "KCB-26-1201",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-07-15",
       "amountRm": 502,
       "paidDate": "2026-07-22",
@@ -5413,7 +5413,7 @@
     },
     {
       "invoiceNo": "SPP260720",
-      "supplier": "SP Plastik & Pembungkusan",
+      "supplier": "SP Packaging Supplies",
       "invoiceDate": "2026-07-20",
       "amountRm": 193,
       "paidDate": "2026-07-25",
@@ -5421,7 +5421,7 @@
     },
     {
       "invoiceNo": "LSS/2607/826",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "supplier": "Fresh Dairy Farm Enterprise",
       "invoiceDate": "2026-07-24",
       "amountRm": 445.6,
       "paidDate": "2026-07-28",
@@ -5429,7 +5429,7 @@
     },
     {
       "invoiceNo": "KCB-26-1208",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-07-29",
       "amountRm": 531.1,
       "paidDate": "2026-08-05",
@@ -5437,7 +5437,7 @@
     },
     {
       "invoiceNo": "TGP 363",
-      "supplier": "Tong Gas Pantas Enterprise",
+      "supplier": "Quick Gas Enterprise",
       "invoiceDate": "2026-08-01",
       "amountRm": 108,
       "paidDate": "2026-08-01",
@@ -5445,7 +5445,7 @@
     },
     {
       "invoiceNo": "BMJ-0805-35",
-      "supplier": "Borong Runcit Maju Jaya",
+      "supplier": "Bright Wholesale Grocers",
       "invoiceDate": "2026-08-05",
       "amountRm": 229.3,
       "paidDate": "2026-08-19",
@@ -5453,7 +5453,7 @@
     },
     {
       "invoiceNo": "RML2370",
-      "supplier": "Roti & Kaya Mak Long",
+      "supplier": "Golden Bakery",
       "invoiceDate": "2026-08-07",
       "amountRm": 231,
       "paidDate": "2026-08-07",
@@ -5461,7 +5461,7 @@
     },
     {
       "invoiceNo": "KCB-26-1215",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-08-12",
       "amountRm": 543.2,
       "paidDate": "2026-08-19",
@@ -5469,7 +5469,7 @@
     },
     {
       "invoiceNo": "LSS/2608/817",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "supplier": "Fresh Dairy Farm Enterprise",
       "invoiceDate": "2026-08-14",
       "amountRm": 560.4,
       "paidDate": "2026-08-18",
@@ -5477,7 +5477,7 @@
     },
     {
       "invoiceNo": "BMJ-0825-27",
-      "supplier": "Borong Runcit Maju Jaya",
+      "supplier": "Bright Wholesale Grocers",
       "invoiceDate": "2026-08-25",
       "amountRm": 229.3,
       "paidDate": "2026-09-08",
@@ -5485,7 +5485,7 @@
     },
     {
       "invoiceNo": "KCB-26-1222",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-08-26",
       "amountRm": 573.4,
       "paidDate": "2026-09-02",
@@ -5493,7 +5493,7 @@
     },
     {
       "invoiceNo": "RML2520",
-      "supplier": "Roti & Kaya Mak Long",
+      "supplier": "Golden Bakery",
       "invoiceDate": "2026-08-28",
       "amountRm": 231,
       "paidDate": "2026-08-28",
@@ -5501,7 +5501,7 @@
     },
     {
       "invoiceNo": "LSS/2609/753",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "supplier": "Fresh Dairy Farm Enterprise",
       "invoiceDate": "2026-09-04",
       "amountRm": 486.4,
       "paidDate": "2026-09-08",
@@ -5509,7 +5509,7 @@
     },
     {
       "invoiceNo": "SPP260905",
-      "supplier": "SP Plastik & Pembungkusan",
+      "supplier": "SP Packaging Supplies",
       "invoiceDate": "2026-09-05",
       "amountRm": 193,
       "paidDate": "2026-09-10",
@@ -5517,7 +5517,7 @@
     },
     {
       "invoiceNo": "BMJ-0908-40",
-      "supplier": "Borong Runcit Maju Jaya",
+      "supplier": "Bright Wholesale Grocers",
       "invoiceDate": "2026-09-08",
       "amountRm": 229.3,
       "paidDate": "2026-09-22",
@@ -5525,7 +5525,7 @@
     },
     {
       "invoiceNo": "KCB-26-1229",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-09-09",
       "amountRm": 587.32,
       "paidDate": "2026-09-16",
@@ -5533,7 +5533,7 @@
     },
     {
       "invoiceNo": "LSS/2609/278",
-      "supplier": "Ladang Susu Segar Hulu Enterprise",
+      "supplier": "Fresh Dairy Farm Enterprise",
       "invoiceDate": "2026-09-11",
       "amountRm": 642,
       "paidDate": "2026-09-15",
@@ -5541,7 +5541,7 @@
     },
     {
       "invoiceNo": "TGP 303",
-      "supplier": "Tong Gas Pantas Enterprise",
+      "supplier": "Quick Gas Enterprise",
       "invoiceDate": "2026-09-12",
       "amountRm": 108,
       "paidDate": "2026-09-12",
@@ -5549,7 +5549,7 @@
     },
     {
       "invoiceNo": "RML2229",
-      "supplier": "Roti & Kaya Mak Long",
+      "supplier": "Golden Bakery",
       "invoiceDate": "2026-09-18",
       "amountRm": 231,
       "paidDate": "2026-09-18",
@@ -5557,7 +5557,7 @@
     },
     {
       "invoiceNo": "KCB-26-1236",
-      "supplier": "Syarikat Kopi Cap Bintang Timur Sdn Bhd",
+      "supplier": "Star Coffee Trading Sdn Bhd",
       "invoiceDate": "2026-09-23",
       "amountRm": 524.6,
       "paidDate": "2026-09-30",
@@ -5565,7 +5565,7 @@
     },
     {
       "invoiceNo": "R-0912-0047731",
-      "supplier": "Pasaraya Serba Murah (fictional)",
+      "supplier": "Value Mart (fictional)",
       "invoiceDate": "2026-09-12",
       "amountRm": 144.15,
       "paidDate": "2026-09-12",

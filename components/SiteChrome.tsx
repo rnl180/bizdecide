@@ -7,14 +7,9 @@ import { Icon } from "./Icon";
 import { APP } from "@/lib/i18n-app";
 import { MyRequestsLink } from "./MyRequests";
 
-/** The primary lockup: the waves-and-sun mark + wordmark, swapped for the dark-ground version in dark mode. */
+/** The primary lockup: the waves-and-sun mark + wordmark. */
 function Lockup({ height }: { height: number }) {
-  return (
-    <picture>
-      <source srcSet="/brand/lockup-dark.svg" media="(prefers-color-scheme: dark)" />
-      <img src="/brand/lockup.svg" alt="BizDecide" width={Math.round((height * 286.47) / 64)} height={height} />
-    </picture>
-  );
+  return <img src="/brand/lockup.svg" alt="BizDecide" width={Math.round((height * 286.47) / 64)} height={height} />;
 }
 
 const SECTIONS = ["how"] as const;
@@ -178,11 +173,6 @@ export function SiteHeader() {
                     </a>
                   </li>
                 ))}
-                <li>
-                  <a href="/skills" aria-current={page("/skills")}>
-                    {t.skills}
-                  </a>
-                </li>
               </ul>
             </nav>
             <div className="topbar-actions">
@@ -242,11 +232,6 @@ export function SiteHeader() {
                 <li>
                   <a href="/requests" aria-current={page("/requests")}>
                     <Icon name="clipboard" size={20} /> {t.myRequests} <Icon name="arrowRight" size={18} className="site-menu-go" />
-                  </a>
-                </li>
-                <li>
-                  <a href="/skills" aria-current={page("/skills")}>
-                    <Icon name="package" size={20} /> {t.skills} <Icon name="arrowRight" size={18} className="site-menu-go" />
                   </a>
                 </li>
                 <li>

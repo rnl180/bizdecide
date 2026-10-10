@@ -1,27 +1,27 @@
 invoice_no,supplier_id,supplier,invoice_date,amount_rm,paid_date,method,invoice_file
-KCB-26-1187,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-06-17,547.00,2026-06-24,transfer,invoices/2026-06-17_KCB_KCB-26-1187.pdf
-KCB-26-1194,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-01,547.00,2026-07-08,transfer,invoices/2026-07-01_KCB_KCB-26-1194.pdf
-LSS/2607/828,S02,Ladang Susu Segar Hulu Enterprise,2026-07-03,486.40,2026-07-07,transfer,invoices/2026-07-03_LSS_LSS-2607-828.pdf
-BMJ-0708-25,S04,Borong Runcit Maju Jaya,2026-07-08,229.30,2026-07-22,transfer,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
-RML2812,S03,Roti & Kaya Mak Long,2026-07-10,231.00,2026-07-10,cash,invoices/2026-07-10_RML_RML2812.pdf
-KCB-26-1201,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-15,502.00,2026-07-22,transfer,invoices/2026-07-15_KCB_KCB-26-1201.pdf
-SPP260720,S05,SP Plastik & Pembungkusan,2026-07-20,193.00,2026-07-25,transfer,invoices/2026-07-20_SPP_SPP260720.pdf
-LSS/2607/826,S02,Ladang Susu Segar Hulu Enterprise,2026-07-24,445.60,2026-07-28,transfer,invoices/2026-07-24_LSS_LSS-2607-826.pdf
-KCB-26-1208,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-07-29,531.10,2026-08-05,transfer,invoices/2026-07-29_KCB_KCB-26-1208.pdf
-TGP 363,S06,Tong Gas Pantas Enterprise,2026-08-01,108.00,2026-08-01,cash,invoices/2026-08-01_TGP_TGP363.pdf
-BMJ-0805-35,S04,Borong Runcit Maju Jaya,2026-08-05,229.30,2026-08-19,transfer,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
-RML2370,S03,Roti & Kaya Mak Long,2026-08-07,231.00,2026-08-07,cash,invoices/2026-08-07_RML_RML2370.pdf
-KCB-26-1215,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-12,543.20,2026-08-19,transfer,invoices/2026-08-12_KCB_KCB-26-1215.pdf
-LSS/2608/817,S02,Ladang Susu Segar Hulu Enterprise,2026-08-14,560.40,2026-08-18,transfer,invoices/2026-08-14_LSS_LSS-2608-817.pdf
-BMJ-0825-27,S04,Borong Runcit Maju Jaya,2026-08-25,229.30,2026-09-08,transfer,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
-KCB-26-1222,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-08-26,573.40,2026-09-02,transfer,invoices/2026-08-26_KCB_KCB-26-1222.pdf
-RML2520,S03,Roti & Kaya Mak Long,2026-08-28,231.00,2026-08-28,cash,invoices/2026-08-28_RML_RML2520.pdf
-LSS/2609/753,S02,Ladang Susu Segar Hulu Enterprise,2026-09-04,486.40,2026-09-08,transfer,invoices/2026-09-04_LSS_LSS-2609-753.pdf
-SPP260905,S05,SP Plastik & Pembungkusan,2026-09-05,193.00,2026-09-10,transfer,invoices/2026-09-05_SPP_SPP260905.pdf
-BMJ-0908-40,S04,Borong Runcit Maju Jaya,2026-09-08,229.30,2026-09-22,transfer,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
-KCB-26-1229,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-09,587.32,2026-09-16,transfer,invoices/2026-09-09_KCB_KCB-26-1229.pdf
-LSS/2609/278,S02,Ladang Susu Segar Hulu Enterprise,2026-09-11,642.00,2026-09-15,transfer,invoices/2026-09-11_LSS_LSS-2609-278.pdf
-TGP 303,S06,Tong Gas Pantas Enterprise,2026-09-12,108.00,2026-09-12,cash,invoices/2026-09-12_TGP_TGP303.pdf
-RML2229,S03,Roti & Kaya Mak Long,2026-09-18,231.00,2026-09-18,cash,invoices/2026-09-18_RML_RML2229.pdf
-KCB-26-1236,S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,2026-09-23,524.60,2026-09-30,transfer,invoices/2026-09-23_KCB_KCB-26-1236.pdf
-R-0912-0047731,X01,Pasaraya Serba Murah (fictional),2026-09-12,144.15,2026-09-12,debit card (business account),invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+KCB-26-1187,S01,Star Coffee Trading Sdn Bhd,2026-06-17,547.00,2026-06-24,transfer,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+KCB-26-1194,S01,Star Coffee Trading Sdn Bhd,2026-07-01,547.00,2026-07-08,transfer,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+LSS/2607/828,S02,Fresh Dairy Farm Enterprise,2026-07-03,486.40,2026-07-07,transfer,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+BMJ-0708-25,S04,Bright Wholesale Grocers,2026-07-08,229.30,2026-07-22,transfer,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+RML2812,S03,Golden Bakery,2026-07-10,231.00,2026-07-10,cash,invoices/2026-07-10_RML_RML2812.pdf
+KCB-26-1201,S01,Star Coffee Trading Sdn Bhd,2026-07-15,502.00,2026-07-22,transfer,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+SPP260720,S05,SP Packaging Supplies,2026-07-20,193.00,2026-07-25,transfer,invoices/2026-07-20_SPP_SPP260720.pdf
+LSS/2607/826,S02,Fresh Dairy Farm Enterprise,2026-07-24,445.60,2026-07-28,transfer,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+KCB-26-1208,S01,Star Coffee Trading Sdn Bhd,2026-07-29,531.10,2026-08-05,transfer,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+TGP 363,S06,Quick Gas Enterprise,2026-08-01,108.00,2026-08-01,cash,invoices/2026-08-01_TGP_TGP363.pdf
+BMJ-0805-35,S04,Bright Wholesale Grocers,2026-08-05,229.30,2026-08-19,transfer,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+RML2370,S03,Golden Bakery,2026-08-07,231.00,2026-08-07,cash,invoices/2026-08-07_RML_RML2370.pdf
+KCB-26-1215,S01,Star Coffee Trading Sdn Bhd,2026-08-12,543.20,2026-08-19,transfer,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+LSS/2608/817,S02,Fresh Dairy Farm Enterprise,2026-08-14,560.40,2026-08-18,transfer,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+BMJ-0825-27,S04,Bright Wholesale Grocers,2026-08-25,229.30,2026-09-08,transfer,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+KCB-26-1222,S01,Star Coffee Trading Sdn Bhd,2026-08-26,573.40,2026-09-02,transfer,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+RML2520,S03,Golden Bakery,2026-08-28,231.00,2026-08-28,cash,invoices/2026-08-28_RML_RML2520.pdf
+LSS/2609/753,S02,Fresh Dairy Farm Enterprise,2026-09-04,486.40,2026-09-08,transfer,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+SPP260905,S05,SP Packaging Supplies,2026-09-05,193.00,2026-09-10,transfer,invoices/2026-09-05_SPP_SPP260905.pdf
+BMJ-0908-40,S04,Bright Wholesale Grocers,2026-09-08,229.30,2026-09-22,transfer,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+KCB-26-1229,S01,Star Coffee Trading Sdn Bhd,2026-09-09,587.32,2026-09-16,transfer,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+LSS/2609/278,S02,Fresh Dairy Farm Enterprise,2026-09-11,642.00,2026-09-15,transfer,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+TGP 303,S06,Quick Gas Enterprise,2026-09-12,108.00,2026-09-12,cash,invoices/2026-09-12_TGP_TGP303.pdf
+RML2229,S03,Golden Bakery,2026-09-18,231.00,2026-09-18,cash,invoices/2026-09-18_RML_RML2229.pdf
+KCB-26-1236,S01,Star Coffee Trading Sdn Bhd,2026-09-23,524.60,2026-09-30,transfer,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+R-0912-0047731,X01,Value Mart (fictional),2026-09-12,144.15,2026-09-12,debit card (business account),invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf

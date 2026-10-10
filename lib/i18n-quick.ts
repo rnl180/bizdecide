@@ -20,7 +20,7 @@ const en = {
   dockButton: "Review and send",
   kinds: { sales: "Sales", purchases: "Purchases", suppliers: "Suppliers", bank: "Bank statement", payables: "Bills paid" } as Record<CsvKind, string>,
   meta: {
-    sales: (n: number, months: number, total: string, split: boolean) => `${n} days · ${months} months · ${total}${split ? " · DuitNow / card split" : ""}`,
+    sales: (n: number, months: number, total: string, split: boolean) => `${n} days · ${months} months · ${total}${split ? " · QR / card split" : ""}`,
     purchases: (n: number, suppliers: number, range: string) => `${n} invoice lines · ${suppliers} suppliers${range ? ` · ${range}` : ""}`,
     suppliers: (n: number) => `${n} suppliers`,
     bank: (n: number, range: string) => `${n} lines${range ? ` · ${range}` : ""}`,

@@ -16,7 +16,7 @@
 
 ## Planted finding 1: quiet supplier price creep (+12%)
 
-Supplier **Syarikat Kopi Cap Bintang Timur Sdn Bhd (S01)**, item **Serbuk Kopi O Campuran 1kg**:
+Supplier **Star Coffee Trading Sdn Bhd (S01)**, item **Black Coffee Powder Blend 1kg**:
 
 | Invoice | Date | Unit price | Change vs baseline |
 |---|---|---|---|
@@ -30,14 +30,14 @@ Supplier **Syarikat Kopi Cap Bintang Timur Sdn Bhd (S01)**, item **Serbuk Kopi O
 | KCB-26-1236 | 23 Sep 2026 | RM31.36 | +12.0% |
 
 - Three step increases of ~RM1.10 each, 15 Jul → 9 Sep (8 weeks). No notice: `suppliers.csv` → notified_price_change = No.
-- Other items on the same invoices (teh powder RM22.50, robusta beans RM38.00) did **not** change. A good agent says the creep is item-specific, not supplier-wide inflation.
+- Other items on the same invoices (tea powder RM22.50, robusta beans RM38.00) did **not** change. A good agent says the creep is item-specific, not supplier-wide inflation.
 - Extra paid Jul–Sep vs RM28.00 baseline: **RM147.62**. Annualised at current price and average volume (11.25 kg/fortnight): **≈ RM983/year**.
 - Expected agent action: alert + suggest asking the supplier for the reason or quoting an alternative; attach invoices KCB-26-1187 and -1229 as evidence.
 - Two of these invoices exist as phone photos in `invoices/photos/` (1201 and 1229). OCR must read 29.10 and 31.36 correctly for the alert to fire.
 
 ## Planted finding 2: duplicate payment
 
-- Invoice **LSS/2609/278** (Ladang Susu Segar Hulu, 11 Sep 2026, **RM642.00**) was paid **twice**: 15 Sep (ref IBG0915S02) and 16 Sep (ref IBG0916S02).
+- Invoice **LSS/2609/278** (Fresh Dairy Farm, 11 Sep 2026, **RM642.00**) was paid **twice**: 15 Sep (ref IBG0915S02) and 16 Sep (ref IBG0916S02).
 - The payables ledger shows it once. Expected action: flag, draft a refund/credit-note request to the supplier.
 
 ## Planted finding 3: missing transaction
@@ -52,15 +52,15 @@ Supplier **Syarikat Kopi Cap Bintang Timur Sdn Bhd (S01)**, item **Serbuk Kopi O
 
 | Line | Amount | Likely |
 |---|---|---|
-| Susu Pekat Manis ×6, Gula ×5, Sabun Pinggan ×2 | RM52.45 | Business |
-| Lampin bayi, ubat gigi | RM51.80 | Personal |
-| Beras Wangi 10kg | RM39.90 | **Genuinely ambiguous** (staff meals vs home) |
+| Sweetened Condensed Milk ×6, Fine Sugar ×5, Dish Soap ×2 | RM52.45 | Business |
+| Baby diapers, toothpaste | RM51.80 | Personal |
+| Fragrant Rice 10kg | RM39.90 | **Genuinely ambiguous** (staff meals vs home) |
 
 Right answer is "split it", not business-or-personal. Expected agent behaviour: propose the split, ask the owner about the rice, and record personal items as owner drawings. Poll question for judges: "Business, personal, or both?"
 
 ## Not anomalies (agent should NOT flag)
 
-- Bread (Roti & Kaya Mak Long) and LPG (Tong Gas Pantas) invoices have no bank payment: they are **cash on delivery** per suppliers.csv / payables_ledger.csv.
+- Bread (Golden Bakery) and LPG (Quick Gas) invoices have no bank payment: they are **cash on delivery** per suppliers.csv / payables_ledger.csv.
 - Owner drawing RM1,500 on 25 Sep: legitimate, but should be classified as drawings, not expense.
 - Card settlements are 1.5% below gross sales: merchant discount rate.
 - Delivery payouts are 70% of gross: 30% platform commission.

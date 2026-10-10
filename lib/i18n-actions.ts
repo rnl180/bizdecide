@@ -16,11 +16,11 @@ const duration = (h: string) => (secs: number) => {
 
 const en = {
   // approve
-  approve: "Approve — let your CFO team do it",
+  approve: "Approve",
   what: {
-    one_off: "Your CFO agent writes the request to get this money back, ready to send from your Gmail. Nothing is sent without you.",
-    monthly: "Your CFO agent writes to the supplier and asks alternatives for quotes, ready to send from your Gmail. Nothing is sent without you.",
-    financing: "Your CFO agent fills in the application pack and drafts the cover email to the agency. Nothing is sent without you.",
+    one_off: "We draft the refund request. Nothing is sent without you.",
+    monthly: "We draft the supplier email. Nothing is sent without you.",
+    financing: "We fill in the application. Nothing is sent without you.",
   } as Record<ImpactKind, string>,
   writeIn: "Write it in",
   langName: { en: "English", ms: "Bahasa Melayu" } as Record<Lang, string>,
@@ -29,7 +29,7 @@ const en = {
 
   // live: queued is shown as a title and a second line, and read out as one sentence
   queued: ["Sent to your CFO team.", "Waiting for an agent…"] as [string, string],
-  queuedSlow: "Still waiting for a free agent. The result will appear here, even if you leave and come back.",
+  queuedSlow: "Still waiting. The result will appear here.",
   working: "Your CFO agent is on it",
   writingIn: { en: "Writing in English", ms: "Writing in Bahasa Melayu" } as Record<Lang, string>,
   dur: duration("h"),
@@ -74,13 +74,11 @@ const en = {
 export type ActStrings = typeof en;
 
 const ms: ActStrings = {
-  approve: "Lulus — biar pasukan CFO anda buat",
+  approve: "Lulus",
   what: {
-    one_off:
-      "Ejen CFO anda menulis permintaan untuk mendapatkan semula duit ini, sedia untuk dihantar dari Gmail anda. Tiada apa dihantar tanpa anda.",
-    monthly:
-      "Ejen CFO anda menulis kepada pembekal dan meminta sebut harga daripada pembekal lain, sedia untuk dihantar dari Gmail anda. Tiada apa dihantar tanpa anda.",
-    financing: "Ejen CFO anda mengisi pek permohonan dan menyediakan emel iringan kepada agensi. Tiada apa dihantar tanpa anda.",
+    one_off: "Kami sediakan draf tuntutan. Tiada apa dihantar tanpa anda.",
+    monthly: "Kami sediakan draf emel pembekal. Tiada apa dihantar tanpa anda.",
+    financing: "Kami isi permohonan. Tiada apa dihantar tanpa anda.",
   },
   writeIn: "Tulis dalam",
   langName: { en: "Inggeris", ms: "Bahasa Melayu" },
@@ -88,7 +86,7 @@ const ms: ActStrings = {
   startError: "Tidak dapat dimulakan. Sila cuba lagi.",
 
   queued: ["Dihantar kepada pasukan CFO anda.", "Menunggu ejen…"],
-  queuedSlow: "Masih menunggu ejen yang lapang. Hasilnya akan muncul di sini, walaupun anda keluar dan kembali semula.",
+  queuedSlow: "Masih menunggu. Hasilnya akan muncul di sini.",
   working: "Ejen CFO anda sedang membuatnya",
   writingIn: { en: "Menulis dalam bahasa Inggeris", ms: "Menulis dalam Bahasa Melayu" },
   dur: duration("j"),

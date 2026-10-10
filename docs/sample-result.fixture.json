@@ -20,7 +20,7 @@
     {
       "priority": "urgent",
       "title": "Recover a duplicate payment",
-      "action": "Ask Ladang Susu Segar Hulu for a refund or credit note for invoice LSS/2609/278.",
+      "action": "Ask Fresh Dairy Farm for a refund or credit note for invoice LSS/2609/278.",
       "impactRm": 642,
       "reason": "RM642.00 was paid twice, on 15 Sep (IBG0915S02) and 16 Sep (IBG0916S02). Your ledger shows it once.",
       "evidence": [
@@ -56,12 +56,12 @@
     {
       "priority": "important",
       "title": "Challenge the coffee powder price rise",
-      "action": "Ask Kopi Cap Bintang to explain the rise on Serbuk Kopi O, or get two alternative quotes.",
+      "action": "Ask Star Coffee Trading to explain the rise on Black Coffee Powder, or get two alternative quotes.",
       "impactRm": 82,
-      "reason": "Price went RM28.00 → RM31.36 (+12%) in three steps since 15 Jul with no notice. Teh powder and robusta did not change. ≈ RM983 a year at current volume.",
+      "reason": "Price went RM28.00 → RM31.36 (+12%) in three steps since 15 Jul with no notice. Tea powder and robusta did not change. ≈ RM983 a year at current volume.",
       "evidence": [
         {
-          "label": "8 invoices from Kopi Cap Bintang",
+          "label": "8 invoices from Star Coffee Trading",
           "detail": "RM28.00 → RM31.36/kg",
           "source": {
             "table": "purchases",
@@ -75,7 +75,7 @@
               "KCB-26-1229",
               "KCB-26-1236"
             ],
-            "item": "Serbuk Kopi O Campuran 1kg"
+            "item": "Black Coffee Powder Blend 1kg"
           },
           "formula": "extra/yr = (31.36 - 28) x 11.25 kg/order x 26.07 orders/yr = 985.5",
           "basis": "data"
@@ -155,7 +155,7 @@
       "basis": "data"
     },
     {
-      "label": "Serbuk Kopi O, average order",
+      "label": "Black Coffee Powder, average order",
       "value": 11.25,
       "unit": "kg",
       "basis": "assumption",
@@ -163,7 +163,7 @@
       "variable": "kopi_qty_order"
     },
     {
-      "label": "Serbuk Kopi O, orders per year",
+      "label": "Black Coffee Powder, orders per year",
       "value": 26.07,
       "unit": "count",
       "basis": "assumption",
@@ -180,9 +180,9 @@
   ],
   "morningNote": {
     "lines": [
-      "Minggu ini: jualan RM4,920 (+6%).",
-      "Stok kopi 9 hari.",
-      "Hutang pembekal RM3,200 jatuh tempo Jumaat."
+      "This week: sales RM4,920 (+6%).",
+      "Coffee stock: 9 days.",
+      "Supplier bills of RM3,200 due Friday."
     ],
     "lang": "ms"
   },
@@ -192,7 +192,7 @@
       "forecastRm": 82,
       "observedRm": 0,
       "verdict": "not_yet",
-      "detail": "No new Kopi Cap Bintang invoice since the brief."
+      "detail": "No new Star Coffee Trading invoice since the brief."
     }
   ],
   "einvoice": {
@@ -227,7 +227,7 @@
   ],
   "benchmarks": [
     {
-      "label": "Teh tarik price",
+      "label": "Milk tea price",
       "yours": 2.5,
       "cohort": 2.2,
       "unit": "RM",

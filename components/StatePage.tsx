@@ -13,10 +13,7 @@ export function StatePage({ kind, onRetry, reference }: { kind: "notFound" | "er
   const copy = kind === "notFound" ? [t.notFoundKicker, t.notFoundTitle, t.notFoundBody] : [t.errorKicker, t.errorTitle, t.errorBody];
   return (
     <section className="container state-page" aria-labelledby="state-title">
-      <picture>
-        <source srcSet="/brand/mark-dark.svg" media="(prefers-color-scheme: dark)" />
-        <img className="state-mark" src="/brand/mark.svg" alt="" width={88} height={88} />
-      </picture>
+      <img className="state-mark" src="/brand/mark.svg" alt="" width={88} height={88} />
       <div className="kicker">{copy[0]}</div>
       <h1 id="state-title">{copy[1]}</h1>
       <p className="lede">{copy[2]}</p>

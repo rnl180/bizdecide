@@ -1,16 +1,15 @@
 "use client";
 
-import { use, useEffect, useRef, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Icon, type IconName } from "@/components/Icon";
 import { PRIORITY_ICON, STATUS, StatusIcon, VERDICT_ICON } from "@/components/RequestMeta";
-import { INTAKE, useLang } from "@/lib/i18n";
-import { APP, ago, type AppStrings } from "@/lib/i18n-app";
+import { useLang } from "@/lib/i18n";
+import { APP, type AppStrings } from "@/lib/i18n-app";
 import { impactKind, impactTotals } from "@/lib/impact";
 import { DecisionAction, FoundHeadline, useActions } from "@/components/DecisionAction";
 import { money } from "@/lib/markets";
 import { saveRequest, toSaved } from "@/lib/myRequests";
 import {
-  SERVICE_LABELS,
   type ApplicationPack,
   type ChatMessageDoc,
   type Decision,
@@ -22,18 +21,6 @@ import {
 
 type Payload = { request: RequestDoc; question: QuestionDoc | null; result: Result | null; messages?: ChatMessageDoc[] };
 
-const time = (iso: string, locale: string) => new Date(iso).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
-/** Re-renders every `ms` so relative times ("2 min ago") stay current. */
-function useNow(ms: number) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const t = setInterval(() => setNow(Date.now()), ms);
-    return () => clearInterval(t);
-  }, [ms]);
-  return now;
-}
-
 /** "+RM82/mo", "+RM954 one-off", "RM40,000 funding", in the page language. */
 function impactText(d: Decision, rm: (n: number) => string, t: AppStrings) {
   if (!d.impactRm) return "";
@@ -43,26 +30,12 @@ function impactText(d: Decision, rm: (n: number) => string, t: AppStrings) {
   return kind === "one_off" ? `${sign}${rm(d.impactRm)} ${t.oneOff}` : `${sign}${rm(d.impactRm)}${t.perMonth}`;
 }
 
-/** Service name in the page language. */
-const serviceTitle = (lang: "en" | "ms", s: RequestDoc["service"]) => (INTAKE[lang].services ?? SERVICE_LABELS)[s].title;
-
-// English names are matched against the agent-written agentsUsed; display text comes from APP[lang].team.
-const TEAM: [IconName, string, string][] = [
-  ["calculator", "Bookkeeper", "Profit and loss, costs by category, duplicates"],
-  ["search", "Procurement", "Hidden supplier price rises and alternatives"],
-  ["tag", "Classifier", "Your official SME category"],
-  ["landmark", "Funding", "Programmes you qualify for, and how to apply"],
-  ["shield", "Verifier", "Reconciles totals, checks every figure and link"],
-  ["send", "Delivery", "Writes your three decisions"],
-];
-
 export default function RequestPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [data, setData] = useState<Payload | null>(null);
   const [error, setError] = useState<string | null>(null);
   const lang = useLang(data?.request.language);
   const t = APP[lang];
-  const now = useNow(30_000);
 
   useEffect(() => {
     let stop = false;
@@ -132,7 +105,6 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
       <header className="page-head">
         <div>
           <div className="meta-row">
-            <span className="chip">{serviceTitle(lang, request.service)}</span>
             <span className={`status ${status.cls}`}>
               <StatusIcon status={request.status} /> {t.status[request.status]}
             </span>
@@ -141,76 +113,51 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
         </div>
         <CopyLink t={t} />
       </header>
-      <ShareNote t={t} />
 
-      <div className="layout-2">
-        <div>
-          <NowCard request={request} hasQuestion={Boolean(question)} t={t} />
-          {question && <QuestionCard key={question.id} q={question} t={t} />}
+      <NowCard request={request} hasQuestion={Boolean(question)} t={t} />
+      {question && <QuestionCard key={question.id} q={question} t={t} />}
 
-          <section className="card" aria-live="polite">
-            <h3 className="card-title">
-              <Icon name="zap" size={18} /> {t.liveActivity}
-              {request.progress.length > 0 && (
-                <span className="steps-done">{t.stepsDone(Math.max(0, request.progress.length - (running ? 1 : 0)))}</span>
-              )}
-            </h3>
-            <ol className="timeline">
-              {request.progress.map((p, i) => {
-                const active = running && i === request.progress.length - 1;
-                return (
-                  <li key={i}>
-                    <span className={`t-dot${active ? " active" : ""}`}>
-                      {active ? <Icon name="spinner" size={14} className="spin" /> : <Icon name="check" size={14} strokeWidth={3} />}
-                    </span>
-                    <div>
-                      <strong>
-                        {p.step}
-                        {active && <span className="now-tag">{queued ? t.waitingQueue : ago(p.at, now, t)}</span>}
-                      </strong>
-                      {p.detail && <div className="detail">{p.detail}</div>}
-                    </div>
-                    <span className="when">{time(p.at, t.dateLocale)}</span>
-                  </li>
-                );
-              })}
-            </ol>
-          </section>
-          {error !== null && (
-            <p className="notice warn reconnect" role="status">
-              <Icon name="wifiOff" size={16} />
-              <span>{t.reconnecting}</span>
-            </p>
-          )}
-        </div>
-
-        <aside>
-          <section className="card">
-            <h3 className="card-title">
-              <Icon name="sparkles" size={18} /> {t.teamTitle}
-            </h3>
-            <ul className="team">
-              {TEAM.map(([icon], i) => {
-                const [name, job] = t.team[i]!;
-                return (
-                <li key={icon}>
-                  <span className="team-icon">
-                    <Icon name={icon} size={16} />
-                  </span>
-                  <div>
-                    <strong>{name}</strong>
-                    <span>{job}</span>
-                  </div>
-                </li>
-                );
-              })}
-            </ul>
-            <p className="muted" style={{ margin: "16px 0 0", fontSize: "0.8125rem" }}>
-              {t.runningOn}
-            </p>
-          </section>
-        </aside>
-      </div>
+      <section className="card" aria-live="polite">
+        <h3 className="card-title">
+          <Icon name="zap" size={18} /> {t.liveActivity}
+        </h3>
+        <ol className="timeline">
+          {request.progress.map((p, i) => {
+            const active = running && i === request.progress.length - 1;
+            const step = (
+              <strong>
+                {p.step}
+                {active && queued && <span className="now-tag">{t.waitingQueue}</span>}
+              </strong>
+            );
+            return (
+              <li key={i}>
+                <span className={`t-dot${active ? " active" : ""}`}>
+                  {active ? <Icon name="spinner" size={14} className="spin" /> : <Icon name="check" size={14} strokeWidth={3} />}
+                </span>
+                {/* A step's detail is folded behind the expand icon. */}
+                {p.detail ? (
+                  <details className="t-fold">
+                    <summary>
+                      {step}
+                      <FoldIcon label={t.expand} />
+                    </summary>
+                    <div className="detail">{p.detail}</div>
+                  </details>
+                ) : (
+                  step
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+      {error !== null && (
+        <p className="notice warn reconnect" role="status">
+          <Icon name="wifiOff" size={16} />
+          <span>{t.reconnecting}</span>
+        </p>
+      )}
     </div>
   );
 }
@@ -218,32 +165,15 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
 function NowCard({ request, hasQuestion, t }: { request: RequestDoc; hasQuestion: boolean; t: AppStrings }) {
   const latest = request.progress[request.progress.length - 1];
   const c = t.now;
-  const view: Record<Exclude<RequestStatus, "completed">, { cls: string; icon: IconName; label: string; title: string; body: React.ReactNode }> = {
-    submitted: {
-      cls: "queued",
-      icon: "clock",
-      label: c.queuedLabel,
-      title: c.queuedTitle,
-      body: c.queuedBody,
-    },
-    processing: {
-      cls: "",
-      icon: "spinner",
-      label: c.workingLabel,
-      title: latest?.step ?? c.workingTitle,
-      body: c.workingBody,
-    },
-    waiting_for_user: {
-      cls: hasQuestion ? "waiting" : "",
-      icon: hasQuestion ? "question" : "check",
-      label: hasQuestion ? c.askLabel : c.answeredLabel,
-      title: hasQuestion ? c.askTitle : c.answeredTitle,
-      body: hasQuestion ? c.askBody : c.answeredBody,
-    },
+  const view: Record<Exclude<RequestStatus, "completed">, { cls: string; icon: IconName; title: string; body?: React.ReactNode }> = {
+    submitted: { cls: "queued", icon: "clock", title: c.queuedTitle },
+    processing: { cls: "", icon: "spinner", title: latest?.step ?? c.workingTitle },
+    waiting_for_user: hasQuestion
+      ? { cls: "waiting", icon: "question", title: c.askTitle, body: c.askBody }
+      : { cls: "", icon: "check", title: c.answeredTitle },
     failed: {
       cls: "failed",
       icon: "xCircle",
-      label: c.failedLabel,
       title: c.failedTitle,
       body: (
         <>
@@ -260,29 +190,11 @@ function NowCard({ request, hasQuestion, t }: { request: RequestDoc; hasQuestion
         <Icon name={v.icon} size={22} className={v.icon === "spinner" ? "spin" : undefined} />
       </span>
       <div>
-        <div className="mini-label">{v.label}</div>
         <strong>{v.title}</strong>
-        <p>{v.body}</p>
+        {v.body && <p>{v.body}</p>}
       </div>
       {request.status !== "failed" && <Elapsed since={request.createdAt} label={t.elapsed} />}
-      {(request.status === "submitted" || request.status === "processing") && <LeaveNote since={request.createdAt} text={t.canLeave} />}
     </section>
-  );
-}
-
-/** After a minute of waiting, tell the owner they don't have to watch. */
-function LeaveNote({ since, text }: { since: string; text: string }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const wait = Math.max(0, 60_000 - (Date.now() - Date.parse(since)));
-    const t = setTimeout(() => setShow(true), Number.isFinite(wait) ? wait : 60_000);
-    return () => clearTimeout(t);
-  }, [since]);
-  if (!show) return null;
-  return (
-    <p className="now-leave">
-      <Icon name="info" size={14} /> {text}
-    </p>
   );
 }
 
@@ -310,14 +222,6 @@ function Elapsed({ since, label }: { since: string; label: string }) {
   );
 }
 
-function ShareNote({ t }: { t: AppStrings }) {
-  return (
-    <p className="share-note no-print">
-      <Icon name="info" size={13} /> {t.shareNote}
-    </p>
-  );
-}
-
 function CopyLink({ t }: { t: AppStrings }) {
   const [copied, setCopied] = useState(false);
   // Phones get the system share sheet (WhatsApp, email…); everything else copies the link.
@@ -329,6 +233,7 @@ function CopyLink({ t }: { t: AppStrings }) {
     <button
       type="button"
       className="btn btn-secondary btn-sm no-print"
+      title={t.shareNote}
       onClick={async () => {
         if (canShare) {
           try {
@@ -443,12 +348,6 @@ function QuestionCard({ q, t }: { q: QuestionDoc; t: AppStrings }) {
   );
 }
 
-/** "Micro (turnover RM252k …)" → ["Micro", "turnover RM252k …"]. Agents often pack detail into brackets. */
-function splitParen(s: string): [string, string | undefined] {
-  const m = s.match(/^([^(]+?)\s*\((.+)\)\s*$/);
-  return m ? [m[1]!, m[2]!] : [s, undefined];
-}
-
 /** "Short verdict — longer explanation" → ["Short verdict", "Longer explanation"]. */
 function splitDash(s: string): [string, string | undefined] {
   const m = s.match(/^(.{20,}?)\s+[—–]\s+(.+)$/);
@@ -491,7 +390,20 @@ function Detail({ text }: { text: string }) {
   );
 }
 
-const agentIcon = (name: string): IconName => TEAM.find(([, n]) => name.toLowerCase().startsWith(n.toLowerCase()))?.[0] ?? "sparkles";
+/** The expand icon on a folded section; it turns when the section opens. */
+function FoldIcon({ label }: { label: string }) {
+  return (
+    <span className="fold-icon" aria-hidden="true" title={label}>
+      <Icon name="chevronDown" size={18} />
+    </span>
+  );
+}
+
+/** Opens a folded section when a link jumps to it. */
+const openFold = (id: string) => () => {
+  const el = document.getElementById(id);
+  if (el instanceof HTMLDetailsElement) el.open = true;
+};
 
 function Brief({ request, result, messages, t, lang }: { request: RequestDoc; result: Result; messages: ChatMessageDoc[]; t: AppStrings; lang: "en" | "ms" }) {
   const rm = money(request.market);
@@ -500,31 +412,13 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   const totals = impactTotals(decisions);
   const { byIndex, approve } = useActions(request.id);
   const passed = result.verification.filter((v) => v.passed).length;
-  const [headline, subhead] = splitDash(result.headline);
-  const { done, toggle } = useDone(request.id, result.decisions.length);
-  // Evidence starts open on wide screens and folded on phones; printing opens everything.
-  const [evidenceOpen, setEvidenceOpen] = useState(true);
+  const [headline] = splitDash(result.headline);
+  // Everything beyond the headline, the amounts and the actions starts folded; printing opens it all.
   useEffect(() => {
-    setEvidenceOpen(!window.matchMedia("(max-width: 640px)").matches);
     const openAll = () => document.querySelectorAll("details").forEach((el) => (el.open = true));
     window.addEventListener("beforeprint", openAll);
     return () => window.removeEventListener("beforeprint", openAll);
   }, []);
-  const isDone = (d: Decision) => done.includes(result.decisions.indexOf(d));
-  const doneN = decisions.filter(isDone).length;
-  const meter = <DoneMeter done={doneN} total={decisions.length} label={t.doneCount(doneN, decisions.length)} />;
-  const sections = [
-    { id: "summary", label: t.navSummary },
-    { id: "decisions", label: t.navDecisions, count: String(decisions.length) },
-    ...(result.applicationPacks?.length ? [{ id: "funding", label: t.navFunding, count: String(result.applicationPacks.length) }] : []),
-    { id: "ask", label: t.askTitle },
-    ...(result.verification.length || result.assumptions.length
-      ? [{ id: "checks", label: t.checked, count: result.verification.length ? `${passed}/${result.verification.length}` : undefined }]
-      : []),
-  ];
-  const facts: [string, string][] = [];
-  if (result.period) facts.push([t.period, result.period]);
-  if (result.smeCategory) facts.push([t.smeCategory, result.smeCategory]);
 
   return (
     <article className="container container-narrow page">
@@ -532,178 +426,61 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         <a href="/requests" className="back-link no-print">
           <Icon name="arrowLeft" size={16} /> {t.myRequests}
         </a>
-        <div className="row no-print">
-          <CopyLink t={t} />
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => window.print()}>
-            <Icon name="printer" size={16} /> {t.print}
-          </button>
-          {result.reportUrl && (
-            <a className="btn btn-primary btn-sm" href={result.reportUrl} target="_blank" rel="noreferrer">
-              <Icon name="download" size={16} /> {t.fullReport}
-            </a>
-          )}
-        </div>
+        <CopyLink t={t} />
       </div>
-      <ShareNote t={t} />
-      <BriefNav items={sections} label={t.navLabel} meter={meter} />
 
-      <header className="card brief-hero double-rule brief-sec" id="summary">
+      <header className="card brief-hero double-rule" id="summary">
         {/* Decision ready: the brand mark settles in once. */}
         <span className="chop-seal" aria-hidden="true">
-          <picture>
-            <source srcSet="/brand/mark-dark.svg" media="(prefers-color-scheme: dark)" />
-            <img src="/brand/mark.svg" alt="" width={64} height={64} />
-          </picture>
+          <img src="/brand/mark.svg" alt="" width={64} height={64} />
         </span>
         <div className="meta-row">
-          <span className="status done">
-            <Icon name="stamp" size={14} /> {t.cfoBrief}
-          </span>
           <span className="chip">{request.businessName}</span>
           {result.verification.length > 0 && (
-            <a className={`status ${passed === result.verification.length ? "done" : "waiting"} checks-chip`} href="#checks">
+            <a
+              className={`status ${passed === result.verification.length ? "done" : "waiting"} checks-chip`}
+              href="#checks"
+              onClick={openFold("checks")}
+            >
               <Icon name="shield" size={14} /> {t.checksChip(passed, result.verification.length)}
             </a>
           )}
         </div>
         <h1>{headline}</h1>
-        {subhead && (
-          <p className="brief-sub">
-            <Nums text={subhead} />
-          </p>
-        )}
-
-        {facts.length > 0 && (
-          <dl className="facts">
-            {facts.map(([label, value]) => {
-              const [main, detail] = splitParen(value);
-              return (
-                <div key={label}>
-                  <dt>{label}</dt>
-                  <dd>
-                    <strong>{main}</strong>
-                    {detail && <span>{detail}</span>}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
-        )}
-
         <FoundHeadline totals={totals} rm={rm} lang={lang} businessName={request.businessName} />
-        <div className="glance">
-          <div className="glance-head">
-            <div className="mini-label">{t.atGlance}</div>
-            {meter}
-          </div>
-          <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {decisions.map((d, i) => (
-              <li key={i} data-done={isDone(d) || undefined}>
-                <a href={`#decision-${i + 1}`}>
-                  <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
-                  <span>{d.title}</span>
-                  <span className={`tag ${d.priority}`}>
-                <Icon name={PRIORITY_ICON[d.priority]} size={13} /> {t.priority[d.priority]}
-              </span>
-                  {d.impactRm ? (
-                    <span className={`amt ${impactKind(d)}${d.impactRm < 0 ? " neg" : ""}`}>{impactText(d, rm, t)}</span>
-                  ) : (
-                    <Icon name="chevronDown" size={16} className="go" />
-                  )}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </div>
       </header>
 
-      {result.keyNumbers.length > 0 && (
-        <div className="stats">
-          {result.keyNumbers.map((k) => {
-            const [value, extra] = splitParen(k.value);
-            return (
-              <div className="stat" key={k.label}>
-                <div className="l">{k.label}</div>
-                <div className="v">{value}</div>
-                {extra && <div className="vx">{extra}</div>}
-                {k.note && <div className="n">{k.note}</div>}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <div className="section-head brief-sec" id="decisions">
-        <div className="kicker">{t.nextKicker}</div>
-        <h2>{t.decisionsTitle(decisions.length)}</h2>
-      </div>
-
+      <h2 className="brief-h2">{t.decisionsTitle(decisions.length)}</h2>
       <section className="decisions">
-        {decisions.map((d, i) => (
-          <div className={`card decision ${d.priority}`} key={i} id={`decision-${i + 1}`} data-done={isDone(d) || undefined}>
-            <div className="decision-top">
-              <span className="decision-n">{isDone(d) ? <Icon name="check" size={14} strokeWidth={3} /> : i + 1}</span>
-              <span className={`tag ${d.priority}`}>
-                <Icon name={PRIORITY_ICON[d.priority]} size={13} /> {t.priority[d.priority]}
-              </span>
-              <button
-                type="button"
-                className="done-toggle no-print"
-                aria-pressed={isDone(d)}
-                title={t.doneNote}
-                onClick={() => toggle(result.decisions.indexOf(d))}
-              >
-                <span className="done-box" aria-hidden="true">
-                  <Icon name="check" size={12} strokeWidth={3} />
+        {decisions.map((d, i) => {
+          const index = result.decisions.indexOf(d);
+          return (
+            <div className={`card decision ${d.priority}`} key={index} id={`decision-${i + 1}`}>
+              <div className="decision-top">
+                <span className="decision-n">{i + 1}</span>
+                <span className={`tag ${d.priority}`}>
+                  <Icon name={PRIORITY_ICON[d.priority]} size={13} /> {t.priority[d.priority]}
                 </span>
-                {isDone(d) ? t.markedDone : t.markDone}
-              </button>
-              {d.impactRm ? (
-                <span className={`decision-impact ${impactKind(d)}${d.impactRm < 0 ? " neg" : ""}`}>
-                  <span className="l">{t.impactKindLabel[impactKind(d)]}</span>
-                  <span className="v">{impactText(d, rm, t)}</span>
-                </span>
-              ) : null}
-            </div>
-            <h3>{d.title}</h3>
-
-            <div className={`decision-body${d.evidence.length ? "" : " single"}`}>
-              <div className="decision-main">
-                <div className="todo">
-                  <Icon name="arrowRight" />
-                  <div>
-                    <div className="mini-label">{t.whatToDo}</div>
-                    <p>
-                      <Nums text={d.action} />
-                    </p>
-                  </div>
-                </div>
-                <div className="why">
-                  <div className="mini-label">{t.why}</div>
-                  <p>
-                    <Nums text={d.reason} />
-                  </p>
-                </div>
-                {d.cta && (
-                  <div className="first-step">
-                    <Icon name="check" size={16} strokeWidth={2.5} />
-                    <div>
-                      <div className="mini-label">{t.firstStep}</div>
-                      <p>
-                        <Nums text={d.cta} />
-                      </p>
-                    </div>
-                  </div>
-                )}
+                {d.impactRm ? (
+                  <span className={`decision-impact ${impactKind(d)}${d.impactRm < 0 ? " neg" : ""}`}>
+                    <span className="v">{impactText(d, rm, t)}</span>
+                  </span>
+                ) : null}
               </div>
-
-              {d.evidence.length > 0 && (
-                <details className="evidence" open={evidenceOpen}>
-                  <summary className="evidence-label">
-                    {t.evidence}
-                    <span className="evidence-n">{d.evidence.length}</span>
-                    <Icon name="chevronDown" size={14} className="evidence-chev" />
-                  </summary>
+              <h3>{d.title}</h3>
+              <p className="decision-do">
+                <Nums text={d.action} />
+              </p>
+              <details className="evidence">
+                <summary className="evidence-label">
+                  {t.whyProof}
+                  {d.evidence.length > 0 && <span className="evidence-n">{d.evidence.length}</span>}
+                  <FoldIcon label={t.expand} />
+                </summary>
+                <p className="decision-why">
+                  <Nums text={d.reason} />
+                </p>
+                {d.evidence.length > 0 && (
                   <ul>
                     {d.evidence.map((e, j) => (
                       <li key={j}>
@@ -727,33 +504,43 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
                       </li>
                     ))}
                   </ul>
-                </details>
-              )}
+                )}
+              </details>
+              <DecisionAction
+                requestId={request.id}
+                index={index}
+                decision={d}
+                action={byIndex[index]}
+                onApprove={(l) => approve(index, l)}
+                lang={lang}
+              />
             </div>
-            <DecisionAction
-              requestId={request.id}
-              index={result.decisions.indexOf(d)}
-              decision={d}
-              action={byIndex[result.decisions.indexOf(d)]}
-              onApprove={(l) => approve(result.decisions.indexOf(d), l)}
-              lang={lang}
-            />
-          </div>
-        ))}
+          );
+        })}
       </section>
 
-      {result.applicationPacks?.length > 0 && <ApplicationPacks packs={result.applicationPacks} rm={rm} t={t} />}
+      {result.applicationPacks?.length > 0 && (
+        <details className="brief-more" id="funding">
+          <summary>
+            <Icon name="landmark" size={18} /> {t.packKicker}
+            <span className="brief-more-n">{result.applicationPacks.length}</span>
+            <FoldIcon label={t.expand} />
+          </summary>
+          <ApplicationPacks packs={result.applicationPacks} rm={rm} t={t} />
+        </details>
+      )}
 
       <AskCfo requestId={request.id} initial={messages} t={t} />
 
       {(result.verification.length > 0 || result.assumptions.length > 0) && (
-        <div className="grid-2 brief-sec" id="checks">
-          {result.verification.length > 0 && (
-            <section className="card">
-              <h3 className="card-title">
-                <Icon name="shield" size={18} /> {t.checked}
-                <span className="score">{t.passed(passed, result.verification.length)}</span>
-              </h3>
+        <details className="brief-more" id="checks">
+          <summary>
+            <Icon name="shield" size={18} /> {t.checked}
+            {result.verification.length > 0 && <span className="score">{t.passed(passed, result.verification.length)}</span>}
+            <FoldIcon label={t.expand} />
+          </summary>
+          <div className="brief-more-body">
+            {result.verification.length > 0 && (
               <ul className="checks">
                 {result.verification.map((v, i) => (
                   <li key={i}>
@@ -771,47 +558,21 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-          {result.assumptions.length > 0 && (
-            <section className="card">
-              <h3 className="card-title">
-                <Icon name="info" size={18} /> {t.assumptions}
-              </h3>
-              <ul className="assumptions">
-                {result.assumptions.map((a, i) => (
-                  <li key={i}>
-                    <Nums text={a} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </div>
-      )}
-
-      {result.agentsUsed.length > 0 && (
-        <section className="card prepared-card">
-          <h3 className="card-title">
-            <Icon name="sparkles" size={18} /> {t.preparedBy}
-          </h3>
-          <ul className="team team-grid">
-            {result.agentsUsed.map((a) => {
-              const [name, job] = splitParen(a);
-              return (
-                <li key={a}>
-                  <span className="team-icon">
-                    <Icon name={agentIcon(name)} size={16} />
-                  </span>
-                  <div>
-                    <strong>{name}</strong>
-                    {job && <span>{job}</span>}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+            )}
+            {result.assumptions.length > 0 && (
+              <>
+                <div className="mini-label brief-more-label">{t.assumptions}</div>
+                <ul className="assumptions">
+                  {result.assumptions.map((a, i) => (
+                    <li key={i}>
+                      <Nums text={a} />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </details>
       )}
     </article>
   );
@@ -838,12 +599,7 @@ function printPack(programId: string) {
 
 function ApplicationPacks({ packs, rm, t }: { packs: ApplicationPack[]; rm: (n: number) => string; t: AppStrings }) {
   return (
-    <div className="packs-wrap brief-sec" id="funding">
-      <div className="section-head">
-        <div className="kicker">{t.packKicker}</div>
-        <h2>{t.packTitle}</h2>
-        <p className="muted">{t.packSub}</p>
-      </div>
+    <div className="brief-more-body">
       <section className="packs">
         {packs.map((p) => {
           const ready = p.checklist.filter((c) => c.status === "ready").length;
@@ -1016,187 +772,91 @@ function AskCfo({ requestId, initial, t }: { requestId: string; initial: ChatMes
   }
 
   return (
-    <section className="card ask no-print brief-sec" id="ask" aria-labelledby="ask-title">
-      <h3 className="card-title" id="ask-title">
+    <details className="brief-more ask no-print" id="ask" open={messages.length > 0 || undefined}>
+      <summary>
         <Icon name="question" size={18} /> {t.askTitle}
-      </h3>
-      <p className="muted ask-sub">{t.askSub}</p>
+        <FoldIcon label={t.expand} />
+      </summary>
+      <div className="brief-more-body">
 
-      {messages.length > 0 ? (
-        <ol className="thread" aria-live="polite">
-          {messages.map((m) => (
-            <li key={m.id}>
-              <div className="q">{m.question}</div>
-              {m.status === "answered" ? (
-                <div className="a">
-                  <p>
-                    <Nums text={m.answer ?? ""} />
-                  </p>
-                  {m.evidence && m.evidence.length > 0 && (
-                    <ul className="a-ev">
-                      {m.evidence.map((e, i) => (
-                        <li key={i}>
-                          <Icon name={e.url ? "external" : "file"} size={13} />
-                          <span>
-                            {e.url ? (
-                              <a href={e.url} target="_blank" rel="noreferrer">
-                                {e.label}
-                              </a>
-                            ) : (
-                              e.label
-                            )}
-                            {e.detail && <span className="muted"> · {e.detail}</span>}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ) : (
-                <div className="a pending">
-                  <Icon name="spinner" size={14} className="spin" />
-                  {Date.now() - Date.parse(m.createdAt) > 45_000 ? t.askSlow : t.askChecking}
-                </div>
-              )}
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <div className="chips ask-suggest">
-          {t.askSuggested.map((s) => (
-            <button type="button" key={s} className="chip-toggle" disabled={sending} onClick={() => ask(s)}>
-              {s}
-            </button>
-          ))}
-        </div>
-      )}
+        {messages.length > 0 ? (
+          <ol className="thread" aria-live="polite">
+            {messages.map((m) => (
+              <li key={m.id}>
+                <div className="q">{m.question}</div>
+                {m.status === "answered" ? (
+                  <div className="a">
+                    <p>
+                      <Nums text={m.answer ?? ""} />
+                    </p>
+                    {m.evidence && m.evidence.length > 0 && (
+                      <ul className="a-ev">
+                        {m.evidence.map((e, i) => (
+                          <li key={i}>
+                            <Icon name={e.url ? "external" : "file"} size={13} />
+                            <span>
+                              {e.url ? (
+                                <a href={e.url} target="_blank" rel="noreferrer">
+                                  {e.label}
+                                </a>
+                              ) : (
+                                e.label
+                              )}
+                              {e.detail && <span className="muted"> · {e.detail}</span>}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : (
+                  <div className="a pending">
+                    <Icon name="spinner" size={14} className="spin" />
+                    {Date.now() - Date.parse(m.createdAt) > 45_000 ? t.askSlow : t.askChecking}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="chips ask-suggest">
+            {t.askSuggested.map((s) => (
+              <button type="button" key={s} className="chip-toggle" disabled={sending} onClick={() => ask(s)}>
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
 
-      <form
-        className="ask-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          ask(text);
-        }}
-      >
-        <label htmlFor="ask-input" className="sr-only">
-          {t.askLabel}
-        </label>
-        <input
-          id="ask-input"
-          type="text"
-          value={text}
-          maxLength={500}
-          onChange={(e) => setText(e.target.value)}
-          placeholder={t.askPh}
-        />
-        <button className="btn btn-primary" type="submit" disabled={sending || text.trim().length < 3}>
-          {sending ? <Icon name="spinner" className="spin" /> : <Icon name="send" size={16} />} {t.askButton}
-        </button>
-      </form>
-      {err && (
-        <p className="field-error" role="alert" style={{ marginTop: 10 }}>
-          <Icon name="alert" size={14} /> {err}
-        </p>
-      )}
-    </section>
-  );
-}
-
-/** Which decisions the owner has ticked off. A per-viewer convenience kept in this browser only. */
-function useDone(requestId: string, count: number) {
-  const key = `bizdecide.done.${requestId}`;
-  const [done, setDone] = useState<number[]>([]);
-  useEffect(() => {
-    try {
-      const saved: unknown = JSON.parse(window.localStorage.getItem(key) ?? "[]");
-      if (Array.isArray(saved)) setDone(saved.filter((n): n is number => Number.isInteger(n) && n >= 0 && n < count));
-    } catch {
-      /* storage blocked or bad value: start empty */
-    }
-  }, [key, count]);
-  const toggle = (i: number) =>
-    setDone((d) => {
-      const next = d.includes(i) ? d.filter((x) => x !== i) : [...d, i];
-      try {
-        window.localStorage.setItem(key, JSON.stringify(next));
-      } catch {
-        /* storage blocked: the tick lasts until the page is closed */
-      }
-      return next;
-    });
-  return { done, toggle };
-}
-
-/** "1 of 3 done" with one segment per decision. */
-function DoneMeter({ done, total, label }: { done: number; total: number; label: string }) {
-  return (
-    <span className="done-meter" data-complete={total > 0 && done === total ? true : undefined}>
-      <span className="done-segs" aria-hidden="true">
-        {Array.from({ length: total }, (_, i) => (
-          <i key={i} data-on={i < done || undefined} />
-        ))}
-      </span>
-      {label}
-    </span>
-  );
-}
-
-/** Sticky bar of the brief's sections; the one you are reading is marked. */
-function BriefNav({ items, label, meter }: { items: { id: string; label: string; count?: string }[]; label: string; meter: React.ReactNode }) {
-  const [active, setActive] = useState(items[0]?.id);
-  const ids = items.map((i) => i.id).join(" ");
-  useEffect(() => {
-    const list = ids.split(" ");
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-      let current = list[0];
-      for (const id of list) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 160) current = id;
-      }
-      setActive(bottom ? list[list.length - 1] : current);
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [ids]);
-
-  // Keep the current section's link visible when the bar scrolls sideways (phones).
-  const listRef = useRef<HTMLOListElement>(null);
-  useEffect(() => {
-    const ol = listRef.current;
-    const link = ol?.querySelector<HTMLElement>("a[aria-current]");
-    if (!ol || !link || ol.scrollWidth <= ol.clientWidth) return;
-    const li = link.parentElement!;
-    if (li.offsetLeft < ol.scrollLeft || li.offsetLeft + li.offsetWidth > ol.scrollLeft + ol.clientWidth) {
-      ol.scrollTo({ left: li.offsetLeft - 12, behavior: "smooth" });
-    }
-  }, [active]);
-
-  return (
-    <nav className="brief-nav no-print" aria-label={label}>
-      <ol ref={listRef}>
-        {items.map((it) => (
-          <li key={it.id}>
-            <a href={`#${it.id}`} aria-current={active === it.id ? "location" : undefined}>
-              {it.label}
-              {it.count && <span className="brief-nav-n">{it.count}</span>}
-            </a>
-          </li>
-        ))}
-      </ol>
-      <div className="brief-nav-meter">{meter}</div>
-    </nav>
+        <form
+          className="ask-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            ask(text);
+          }}
+        >
+          <label htmlFor="ask-input" className="sr-only">
+            {t.askLabel}
+          </label>
+          <input
+            id="ask-input"
+            type="text"
+            value={text}
+            maxLength={500}
+            onChange={(e) => setText(e.target.value)}
+            placeholder={t.askPh}
+          />
+          <button className="btn btn-primary" type="submit" disabled={sending || text.trim().length < 3}>
+            {sending ? <Icon name="spinner" className="spin" /> : <Icon name="send" size={16} />} {t.askButton}
+          </button>
+        </form>
+        {err && (
+          <p className="field-error" role="alert" style={{ marginTop: 10 }}>
+            <Icon name="alert" size={14} /> {err}
+          </p>
+        )}
+      </div>
+    </details>
   );
 }
 

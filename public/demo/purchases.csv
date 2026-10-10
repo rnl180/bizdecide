@@ -1,80 +1,80 @@
 date,invoiceNo,supplier,item,qty,unit,unitPriceRm,totalRm,invoiceTotalRm,file
-2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,28,336,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
-2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
-2026-06-17,KCB-26-1187,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
-2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,28,336,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
-2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
-2026-07-01,KCB-26-1194,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
-2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
-2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
-2026-07-03,LSS/2607/828,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
-2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
-2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
-2026-07-08,BMJ-0708-25,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
-2026-07-10,RML2812,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-07-10_RML_RML2812.pdf
-2026-07-10,RML2812,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-07-10_RML_RML2812.pdf
-2026-07-10,RML2812,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-07-10_RML_RML2812.pdf
-2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,10,kg,29.1,291,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
-2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
-2026-07-15,KCB-26-1201,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
-2026-07-20,SPP260720,SP Plastik & Pembungkusan,Cawan Plastik 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-07-20_SPP_SPP260720.pdf
-2026-07-20,SPP260720,SP Plastik & Pembungkusan,Penutup Cawan (50pcs),10,pek,5.5,55,193,invoices/2026-07-20_SPP_SPP260720.pdf
-2026-07-20,SPP260720,SP Plastik & Pembungkusan,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-07-20_SPP_SPP260720.pdf
-2026-07-20,SPP260720,SP Plastik & Pembungkusan,Plastik Ikat Tepi 1kg,2,kg,12,24,193,invoices/2026-07-20_SPP_SPP260720.pdf
-2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
-2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),36,tin,3.4,122.4,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
-2026-07-24,LSS/2607/826,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
-2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,11,kg,29.1,320.1,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
-2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
-2026-07-29,KCB-26-1208,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
-2026-08-01,TGP 363,Tong Gas Pantas Enterprise,Isi semula tong gas LPG 14kg,4,tong,27,108,108,invoices/2026-08-01_TGP_TGP363.pdf
-2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
-2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
-2026-08-05,BMJ-0805-35,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
-2026-08-07,RML2370,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-08-07_RML_RML2370.pdf
-2026-08-07,RML2370,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-08-07_RML_RML2370.pdf
-2026-08-07,RML2370,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-08-07_RML_RML2370.pdf
-2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,11,kg,30.2,332.2,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
-2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
-2026-08-12,KCB-26-1215,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
-2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),60,tin,3.9,234,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
-2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
-2026-08-14,LSS/2608/817,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,24,btl,6.8,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
-2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
-2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
-2026-08-25,BMJ-0825-27,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
-2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,30.2,362.4,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
-2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
-2026-08-26,KCB-26-1222,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
-2026-08-28,RML2520,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-08-28_RML_RML2520.pdf
-2026-08-28,RML2520,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-08-28_RML_RML2520.pdf
-2026-08-28,RML2520,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-08-28_RML_RML2520.pdf
-2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
-2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
-2026-09-04,LSS/2609/753,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,20,btl,6.8,136,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
-2026-09-05,SPP260905,SP Plastik & Pembungkusan,Cawan Plastik 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-09-05_SPP_SPP260905.pdf
-2026-09-05,SPP260905,SP Plastik & Pembungkusan,Penutup Cawan (50pcs),10,pek,5.5,55,193,invoices/2026-09-05_SPP_SPP260905.pdf
-2026-09-05,SPP260905,SP Plastik & Pembungkusan,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-09-05_SPP_SPP260905.pdf
-2026-09-05,SPP260905,SP Plastik & Pembungkusan,Plastik Ikat Tepi 1kg,2,kg,12,24,193,invoices/2026-09-05_SPP_SPP260905.pdf
-2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Gula Pasir 10kg,3,beg,28.5,85.5,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
-2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Telur Gred A (30 biji),6,papan,13.8,82.8,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
-2026-09-08,BMJ-0908-40,Borong Runcit Maju Jaya,Minyak Masak 5kg,2,botol,30.5,61,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
-2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,12,kg,31.36,376.32,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
-2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
-2026-09-09,KCB-26-1229,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
-2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Pekat Manis 500g (tin),60,tin,3.9,234,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
-2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Sejat 390g (tin),60,tin,3.4,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
-2026-09-11,LSS/2609/278,Ladang Susu Segar Hulu Enterprise,Susu Segar 1L,30,btl,6.8,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
-2026-09-12,TGP 303,Tong Gas Pantas Enterprise,Isi semula tong gas LPG 14kg,4,tong,27,108,108,invoices/2026-09-12_TGP_TGP303.pdf
-2026-09-18,RML2229,Roti & Kaya Mak Long,Roti Benggali,60,buku,2.2,132,231,invoices/2026-09-18_RML_RML2229.pdf
-2026-09-18,RML2229,Roti & Kaya Mak Long,Kaya Homemade 1kg,3,bekas,16,48,231,invoices/2026-09-18_RML_RML2229.pdf
-2026-09-18,RML2229,Roti & Kaya Mak Long,Mentega 250g,6,ketul,8.5,51,231,invoices/2026-09-18_RML_RML2229.pdf
-2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Kopi O Campuran 1kg,10,kg,31.36,313.6,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
-2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Serbuk Teh Cap Daun 1kg,6,kg,22.5,135,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
-2026-09-23,KCB-26-1236,Syarikat Kopi Cap Bintang Timur Sdn Bhd,Biji Kopi Robusta Panggang 1kg,2,kg,38,76,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Susu Pekat Manis 500g,6,tin,4.2,25.2,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Gula Halus 1kg,5,pek,2.85,14.25,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Sabun Pinggan 900ml,2,btl,6.5,13,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Beras Wangi 10kg,1,beg,39.9,39.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Lampin Bayi Saiz M (38s),1,pek,42.9,42.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
-2026-09-12,R-0912-0047731,Pasaraya Serba Murah (fictional),Ubat Gigi 175g,1,tiub,8.9,8.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-06-17,KCB-26-1187,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,12,kg,28,336,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-06-17,KCB-26-1187,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-06-17,KCB-26-1187,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,547,invoices/2026-06-17_KCB_KCB-26-1187.pdf
+2026-07-01,KCB-26-1194,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,12,kg,28,336,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-01,KCB-26-1194,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-01,KCB-26-1194,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,547,invoices/2026-07-01_KCB_KCB-26-1194.pdf
+2026-07-03,LSS/2607/828,Fresh Dairy Farm Enterprise,Sweetened Condensed Milk 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-03,LSS/2607/828,Fresh Dairy Farm Enterprise,Evaporated Milk 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-03,LSS/2607/828,Fresh Dairy Farm Enterprise,Fresh Milk 1L,20,btl,6.8,136,486.4,invoices/2026-07-03_LSS_LSS-2607-828.pdf
+2026-07-08,BMJ-0708-25,Bright Wholesale Grocers,Sugar 10kg,3,beg,28.5,85.5,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-08,BMJ-0708-25,Bright Wholesale Grocers,Grade A Eggs (30 pcs),6,papan,13.8,82.8,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-08,BMJ-0708-25,Bright Wholesale Grocers,Cooking Oil 5kg,2,botol,30.5,61,229.3,invoices/2026-07-08_BMJ_BMJ-0708-25.pdf
+2026-07-10,RML2812,Golden Bakery,Bread Loaf,60,buku,2.2,132,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-10,RML2812,Golden Bakery,Coconut Jam 1kg,3,bekas,16,48,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-10,RML2812,Golden Bakery,Butter 250g,6,ketul,8.5,51,231,invoices/2026-07-10_RML_RML2812.pdf
+2026-07-15,KCB-26-1201,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,10,kg,29.1,291,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-15,KCB-26-1201,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-15,KCB-26-1201,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,502,invoices/2026-07-15_KCB_KCB-26-1201.pdf
+2026-07-20,SPP260720,SP Packaging Supplies,Plastic Cups 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Packaging Supplies,Cup Lids (50pcs),10,pek,5.5,55,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Packaging Supplies,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-20,SPP260720,SP Packaging Supplies,Takeaway Bags 1kg,2,kg,12,24,193,invoices/2026-07-20_SPP_SPP260720.pdf
+2026-07-24,LSS/2607/826,Fresh Dairy Farm Enterprise,Sweetened Condensed Milk 500g (tin),48,tin,3.9,187.2,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-24,LSS/2607/826,Fresh Dairy Farm Enterprise,Evaporated Milk 390g (tin),36,tin,3.4,122.4,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-24,LSS/2607/826,Fresh Dairy Farm Enterprise,Fresh Milk 1L,20,btl,6.8,136,445.6,invoices/2026-07-24_LSS_LSS-2607-826.pdf
+2026-07-29,KCB-26-1208,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,11,kg,29.1,320.1,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-07-29,KCB-26-1208,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-07-29,KCB-26-1208,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,531.1,invoices/2026-07-29_KCB_KCB-26-1208.pdf
+2026-08-01,TGP 363,Quick Gas Enterprise,LPG Gas Refill 14kg,4,tong,27,108,108,invoices/2026-08-01_TGP_TGP363.pdf
+2026-08-05,BMJ-0805-35,Bright Wholesale Grocers,Sugar 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-05,BMJ-0805-35,Bright Wholesale Grocers,Grade A Eggs (30 pcs),6,papan,13.8,82.8,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-05,BMJ-0805-35,Bright Wholesale Grocers,Cooking Oil 5kg,2,botol,30.5,61,229.3,invoices/2026-08-05_BMJ_BMJ-0805-35.pdf
+2026-08-07,RML2370,Golden Bakery,Bread Loaf,60,buku,2.2,132,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-07,RML2370,Golden Bakery,Coconut Jam 1kg,3,bekas,16,48,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-07,RML2370,Golden Bakery,Butter 250g,6,ketul,8.5,51,231,invoices/2026-08-07_RML_RML2370.pdf
+2026-08-12,KCB-26-1215,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,11,kg,30.2,332.2,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-12,KCB-26-1215,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-12,KCB-26-1215,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,543.2,invoices/2026-08-12_KCB_KCB-26-1215.pdf
+2026-08-14,LSS/2608/817,Fresh Dairy Farm Enterprise,Sweetened Condensed Milk 500g (tin),60,tin,3.9,234,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-14,LSS/2608/817,Fresh Dairy Farm Enterprise,Evaporated Milk 390g (tin),48,tin,3.4,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-14,LSS/2608/817,Fresh Dairy Farm Enterprise,Fresh Milk 1L,24,btl,6.8,163.2,560.4,invoices/2026-08-14_LSS_LSS-2608-817.pdf
+2026-08-25,BMJ-0825-27,Bright Wholesale Grocers,Sugar 10kg,3,beg,28.5,85.5,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-25,BMJ-0825-27,Bright Wholesale Grocers,Grade A Eggs (30 pcs),6,papan,13.8,82.8,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-25,BMJ-0825-27,Bright Wholesale Grocers,Cooking Oil 5kg,2,botol,30.5,61,229.3,invoices/2026-08-25_BMJ_BMJ-0825-27.pdf
+2026-08-26,KCB-26-1222,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,12,kg,30.2,362.4,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-26,KCB-26-1222,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-26,KCB-26-1222,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,573.4,invoices/2026-08-26_KCB_KCB-26-1222.pdf
+2026-08-28,RML2520,Golden Bakery,Bread Loaf,60,buku,2.2,132,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-08-28,RML2520,Golden Bakery,Coconut Jam 1kg,3,bekas,16,48,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-08-28,RML2520,Golden Bakery,Butter 250g,6,ketul,8.5,51,231,invoices/2026-08-28_RML_RML2520.pdf
+2026-09-04,LSS/2609/753,Fresh Dairy Farm Enterprise,Sweetened Condensed Milk 500g (tin),48,tin,3.9,187.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-04,LSS/2609/753,Fresh Dairy Farm Enterprise,Evaporated Milk 390g (tin),48,tin,3.4,163.2,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-04,LSS/2609/753,Fresh Dairy Farm Enterprise,Fresh Milk 1L,20,btl,6.8,136,486.4,invoices/2026-09-04_LSS_LSS-2609-753.pdf
+2026-09-05,SPP260905,SP Packaging Supplies,Plastic Cups 16oz (50pcs),10,pek,9.5,95,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Packaging Supplies,Cup Lids (50pcs),10,pek,5.5,55,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Packaging Supplies,Straw (100pcs),5,pek,3.8,19,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-05,SPP260905,SP Packaging Supplies,Takeaway Bags 1kg,2,kg,12,24,193,invoices/2026-09-05_SPP_SPP260905.pdf
+2026-09-08,BMJ-0908-40,Bright Wholesale Grocers,Sugar 10kg,3,beg,28.5,85.5,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-08,BMJ-0908-40,Bright Wholesale Grocers,Grade A Eggs (30 pcs),6,papan,13.8,82.8,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-08,BMJ-0908-40,Bright Wholesale Grocers,Cooking Oil 5kg,2,botol,30.5,61,229.3,invoices/2026-09-08_BMJ_BMJ-0908-40.pdf
+2026-09-09,KCB-26-1229,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,12,kg,31.36,376.32,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-09,KCB-26-1229,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-09,KCB-26-1229,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,587.32,invoices/2026-09-09_KCB_KCB-26-1229.pdf
+2026-09-11,LSS/2609/278,Fresh Dairy Farm Enterprise,Sweetened Condensed Milk 500g (tin),60,tin,3.9,234,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-11,LSS/2609/278,Fresh Dairy Farm Enterprise,Evaporated Milk 390g (tin),60,tin,3.4,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-11,LSS/2609/278,Fresh Dairy Farm Enterprise,Fresh Milk 1L,30,btl,6.8,204,642,invoices/2026-09-11_LSS_LSS-2609-278.pdf
+2026-09-12,TGP 303,Quick Gas Enterprise,LPG Gas Refill 14kg,4,tong,27,108,108,invoices/2026-09-12_TGP_TGP303.pdf
+2026-09-18,RML2229,Golden Bakery,Bread Loaf,60,buku,2.2,132,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-18,RML2229,Golden Bakery,Coconut Jam 1kg,3,bekas,16,48,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-18,RML2229,Golden Bakery,Butter 250g,6,ketul,8.5,51,231,invoices/2026-09-18_RML_RML2229.pdf
+2026-09-23,KCB-26-1236,Star Coffee Trading Sdn Bhd,Black Coffee Powder Blend 1kg,10,kg,31.36,313.6,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-23,KCB-26-1236,Star Coffee Trading Sdn Bhd,Tea Powder 1kg,6,kg,22.5,135,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-23,KCB-26-1236,Star Coffee Trading Sdn Bhd,Roasted Robusta Coffee Beans 1kg,2,kg,38,76,524.6,invoices/2026-09-23_KCB_KCB-26-1236.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Sweetened Condensed Milk 500g,6,tin,4.2,25.2,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Fine Sugar 1kg,5,pek,2.85,14.25,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Dish Soap 900ml,2,btl,6.5,13,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Fragrant Rice 10kg,1,beg,39.9,39.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Baby Diapers Size M (38s),1,pek,42.9,42.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf
+2026-09-12,R-0912-0047731,Value Mart (fictional),Toothpaste 175g,1,tiub,8.9,8.9,144.15,invoices/2026-09-12_RECEIPT_pasaraya-serba-murah_UNCLEAR.pdf

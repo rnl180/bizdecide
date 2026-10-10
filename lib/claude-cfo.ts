@@ -176,7 +176,7 @@ const LANES: Lane[] = [
         await emit(`${d.invoiceNo} paid ${d.timesPaid} times: ${sen(fmt, d.overpaid)}`, { detail: d.supplier, impactRm: d.overpaid });
       }
       for (const m of f.missingQrSettlements ?? []) {
-        await emit(`DuitNow QR for ${m.saleDate} never settled: ${sen(fmt, m.expectedAmount)}`, { impactRm: m.expectedAmount });
+        await emit(`QR payment for ${m.saleDate} never settled: ${sen(fmt, m.expectedAmount)}`, { impactRm: m.expectedAmount });
       }
       for (const m of f.missingCardSettlements ?? []) {
         await emit(`Card sales for ${m.saleDate} never settled: ${sen(fmt, m.expectedGross)}`, { impactRm: m.expectedGross });
@@ -406,7 +406,7 @@ const ANALYSIS_TOOLS: Anthropic.Beta.BetaTool[] = [
       type: "object",
       properties: {
         question: { type: "string", description: "Short question in the owner's language" },
-        context: { type: "string", description: "Evidence shown under the question, e.g. 'POS DEBIT PASARAYA SERBA MURAH PJ, RM144.15, 12 Sep'" },
+        context: { type: "string", description: "Evidence shown under the question, e.g. 'POS DEBIT VALUE MART PJ, RM144.15, 12 Sep'" },
         options: { type: "array", items: { type: "string" }, description: "2-4 answer options" },
         defaultOption: { type: "string", description: "The option you will assume if there is no answer; must be one of options" },
       },
@@ -683,7 +683,7 @@ Rules:
 - kind "monthly" (a cost that keeps leaking, such as a supplier price rise): an email to the supplier asking why the price rose and asking for the old price back, quoting the old and new unit prices and the invoice numbers. Also add a document titled as a quote request, with one short section the owner can send to two other suppliers.
 - kind "financing" (a loan or grant): a document that is the application pack, with these sections: Why this business qualifies; Amount and purpose; Prefilled answers; Documents checklist (mark each item ready or missing); Next steps. Use the application packs when they are given and the programme facts in the market pack. Also write a short cover email to the agency.
 - Emails stay under 150 words and are signed with the owner's name and the business name.
-- summary: one line for the owner saying what is ready, for example "Refund request to Ladang Susu Segar, ready to send". Never say that anything was sent or saved anywhere.`;
+- summary: one line for the owner saying what is ready, for example "Refund request to Fresh Dairy Farm, ready to send". Never say that anything was sent or saved anywhere.`;
 
 const ActionOutSchema = z.object({
   summary: z.string().min(1).max(300),

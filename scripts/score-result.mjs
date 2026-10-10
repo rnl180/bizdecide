@@ -34,14 +34,14 @@ const ALL = R + " " + Q;
 const has = (s, ...needles) => needles.some((n) => s.includes(n.toLowerCase()));
 
 const checks = [
-  ["Finding 1: coffee powder price creep +12% at Kopi Cap Bintang (item-specific)",
-    has(R, "cap bintang", "kcb-26") && has(R, "12%", "12.0%", "31.36")],
+  ["Finding 1: coffee powder price creep +12% at Star Coffee Trading (item-specific)",
+    has(R, "star coffee", "kcb-26") && has(R, "12%", "12.0%", "31.36")],
   ["Finding 2: duplicate payment LSS/2609/278 (RM642)",
     has(R, "lss/2609/278", "lss-2609-278") || (has(R, "642") && has(R, "duplicate", "twice", "paid two"))],
   ["Finding 3: missing DuitNow QR settlement for 18 Sep (RM312.40)",
     has(R, "312.40", "312.4") || (has(R, "duitnow", "qr") && has(R, "18 sep", "2026-09-18", "18/09"))],
-  ["Finding 4: mixed receipt (Pasaraya Serba Murah) split or asked",
-    has(ALL, "serba murah", "144.15", "r-0912-0047731")],
+  ["Finding 4: mixed receipt (Value Mart) split or asked",
+    has(ALL, "value mart", "144.15", "r-0912-0047731")],
   ["Asked the owner a question (live poll used)", questions.length > 0],
   ["Asked about household income for AIM instead of guessing",
     has(Q, "household income", "pendapatan isi rumah") || (has(R, "aim", "paduri") && has(R, "household income") && has(R, "unknown", "need", "ask", "confirm"))],
@@ -58,8 +58,8 @@ const checks = [
 ];
 
 const falsePositives = [
-  ["Flagged cash-on-delivery bread (Roti & Kaya) as unpaid/missing", has(R, "roti & kaya", "roti dan kaya", "mak long") && has(R, "missing payment", "unpaid", "not paid")],
-  ["Flagged LPG (Tong Gas) as unpaid/missing", has(R, "tong gas") && has(R, "missing payment", "unpaid", "not paid")],
+  ["Flagged cash-on-delivery bread (Golden Bakery) as unpaid/missing", has(R, "golden bakery") && has(R, "missing payment", "unpaid", "not paid")],
+  ["Flagged LPG (Quick Gas) as unpaid/missing", has(R, "quick gas") && has(R, "missing payment", "unpaid", "not paid")],
   ["Treated owner drawing RM1,500 as an expense", has(R, "1,500", "1500") && has(R, "expense") && !has(R, "drawing")],
   ["Flagged delivery platform commission as an anomaly", has(R, "commission") && has(R, "anomal", "unexpected", "discrepan")],
 ];

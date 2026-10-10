@@ -1,7 +1,7 @@
 id,name,category,contact,paymentTerms,notifiedPriceChange
-S01,Syarikat Kopi Cap Bintang Timur Sdn Bhd,"Kopi powder, teh powder, roasted beans",Mr. Lim (sales) | orders@kopibintang.example | +60-0-0000-0101 (fictional),"7 days, bank transfer",No
-S02,Ladang Susu Segar Hulu Enterprise,"Condensed milk, evaporated milk, fresh milk",Pn. Rosnah | ladangsusu@dairy.example | +60-0-0000-0102 (fictional),"7 days, bank transfer",No
-S03,Roti & Kaya Mak Long,"Bread, kaya, butter",Mak Long | rotimaklong@bakery.example | +60-0-0000-0103 (fictional),Cash on delivery,No
-S04,Borong Runcit Maju Jaya,"Sugar, eggs, cooking oil, dry goods",Encik Hafiz | majujaya@wholesale.example | +60-0-0000-0104 (fictional),"14 days, bank transfer",No
-S05,SP Plastik & Pembungkusan,"Cups, lids, straws, takeaway bags",Ms. Kavitha | sales@spplastik.example | +60-0-0000-0105 (fictional),"7 days, bank transfer",No
-S06,Tong Gas Pantas Enterprise,LPG cylinder refill,Ah Seng | +60-0-0000-0106 (fictional),Cash on delivery,No
+S01,Star Coffee Trading Sdn Bhd,"Coffee powder, tea powder, roasted beans",Mr. Lim (sales) | orders@starcoffee.example | +60-0-0000-0101 (fictional),"7 days, bank transfer",No
+S02,Fresh Dairy Farm Enterprise,"Condensed milk, evaporated milk, fresh milk",Ms. Rose | freshdairy@dairy.example | +60-0-0000-0102 (fictional),"7 days, bank transfer",No
+S03,Golden Bakery,"Bread, coconut jam, butter",Ms. Lee | goldenbakery@bakery.example | +60-0-0000-0103 (fictional),Cash on delivery,No
+S04,Bright Wholesale Grocers,"Sugar, eggs, cooking oil, dry goods",Mr. Hafiz | bright@wholesale.example | +60-0-0000-0104 (fictional),"14 days, bank transfer",No
+S05,SP Packaging Supplies,"Cups, lids, straws, takeaway bags",Ms. Kavitha | sales@sppackaging.example | +60-0-0000-0105 (fictional),"7 days, bank transfer",No
+S06,Quick Gas Enterprise,LPG cylinder refill,Mr. Seng | +60-0-0000-0106 (fictional),Cash on delivery,No
