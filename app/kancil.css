@@ -1,0 +1,47 @@
+/* Kancil, the mascot in the bottom corner (components/Kancil.tsx, poses in public/mascot/).
+   Takes clicks only on itself, sits under the header and menu, stands on top of the phone bars. Every class is kc-. */
+
+.kc { --kc-size: 96px; position: fixed; right: 20px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 24; width: var(--kc-size); height: var(--kc-size); pointer-events: none; transition: bottom 0.25s ease; }
+/* stand on the send bar (app/quick.css .qx-dock) and, on phones, the "Upload documents" pill */
+body:has(.qx-dock) .kc { bottom: calc(80px + env(safe-area-inset-bottom)); }
+@media (max-width: 640px) {
+  .kc { --kc-size: 72px; right: 10px; }
+  body:has(.qx-pill) .kc { bottom: calc(76px + env(safe-area-inset-bottom)); }
+}
+
+.kc-body { position: relative; width: 100%; height: 100%; pointer-events: auto; cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.kc-body img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.kc-pose { transform-origin: 50% 92%; }
+.kc-walk { position: absolute; inset: 0; }
+.kc[data-face="left"] .kc-walk { transform: scaleX(-1); }
+.kc-walk img + img { opacity: 0; }
+
+/* speech bubble, to his left */
+.kc-say { position: absolute; right: calc(100% - 10px); bottom: 58%; margin: 0; width: max-content; max-width: 200px; padding: 8px 12px; border-radius: 14px 14px 4px 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-card); font-size: 0.8125rem; font-weight: 600; line-height: 1.35; color: var(--ink); pointer-events: none; transform-origin: 100% 100%; }
+@media (max-width: 640px) { .kc-say { max-width: 160px; } }
+
+/* hide for good: shows on hover or keyboard focus, always on touch screens */
+.kc-close { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-2); cursor: pointer; pointer-events: auto; opacity: 0; transition: opacity 0.15s; }
+.kc:hover .kc-close, .kc-close:focus-visible { opacity: 1; }
+@media (hover: none) { .kc-close { opacity: 0.9; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .kc[data-enter] { animation: kc-enter 1.4s cubic-bezier(0.3, 0.6, 0.4, 1) both; }
+  /* walk cycle: four frames at 6 fps, each shown for a quarter of the loop, with a small bounce */
+  .kc-walk { animation: kc-bob 0.333s ease-in-out infinite alternate; }
+  .kc-walk img { animation: kc-frame 0.667s steps(1, end) infinite; }
+  .kc-walk img:nth-child(2) { animation-delay: -0.5s; }
+  .kc-walk img:nth-child(3) { animation-delay: -0.333s; }
+  .kc-walk img:nth-child(4) { animation-delay: -0.167s; }
+  .kc-pose { animation: kc-pop 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4); }
+  .kc[data-pose="front"] .kc-pose, .kc[data-pose="sleep"] .kc-pose { animation: kc-pop 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4), kc-breathe 2.4s ease-in-out 0.35s infinite alternate; }
+  .kc-hop { animation: kc-hop 0.45s ease-out; }
+  .kc-say { animation: kc-say 0.2s ease-out both; }
+}
+@keyframes kc-enter { from { translate: calc(100% + 40px) 0; } }
+@keyframes kc-frame { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
+@keyframes kc-bob { to { translate: 0 -3px; } }
+@keyframes kc-pop { from { scale: 0.86; } }
+@keyframes kc-breathe { to { scale: 1 1.03; } }
+@keyframes kc-hop { 40% { translate: 0 -14px; } }
+@keyframes kc-say { from { opacity: 0; scale: 0.9; } }

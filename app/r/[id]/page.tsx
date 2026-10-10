@@ -10,6 +10,7 @@ import { DecisionAction, FoundHeadline, useActions } from "@/components/Decision
 import { marketPack, money } from "@/lib/markets";
 import type { Channel, Statements } from "@/lib/statements";
 import { saveRequest, toSaved } from "@/lib/myRequests";
+import { useKancil, type KancilMood } from "@/lib/kancil";
 import {
   type ApplicationPack,
   type ChatMessageDoc,
@@ -19,6 +20,12 @@ import {
   type RequestStatus,
   type Result,
 } from "@/lib/types";
+
+/** Kancil digs while the request runs, peeks when it has a question, cheers at the brief and worries on failure. */
+function kancilFor(status: RequestStatus | undefined, loadFailed: boolean): KancilMood | null {
+  if (!status) return loadFailed ? "worried" : null;
+  return status === "completed" ? "cheer" : status === "failed" ? "worried" : status === "waiting_for_user" ? "peek" : "dig";
+}
 
 type Payload = { request: RequestDoc; question: QuestionDoc | null; result: Result | null; messages?: ChatMessageDoc[]; statements?: Statements | null };
 
@@ -37,6 +44,7 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
   const [error, setError] = useState<string | null>(null);
   const lang = useLang(data?.request.language);
   const t = APP[lang];
+  useKancil(kancilFor(data?.request.status, !data && error !== null));
 
   useEffect(() => {
     let stop = false;

@@ -8,6 +8,7 @@ import { LANDING } from "@/lib/i18n-landing";
 import { RecentRequests } from "@/components/MyRequests";
 import { SERVICE_ICONS } from "@/components/RequestMeta";
 import { saveRequest } from "@/lib/myRequests";
+import { useKancil } from "@/lib/kancil";
 import {
   FIELDS,
   dataWarnings,
@@ -120,6 +121,7 @@ export default function IntakePage() {
   const [error, setError] = useState<string | null>(null);
   const [tried, setTried] = useState(false);
   const [demoLoaded, setDemoLoaded] = useState(false);
+  useKancil(reading || uploading ? "read" : busy ? "dig" : null);
   const inputRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 

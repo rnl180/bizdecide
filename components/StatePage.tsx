@@ -3,6 +3,7 @@
 import { Icon } from "@/components/Icon";
 import { useLang } from "@/lib/i18n";
 import { APP } from "@/lib/i18n-app";
+import { useKancil } from "@/lib/kancil";
 
 /**
  * Full-page state for when something is missing or broken (404 and the app error page).
@@ -10,6 +11,7 @@ import { APP } from "@/lib/i18n-app";
  */
 export function StatePage({ kind, onRetry, reference }: { kind: "notFound" | "error"; onRetry?: () => void; reference?: string }) {
   const t = APP[useLang()];
+  useKancil("worried");
   const copy = kind === "notFound" ? [t.notFoundKicker, t.notFoundTitle, t.notFoundBody] : [t.errorKicker, t.errorTitle, t.errorBody];
   return (
     <section className="container state-page" aria-labelledby="state-title">

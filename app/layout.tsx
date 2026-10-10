@@ -4,6 +4,8 @@ import "./globals.css";
 import "./landing.css";
 import "./actions.css";
 import "./quick.css";
+import "./kancil.css";
+import { Kancil } from "@/components/Kancil";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
@@ -45,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <SiteFooter />
+        <Kancil />
       </body>
     </html>
   );
