@@ -1,11 +1,11 @@
-/* BizDecide landing: hero, sample brief and marketing sections (components/Landing.tsx).
+/* BizDecide landing: hero, sample brief and how it works (components/Landing.tsx).
    Builds on the tokens and classes in globals.css. Every class here is prefixed lx-. */
 
 /* ---------- hero ---------- */
 .lx-hero { overflow: clip; }
 .lx-hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-top: 44px; padding-bottom: 80px; }
 .lx-copy { min-width: 0; }
-.lx-h1 { font-size: clamp(2.75rem, 6.2vw, 4.75rem); line-height: 0.94; letter-spacing: -0.02em; margin: 0 0 22px; }
+.lx-h1 { font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 22px; }
 .lx-h1 > span { display: block; text-wrap: balance; }
 .lx-h1 .lx-h1-hl { color: var(--brand); }
 .lede.lx-lede { max-width: 52ch; }
@@ -43,7 +43,7 @@
 .lx-mid { margin: 0; font-family: var(--font-mono); font-size: 1.375rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lx-fig-side .lx-fig-label { max-width: 17ch; font-weight: 500; color: var(--muted); }
 
-.lx-rows { list-style: none; margin: 0; padding: 2px 20px 6px; }
+.lx-rows { list-style: none; margin: 0; padding: 2px 20px 10px; }
 .lx-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 16px; align-items: baseline; padding: 12px 0 12px 14px; }
 .lx-row + .lx-row { border-top: 1px solid var(--line); }
 .lx-row::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--line-strong); }
@@ -60,11 +60,6 @@
 .lx-status svg { flex: none; }
 .lx-status .lx-status-was { display: none; margin: 0 2px; } /* same 12px footprint as the check */
 
-.lx-found-chips { list-style: none; margin: 0; padding: 14px 20px 0; display: flex; flex-wrap: wrap; gap: 6px; border-top: 1px solid var(--line); }
-.lx-chip.lx-chip-ok { color: var(--ok); background: var(--ok-soft); border-color: var(--ok-line); }
-.lx-note { display: flex; align-items: flex-start; gap: 8px; margin: 0; padding: 12px 20px 18px; font-size: 0.8125rem; line-height: 1.45; color: var(--muted); }
-.lx-note svg { flex: none; margin-top: 1px; color: var(--brand); }
-
 @container lx-found (max-width: 440px) {
   .lx-found-head { grid-template-columns: 40px minmax(0, 1fr); padding: 14px 16px; }
   .lx-badge { grid-column: 2; justify-self: start; }
@@ -72,9 +67,7 @@
   .lx-fig-side { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 12px 0 0; border-left: 0; border-top: 1px solid var(--rule); }
   .lx-fig-side .lx-fig-label { margin: 0; max-width: none; }
   .lx-mid { font-size: 1.25rem; }
-  .lx-rows { padding: 2px 16px 6px; }
-  .lx-found-chips { padding: 12px 16px 0; }
-  .lx-note { padding: 10px 16px 16px; }
+  .lx-rows { padding: 2px 16px 8px; }
 }
 
 /* One page-load moment: the brief rises onto the stack, the figure counts up, then the first finding is marked done. */
@@ -108,142 +101,28 @@
   .lx-trust { flex-direction: column; gap: 10px; }
 }
 
-/* ---------- sections ---------- */
-.lx-section { padding-top: 104px; }
+/* ---------- how it works: a white band with a numbered track ---------- */
 .section-head.lx-head { max-width: 46rem; margin-bottom: 40px; }
 .section-head.lx-head h2 { margin: 0; font-size: clamp(2.125rem, 4.4vw, 3.25rem); line-height: 1; letter-spacing: -0.015em; text-wrap: balance; }
-
-/* Why not ChatGPT: the BizDecide column is one raised card behind every row */
-.lx-vs { --lx-vs-cols: minmax(0, 1fr) minmax(0, 1.2fr); display: grid; grid-template-columns: var(--lx-vs-cols); column-gap: 32px; }
-.lx-vs::before { content: ""; grid-column: 2; grid-row: 1 / 3; background: var(--surface); border: 1.5px solid var(--brand-line); border-radius: var(--r-chop); box-shadow: var(--press-lg); }
-.lx-vs-h { display: flex; align-items: center; gap: 10px; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; }
-.lx-vs-h-them { grid-column: 1; grid-row: 1; padding: 24px 0 16px; color: var(--muted); }
-.lx-vs-h-us { grid-column: 2; grid-row: 1; padding: 24px 28px 16px; color: var(--ink); }
-.lx-mark { display: block; flex: none; width: 30px; height: 30px; }
-.lx-vs-rows { grid-column: 1 / -1; grid-row: 2; list-style: none; margin: 0; padding: 0 0 8px; }
-.lx-vs-row { display: grid; grid-template-columns: var(--lx-vs-cols); column-gap: 32px; }
-.lx-vs-them, .lx-vs-us { display: flex; align-items: flex-start; gap: 12px; margin: 0; font-size: 1rem; line-height: 1.5; }
-.lx-vs-them { padding: 18px 0; color: var(--muted); border-top: 1px dashed var(--line-strong); }
-.lx-vs-us { padding: 18px 28px; color: var(--ink); font-weight: 600; background: linear-gradient(var(--line), var(--line)) no-repeat top center / calc(100% - 56px) 1px; }
-.lx-vs-ico { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--line); color: var(--subtle); }
-.lx-vs-ico.lx-vs-ok { background: var(--ok); color: var(--on-fill); }
-
-@media (max-width: 720px) {
-  .lx-vs { display: flex; flex-wrap: wrap; gap: 0 20px; }
-  .lx-vs::before { content: none; }
-  .lx-vs-h { padding: 0 0 14px; font-size: 0.9375rem; }
-  .lx-vs-h .lx-mark { width: 26px; height: 26px; }
-  .lx-vs-rows { flex: 1 1 100%; display: grid; gap: 10px; padding: 0; }
-  .lx-vs-row { grid-template-columns: minmax(0, 1fr); padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-chop); box-shadow: var(--shadow-xs); }
-  .lx-vs-them { padding: 12px 12px 12px; border-top: 0; font-size: 0.9375rem; }
-  .lx-vs-us { padding: 12px; border-radius: var(--r-chop); background: var(--brand-soft); font-size: 0.9375rem; }
-}
-
-/* Built for Malaysia: one spec sheet with hairline cells */
-.lx-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-chop); overflow: hidden; box-shadow: var(--shadow-xs); }
-.lx-tile { min-width: 0; padding: 26px 24px 28px; background: var(--surface); }
-.lx-tile-ico { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 18px; border-radius: var(--r-chop); background: var(--brand-soft); color: var(--brand); }
-.lx-tile-title { margin: 0 0 6px; font-size: 1rem; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; }
-.lx-tile-body { margin: 0; font-size: 0.875rem; line-height: 1.55; color: var(--muted); }
-.lx-tile.lx-tile-link { padding: 0; background: var(--brand-soft); }
-.lx-tile-link a { position: relative; display: block; height: 100%; padding: 26px 24px 28px; color: inherit; transition: background-color 0.15s; }
-.lx-tile-link a:hover { text-decoration: none; background: color-mix(in srgb, var(--cop-wash) 70%, var(--cop) 8%); }
-.lx-tile-link a:focus-visible { outline-offset: -4px; }
-.lx-tile-link .lx-tile-ico { background: var(--brand); color: var(--brand-ink); }
-.lx-tile-link .lx-tile-body { color: var(--ink-2); }
-.lx-tile-go { position: absolute; top: 28px; right: 24px; color: var(--brand); transition: transform 0.15s; }
-.lx-tile-link a:hover .lx-tile-go { transform: translateX(3px); }
-@media (max-width: 1000px) { .lx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) {
-  .lx-grid { grid-template-columns: minmax(0, 1fr); }
-  .lx-tile:not(.lx-tile-link), .lx-tile-link a { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: start; padding: 20px 18px; }
-  .lx-tile-ico { grid-row: 1 / span 2; margin: 0; }
-  .lx-tile-title { padding-top: 9px; padding-right: 24px; }
-  .lx-tile-go { top: 30px; right: 18px; }
-}
-
-/* How it works: a white band with a numbered track */
-.lx-section.lx-band { margin-top: 104px; padding-top: 88px; padding-bottom: 88px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.lx-steps { --lx-gap: 32px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--lx-gap); }
+.lx-section.lx-band { padding-top: 88px; padding-bottom: 88px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.lx-steps { --lx-gap: 32px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--lx-gap); }
 .lx-step { position: relative; min-width: 0; }
 .lx-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; left: 64px; right: calc(16px - var(--lx-gap)); height: 2px; background-image: linear-gradient(90deg, var(--line-strong) 55%, transparent 0); background-size: 8px 2px; }
 .lx-step-node { position: relative; display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 20px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--line-strong); color: var(--ink-2); }
 .lx-step:last-child .lx-step-node { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); box-shadow: var(--press); }
 .lx-step-n { position: absolute; top: -6px; right: -8px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 0.6875rem; font-weight: 700; border: 2px solid var(--surface); }
-.lx-step-title { margin: 0 0 6px; font-size: 1.0625rem; line-height: 1.3; text-wrap: balance; }
-.lx-step-body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--muted); }
-.lx-agents { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 48px; padding: 16px 20px; border-radius: var(--r-chop); background: var(--surface-2); border: 1px solid var(--line); }
-.lx-running { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+.lx-step-title { margin: 0 0 6px; font-size: 1.25rem; line-height: 1.3; text-wrap: balance; }
+.lx-step-body { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--muted); }
+.lx-running { display: inline-flex; align-items: center; gap: 10px; margin-top: 48px; padding: 10px 16px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+.lx-running:hover { text-decoration: none; border-color: var(--brand-line); color: var(--brand); }
 .lx-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
-.lx-agent-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.chip.lx-agent { padding: 5px 12px; font-size: 0.8125rem; background: var(--surface); }
-@media (max-width: 1000px) and (min-width: 761px) {
-  .lx-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
-  .lx-step:nth-child(2n)::after { content: none; }
-}
 @media (max-width: 760px) {
-  .lx-section.lx-band { margin-top: 72px; padding-top: 64px; padding-bottom: 64px; }
+  .section-head.lx-head { margin-bottom: 28px; }
+  .lx-section.lx-band { padding-top: 64px; padding-bottom: 64px; }
   .lx-steps { --lx-gap: 28px; grid-template-columns: minmax(0, 1fr); }
   .lx-step { padding-left: 68px; min-height: 48px; }
   .lx-step-node { position: absolute; top: 0; left: 0; margin: 0; }
   .lx-step:not(:last-child)::after { top: 60px; bottom: calc(10px - var(--lx-gap)); left: 23px; right: auto; width: 2px; height: auto; background-image: linear-gradient(180deg, var(--line-strong) 55%, transparent 0); background-size: 2px 8px; }
-  .lx-step-title { padding-top: 12px; }
-  .lx-agents { margin-top: 36px; padding: 16px; }
-}
-
-/* The problem: figures on a ruled line, each with its source */
-.lx-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); }
-.lx-stat { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 28px 24px 4px; }
-.lx-stat:first-child { padding-left: 0; }
-.lx-stat + .lx-stat { border-left: 1px solid var(--line); }
-.lx-stat-v { margin: 0; font-family: var(--font-mono); font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: 600; line-height: 1; letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.lx-stat-unit { font-size: 0.5em; letter-spacing: -0.02em; }
-.lx-stat-l { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
-.lx-src { display: block; width: fit-content; margin-top: auto; padding-top: 6px; font-size: 0.75rem; font-weight: 600; line-height: 1.45; color: var(--muted); }
-.lx-src-end { white-space: nowrap; }
-.lx-src svg { display: inline-block; margin-left: 4px; vertical-align: -1px; }
-.lx-src:hover { color: var(--brand); }
-@media (max-width: 1000px) {
-  .lx-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .lx-stat:nth-child(odd) { padding-left: 0; border-left: 0; }
-  .lx-stat:nth-child(n + 3) { border-top: 1px solid var(--line); margin-top: 24px; }
-}
-@media (max-width: 560px) {
-  .lx-stats { grid-template-columns: minmax(0, 1fr); }
-  .lx-stat:nth-child(n) { padding: 24px 0; border-left: 0; margin-top: 0; }
-  .lx-stat + .lx-stat { border-top: 1px solid var(--line); }
-}
-
-/* Closing call to action, on ledger lines */
-.lx-cta { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; padding: 56px; border-radius: var(--r-chop); background: var(--band); color: var(--ink); }
-.lx-cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: repeating-linear-gradient(180deg, transparent 0 31px, color-mix(in srgb, var(--on-night) 10%, transparent) 31px 32px); -webkit-mask-image: linear-gradient(90deg, transparent 10%, #000 75%); mask-image: linear-gradient(90deg, transparent 10%, #000 75%); }
-.lx-cta-copy { min-width: 0; max-width: 34rem; }
-.lx-cta-title { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -0.015em; text-wrap: balance; }
-.lx-cta-sub { margin: 0; font-size: 1.125rem; color: var(--ink-2); }
-@media (max-width: 760px) {
-  .lx-section { padding-top: 72px; }
-  .section-head.lx-head { margin-bottom: 28px; }
-  .lx-cta { padding: 32px 20px; border-radius: var(--r-chop); }
-  .lx-cta .lx-cta-btn { width: 100%; }
-}
-
-/* FAQ: heading on the left, ruled questions on the right */
-.lx-faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 24px 56px; align-items: start; }
-.section-head.lx-faq-head { position: sticky; top: calc(var(--header-h) + 24px); margin: 0; }
-.lx-faq-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-weight: 600; }
-.lx-faq-list { border-top: 1px solid var(--rule-strong); }
-.lx-qa { border-bottom: 1px solid var(--rule); }
-.lx-qa summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px 4px; cursor: pointer; list-style: none; font-size: 1.0625rem; font-weight: 700; line-height: 1.4; color: var(--ink); border-radius: var(--r-inner); }
-.lx-qa summary::-webkit-details-marker { display: none; }
-.lx-qa summary:hover { color: var(--cop); }
-.lx-qa-ico { flex: none; margin-top: 2px; color: var(--cop); transition: transform 160ms ease-out; }
-.lx-qa[open] .lx-qa-ico { transform: rotate(45deg); }
-.lx-qa p { max-width: 62ch; margin: -6px 0 0; padding: 0 40px 22px 4px; font-size: 1rem; line-height: 1.6; color: var(--ink-2); }
-@media (max-width: 860px) {
-  .lx-faq { grid-template-columns: minmax(0, 1fr); }
-  .section-head.lx-faq-head { position: static; }
-}
-@media (max-width: 640px) {
-  .lx-qa summary { padding: 16px 0; font-size: 1rem; }
-  .lx-qa p { padding: 0 0 18px; }
+  .lx-step-title { padding-top: 10px; }
+  .lx-running { margin-top: 36px; }
 }

@@ -19,7 +19,7 @@ export default async function SkillsPage() {
 
   return (
     <>
-      <section className="hero-band" data-theme="dark">
+      <section className="hero-band">
         <div className="container page-hero">
           <span className="eyebrow">
             <Icon name="zap" size={14} /> For accountants and SME consultants

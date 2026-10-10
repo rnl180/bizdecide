@@ -6,13 +6,11 @@ import { PRIORITY_ICON } from "@/components/RequestMeta";
 import { LANGS, setLang, type Lang } from "@/lib/i18n";
 import { LANDING, type LandingStrings } from "@/lib/i18n-landing";
 
-/** Home page hero and the marketing sections between it and the intake form. Styles live in app/landing.css (lx-*). */
+/** Home page hero and "how it works", above the intake form. Styles live in app/landing.css (lx-*). */
 
-const TILE_ICONS: IconName[] = ["receipt", "landmark", "tag", "chart", "sparkles", "send", "question", "calculator"];
-const SKILLS_TILE = 7; // "Skills for accountants" links to /skills
-const STEP_ICONS: IconName[] = ["upload", "sparkles", "clipboard", "check"];
+const STEP_ICONS: IconName[] = ["upload", "sparkles", "check"];
 
-/** Renders `parts` as unbreakable-between units, so text wraps at their joins first ("A chatbot talks. / A CFO team…"). */
+/** Renders `parts` as unbreakable-between units, so text wraps at their joins first. */
 function Joined({ parts, sep = " " }: { parts: string[]; sep?: string }) {
   return (
     <>
@@ -26,21 +24,6 @@ function Joined({ parts, sep = " " }: { parts: string[]; sep?: string }) {
   );
 }
 
-/** "A chatbot talks. A CFO team does the work." -> ["A chatbot talks.", "A CFO team does the work."] */
-function sentences(text: string): string[] {
-  const out: string[] = [];
-  let cur = "";
-  for (const word of text.split(" ")) {
-    cur = cur ? `${cur} ${word}` : word;
-    if (/[.?!]$/.test(word)) {
-      out.push(cur);
-      cur = "";
-    }
-  }
-  if (cur) out.push(cur);
-  return out;
-}
-
 /** "AI CFO for Malaysian SMEs · runs on Tencent WorkBuddy" -> ["AI CFO for Malaysian SMEs ·", "runs on Tencent WorkBuddy"] */
 const dotParts = (text: string) => text.split(" · ").map((p, i, all) => (i < all.length - 1 ? `${p} ·` : p));
 
@@ -50,16 +33,18 @@ export function LandingHero({ lang, onTryDemo }: { lang: Lang; onTryDemo: () => 
   const t = LANDING[lang];
   const h = t.hero;
   return (
-    <section className="hero-band lx-hero" data-theme="dark">
+    <section className="hero-band lx-hero">
       <div className="container lx-hero-grid">
         <div className="lx-copy">
-          <div className="lang-toggle" role="group" aria-label={t.langLabel}>
-            {LANGS.map((l) => (
-              <button key={l.code} type="button" aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
-                {l.label}
-              </button>
-            ))}
-          </div>
+          {LANGS.length > 1 && (
+            <div className="lang-toggle" role="group" aria-label={t.langLabel}>
+              {LANGS.map((l) => (
+                <button key={l.code} type="button" aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          )}
           <span className="eyebrow lx-eyebrow">
             <Icon name="sparkles" size={14} />
             <span>
@@ -166,8 +151,7 @@ function FoundCard({ c }: { c: LandingStrings["card"] }) {
   const shown = value.toLocaleString("en-MY", { minimumFractionDigits: found.decimals, maximumFractionDigits: found.decimals });
 
   return (
-    // The sample brief is a paper document on the night band, so it keeps the light theme.
-    <div className="lx-stage" data-theme="light">
+    <div className="lx-stage">
       <div className="lx-sheet lx-sheet-2" aria-hidden="true" />
       <div className="lx-sheet lx-sheet-1" aria-hidden="true" />
       <figure className="lx-found double-rule" data-phase={phase} aria-labelledby="lx-found-name lx-found-badge">
@@ -230,140 +214,27 @@ function FoundCard({ c }: { c: LandingStrings["card"] }) {
             </li>
           ))}
         </ul>
-
-        <ul className="lx-found-chips">
-          {c.chips.map((chip) => (
-            <li key={chip} className={`chip lx-chip${chip.includes("✓") ? " lx-chip-ok" : ""}`}>
-              {chip}
-            </li>
-          ))}
-        </ul>
-        <figcaption className="lx-note">
-          <Icon name="calculator" size={15} />
-          {c.note}
-        </figcaption>
       </figure>
     </div>
   );
 }
 
-// ---------- marketing sections ----------
+// ---------- how it works ----------
 
 export function LandingSections({ lang }: { lang: Lang }) {
-  const t = LANDING[lang];
-  return (
-    <div className="lx-sections">
-      <WhyNotChatGPT t={t.vs} />
-      <Capabilities t={t.grid} />
-      <HowItWorks t={t.how} />
-      <Problem t={t.stats} />
-      <Faq t={t.faq} />
-      <CtaBand t={t.cta} />
-    </div>
-  );
-}
-
-function SectionHead({ kicker, title, id }: { kicker: string; title: string; id: string }) {
-  return (
-    <div className="section-head lx-head">
-      <div className="kicker">{kicker}</div>
-      <h2 id={id}>
-        <Joined parts={sentences(title)} />
-      </h2>
-    </div>
-  );
-}
-
-function WhyNotChatGPT({ t }: { t: LandingStrings["vs"] }) {
-  return (
-    <section className="lx-section" aria-labelledby="lx-vs-title">
-      <div className="container">
-        <SectionHead kicker={t.kicker} title={t.title} id="lx-vs-title" />
-        <div className="lx-vs">
-          {/* Column headings; each row repeats them for screen readers. */}
-          <div className="lx-vs-h lx-vs-h-them" aria-hidden="true">
-            <span className="lx-vs-ico">
-              <Icon name="x" size={12} strokeWidth={3} />
-            </span>
-            {t.them}
-          </div>
-          <div className="lx-vs-h lx-vs-h-us" aria-hidden="true">
-            <picture>
-              <source srcSet="/brand/mark-dark.svg" media="(prefers-color-scheme: dark)" />
-              <img className="lx-mark" src="/brand/mark.svg" alt="" width={30} height={30} />
-            </picture>
-            {t.us}
-          </div>
-          <ul className="lx-vs-rows">
-            {t.rows.map(([them, us]) => (
-              <li className="lx-vs-row" key={us}>
-                <p className="lx-vs-them">
-                  <span className="lx-vs-ico">
-                    <Icon name="x" size={12} strokeWidth={3} />
-                  </span>
-                  <span>
-                    <span className="sr-only">{t.them}: </span>
-                    {them}
-                  </span>
-                </p>
-                <p className="lx-vs-us">
-                  <span className="lx-vs-ico lx-vs-ok">
-                    <Icon name="check" size={12} strokeWidth={3} />
-                  </span>
-                  <span>
-                    <span className="sr-only">{t.us}: </span>
-                    {us}
-                  </span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Capabilities({ t }: { t: LandingStrings["grid"] }) {
-  return (
-    <section className="lx-section" id="checks" aria-labelledby="lx-grid-title">
-      <div className="container">
-        <SectionHead kicker={t.kicker} title={t.title} id="lx-grid-title" />
-        <ul className="lx-grid">
-          {t.tiles.map((tile, i) => {
-            const inner = (
-              <>
-                <span className="lx-tile-ico">
-                  <Icon name={TILE_ICONS[i] ?? "check"} size={20} />
-                </span>
-                <h3 className="lx-tile-title">{tile.title}</h3>
-                <p className="lx-tile-body">{tile.body}</p>
-              </>
-            );
-            return i === SKILLS_TILE ? (
-              <li key={tile.title} className="lx-tile lx-tile-link">
-                <a href="/skills">
-                  {inner}
-                  <Icon name="arrowRight" size={18} className="lx-tile-go" />
-                </a>
-              </li>
-            ) : (
-              <li key={tile.title} className="lx-tile">
-                {inner}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
-  );
+  return <HowItWorks t={LANDING[lang].how} />;
 }
 
 function HowItWorks({ t }: { t: LandingStrings["how"] }) {
   return (
     <section className="lx-section lx-band" id="how" aria-labelledby="lx-how-title">
       <div className="container">
-        <SectionHead kicker={t.kicker} title={t.title} id="lx-how-title" />
+        <div className="section-head lx-head">
+          <div className="kicker">{t.kicker}</div>
+          <h2 id="lx-how-title">
+            <Joined parts={t.title.split(/(?<=[.?!]) /)} />
+          </h2>
+        </div>
         <ol className="lx-steps">
           {t.steps.map((s, i) => (
             <li key={s.title} className="lx-step">
@@ -376,111 +247,11 @@ function HowItWorks({ t }: { t: LandingStrings["how"] }) {
             </li>
           ))}
         </ol>
-        <div className="lx-agents">
-          <p className="lx-running" id="lx-agents-label">
-            <span className="lx-dot" aria-hidden="true" />
-            {t.running}
-          </p>
-          <ul className="lx-agent-list" aria-labelledby="lx-agents-label">
-            {t.agents.map((a) => (
-              <li key={a} className="chip lx-agent">
-                {a}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** "1.1 million" -> ["1.1", " million"] so the unit can sit smaller than the figure. */
-function splitStat(v: string): [string, string] {
-  const m = /^([~≈]?[\d.,]+%?)(\s.+)?$/.exec(v);
-  return m ? [m[1] ?? v, m[2] ?? ""] : [v, ""];
-}
-
-function Problem({ t }: { t: LandingStrings["stats"] }) {
-  return (
-    <section className="lx-section" aria-labelledby="lx-stats-title">
-      <div className="container">
-        <SectionHead kicker={t.kicker} title={t.title} id="lx-stats-title" />
-        <ul className="lx-stats">
-          {t.items.map((s) => {
-            const [figure, unit] = splitStat(s.value);
-            const cut = s.source.lastIndexOf(" ") + 1; // keep the icon on the line of the last word
-            return (
-              <li key={s.href} className="lx-stat">
-                <p className="lx-stat-v">
-                  {figure}
-                  {unit && (
-                    <>
-                      {" "}
-                      <span className="lx-stat-unit">{unit.trim()}</span>
-                    </>
-                  )}
-                </p>
-                <p className="lx-stat-l">{s.label}</p>
-                <a className="lx-src" href={s.href} target="_blank" rel="noreferrer">
-                  {s.source.slice(0, cut)}
-                  <span className="lx-src-end">
-                    {s.source.slice(cut)}
-                    <Icon name="external" size={12} />
-                  </span>
-                  <span className="sr-only"> {t.newTab}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/** Plain answers to what owners worry about before uploading: data, sending, accuracy, approval. */
-function Faq({ t }: { t: LandingStrings["faq"] }) {
-  return (
-    <section className="lx-section" id="faq" aria-labelledby="lx-faq-title">
-      <div className="container lx-faq">
-        <div className="section-head lx-head lx-faq-head">
-          <div className="kicker">{t.kicker}</div>
-          <h2 id="lx-faq-title">{t.title}</h2>
-          <a className="lx-faq-link" href="/privacy">
-            <Icon name="shield" size={16} /> {t.privacyLink}
-          </a>
-        </div>
-        <div className="lx-faq-list">
-          {t.items.map(([q, a], i) => (
-            <details key={q} className="lx-qa" open={i === 0}>
-              <summary>
-                <span>{q}</span>
-                <Icon name="plus" size={18} className="lx-qa-ico" />
-              </summary>
-              <p>{a}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CtaBand({ t }: { t: LandingStrings["cta"] }) {
-  return (
-    <section className="lx-section lx-cta-wrap" aria-labelledby="lx-cta-title">
-      <div className="container">
-        <div className="lx-cta" data-theme="dark">
-          <div className="lx-cta-copy">
-            <h2 className="lx-cta-title" id="lx-cta-title">
-              {t.title}
-            </h2>
-            <p className="lx-cta-sub">{t.sub}</p>
-          </div>
-          <a href="#start" className="btn btn-primary btn-lg lx-cta-btn">
-            <Icon name="upload" /> {t.button}
-          </a>
-        </div>
+        <a className="lx-running" href="/skills">
+          <span className="lx-dot" aria-hidden="true" />
+          {t.running}
+          <Icon name="arrowRight" size={16} />
+        </a>
       </div>
     </section>
   );

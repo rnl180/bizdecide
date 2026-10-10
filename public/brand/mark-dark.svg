@@ -1,7 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.00 64.00" width="64" height="64" role="img" aria-label="BizDecide">
-<g transform="translate(0 0) scale(1)"><g transform="rotate(-6 32 32)"><rect x="5" y="13" width="54" height="38" rx="8" fill="#A9ACFF"/>
-    <rect x="9" y="17" width="46" height="30" rx="5" fill="none" stroke="#14152E" stroke-width="1.6" stroke-opacity="0.9"/>
-    <path d="M14 36 H23 C30 36 31.5 42 39 42" fill="none" stroke="#14152E" stroke-opacity="0.4" stroke-width="4.5" stroke-linecap="round"/>
-    <path d="M14 36 H23 C30 36 31.5 26 39 26" fill="none" stroke="#14152E" stroke-width="4.5" stroke-linecap="round"/>
-    <circle cx="45.5" cy="26" r="5" fill="#F2B65A"/></g></g>
+<g transform="translate(0 0) scale(1)"><circle cx="45" cy="18" r="9" fill="#F5C468"/><path d="M8 36 C14 29 20 29 26 36 S38 43 44 36 S54 29 58 33" fill="none" stroke="#8EC0F2" stroke-width="6" stroke-linecap="round"/><path d="M8 50 C14 43 20 43 26 50 S38 57 44 50 S54 43 58 47" fill="none" stroke="#8EC0F2" stroke-width="6" stroke-linecap="round" opacity="0.55"/></g>
 </svg>

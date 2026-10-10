@@ -548,11 +548,11 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
       <BriefNav items={sections} label={t.navLabel} meter={meter} />
 
       <header className="card brief-hero double-rule brief-sec" id="summary">
-        {/* Decision ready: the emblem presses in once. */}
+        {/* Decision ready: the brand mark settles in once. */}
         <span className="chop-seal" aria-hidden="true">
           <picture>
-            <source srcSet="/brand/emblem-light.svg" media="(prefers-color-scheme: dark)" />
-            <img src="/brand/emblem.svg" alt="" width={196} height={124} />
+            <source srcSet="/brand/mark-dark.svg" media="(prefers-color-scheme: dark)" />
+            <img src="/brand/mark.svg" alt="" width={64} height={64} />
           </picture>
         </span>
         <div className="meta-row">

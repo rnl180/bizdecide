@@ -7,17 +7,17 @@ import { Icon } from "./Icon";
 import { APP } from "@/lib/i18n-app";
 import { MyRequestsLink } from "./MyRequests";
 
-/** The primary lockup: the Path Chop + wordmark, swapped for the dark-ground version in dark mode. */
+/** The primary lockup: the waves-and-sun mark + wordmark, swapped for the dark-ground version in dark mode. */
 function Lockup({ height }: { height: number }) {
   return (
     <picture>
       <source srcSet="/brand/lockup-dark.svg" media="(prefers-color-scheme: dark)" />
-      <img src="/brand/lockup.svg" alt="BizDecide" width={Math.round((height * 222.66) / 64)} height={height} />
+      <img src="/brand/lockup.svg" alt="BizDecide" width={Math.round((height * 286.47) / 64)} height={height} />
     </picture>
   );
 }
 
-const SECTIONS = ["how", "checks", "faq"] as const;
+const SECTIONS = ["how"] as const;
 
 /** Marks the landing section in view, so its header link can show it. */
 function useSectionInView(enabled: boolean) {
@@ -156,8 +156,6 @@ export function SiteHeader() {
   const page = (href: string) => (path === href ? "page" : undefined);
   const nav = [
     { href: "/#how", id: "how", label: t.navHow, icon: "sparkles" },
-    { href: "/#checks", id: "checks", label: t.navCheck, icon: "search" },
-    { href: "/#faq", id: "faq", label: t.navFaq, icon: "helpCircle" },
   ] as const;
 
   return (
@@ -188,7 +186,7 @@ export function SiteHeader() {
               </ul>
             </nav>
             <div className="topbar-actions">
-              <LangMenu />
+              {LANGS.length > 1 && <LangMenu />}
               <MyRequestsLink current={page("/requests")} />
               <a href="/#start" className="btn btn-primary hdr-cta">
                 <Icon name="plus" size={18} strokeWidth={2.25} />
@@ -210,9 +208,9 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <div id="site-menu" ref={panelRef} className="site-menu" data-theme="dark" role="dialog" aria-modal="true" aria-label={t.menu}>
+          <div id="site-menu" ref={panelRef} className="site-menu" role="dialog" aria-modal="true" aria-label={t.menu}>
             <div className="site-menu-top">
-              <img src="/brand/lockup-dark.svg" alt="BizDecide" width={97} height={28} />
+              <Lockup height={28} />
               <button
                 type="button"
                 className="hdr-menu-btn site-menu-close"
@@ -257,18 +255,20 @@ export function SiteHeader() {
                   </a>
                 </li>
               </ul>
-              <div className="site-menu-lang">
-                <span className="mini-label">
-                  <Icon name="languages" size={14} /> {t.language}
-                </span>
-                <div className="lang-toggle" role="group" aria-label={t.language}>
-                  {LANGS.map((l) => (
-                    <button key={l.code} type="button" lang={l.code} aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
-                      {l.label}
-                    </button>
-                  ))}
+              {LANGS.length > 1 && (
+                <div className="site-menu-lang">
+                  <span className="mini-label">
+                    <Icon name="languages" size={14} /> {t.language}
+                  </span>
+                  <div className="lang-toggle" role="group" aria-label={t.language}>
+                    {LANGS.map((l) => (
+                      <button key={l.code} type="button" lang={l.code} aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
+                        {l.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="site-menu-foot">
               <a href="/#start" className="btn btn-primary btn-lg" onClick={() => setOpen(false)}>
@@ -296,13 +296,15 @@ export function SiteFooter() {
           {t.builtFor} · <a href="/skills">{t.skills}</a> · <a href="/privacy">{t.privacy}</a>
         </span>
         {/* Each language is labelled in itself, never with a flag. */}
-        <div className="lang-toggle footer-lang" role="group" aria-label={t.language}>
-          {LANGS.map((l) => (
-            <button key={l.code} type="button" lang={l.code} aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
-              {l.label}
-            </button>
-          ))}
-        </div>
+        {LANGS.length > 1 && (
+          <div className="lang-toggle footer-lang" role="group" aria-label={t.language}>
+            {LANGS.map((l) => (
+              <button key={l.code} type="button" lang={l.code} aria-pressed={lang === l.code} onClick={() => setLang(l.code)}>
+                {l.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </footer>
   );

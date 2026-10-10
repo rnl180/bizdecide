@@ -470,8 +470,6 @@ export default function IntakePage() {
   );
 
   const missing = KINDS.filter((k) => !data[k]);
-  // The one missing file that adds the most, named in the bottom bar.
-  const dockHint = (["bank", "purchases", "sales", "payables", "suppliers"] as const).find((k) => !data[k]);
   const nameError = tried && hasNumbers && !hasName;
 
   return (
@@ -486,7 +484,6 @@ export default function IntakePage() {
         <div className="section-head">
           <div className="kicker">{q.kicker}</div>
           <h2>{q.title}</h2>
-          <p className="muted">{q.sub}</p>
         </div>
 
         <div className="qx">
@@ -598,7 +595,7 @@ export default function IntakePage() {
                         <div className="qx-file-title">
                           {q.profileFile} <Icon name="check" size={14} strokeWidth={3} className="qx-ok" />
                         </div>
-                        <div className="qx-file-meta">{q.profileMeta(name || profileFile)}</div>
+                        <div className="qx-file-meta">{name || profileFile}</div>
                         <div className="qx-file-name">{profileFile}</div>
                       </div>
                     </li>
@@ -613,9 +610,7 @@ export default function IntakePage() {
                           {q.kinds[k]} <Icon name="check" size={14} strokeWidth={3} className="qx-ok" />
                         </div>
                         <div className="qx-file-meta">{meta(k, data[k]!.rows)}</div>
-                        <div className="qx-file-name">
-                          {data[k]!.fileName} · {q.kindWhy[k]}
-                        </div>
+                        <div className="qx-file-name">{data[k]!.fileName}</div>
                         {fileNotes(k)}
                         {mapper?.kind === k && (
                           <ColumnPicker
@@ -696,8 +691,8 @@ export default function IntakePage() {
                   <div className="qx-missing">
                     <span>{q.missingTitle}</span>
                     {missing.map((k) => (
-                      <span key={k} className="qx-miss" title={q.kindWhy[k]}>
-                        <Icon name="plus" size={12} strokeWidth={2.5} /> {q.kinds[k]} <small>· {q.kindWhy[k]}</small>
+                      <span key={k} className="qx-miss">
+                        <Icon name="plus" size={12} strokeWidth={2.5} /> {q.kinds[k]}
                       </span>
                     ))}
                   </div>
@@ -708,10 +703,7 @@ export default function IntakePage() {
             {anything && (
               <div className="card qx-confirm">
                 <div className="qx-card-head">
-                  <div>
-                    <h3>{q.confirmTitle}</h3>
-                    <p className="muted">{q.confirmSub}</p>
-                  </div>
+                  <h3>{q.confirmTitle}</h3>
                 </div>
                 <div className="qx-grid">
                   <div className="field">
@@ -773,39 +765,38 @@ export default function IntakePage() {
                       ))}
                     </div>
                   </div>
-                  <div className="field">
-                    <label htmlFor="biz-staff">{q.staff}</label>
-                    <input
-                      id="biz-staff"
-                      type="text"
-                      inputMode="numeric"
-                      value={employees}
-                      onChange={(e) => setEmployees(e.target.value.replace(/\D/g, ""))}
-                      placeholder={q.staffPh}
-                    />
-                    <p className="help">{q.staffHelp}</p>
-                  </div>
-                  {pack.ownershipFlags.length > 0 && (
-                    <div className="field">
-                      <span className="label">{q.ownership}</span>
-                      <div className="chips">
-                        {pack.ownershipFlags.map(({ id: v, label: l }) => (
-                          <label key={v} className="chip-toggle" data-on={flags.includes(v)}>
-                            <input type="checkbox" className="sr-only" checked={flags.includes(v)} onChange={() => toggleFlag(v)} />
-                            <span className="box">{flags.includes(v) && <Icon name="check" size={11} strokeWidth={3.5} />}</span>
-                            {l}
-                          </label>
-                        ))}
-                      </div>
-                      <p className="help">{q.ownershipHelp}</p>
-                    </div>
-                  )}
                 </div>
-                <details className="qx-more" open={Boolean(goal || state) || undefined}>
+                <details className="qx-more">
                   <summary>
                     <Icon name="chevronDown" size={16} /> {q.more}
                   </summary>
                   <div className="qx-grid">
+                    <div className="field">
+                      <label htmlFor="biz-staff">{q.staff}</label>
+                      <input
+                        id="biz-staff"
+                        type="text"
+                        inputMode="numeric"
+                        value={employees}
+                        onChange={(e) => setEmployees(e.target.value.replace(/\D/g, ""))}
+                        placeholder={q.staffPh}
+                      />
+                    </div>
+                    {pack.ownershipFlags.length > 0 && (
+                      <div className="field">
+                        <span className="label">{q.ownership}</span>
+                        <div className="chips">
+                          {pack.ownershipFlags.map(({ id: v, label: l }) => (
+                            <label key={v} className="chip-toggle" data-on={flags.includes(v)}>
+                              <input type="checkbox" className="sr-only" checked={flags.includes(v)} onChange={() => toggleFlag(v)} />
+                              <span className="box">{flags.includes(v) && <Icon name="check" size={11} strokeWidth={3.5} />}</span>
+                              {l}
+                            </label>
+                          ))}
+                        </div>
+                        <p className="help">{q.ownershipHelp}</p>
+                      </div>
+                    )}
                     {pack.regions.length > 0 && (
                       <div className="field">
                         <label htmlFor="biz-state">{q.state}</label>
@@ -843,7 +834,6 @@ export default function IntakePage() {
                         {(t.services ?? SERVICE_LABELS)[s].title}
                         {s === "cfo_brief" && <span className="badge">{t.recommended}</span>}
                       </strong>
-                      <small>{(t.services ?? SERVICE_LABELS)[s].blurb}</small>
                     </span>
                   </label>
                 ))}
@@ -896,25 +886,8 @@ export default function IntakePage() {
           </div>
 
           <aside className="qx-side">
-            <div className="card qx-next">
-              <h3>{q.nextTitle}</h3>
-              <ol>
-                {q.next.map(([title, body], i) => (
-                  <li key={title}>
-                    <span className="qx-step">{i + 1}</span>
-                    <span>
-                      <strong>{title}</strong> {body}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-              <p className="qx-privacy">
-                <Icon name="shield" size={14} /> {q.privacy}
-              </p>
-            </div>
             <div className="card qx-samples">
               <strong>{q.samples}</strong>
-              <p className="muted">{q.samplesSub}</p>
               <ul>
                 {(["sales", "purchases", "suppliers", "bank"] as const).map((f) => (
                   <li key={f}>
@@ -924,6 +897,9 @@ export default function IntakePage() {
                   </li>
                 ))}
               </ul>
+              <p className="qx-privacy">
+                <Icon name="shield" size={14} /> {q.privacy}
+              </p>
             </div>
           </aside>
         </div>
@@ -939,7 +915,6 @@ export default function IntakePage() {
 
       {hasNumbers && inForm && !sendInView && !busy && (
         <div className="qx-dock no-print">
-          {dockHint && <p className="container qx-dock-hint">{q.dockHint(q.kinds[dockHint], q.kindWhy[dockHint])}</p>}
           <div className="container qx-dock-inner">
             <p className="qx-dock-text">
               <span className="qx-dock-ok" aria-hidden="true">

@@ -3,10 +3,8 @@ import type { Service } from "./types";
 
 /** Intake form copy in English and Bahasa Melayu. Market-specific labels come from the market pack (see lib/markets.ts). */
 export type Lang = "en" | "ms";
-export const LANGS: { code: Lang; label: string }[] = [
-  { code: "en", label: "English" },
-  { code: "ms", label: "Bahasa Melayu" },
-];
+// English only, per the brand kit. The Malay copy stays in place: add { code: "ms", label: "Bahasa Melayu" } to bring it back.
+export const LANGS: { code: Lang; label: string }[] = [{ code: "en", label: "English" }];
 
 // ---------- the viewer's language, shared by every page in this browser ----------
 
@@ -16,7 +14,7 @@ const LANG_EVENT = "bizdecide:lang-change";
 function readLang(): Lang | null {
   try {
     const v = window.localStorage.getItem(LANG_KEY);
-    return v === "en" || v === "ms" ? v : null;
+    return LANGS.some((l) => l.code === v) ? (v as Lang) : null;
   } catch {
     return null; // storage blocked
   }
@@ -187,7 +185,7 @@ const en = {
     outlier: (n: number, v: string) => `${n} unusually large amount${n === 1 ? "" : "s"}, e.g. ${v}. Check for a typo.`,
     future: (n: number) => `${n} date${n === 1 ? " is" : "s are"} in the future.`,
   },
-  privacyAgree: ["I agree to the ", "privacy notice", ". BizDecide's AI agents will read the numbers I upload to prepare my brief."],
+  privacyAgree: ["I agree to the ", "privacy notice", " and let AI agents read my files."],
   privacyErr: "Please agree to the privacy notice to send.",
   docsMax: "You can attach up to 20 documents.",
   drop: {
@@ -357,7 +355,7 @@ const ms: Strings = {
     outlier: (n, v) => `${n} amaun luar biasa besar, contohnya ${v}. Semak jika ada salah taip.`,
     future: (n) => `${n} tarikh adalah pada masa hadapan.`,
   },
-  privacyAgree: ["Saya bersetuju dengan ", "notis privasi", ". Ejen AI BizDecide akan membaca angka yang saya muat naik untuk menyediakan ringkasan saya."],
+  privacyAgree: ["Saya bersetuju dengan ", "notis privasi", " dan benarkan ejen AI membaca fail saya."],
   privacyErr: "Sila bersetuju dengan notis privasi untuk menghantar.",
   docsMax: "Anda boleh melampirkan sehingga 20 dokumen.",
   drop: {

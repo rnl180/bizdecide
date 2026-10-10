@@ -1,103 +1,76 @@
-/* BizDecide brand tokens (The Chop). Copied from the brand kit's 03-colors-tokens/tokens.css; do not retype values.
-   Only change: the Google Fonts @import moved to a <link> in app/layout.tsx. */
+/* BizDecide brand tokens (Laut × Langit). Copied from the brand kit's 03-colors-tokens/tokens.css; do not retype values.
+   Changes: the Google Fonts @import moved to a <link> in app/layout.tsx, and the font is Roboto instead of Manrope. */
 :root, [data-theme="light"] {
-  --paper: #FBF6EA;
-  --card: #FFFFFF;
-  --card-sunken: #F2EBDA;
-  --rule: #E2D8C2;
-  --rule-strong: #857E6C;
-  --ink: #1E2149;
-  --ink-soft: #5C5970;
-  --cop: #3438A8;
-  --on-cop: #FFFFFF;
-  --cop-wash: #E7E7F8;
-  --kunyit: #E9A23B;
-  --on-kunyit: #1E2149;
-  --night: #1E2149;
-  --on-night: #FBF6EA;
-  --lulus: #2F7D4F;
-  --semak: #A35A00;
-  --gagal: #B3261E;
-  --s-1: 4px;
-  --s-2: 8px;
-  --s-3: 12px;
-  --s-4: 16px;
-  --s-6: 24px;
-  --s-10: 40px;
-  --s-14: 56px;
-  --r-chop: 8px;
-  --r-inner: 5px;
-  --r-pill: 999px;
-  --font-display: 'Bricolage Grotesque', 'Noto Sans SC', 'Noto Sans Tamil', 'Arial Narrow', system-ui, sans-serif;
-  --font-text: 'Figtree', 'Noto Sans SC', 'Noto Sans Tamil', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  --press: 2px 2px 0 rgba(30,33,73,0.12);
+  --bg: #F3F7FB;
+  --surface: #FCFDFE;
+  --surface-muted: #E8F0F8;
+  --line: #D6E2EE;
+  --line-strong: #768598;
+  --text: #18263A;
+  --text-muted: #4A596C;
+  --primary: #2A67A8;
+  --on-primary: #FFFFFF;
+  --primary-soft: #DDEBF8;
+  --accent: #F2B33D;
+  --on-accent: #18263A;
+  --success: #2F7444;
+  --warning: #965800;
+  --danger: #B23A2E;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-10: 40px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --font-display: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-text: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --shadow-card: 0 1px 2px rgba(24,38,58,0.06), 0 6px 16px rgba(24,38,58,0.06);
 }
 [data-theme="dark"] {
-  --paper: #14152E;
-  --card: #1D1F40;
-  --card-sunken: #272A52;
-  --rule: #353862;
-  --rule-strong: #7A7EAA;
-  --ink: #F4EEDF;
-  --ink-soft: #B6B2C6;
-  --cop: #A9ACFF;
-  --on-cop: #14152E;
-  --cop-wash: #2B2E66;
-  --kunyit: #F2B65A;
-  --on-kunyit: #14152E;
-  --night: #5055D0;
-  --on-night: #FFFFFF;
-  --lulus: #6FD39B;
-  --semak: #FBBF24;
-  --gagal: #FF8A80;
-  --press: none;
+  --bg: #0E1622;
+  --surface: #152030;
+  --surface-muted: #1C2A3C;
+  --line: #2A3A50;
+  --line-strong: #66788F;
+  --text: #EAF1F9;
+  --text-muted: #A9B8CA;
+  --primary: #8EC0F2;
+  --on-primary: #0E1622;
+  --primary-soft: #1B3352;
+  --accent: #F5C468;
+  --on-accent: #0E1622;
+  --success: #7DD08F;
+  --warning: #F2B65A;
+  --danger: #F28B7D;
+  --shadow-card: none;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --paper: #14152E;
-    --card: #1D1F40;
-    --card-sunken: #272A52;
-    --rule: #353862;
-    --rule-strong: #7A7EAA;
-    --ink: #F4EEDF;
-    --ink-soft: #B6B2C6;
-    --cop: #A9ACFF;
-    --on-cop: #14152E;
-    --cop-wash: #2B2E66;
-    --kunyit: #F2B65A;
-    --on-kunyit: #14152E;
-    --night: #5055D0;
-    --on-night: #FFFFFF;
-    --lulus: #6FD39B;
-    --semak: #FBBF24;
-    --gagal: #FF8A80;
-    --press: none;
+    --bg: #0E1622;
+    --surface: #152030;
+    --surface-muted: #1C2A3C;
+    --line: #2A3A50;
+    --line-strong: #66788F;
+    --text: #EAF1F9;
+    --text-muted: #A9B8CA;
+    --primary: #8EC0F2;
+    --on-primary: #0E1622;
+    --primary-soft: #1B3352;
+    --accent: #F5C468;
+    --on-accent: #0E1622;
+    --success: #7DD08F;
+    --warning: #F2B65A;
+    --danger: #F28B7D;
+    --shadow-card: none;
 } }
 
-.text-display-xl { font-family: var(--font-display); font-size: 64px; line-height: 60px; font-weight: 800; letter-spacing: -0.02em; font-stretch: 75%; }
-.text-display { font-family: var(--font-display); font-size: 40px; line-height: 42px; font-weight: 800; letter-spacing: -0.015em; font-stretch: 75%; }
-.text-stamp { font-family: var(--font-display); font-size: 12px; line-height: 16px; font-weight: 800; letter-spacing: 0.16em; font-stretch: 75%; text-transform: uppercase; }
-.text-title { font-family: var(--font-text); font-size: 22px; line-height: 28px; font-weight: 700; }
-.text-heading { font-family: var(--font-text); font-size: 17px; line-height: 24px; font-weight: 700; }
-.text-body { font-family: var(--font-text); font-size: 16px; line-height: 24px; font-weight: 400; }
-.text-label { font-family: var(--font-text); font-size: 14px; line-height: 18px; font-weight: 600; }
-.text-caption { font-family: var(--font-text); font-size: 12px; line-height: 16px; font-weight: 500; }
-.text-figure { font-family: var(--font-mono); font-size: 30px; line-height: 34px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.text-log { font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 400; font-variant-numeric: tabular-nums; }
-body { background: var(--paper); color: var(--ink); font-family: var(--font-text); }
-:focus-visible { outline: 2px solid var(--cop); outline-offset: 2px; }
+.text-display { font-family: var(--font-display); font-size: 40px; line-height: 46px; font-weight: 800; letter-spacing: -0.01em; }
+.text-title { font-family: var(--font-display); font-size: 26px; line-height: 32px; font-weight: 800; }
+.text-heading { font-family: var(--font-text); font-size: 18px; line-height: 26px; font-weight: 700; }
+.text-body { font-family: var(--font-text); font-size: 16px; line-height: 25px; font-weight: 500; }
+.text-label { font-family: var(--font-text); font-size: 15px; line-height: 20px; font-weight: 600; }
+.text-caption { font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 500; }
+.text-figure { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums; }
 
-/* ---------- Multilingual: en · ms · zh · ta ----------
-   Set <html lang="en|ms|zh|ta">. Latin letters and digits (BizDecide, RM50,000) stay in the brand fonts;
-   Chinese and Tamil glyphs fall through to Noto Sans SC / Noto Sans Tamil. */
-:lang(zh) { --font-display: 'Noto Sans SC', 'Bricolage Grotesque', sans-serif; }
-:lang(zh) .text-display-xl, :lang(zh) .text-display { font-stretch: normal; letter-spacing: 0; font-weight: 700; }
-:lang(zh) .text-display-xl { font-size: 52px; line-height: 62px; }
-:lang(zh) .text-display { font-size: 34px; line-height: 44px; }
-:lang(ta) { --font-display: 'Noto Sans Tamil', 'Bricolage Grotesque', sans-serif; }
-:lang(ta) .text-display-xl, :lang(ta) .text-display { font-stretch: normal; letter-spacing: 0; font-weight: 700; }
-:lang(ta) .text-display-xl { font-size: 44px; line-height: 64px; }
-:lang(ta) .text-display { font-size: 30px; line-height: 44px; }
-:lang(ta) .text-body { line-height: 26px; }
-:lang(ta) .text-title, :lang(ta) .text-heading, :lang(ta) .text-label, :lang(ta) .text-caption { line-height: 1.6; }
-:lang(zh) .text-stamp, :lang(ta) .text-stamp { text-transform: none; letter-spacing: 0.02em; font-size: 13px; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-text); font-weight: 500; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

@@ -1,59 +1,72 @@
-/* BizDecide · The Chop.
+/* BizDecide · Laut × Langit.
    Brand tokens come from tokens.css (imported first in app/layout.tsx). The names below are the app's working
-   vocabulary, mapped onto those tokens. They are declared on every [data-theme] scope too, so a band can switch
-   theme (the landing hero is data-theme="dark", the sample brief inside it data-theme="light"). */
+   vocabulary, mapped onto those tokens; the older token names (paper, card, ink, cop…) are kept as aliases so
+   existing rules read the new palette. They are declared on every [data-theme] scope too, so a part of the page
+   can switch theme. --bg, --surface, --line, --line-strong and --radius-* come straight from tokens.css. */
 :root, [data-theme] {
-  --bg: var(--paper);
-  --surface: var(--card);
-  --surface-2: color-mix(in srgb, var(--card-sunken) 45%, var(--card));
-  --ink-2: color-mix(in srgb, var(--ink) 55%, var(--ink-soft));
-  --muted: var(--ink-soft);
-  --subtle: var(--ink-soft);
-  --placeholder: color-mix(in srgb, var(--ink-soft) 72%, var(--card));
-  --line: var(--rule);
-  --line-strong: color-mix(in srgb, var(--rule) 45%, var(--rule-strong));
+  /* aliases for the previous brand's token names */
+  --paper: var(--bg);
+  --card: var(--surface);
+  --card-sunken: var(--surface-muted);
+  --rule: var(--line);
+  --rule-strong: var(--line-strong);
+  --ink: var(--text);
+  --ink-soft: var(--text-muted);
+  --cop: var(--primary);
+  --on-cop: var(--on-primary);
+  --cop-wash: var(--primary-soft);
+  --kunyit: var(--accent);
+  --on-kunyit: var(--on-accent);
+  --lulus: var(--success);
+  --semak: var(--warning);
+  --gagal: var(--danger);
+  --r-chop: var(--radius-md);
+  --r-inner: var(--radius-sm);
+  /* figures: the text face with tabular numerals, as the kit's .text-figure */
+  --font-mono: var(--font-display);
+  /* depth is soft and minimal: one light shadow on raised cards, none on buttons */
+  --press: none;
+  --press-lg: var(--shadow-card);
 
-  /* cop: the brand and action colour */
-  --brand: var(--cop);
-  --brand-hover: color-mix(in srgb, var(--cop) 82%, var(--ink));
-  --brand-ink: var(--on-cop);
-  --brand-soft: var(--cop-wash);
-  --brand-line: color-mix(in srgb, var(--cop) 32%, var(--card));
-  --brand-ring: color-mix(in srgb, var(--cop) 24%, transparent);
+  --surface-2: color-mix(in srgb, var(--surface-muted) 45%, var(--surface));
+  --ink-2: color-mix(in srgb, var(--text) 55%, var(--text-muted));
+  --muted: var(--text-muted);
+  --subtle: var(--text-muted);
+  --placeholder: color-mix(in srgb, var(--text-muted) 72%, var(--surface));
 
-  /* verdicts: lulus = done / eligible, semak = borderline / needs a look, gagal = failed / not eligible */
-  --ok: var(--lulus);
-  --ok-soft: color-mix(in srgb, var(--lulus) 9%, var(--card));
-  --ok-line: color-mix(in srgb, var(--lulus) 32%, var(--card));
-  --urgent: var(--gagal);
-  --urgent-soft: color-mix(in srgb, var(--gagal) 8%, var(--card));
-  --urgent-line: color-mix(in srgb, var(--gagal) 30%, var(--card));
-  --important: var(--semak);
-  --important-soft: color-mix(in srgb, var(--semak) 9%, var(--card));
-  --important-line: color-mix(in srgb, var(--semak) 32%, var(--card));
-  --opportunity: var(--lulus);
+  /* primary: the brand and action colour */
+  --brand: var(--primary);
+  --brand-hover: color-mix(in srgb, var(--primary) 82%, var(--text));
+  --brand-ink: var(--on-primary);
+  --brand-soft: var(--primary-soft);
+  --brand-line: color-mix(in srgb, var(--primary) 32%, var(--surface));
+  --brand-ring: color-mix(in srgb, var(--primary) 24%, transparent);
+
+  /* verdicts: success = done / eligible, warning = borderline / needs a look, danger = failed / not eligible */
+  --ok: var(--success);
+  --ok-soft: color-mix(in srgb, var(--success) 9%, var(--surface));
+  --ok-line: color-mix(in srgb, var(--success) 32%, var(--surface));
+  --urgent: var(--danger);
+  --urgent-soft: color-mix(in srgb, var(--danger) 8%, var(--surface));
+  --urgent-line: color-mix(in srgb, var(--danger) 30%, var(--surface));
+  --important: var(--warning);
+  --important-soft: color-mix(in srgb, var(--warning) 9%, var(--surface));
+  --important-line: color-mix(in srgb, var(--warning) 32%, var(--surface));
+  --opportunity: var(--success);
   --opportunity-soft: var(--ok-soft);
   --opportunity-line: var(--ok-line);
-  /* text or icon on a filled status / cop tile */
-  --on-fill: var(--card);
+  /* text or icon on a filled status / primary tile */
+  --on-fill: var(--surface);
 
-  /* one radius cut from the same stamp; depth is the flat press, never a blur */
-  --radius-sm: var(--r-chop);
-  --radius: var(--r-chop);
-  --radius-lg: var(--r-chop);
-  --shadow-xs: var(--press);
-  --shadow-sm: var(--press);
-  --shadow-lg: var(--press-lg);
+  --radius: var(--radius-md);
+  --shadow-xs: var(--shadow-card);
+  --shadow-sm: var(--shadow-card);
+  --shadow-lg: var(--shadow-card);
 
   --sans: var(--font-text);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-:root, [data-theme="light"] { --press-lg: 4px 4px 0 rgba(30, 33, 73, 0.12); }
-[data-theme="dark"] { --press-lg: none; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --press-lg: none; } }
-/* the ground of night bands (landing hero, closing call to action) */
-:root { --band: var(--night); color-scheme: light dark; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --band: color-mix(in srgb, var(--paper) 70%, #000); } }
+:root { color-scheme: light dark; }
 [data-theme="dark"] { color-scheme: dark; }
 [data-theme="light"] { color-scheme: light; }
 
@@ -61,15 +74,15 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-text); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-text); font-weight: 400; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 body { min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
 a { color: var(--brand); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 h1, h2, h3, h4 { color: var(--ink); line-height: 1.2; margin: 0 0 8px; font-weight: 700; }
-/* display: Bricolage Grotesque ExtraBold at its condensed width, for headlines only */
-h1, h2 { font-family: var(--font-display); font-weight: 800; font-stretch: 75%; }
-h1 { font-size: clamp(2.25rem, 5.2vw, 4rem); line-height: 0.98; letter-spacing: -0.02em; }
+/* display: Roboto ExtraBold, for headlines only */
+h1, h2 { font-family: var(--font-display); font-weight: 800; }
+h1 { font-size: clamp(2.25rem, 5.2vw, 4rem); line-height: 1.04; letter-spacing: -0.02em; }
 h2 { font-size: 1.625rem; line-height: 1.08; letter-spacing: -0.015em; }
 h3 { font-size: 1.0625rem; line-height: 1.4; }
 :lang(zh) :is(h1, h2), :lang(ta) :is(h1, h2) { font-stretch: normal; letter-spacing: 0; font-weight: 700; }
@@ -92,7 +105,7 @@ button { font: inherit; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; flex-wrap: wrap; padding-top: 28px; padding-bottom: 36px; font-size: 0.875rem; color: var(--muted); }
 .footer-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-brand img { display: block; height: 28px; width: auto; }
-.footer-tagline { font-family: var(--font-display); font-weight: 800; font-stretch: 75%; font-size: 12px; line-height: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-tagline { font-size: 0.875rem; font-weight: 500; color: var(--ink-2); }
 .footer-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 
 /* ---------- buttons: one radius, a flat press that "stamps" down when clicked ---------- */
@@ -114,11 +127,14 @@ button { font: inherit; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---------- hero ---------- */
-/* night band: the landing hero. The section carries data-theme="dark" so everything inside re-themes. */
-.hero-band { position: relative; isolation: isolate; background: var(--band); color: var(--ink); border-bottom: 1px solid var(--rule); }
-.hero-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/brand/pattern-night.svg") 0 0 / 240px 240px; opacity: 0.22; -webkit-mask-image: linear-gradient(100deg, transparent 35%, #000 85%); mask-image: linear-gradient(100deg, transparent 35%, #000 85%); }
+/* sky band: the landing hero, a soft sky tint with the brand pattern fading in on the right */
+:root { --hero-pattern: url("/brand/pattern-light.svg"); }
+[data-theme="dark"] { --hero-pattern: url("/brand/pattern-navy.svg"); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hero-pattern: url("/brand/pattern-navy.svg"); } }
+.hero-band { position: relative; isolation: isolate; background: color-mix(in srgb, var(--primary-soft) 60%, var(--bg)); color: var(--ink); border-bottom: 1px solid var(--rule); }
+.hero-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--hero-pattern) 0 0 / 240px 240px; opacity: 0.25; -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 90%); mask-image: linear-gradient(100deg, transparent 40%, #000 90%); }
 .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; font-stretch: 75%; font-size: 12px; line-height: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brand); padding: 6px 12px 6px 10px; border: 1.5px solid currentColor; border-radius: var(--r-inner); margin-bottom: 20px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); padding: 6px 12px 6px 10px; border: 1.5px solid currentColor; border-radius: var(--r-inner); margin-bottom: 20px; }
 .hero h1 { margin-bottom: 18px; }
 .hero h1 .hl { color: var(--brand); }
 .lede { font-size: 1.125rem; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin-bottom: 28px; }
@@ -148,12 +164,12 @@ button { font: inherit; }
 .section-head { margin-bottom: 24px; }
 .section-head h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); margin-bottom: 4px; }
 /* the stamp kicker: names the section, Latin only (zh/ta fall back to plain bold) */
-.kicker, .mini-label, .evidence-label, .facts dt, .summary-head { font-family: var(--font-display); font-weight: 800; font-stretch: 75%; font-size: 12px; line-height: 16px; letter-spacing: 0.16em; text-transform: uppercase; }
+.kicker, .mini-label, .evidence-label, .facts dt, .summary-head { font-family: var(--font-display); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; }
 :lang(zh) :is(.kicker, .mini-label, .evidence-label, .facts dt, .summary-head, .eyebrow), :lang(ta) :is(.kicker, .mini-label, .evidence-label, .facts dt, .summary-head, .eyebrow) { text-transform: none; letter-spacing: 0.02em; font-size: 13px; }
 .kicker { color: var(--brand); margin-bottom: 10px; }
 
 /* ---------- cards ---------- */
-.card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-chop); box-shadow: var(--press); padding: 24px; }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-chop); box-shadow: var(--shadow-card); padding: 24px; }
 .card + .card { margin-top: 16px; }
 .card-title { display: flex; align-items: center; gap: 8px; font-size: 1rem; margin-bottom: 16px; }
 .card-title svg { color: var(--muted); }
@@ -223,7 +239,7 @@ button { font: inherit; }
 .field .help { font-size: 0.875rem; color: var(--muted); margin-top: 6px; }
 .field-error { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--urgent); margin: 6px 0 0; }
 input[type="text"], input[type="number"], input[type="month"], select, textarea {
-  width: 100%; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: var(--r-chop);
+  width: 100%; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
   background: var(--surface); color: var(--ink); font: inherit; font-size: 0.9375rem; box-shadow: var(--shadow-xs);
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -670,7 +686,7 @@ input[type="file"]:focus-visible + .drop-zone { outline: 2px solid var(--cop); o
 /* ---------- The Chop: signature pieces ---------- */
 /* Double rule: 2px cop border with a 1px cop rule 4px inside. Used only on the decision-ready panel
    (brief hero) and the sample brief on the landing page. */
-.double-rule { border: 2px solid var(--cop); box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px var(--cop), var(--press-lg); }
+.double-rule { border: 1px solid var(--line); box-shadow: var(--shadow-card); }
 
 /* The emblem presses in once when the decision is ready: 1.06 to 1, a 120ms settle, no bounce. */
 .chop-seal { display: block; pointer-events: none; user-select: none; }
@@ -685,12 +701,12 @@ input[type="file"]:focus-visible + .drop-zone { outline: 2px solid var(--cop); o
 }
 
 .brief-hero { position: relative; }
-.brief-hero .chop-seal { position: absolute; top: 22px; right: 24px; width: 128px; }
+.brief-hero .chop-seal { position: absolute; top: 22px; right: 24px; width: 64px; }
 /* the headline is the agent's own sentence and can run long, so it sits smaller than a page title */
-.brief-hero h1 { font-size: clamp(1.625rem, 2.8vw, 2.25rem); line-height: 1.06; max-width: min(34ch, calc(100% - 150px)); }
-.brief-hero .meta-row { padding-right: 150px; }
+.brief-hero h1 { font-size: clamp(1.625rem, 2.8vw, 2.25rem); line-height: 1.1; max-width: min(34ch, calc(100% - 90px)); }
+.brief-hero .meta-row { padding-right: 90px; }
 @media (max-width: 640px) {
-  .brief-hero .chop-seal { position: static; width: 104px; margin: 0 0 12px; }
+  .brief-hero .chop-seal { position: static; width: 48px; margin: 0 0 12px; }
   .brief-hero h1 { max-width: none; }
   .brief-hero .meta-row { padding-right: 0; }
 }
@@ -735,7 +751,7 @@ input[type="file"]:focus-visible + .drop-zone { outline: 2px solid var(--cop); o
 /* ---------- request page: progress while the agents work ---------- */
 .card-title .steps-done { margin-left: auto; padding: 1px 8px; border: 1px solid var(--ok-line); border-radius: 999px; background: var(--card); color: var(--ok); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
 .now-clock { display: grid; justify-items: end; gap: 2px; align-self: start; }
-.now-clock-l { font-family: var(--font-display); font-weight: 800; font-stretch: 75%; font-size: 11px; line-height: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.now-clock-l { font-family: var(--font-display); font-weight: 700; font-size: 11px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .now-clock-v { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; }
 @media (max-width: 640px) {
   .now { grid-template-columns: 44px minmax(0, 1fr); }
@@ -840,8 +856,8 @@ main:has(> .hero-band:first-child) { margin-top: calc(-1 * var(--header-h)); }
 main:has(> .hero-band:first-child) > .hero-band:first-child { padding-top: var(--header-h); }
 
 /* phone and tablet menu: a full-screen night sheet, big rows, New request pinned to the thumb */
-.site-menu { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; pointer-events: auto; background: var(--band); color: var(--ink); isolation: isolate; }
-.site-menu::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/brand/pattern-night.svg") 0 0 / 240px 240px; opacity: 0.14; -webkit-mask-image: linear-gradient(180deg, transparent 30%, #000 100%); mask-image: linear-gradient(180deg, transparent 30%, #000 100%); }
+.site-menu { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; pointer-events: auto; background: var(--bg); color: var(--ink); isolation: isolate; }
+.site-menu::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--hero-pattern) 0 0 / 240px 240px; opacity: 0.2; -webkit-mask-image: linear-gradient(180deg, transparent 30%, #000 100%); mask-image: linear-gradient(180deg, transparent 30%, #000 100%); }
 @media (prefers-reduced-motion: no-preference) { .site-menu { animation: menu-in 160ms ease-out both; } }
 @keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 .site-menu-top { display: flex; align-items: center; justify-content: space-between; height: 68px; padding: 8px 16px 0 20px; }
