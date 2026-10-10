@@ -1,6 +1,7 @@
 import type { Lang } from "./i18n";
 import type { ApplicationPack, RequestStatus } from "./types";
 import type { ImpactKind } from "./impact";
+import type { Channel } from "./statements";
 
 /** Copy for the request/brief page, "My requests" and the site header and footer, in English and Bahasa Melayu. */
 
@@ -84,6 +85,20 @@ const en = {
   priority: { urgent: "urgent", important: "important", opportunity: "opportunity" },
   decisionsTitle: (n: number) => `Your ${n} decisions`,
   approveAll: (n: number) => `Approve all ${n}`,
+  figSales: "Sales",
+  figPurchases: "Purchases",
+  figBank: "Bank balance",
+  stmtTitle: "Sales and bank statements",
+  salesByChannel: "Sales by channel",
+  channel: { cash: "Cash", qr: "QR payments", card: "Card", delivery: "Delivery apps", other: "Other" } as Record<Channel, string>,
+  totalSales: "Total sales",
+  bankCheck: "Bank check",
+  opening: "Opening balance",
+  moneyIn: "Money in",
+  moneyOut: "Money out",
+  closing: "Closing balance",
+  reconciles: "Opening + money in − money out = closing ✓",
+  notReconciled: "These don't add up: a bank line may be missing",
   whyProof: "Why & proof",
   expand: "Show more",
   checked: "How we checked this",
@@ -216,6 +231,20 @@ const ms: AppStrings = {
   priority: { urgent: "segera", important: "penting", opportunity: "peluang" },
   decisionsTitle: (n) => `${n} keputusan anda`,
   approveAll: (n) => `Lulus kesemua ${n}`,
+  figSales: "Jualan",
+  figPurchases: "Belian",
+  figBank: "Baki bank",
+  stmtTitle: "Penyata jualan dan bank",
+  salesByChannel: "Jualan ikut saluran",
+  channel: { cash: "Tunai", qr: "Bayaran QR", card: "Kad", delivery: "Aplikasi penghantaran", other: "Lain-lain" },
+  totalSales: "Jumlah jualan",
+  bankCheck: "Semakan bank",
+  opening: "Baki pembukaan",
+  moneyIn: "Duit masuk",
+  moneyOut: "Duit keluar",
+  closing: "Baki penutup",
+  reconciles: "Pembukaan + masuk − keluar = penutup ✓",
+  notReconciled: "Angka ini tidak sepadan: mungkin ada baris bank yang tiada",
   whyProof: "Kenapa & bukti",
   expand: "Tunjuk lagi",
   checked: "Cara kami menyemak",

@@ -1,6 +1,7 @@
 import { after, NextResponse } from "next/server";
 import { answerOwnerMessage, claudeEnabled, processRequest, STALE_RUN_MS } from "@/lib/claude-cfo";
-import { getOpenQuestion, getRequest, getResult, isStaleRun, listMessages } from "@/lib/store";
+import { getBusiness, getOpenQuestion, getRequest, getResult, isStaleRun, listMessages } from "@/lib/store";
+import { buildStatements } from "@/lib/statements";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,11 +12,14 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const request = await getRequest(id);
   if (!request) return NextResponse.json({ error: "Not found" }, { status: 404 });
   const done = request.status === "completed";
-  const [question, result, messages] = await Promise.all([
+  const [question, result, messages, business] = await Promise.all([
     request.status === "waiting_for_user" ? getOpenQuestion(id) : Promise.resolve(null),
     done ? getResult(id) : Promise.resolve(null),
     done ? listMessages(id) : Promise.resolve([]),
+    done ? getBusiness(request.businessId) : Promise.resolve(null),
   ]);
+  // The figure cards on the brief: added up in code from the owner's own rows.
+  const statements = business ? buildStatements(business) : null;
   // The brief page polls this route, so it also restarts work a server restart left behind.
   if (claudeEnabled()) {
     const older = (at: string | undefined, ms: number) => Boolean(at) && Date.now() - Date.parse(at!) > ms;
@@ -28,5 +32,5 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       }
     }
   }
-  return NextResponse.json({ request, question, result, messages });
+  return NextResponse.json({ request, question, result, messages, statements });
 }

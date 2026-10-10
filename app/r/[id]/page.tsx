@@ -7,7 +7,8 @@ import { useLang } from "@/lib/i18n";
 import { APP, type AppStrings } from "@/lib/i18n-app";
 import { impactKind, impactTotals } from "@/lib/impact";
 import { DecisionAction, FoundHeadline, useActions } from "@/components/DecisionAction";
-import { money } from "@/lib/markets";
+import { marketPack, money } from "@/lib/markets";
+import type { Channel, Statements } from "@/lib/statements";
 import { saveRequest, toSaved } from "@/lib/myRequests";
 import {
   type ApplicationPack,
@@ -19,7 +20,7 @@ import {
   type Result,
 } from "@/lib/types";
 
-type Payload = { request: RequestDoc; question: QuestionDoc | null; result: Result | null; messages?: ChatMessageDoc[] };
+type Payload = { request: RequestDoc; question: QuestionDoc | null; result: Result | null; messages?: ChatMessageDoc[]; statements?: Statements | null };
 
 /** "+RM82/mo", "+RM954 one-off", "RM40,000 funding", in the page language. */
 function impactText(d: Decision, rm: (n: number) => string, t: AppStrings) {
@@ -90,7 +91,8 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
   }
 
   const { request, question, result } = data;
-  if (request.status === "completed" && result) return <Brief request={request} result={result} messages={data.messages ?? []} t={t} lang={lang} />;
+  if (request.status === "completed" && result)
+    return <Brief request={request} result={result} messages={data.messages ?? []} statements={data.statements ?? null} t={t} lang={lang} />;
 
   const status = STATUS[request.status];
   const queued = request.status === "submitted";
@@ -405,7 +407,21 @@ const openFold = (id: string) => () => {
   if (el instanceof HTMLDetailsElement) el.open = true;
 };
 
-function Brief({ request, result, messages, t, lang }: { request: RequestDoc; result: Result; messages: ChatMessageDoc[]; t: AppStrings; lang: "en" | "ms" }) {
+function Brief({
+  request,
+  result,
+  messages,
+  statements,
+  t,
+  lang,
+}: {
+  request: RequestDoc;
+  result: Result;
+  messages: ChatMessageDoc[];
+  statements: Statements | null;
+  t: AppStrings;
+  lang: "en" | "ms";
+}) {
   const rm = money(request.market);
   const order = { urgent: 0, important: 1, opportunity: 2 } as const;
   const decisions = [...result.decisions].sort((a, b) => order[a.priority] - order[b.priority]);
@@ -465,6 +481,7 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         <h1>{headline}</h1>
         <FoundHeadline totals={totals} rm={rm} lang={lang} businessName={request.businessName} />
       </header>
+      {statements && <Figures s={statements} market={request.market} t={t} />}
 
       <div className="brief-h2-row">
         <h2 className="brief-h2">{t.decisionsTitle(decisions.length)}</h2>
@@ -548,6 +565,8 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         })}
       </section>
 
+      {statements && <StatementsFold s={statements} market={request.market} t={t} />}
+
       {result.applicationPacks?.length > 0 && (
         <details className="brief-more" id="funding">
           <summary>
@@ -604,6 +623,104 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         </details>
       )}
     </article>
+  );
+}
+
+/** "252,571.08": accounting style, the currency goes in the caption. Money out is shown in brackets. */
+const n2 = (n: number) => n.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const monthYear = (iso: string, locale: string) => new Date(`${iso.slice(0, 10)}T00:00:00`).toLocaleDateString(locale, { month: "short", year: "numeric" });
+const dayMonthYear = (iso: string, locale: string) =>
+  new Date(`${iso.slice(0, 10)}T00:00:00`).toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" });
+const span = (from: string, to: string, locale: string) => {
+  const [a, b] = [monthYear(from, locale), monthYear(to, locale)];
+  return a === b ? a : `${a} – ${b}`;
+};
+
+/** Three small cards under the headline: sales, purchases and the bank balance. */
+function Figures({ s, market, t }: { s: Statements; market: string; t: AppStrings }) {
+  const cur = marketPack(market)?.currencySymbol ?? "RM";
+  const cards: [string, number, string][] = [];
+  if (s.sales) cards.push([t.figSales, s.sales.total, span(s.sales.from, s.sales.to, t.dateLocale)]);
+  if (s.purchases) cards.push([t.figPurchases, s.purchases.total, span(s.purchases.from, s.purchases.to, t.dateLocale)]);
+  if (s.bank) cards.push([t.figBank, s.bank.closing, dayMonthYear(s.bank.to, t.dateLocale)]);
+  return (
+    <ul className="figs">
+      {cards.map(([label, value, when]) => (
+        <li key={label} className="fig">
+          <span className="fig-l">{label}</span>
+          <span className="fig-v">{n2(value)}</span>
+          <span className="fig-n">
+            {cur} · {when}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Sales by channel and the bank check, folded at the foot of the brief. */
+function StatementsFold({ s, market, t }: { s: Statements; market: string; t: AppStrings }) {
+  const cur = marketPack(market)?.currencySymbol ?? "RM";
+  const channels = s.sales?.channels ?? [];
+  if (!channels.length && !s.bank) return null;
+  return (
+    <details className="brief-more" id="statements">
+      <summary>
+        <Icon name="chart" size={18} /> {t.stmtTitle}
+        <FoldIcon label={t.expand} />
+      </summary>
+      <div className="brief-more-body stmts">
+        {s.sales && channels.length > 0 && (
+          <section className="stmt">
+            <h4>{t.salesByChannel}</h4>
+            <span className="stmt-n">
+              {cur} · {span(s.sales.from, s.sales.to, t.dateLocale)}
+            </span>
+            <dl>
+              {channels.map((c) => (
+                <div key={c.key}>
+                  <dt>{t.channel[c.key]}</dt>
+                  <dd>{n2(c.amount)}</dd>
+                </div>
+              ))}
+              <div className="stmt-total">
+                <dt>{t.totalSales}</dt>
+                <dd>{n2(s.sales.total)}</dd>
+              </div>
+            </dl>
+          </section>
+        )}
+        {s.bank && (
+          <section className="stmt">
+            <h4>{t.bankCheck}</h4>
+            <span className="stmt-n">
+              {cur} · {span(s.bank.from, s.bank.to, t.dateLocale)}
+            </span>
+            <dl>
+              <div>
+                <dt>{t.opening}</dt>
+                <dd>{n2(s.bank.opening)}</dd>
+              </div>
+              <div>
+                <dt>{t.moneyIn}</dt>
+                <dd>{n2(s.bank.moneyIn)}</dd>
+              </div>
+              <div>
+                <dt>{t.moneyOut}</dt>
+                <dd>({n2(s.bank.moneyOut)})</dd>
+              </div>
+              <div className="stmt-total">
+                <dt>{t.closing}</dt>
+                <dd>{n2(s.bank.closing)}</dd>
+              </div>
+            </dl>
+            <p className={`stmt-check${s.bank.reconciles ? "" : " bad"}`}>
+              <Icon name={s.bank.reconciles ? "checkCircle" : "alert"} size={15} /> {s.bank.reconciles ? t.reconciles : t.notReconciled}
+            </p>
+          </section>
+        )}
+      </div>
+    </details>
   );
 }
 
