@@ -152,14 +152,14 @@ export function MyRequestsPage() {
         </div>
       )}
 
-      <div className="notice" style={{ marginTop: 16 }}>
-        <Icon name="info" />
-        <p>
+      <p className="req-note">
+        <Icon name="info" size={14} />
+        <span>
           {t.deviceNote[0]}
           <strong>{t.deviceNote[1]}</strong>
           {t.deviceNote[2]}
-        </p>
-      </div>
+        </span>
+      </p>
     </div>
   );
 }

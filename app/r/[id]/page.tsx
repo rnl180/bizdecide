@@ -413,6 +413,22 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
   const { byIndex, approve } = useActions(request.id);
   const passed = result.verification.filter((v) => v.passed).length;
   const [headline] = splitDash(result.headline);
+  // "Approve all": every decision not yet approved (or that failed), most urgent first, one after another.
+  const toApprove = decisions.map((d) => result.decisions.indexOf(d)).filter((i) => !byIndex[i] || byIndex[i]!.status === "failed");
+  const [approvingAll, setApprovingAll] = useState(false);
+  const [allErr, setAllErr] = useState<string | null>(null);
+  async function approveAll() {
+    if (approvingAll) return;
+    setApprovingAll(true);
+    setAllErr(null);
+    try {
+      for (const i of toApprove) await approve(i, lang);
+    } catch (e) {
+      setAllErr(e instanceof Error ? e.message : t.sendRetry);
+    } finally {
+      setApprovingAll(false);
+    }
+  }
   // Everything beyond the headline, the amounts and the actions starts folded; printing opens it all.
   useEffect(() => {
     const openAll = () => document.querySelectorAll("details").forEach((el) => (el.open = true));
@@ -450,7 +466,20 @@ function Brief({ request, result, messages, t, lang }: { request: RequestDoc; re
         <FoundHeadline totals={totals} rm={rm} lang={lang} businessName={request.businessName} />
       </header>
 
-      <h2 className="brief-h2">{t.decisionsTitle(decisions.length)}</h2>
+      <div className="brief-h2-row">
+        <h2 className="brief-h2">{t.decisionsTitle(decisions.length)}</h2>
+        {toApprove.length > 1 && (
+          <button type="button" className="btn btn-primary no-print" onClick={approveAll} aria-disabled={approvingAll || undefined}>
+            {approvingAll ? <Icon name="spinner" size={18} className="spin" /> : <Icon name="checkCircle" size={18} />}
+            {t.approveAll(toApprove.length)}
+          </button>
+        )}
+      </div>
+      {allErr && (
+        <p className="field-error" role="alert">
+          <Icon name="alert" size={14} /> {allErr}
+        </p>
+      )}
       <section className="decisions">
         {decisions.map((d, i) => {
           const index = result.decisions.indexOf(d);
