@@ -191,4 +191,36 @@ test("claims, interruption recovery and delivery are atomic", async (t) => {
     await assert.rejects(store.answerQuestion(pending, "Yes"), /closed/);
     await store.saveResult(id, brief, recovered.claimToken);
   });
+
+  await t.test("owner outcomes persist separately, support corrections and reject concurrent stale updates", async () => {
+    const id = await create();
+    const run = (await store.claimRequest(id, "Worker"))!;
+    await store.saveResult(id, brief, run.claimToken);
+    const action = await store.createAction({ requestId: id, businessId, decisionIndex: 0, decisionTitle: "Refund", lang: "en" });
+    await assert.rejects(store.recordActionOutcome(id, action.id, { status: "sent", revision: 0 }), /until.*prepared/);
+    const claimed = (await store.claimAction(action.id))!;
+    const email = { subject: "Refund", body: "Please refund the additional RM642." };
+    await store.completeAction(action.id, { status: "done", summary: "Prepared", email }, claimed.claimToken);
+    assert.equal((await store.getAction(action.id))?.outcome, undefined);
+    await assert.rejects(store.recordActionOutcome("another-request", action.id, { status: "sent", revision: 0 }), /not found/);
+    const sent = await store.recordActionOutcome(id, action.id, { status: "sent", revision: 0 });
+    assert.equal(sent.outcome?.source, "owner_reported");
+    const before = await store.getResult(id);
+    const attempts = await Promise.allSettled([
+      store.recordActionOutcome(id, action.id, { status: "recorded", revision: 1, amountRm: 321.25, note: "Partial refund received on 11 October" }),
+      store.recordActionOutcome(id, action.id, { status: "recorded", revision: 1, amountRm: 642, note: "Full refund" }),
+    ]);
+    assert.equal(attempts.filter((x) => x.status === "fulfilled").length, 1);
+    assert.equal(attempts.filter((x) => x.status === "rejected").length, 1);
+    const corrected = await store.recordActionOutcome(id, action.id, { status: "recorded", revision: 2, amountRm: 0, note: "Correction: refund was declined" });
+    assert.equal(corrected.outcome?.status === "recorded" && corrected.outcome.amountRm, 0);
+    assert.ok(corrected.outcome?.updatedAt);
+    assert.deepEqual(corrected.email, email);
+    assert.equal(corrected.status, "done");
+    assert.deepEqual(await store.getResult(id), before);
+    const reset = await store.recordActionOutcome(id, action.id, { status: "prepared", revision: 3 });
+    assert.equal(reset.outcome?.status, "prepared");
+    assert.equal("amountRm" in reset.outcome!, false);
+    assert.deepEqual((await store.listActions(id))[0]?.outcome, reset.outcome);
+  });
 });

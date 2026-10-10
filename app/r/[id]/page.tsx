@@ -434,7 +434,7 @@ function Brief({
   const order = { urgent: 0, important: 1, opportunity: 2 } as const;
   const decisions = [...result.decisions].sort((a, b) => order[a.priority] - order[b.priority]);
   const totals = impactTotals(decisions);
-  const { byIndex, approve } = useActions(request.id);
+  const { byIndex, approve, recordOutcome } = useActions(request.id);
   const passed = result.verification.filter((v) => v.passed).length;
   const [headline] = splitDash(result.headline);
   // "Approve all": every decision not yet approved (or that failed), most urgent first, one after another.
@@ -566,6 +566,7 @@ function Brief({
                 decision={d}
                 action={byIndex[index]}
                 onApprove={(l) => approve(index, l)}
+                onOutcome={recordOutcome}
                 lang={lang}
               />
             </div>
