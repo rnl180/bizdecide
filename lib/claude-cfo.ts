@@ -462,7 +462,24 @@ const block = (tag: string, data: unknown) => `<${tag}>\n${typeof data === "stri
 
 // ---------- a request, end to end ----------
 
-const ResultFormat = zodOutputFormat(ResultSchema);
+/**
+ * What the Verifier writes. Structured outputs allow at most 24 optional fields in the main schema (the API
+ * answers 400 above that; fields inside shared sub-schemas such as a decision or a pack don't count), so this
+ * leaves out what the model shouldn't write: the server fills notChecked and reportUrl, and the later-phase
+ * blocks (morning note, follow-ups, e-invoice, zakat, channels, benchmarks) come from code, not the model.
+ * Check the count when adding an optional field to Result.
+ */
+const VerifierOutputSchema = ResultSchema.omit({
+  reportUrl: true,
+  notChecked: true,
+  morningNote: true,
+  followUps: true,
+  einvoice: true,
+  zakat: true,
+  channels: true,
+  benchmarks: true,
+});
+const ResultFormat = zodOutputFormat(VerifierOutputSchema);
 const clampResult = (r: Json) => ({
   ...r,
   keyNumbers: Array.isArray(r.keyNumbers) ? r.keyNumbers.slice(0, 4) : r.keyNumbers,
@@ -573,7 +590,7 @@ export function processRequest(requestId: string) {
         },
       ];
       const final = await converse(verifierParams, verifierMessages, usage);
-      const result: Result = await parseStructured(ResultSchema, final, verifierParams, verifierMessages, usage, clampResult);
+      const result: Result = await parseStructured(VerifierOutputSchema, final, verifierParams, verifierMessages, usage, clampResult);
       result.agentsUsed = [...LANES.map((l) => l.agent).filter((a) => !laneData[a]?.error), "Verifier"];
       for (const v of result.verification) {
         const status = v.status ?? (v.passed ? "passed" : "failed");
