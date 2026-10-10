@@ -1,4 +1,4 @@
-import MY from "@/workbuddy/knowledge/markets/MY/market.json";
+import MY from "../workbuddy/knowledge/markets/MY/market.json";
 
 /**
  * BizDecide is built for Malaysia: one market pack, workbuddy/knowledge/markets/MY/ (see the README there).

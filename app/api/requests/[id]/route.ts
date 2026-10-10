@@ -32,5 +32,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       }
     }
   }
-  return NextResponse.json({ request, question, result, messages, statements });
+  const { claimToken: _claimToken, ...publicRequest } = request;
+  return NextResponse.json({ request: publicRequest, question, result, messages, statements });
 }

@@ -4,7 +4,8 @@ import { DEFAULT_MARKET, marketPack } from "./markets";
 /**
  * The contract between the BizDecide app (data layer) and WorkBuddy (the brain).
  * The app only collects and stores these shapes. WorkBuddy reads them through
- * the MCP server, does all of the analysis, and writes a Result back.
+ * the MCP server, analyses it, and writes a Result back. The server independently
+ * recalculates supported structured financial effects before accepting delivery.
  */
 
 export const SERVICES = ["cfo_brief", "bookkeeping", "procurement", "funding"] as const;
@@ -107,6 +108,7 @@ export interface ProgressEntry {
 
 export interface RequestDoc {
   id: string;
+  claimToken?: string; // worker lease; never expose in the public owner API
   businessId: string;
   businessName: string;
   service: Service;
@@ -234,6 +236,7 @@ export const DecisionSchema = z.object({
   action: z.string().min(1), // what to do, in one sentence
   impactRm: z.number().optional(), // estimated RM impact (positive = saving or gain); what kind is in impactType
   impactType: z.enum(["monthly", "one_off", "financing"]).optional(), // monthly saving/gain, one-off amount, or funding you can raise
+  impactCheckId: z.string().min(1).optional(), // copied from get_impact_checks; server recalculates before accepting impactRm
   reason: z.string().min(1), // why, with the numbers
   evidence: z.array(EvidenceSchema).default([]),
   cta: z.string().optional(), // button text, e.g. "Draft the order", "Start application"

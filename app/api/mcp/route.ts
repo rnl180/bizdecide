@@ -4,6 +4,10 @@ import {
   answerMessage,
   claimNextAction,
   claimNextMessage,
+  claimNextRequest,
+  claimRequest,
+  REQUEST_STALE_MS,
+  RequestClaimError,
   completeAction,
   getAction,
   createQuestion,
@@ -19,17 +23,20 @@ import {
   sleep,
   updateRequest,
 } from "@/lib/store";
-import { LANE_IDS, LANE_STATES, ResultSchema } from "@/lib/types";
+import { LANE_IDS, LANE_STATES } from "@/lib/types";
 import { impactKind } from "@/lib/impact";
 import { makeDataLink, rememberOrigin } from "@/lib/data-link";
 import { bucket } from "@/lib/firebase";
+import { ActionCompletionError } from "@/lib/action-completion";
+import { sourceRows } from "@/lib/source-rows";
+import { DeliveryResultSchema, ResultDeliveryError } from "@/lib/result-delivery";
+import { financialImpactChecks } from "@/lib/financial-impact";
 
 /**
  * BizDecide MCP server.
  *
- * These tools only MOVE data between the BizDecide app and WorkBuddy.
- * They never analyse anything. All classification, analysis, research,
- * verification and decision-making happens inside WorkBuddy and its skills.
+ * WorkBuddy owns planning, analysis, research and decisions. The backend also
+ * independently recalculates supported financial effects from uploaded rows.
  */
 
 export const runtime = "nodejs";
@@ -55,13 +62,26 @@ const mcp = createMcpHandler(
       {
         title: "List pending requests",
         description:
-          "List business owners' service requests waiting to be processed (status 'submitted'), oldest first. Start every run here.",
-        inputSchema: z.object({ includeInProgress: z.boolean().optional().describe("Also return requests already 'processing'") }),
+          "List business owners' service requests, oldest first. Listing does not claim anything: use claim_request before working, or use wait_for_request for automatic claiming and recovery.",
+        inputSchema: z.object({ includeInProgress: z.boolean().optional().describe("Also return processing or waiting requests; claim_request will only take interrupted runs") }),
       },
       async ({ includeInProgress }) => {
-        const statuses = includeInProgress ? (["submitted", "processing"] as const) : (["submitted"] as const);
+        const statuses = includeInProgress ? (["submitted", "processing", "waiting_for_user"] as const) : (["submitted"] as const);
         const rows = await listRequestsByStatus([...statuses]);
         return json(rows.map(({ id, businessId, businessName, service, status, createdAt }) => ({ id, businessId, businessName, service, status, createdAt })));
+      },
+    );
+
+    server.registerTool(
+      "claim_request",
+      {
+        title: "Claim a selected request",
+        description: "After list_pending_requests, atomically claim one request before doing any work. Keep request.claimToken and pass it to update_request, ask_user, get_answer and submit_results. A busy or completed request cannot be claimed; interrupted work can be recovered after ten minutes without progress.",
+        inputSchema: z.object({ requestId: z.string() }),
+      },
+      async ({ requestId }) => {
+        const request = await claimRequest(requestId, "BizDecide agents on WorkBuddy started working", REQUEST_STALE_MS);
+        return request ? json({ request }) : fail("This request is already owned by another run, completed, or missing.");
       },
     );
 
@@ -111,6 +131,10 @@ const mcp = createMcpHandler(
               action: { id: act.id, requestId: act.requestId, decisionIndex: act.decisionIndex, writeIn: act.lang === "ms" ? "Bahasa Melayu" : "English" },
               kind, // one_off: get money back · monthly: supplier price / cost · financing: funding application
               decision,
+              sourceRows: decision.evidence.filter((e) => e.source).map((e) => {
+                const rows = sourceRows(business, e.source!);
+                return { source: e.source, rows: rows.slice(0, 50), total: rows.length, truncated: rows.length > 50 };
+              }),
               business: {
                 name: p.name,
                 sector: p.sector,
@@ -127,14 +151,11 @@ const mcp = createMcpHandler(
                 "Carry out this decision for the owner, in action.writeIn. one_off: a short, polite email to the counterparty (supplier, or the bank/QR acquirer) asking for the money back, quoting the invoice numbers, dates, amounts and bank references from decision.evidence. monthly: an email to the supplier asking why the price rose and for the old price, plus one line asking 2 alternative suppliers for a quote. financing: a document (the application pack: why the business qualifies, amount and purpose, prefilled answers, document checklist) and a short cover email to the agency. Use the supplier's email from suppliers[].contact when there is one. Sign as the owner. If your Gmail connector is available, save the email as a Gmail DRAFT (never send). Then complete_action(actionId, summary, channel, email and/or document). Then call wait_for_request again.",
             });
           }
-          const [next] = await listRequestsByStatus(["submitted"], 1);
+          const next = await claimNextRequest("BizDecide agents on WorkBuddy started working");
           if (next) {
-            await updateRequest(next.id, {
-              status: "processing",
-              progress: { step: "Picked up by your CFO team", detail: "BizDecide agents on WorkBuddy started working" },
-            });
             const { id, businessId, businessName, service, market, createdAt } = next;
-            return json({ status: "new_request", request: { id, businessId, businessName, service, market: market ?? "MY", createdAt }, next: "Follow the RECIPE: get_data_link(businessId), then python3 run_all.py --data <url>, ask_user only if needed, then submit_results. Then call wait_for_request again." });
+            const business = await getBusiness(businessId);
+            return json({ status: "new_request", request: { id, businessId, businessName, service, claimToken: next.claimToken, market: market ?? "MY", language: next.language ?? business?.profile.language ?? "en", goal: business?.profile.goal, createdAt }, next: "Keep request.claimToken for update_request, ask_user, get_answer and submit_results. Read get_data_link(businessId), run python3 run_all.py --data <url>, ask_user only if needed, verify the selected evidence, then submit_results. An interrupted request restarts from its own data; never reuse unchecked output from an expired run. Then call wait_for_request again." });
           }
           await sleep(2000);
         }
@@ -163,6 +184,19 @@ const mcp = createMcpHandler(
             `python3 skills/sme-classifier/scripts/classify.py --data "${url}"`,
           ],
         });
+      },
+    );
+
+    server.registerTool(
+      "get_impact_checks",
+      {
+        title: "Get independently calculated financial effects",
+        description: "Recalculate supported financial effects from the full uploaded data: overpayments, missing QR/card settlement query amounts, and monthly supplier price increases. Before submit_results, copy the selected check's id as impactCheckId, exact impactRm, impactType, and all sources into decision evidence. Keep its assumptions visible. Unsupported effects, including proposed financing amounts, must omit impactRm. The server recalculates again on delivery and rejects mismatches or double counting.",
+        inputSchema: z.object({ businessId: z.string() }),
+      },
+      async ({ businessId }) => {
+        const b = await getBusiness(businessId);
+        return b ? json({ checks: financialImpactChecks(b) }) : fail(`Business ${businessId} not found`);
       },
     );
 
@@ -200,6 +234,7 @@ const mcp = createMcpHandler(
           "Report progress to the owner's screen and/or change status. Call it at every major step (e.g. 'Classifying SME category', 'Verifying funding links') so the owner sees the agents working. Set status 'processing' when you start. Tag each step with its lane (bookkeeper, reconciliation, procurement, classifier, funding, verifier) and state, and put the RM amount of a money finding in impactRm.",
         inputSchema: z.object({
           requestId: z.string(),
+          claimToken: z.string().min(1),
           status: z.enum(["processing", "failed"]).optional(),
           step: z.string().optional().describe("Short step label shown to the owner"),
           detail: z.string().optional(),
@@ -209,10 +244,10 @@ const mcp = createMcpHandler(
           error: z.string().optional(),
         }),
       },
-      async ({ requestId, status, step, detail, lane, state, impactRm, error }) => {
+      async ({ requestId, claimToken, status, step, detail, lane, state, impactRm, error }) => {
         const r = await getRequest(requestId);
         if (!r) return fail(`Request ${requestId} not found`);
-        await updateRequest(requestId, { status, error, progress: step ? { step, detail, lane, state, impactRm } : undefined });
+        await updateRequest(requestId, { status, error, progress: step ? { step, detail, lane, state, impactRm } : undefined }, claimToken);
         return json({ ok: true });
       },
     );
@@ -225,6 +260,7 @@ const mcp = createMcpHandler(
           "Ask the owner a multiple-choice question in the BizDecide app (they can also type their own answer under 'Other'). Use it only when the data is genuinely ambiguous and the answer changes the result, e.g. an invoice that could be personal or business. Waits up to waitSeconds for the answer. If it times out, it returns status 'pending' and a questionId: either call get_answer later, or continue with defaultOption and record that assumption.",
         inputSchema: z.object({
           requestId: z.string(),
+          claimToken: z.string().min(1),
           question: z.string(),
           context: z.string().optional().describe("Evidence shown under the question, e.g. 'Invoice HN-2231, RM2,400, 14 Sep'"),
           options: z.array(z.string()).min(2).max(5),
@@ -233,18 +269,18 @@ const mcp = createMcpHandler(
           waitSeconds: z.number().int().min(0).max(50).default(45),
         }),
       },
-      async ({ requestId, question, context, options, allowOther, defaultOption, waitSeconds }) => {
+      async ({ requestId, claimToken, question, context, options, allowOther, defaultOption, waitSeconds }) => {
         const r = await getRequest(requestId);
         if (!r) return fail(`Request ${requestId} not found`);
-        const questionId = await createQuestion({ requestId, question, context, options, allowOther, defaultOption });
-        await updateRequest(requestId, { status: "waiting_for_user", progress: { step: "Waiting for your answer", detail: question } });
+        const questionId = await createQuestion({ requestId, question, context, options, allowOther, defaultOption }, claimToken);
+        await updateRequest(requestId, { status: "waiting_for_user", progress: { step: "Waiting for your answer", detail: question } }, claimToken);
 
         const deadline = Date.now() + waitSeconds * 1000;
         while (Date.now() < deadline) {
           await sleep(2000);
           const q = await getQuestion(questionId);
           if (q?.status === "answered") {
-            await updateRequest(requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } });
+            await updateRequest(requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } }, claimToken);
             return json({ status: "answered", questionId, answer: q.answer, otherText: q.otherText ?? null });
           }
         }
@@ -258,21 +294,21 @@ const mcp = createMcpHandler(
         title: "Get answer",
         description:
           "Check whether the owner has answered a question from ask_user. Pass giveUp=true to close the question and continue with its default.",
-        inputSchema: z.object({ questionId: z.string(), giveUp: z.boolean().optional() }),
+        inputSchema: z.object({ questionId: z.string(), claimToken: z.string().min(1), giveUp: z.boolean().optional() }),
       },
-      async ({ questionId, giveUp }) => {
+      async ({ questionId, claimToken, giveUp }) => {
         const q = await getQuestion(questionId);
         if (!q) return fail(`Question ${questionId} not found`);
         if (q.status === "answered") {
-          await updateRequest(q.requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } });
+          await updateRequest(q.requestId, { status: "processing", progress: { step: "Answer received", detail: q.otherText || q.answer } }, claimToken);
           return json({ status: "answered", answer: q.answer, otherText: q.otherText ?? null });
         }
         if (giveUp && q.status === "open") {
-          await expireQuestion(questionId);
+          await expireQuestion(questionId, claimToken);
           await updateRequest(q.requestId, {
             status: "processing",
             progress: { step: "No answer yet, continuing", detail: `Assumed: ${q.defaultOption ?? "default"}` },
-          });
+          }, claimToken);
           return json({ status: "expired", usedDefault: q.defaultOption ?? null });
         }
         return json({ status: q.status });
@@ -308,7 +344,7 @@ const mcp = createMcpHandler(
       {
         title: "Complete an approved action",
         description:
-          "Report the result of a decision the owner approved (wait_for_request status 'owner_action'). Pass what you wrote: email {to, subject, body} and/or document {title, sections[]}, plus a one-line summary for the owner (e.g. 'Refund request to Ladang Susu Segar saved to your Gmail drafts'). channel: 'gmail_draft' ONLY if you really saved it as a Gmail draft, 'document' for a pack or letter, else 'note'. Never send emails. If you could not do it, status 'failed' with error.",
+          "Report the result of a decision the owner approved (wait_for_request status 'owner_action'). To finish with status done, attach the actual email {to, subject, body} and/or document {title, sections[]} plus a short summary. Refunds require an email. A summary or links alone will be rejected: repair the output and retry the same action. channel: 'gmail_draft' ONLY if you really saved it as a Gmail draft, 'document' for a pack or letter, else 'note'. Never send emails. If you could not do it, status 'failed' with error.",
         inputSchema: z.object({
           actionId: z.string(),
           status: z.enum(["done", "failed"]).default("done"),
@@ -336,15 +372,20 @@ const mcp = createMcpHandler(
         const a = await getAction(actionId);
         if (!a) return fail(`Action ${actionId} not found`);
         if (a.status === "done") return fail("This action is already done");
-        await completeAction(actionId, {
-          status,
-          summary,
-          channel: channel ?? (document ? "document" : "note"),
-          email,
-          document,
-          links,
-          error: status === "failed" ? (error ?? summary) : undefined,
-        });
+        try {
+          await completeAction(actionId, {
+            status,
+            summary,
+            channel: channel ?? (document ? "document" : "note"),
+            email,
+            document,
+            links,
+            error: status === "failed" ? (error ?? summary) : undefined,
+          });
+        } catch (error) {
+          if (error instanceof ActionCompletionError) return fail(error.message);
+          throw error;
+        }
         return json({ ok: true, next: "Call wait_for_request again." });
       },
     );
@@ -354,14 +395,16 @@ const mcp = createMcpHandler(
       {
         title: "Submit results",
         description:
-          "Deliver the final CFO brief to the owner and mark the request completed. Decisions must be concrete actions with money impact in the market's currency (impactRm holds it) and evidence (invoice numbers, supplier names, official programme URLs). Include the verification checks you ran (status not_checked for what the data can't show) and any assumptions. Give each decision a confidence (high, medium or check). Evidence that cites invoices, bank lines or sale dates carries source {table, keys} with keys copied exactly from the script output. Optional extras: numbers (the figures table with formula, source and basis), impactBasis, hoursSavedPerMonth with hoursBasis. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose, repayment and affordability, next steps and the official URL.",
-        inputSchema: z.object({ requestId: z.string(), result: ResultSchema }),
+          "Deliver the final CFO brief to the owner and mark the request completed. Each numeric impactRm requires impactCheckId, exact impactRm/impactType and all source evidence from get_impact_checks; delivery independently recalculates and rejects mismatches. Omit impactRm for unsupported estimates or financing. Include the verification checks you ran (status not_checked for what the data can't show) and any assumptions. Give each decision a confidence (high, medium or check). Evidence that cites invoices, bank lines or sale dates carries source {table, keys} copied exactly from the data. Optional extras: numbers (the figures table with formula, source and basis), impactBasis, hoursSavedPerMonth with hoursBasis. For 'funding' and 'cfo_brief', add applicationPacks for the top 1-3 programmes the business is eligible or conditional for: a document checklist marked ready/partial/missing against the data we hold, prefilled application answers, suggested amount and purpose (a proposal, not verified funding), repayment and affordability, next steps and the official URL.",
+        inputSchema: z.object({ requestId: z.string(), claimToken: z.string().min(1), result: DeliveryResultSchema }),
       },
-      async ({ requestId, result }) => {
-        const r = await getRequest(requestId);
-        if (!r) return fail(`Request ${requestId} not found`);
-        await saveResult(requestId, result);
-        await updateRequest(requestId, { status: "completed", progress: { step: "CFO brief delivered", detail: result.headline } });
+      async ({ requestId, claimToken, result }) => {
+        try {
+          await saveResult(requestId, result, claimToken);
+        } catch (error) {
+          if (error instanceof ResultDeliveryError || error instanceof RequestClaimError) return fail(error.message);
+          throw error;
+        }
         return json({ ok: true, viewAt: `/r/${requestId}` });
       },
     );
@@ -369,7 +412,7 @@ const mcp = createMcpHandler(
   {
     serverInfo: { name: "bizdecide", version: "0.1.0" },
     instructions:
-      "BizDecide backend. Use list_pending_requests, then get_business_data, then report progress with update_request, ask the owner with ask_user only when needed, and finish with submit_results. In on-duty mode, wait_for_request also returns owner follow-up questions (answer with reply_to_owner) and approved decisions (carry them out, Gmail drafts only, then complete_action). These tools move data only; do all analysis yourself with the BizDecide skills.",
+      "BizDecide backend. Use wait_for_request, or list_pending_requests followed by claim_request. Keep request.claimToken for update_request, ask_user, get_answer and submit_results. Use get_impact_checks for every numeric decision impact; the server recalculates on delivery. Deliver supported decisions with source evidence and recorded verification checks. In on-duty mode, wait_for_request also returns owner follow-up questions (answer with reply_to_owner) and approved decisions (carry them out, Gmail drafts only, then complete_action). Plan and analyse with the BizDecide skills.",
   },
 );
 

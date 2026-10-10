@@ -1,6 +1,8 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import { ActionCompletionError, actionCompletionProblem, type ActionCompletion } from "./action-completion";
+import { validateResultDelivery } from "./result-delivery";
 import type { ActionDoc, BusinessInput, ChatMessageDoc, ProgressEntry, QuestionDoc, RequestDoc, RequestStatus, Result, Service } from "./types";
 
 /**
@@ -31,6 +33,7 @@ type Doc = Record<string, unknown>;
 type Pre = [string, "==" | "in", unknown];
 
 interface Backend {
+  transaction<T>(fn: (tx: StoreTransaction) => Promise<T>): Promise<T>;
   add(c: Collection, data: Doc): Promise<string>;
   set(c: Collection, id: string, data: Doc): Promise<void>;
   get<T>(c: Collection, id: string): Promise<(T & { id: string }) | null>;
@@ -38,12 +41,21 @@ interface Backend {
   where<T>(c: Collection, match: (d: Doc) => boolean, limit: number, pre?: Pre): Promise<(T & { id: string })[]>;
 }
 
+interface StoreTransaction {
+  get<T>(c: Collection, id: string): Promise<(T & { id: string }) | null>;
+  set(c: Collection, id: string, data: Doc): void;
+  update(c: Collection, id: string, patch: Doc): void;
+}
+const defined = (data: Doc): Doc => Object.fromEntries(Object.entries(data).filter(([, value]) => value !== undefined));
+
 // ---------- local JSON file backend ----------
 
 const DATA_DIR = path.join(process.cwd(), ".data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
 type Db = Record<Collection, Record<string, Doc>>;
-let queue: Promise<unknown> = Promise.resolve();
+// Route bundles must share the same queue. Local storage is for a single Node process;
+// Firestore transactions coordinate multiple server instances.
+const queues = ((globalThis as unknown as { __bizdecideDbQueues?: Map<string, Promise<unknown>> }).__bizdecideDbQueues ??= new Map());
 
 async function loadDb(): Promise<Db> {
   const empty: Db = { businesses: {}, requests: {}, questions: {}, results: {}, messages: {}, actions: {}, lane_outputs: {} };
@@ -55,21 +67,31 @@ async function loadDb(): Promise<Db> {
 }
 async function saveDb(db: Db) {
   await mkdir(DATA_DIR, { recursive: true });
-  await writeFile(DB_FILE, JSON.stringify(db, null, 2));
+  const temp = `${DB_FILE}.${randomUUID()}.tmp`;
+  await writeFile(temp, JSON.stringify(db, null, 2));
+  await rename(temp, DB_FILE);
 }
 // Serialise writes so concurrent requests don't clobber the file.
 function withDb<T>(fn: (db: Db) => T | Promise<T>, write: boolean): Promise<T> {
-  const run = queue.then(async () => {
+  const run = (queues.get(DB_FILE) ?? Promise.resolve()).then(async () => {
     const db = await loadDb();
     const out = await fn(db);
     if (write) await saveDb(db);
     return out;
   });
-  queue = run.catch(() => undefined);
+  queues.set(DB_FILE, run.catch(() => undefined));
   return run;
 }
 
 const local: Backend = {
+  transaction: (fn) => withDb(async (data) => fn({
+    get: async <T,>(c: Collection, id: string) => data[c][id] ? ({ id, ...data[c][id] } as T & { id: string }) : null,
+    set: (c, id, doc) => { data[c][id] = defined(doc); },
+    update: (c, id, patch) => {
+      if (!data[c][id]) throw new Error(`${c}/${id} not found`);
+      Object.assign(data[c][id], defined(patch));
+    },
+  }), true),
   add: (c, data) =>
     withDb((db) => {
       const id = randomUUID().replace(/-/g, "").slice(0, 20);
@@ -109,6 +131,17 @@ async function fs() {
 }
 
 const firebase: Backend = {
+  async transaction(fn) {
+    const { col } = await fs();
+    return col.requests().firestore.runTransaction(async (transaction) => fn({
+      get: async <T,>(c: Collection, id: string) => {
+        const snap = await transaction.get(col[c]().doc(id));
+        return snap.exists ? ({ id: snap.id, ...snap.data() } as T & { id: string }) : null;
+      },
+      set: (c, id, data) => { transaction.set(col[c]().doc(id), defined(data)); },
+      update: (c, id, patch) => { transaction.update(col[c]().doc(id), defined(patch)); },
+    }));
+  },
   async add(c, data) {
     const { col } = await fs();
     const ref = col[c]().doc();
@@ -183,22 +216,46 @@ export function isStaleRun(r: RequestDoc, staleMs: number) {
   return (r.status === "processing" || r.status === "waiting_for_user") && Date.now() - Date.parse(r.updatedAt) > staleMs;
 }
 
+export const REQUEST_STALE_MS = 10 * 60_000;
+export class RequestClaimError extends Error {}
+
+function assertClaim(r: RequestDoc | null, claimToken?: string): asserts r is RequestDoc {
+  if (!r) throw new RequestClaimError("Request not found");
+  if (!claimToken || r.claimToken !== claimToken || !["processing", "waiting_for_user"].includes(r.status)) {
+    throw new RequestClaimError("This request is not owned by this run. Claim it first; discard output from an expired run.");
+  }
+}
+
 /**
  * Moves a submitted request to processing. With staleMs, also takes over a run that went quiet for that long
  * (and closes the question it left open). Null if it's gone or someone else has it.
  */
 export async function claimRequest(id: string, detail: string, staleMs?: number): Promise<RequestDoc | null> {
-  const r = await getRequest(id);
-  if (!r) return null;
-  if (r.status === "submitted") {
-    await updateRequest(id, { status: "processing", progress: { step: "Picked up by your CFO team", detail } });
-    return r;
-  }
-  if (staleMs === undefined || !isStaleRun(r, staleMs)) return null;
   const open = await getOpenQuestion(id);
-  if (open) await expireQuestion(open.id);
-  await updateRequest(id, { status: "processing", progress: { step: "Restarted after an interruption", detail } });
-  return r;
+  return db.transaction(async (tx) => {
+    const r = await tx.get<RequestDoc>("requests", id);
+    if (!r || (r.status !== "submitted" && (staleMs === undefined || !isStaleRun(r, staleMs)))) return null;
+    const oldQuestion = open ? await tx.get<QuestionDoc>("questions", open.id) : null;
+    const at = now();
+    const patch = {
+      status: "processing" as const, updatedAt: at, claimToken: randomUUID(),
+      progress: [...r.progress, { at, step: r.status === "submitted" ? "Picked up by your CFO team" : "Restarted after an interruption", detail }],
+    };
+    if (oldQuestion?.status === "open") tx.update("questions", oldQuestion.id, { status: "expired" });
+    tx.update("requests", id, patch);
+    return { ...r, ...patch };
+  });
+}
+
+/** Atomically pick new work or recover a run whose heartbeat stopped. */
+export async function claimNextRequest(detail: string, staleMs = REQUEST_STALE_MS): Promise<RequestDoc | null> {
+  const rows = await listRequestsByStatus(["submitted", "processing", "waiting_for_user"], 200);
+  for (const r of rows) {
+    if (r.status !== "submitted" && !isStaleRun(r, staleMs)) continue;
+    const claimed = await claimRequest(r.id, detail, staleMs);
+    if (claimed) return claimed;
+  }
+  return null;
 }
 
 export async function listRequestsByStatus(statuses: RequestStatus[], limit = 20): Promise<RequestDoc[]> {
@@ -209,19 +266,28 @@ export async function listRequestsByStatus(statuses: RequestStatus[], limit = 20
 export async function updateRequest(
   id: string,
   patch: { status?: RequestStatus; progress?: Omit<ProgressEntry, "at">; error?: string },
+  claimToken?: string,
 ) {
-  await db.update(
-    "requests",
-    id,
-    { updatedAt: now(), status: patch.status, error: patch.error },
-    patch.progress ? { at: now(), ...patch.progress } : undefined,
-  );
+  if (patch.status === "completed") throw new RequestClaimError("Use saveResult to validate and complete the brief.");
+  await db.transaction(async (tx) => {
+    const r = await tx.get<RequestDoc>("requests", id);
+    assertClaim(r, claimToken);
+    const at = now();
+    tx.update("requests", id, { updatedAt: at, status: patch.status, error: patch.error,
+      progress: patch.progress ? [...r.progress, { at, ...patch.progress }] : r.progress });
+  });
 }
 
 // ---------- questions (live poll between the agent and the owner) ----------
 
-export async function createQuestion(q: Omit<QuestionDoc, "id" | "status" | "createdAt">) {
-  return db.add("questions", { ...q, status: "open", createdAt: now() });
+export async function createQuestion(q: Omit<QuestionDoc, "id" | "status" | "createdAt">, claimToken?: string) {
+  return db.transaction(async (tx) => {
+    const r = await tx.get<RequestDoc>("requests", q.requestId);
+    assertClaim(r, claimToken);
+    const id = randomUUID().replace(/-/g, "").slice(0, 20);
+    tx.set("questions", id, { ...q, status: "open", createdAt: now() });
+    return id;
+  });
 }
 
 export async function getQuestion(id: string): Promise<QuestionDoc | null> {
@@ -237,14 +303,31 @@ export async function answerQuestion(id: string, answer: string, otherText?: str
   await db.update("questions", id, { status: "answered", answer, otherText, answeredAt: now() });
 }
 
-export async function expireQuestion(id: string) {
-  await db.update("questions", id, { status: "expired" });
+export async function expireQuestion(id: string, claimToken?: string) {
+  await db.transaction(async (tx) => {
+    const q = await tx.get<QuestionDoc>("questions", id);
+    if (!q || q.status !== "open") return;
+    const r = await tx.get<RequestDoc>("requests", q.requestId);
+    assertClaim(r, claimToken);
+    tx.update("questions", id, { status: "expired" });
+  });
 }
 
 // ---------- results ----------
 
-export async function saveResult(requestId: string, result: Result) {
-  await db.set("results", requestId, { ...result, createdAt: now() });
+export async function saveResult(requestId: string, input: Result, claimToken?: string) {
+  // Validation and completion share a transaction: failed validation leaves both documents unchanged.
+  await db.transaction(async (tx) => {
+    const r = await tx.get<RequestDoc>("requests", requestId);
+    assertClaim(r, claimToken);
+    const business = await tx.get<BusinessInput>("businesses", r.businessId);
+    if (!business) throw new RequestClaimError("Business data is missing");
+    const result = validateResultDelivery(input, business);
+    const at = now();
+    tx.set("results", requestId, { ...result, createdAt: at });
+    tx.update("requests", requestId, { status: "completed", updatedAt: at,
+      progress: [...r.progress, { at, step: "CFO brief delivered", detail: result.headline }] });
+  });
 }
 
 export async function getResult(requestId: string): Promise<Result | null> {
@@ -257,8 +340,11 @@ export async function getResult(requestId: string): Promise<Result | null> {
 // ---------- lane outputs (what the skill scripts computed for a brief; follow-up answers read them) ----------
 
 // Stored as one JSON string: script output can hold map keys Firestore won't take as field names.
-export async function saveLaneOutputs(requestId: string, lanes: Record<string, unknown>) {
-  await db.set("lane_outputs", requestId, { json: JSON.stringify(lanes), createdAt: now() });
+export async function saveLaneOutputs(requestId: string, lanes: Record<string, unknown>, claimToken?: string) {
+  await db.transaction(async (tx) => {
+    assertClaim(await tx.get<RequestDoc>("requests", requestId), claimToken);
+    tx.set("lane_outputs", requestId, { json: JSON.stringify(lanes), createdAt: now() });
+  });
 }
 
 export async function getLaneOutputs(requestId: string): Promise<Record<string, unknown> | null> {
@@ -291,19 +377,23 @@ export async function claimNextMessage(): Promise<ChatMessageDoc | null> {
     50,
     ["status", "in", ["open", "claimed"]],
   );
-  const next = rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
-  if (!next) return null;
-  await db.update("messages", next.id, { status: "claimed", claimedAt: now() });
-  return next;
+  for (const next of rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt))) {
+    const claimed = await claimMessage(next.id);
+    if (claimed) return claimed;
+  }
+  return null;
 }
 
 /** Claims one question if it's open (or its claim went stale). Null otherwise. */
 export async function claimMessage(id: string): Promise<ChatMessageDoc | null> {
-  const m = await getMessage(id);
-  const stale = new Date(Date.now() - 3 * 60_000).toISOString();
-  if (!m || !(m.status === "open" || (m.status === "claimed" && String(m.claimedAt) < stale))) return null;
-  await db.update("messages", id, { status: "claimed", claimedAt: now() });
-  return m;
+  return db.transaction(async (tx) => {
+    const m = await tx.get<ChatMessageDoc>("messages", id);
+    const stale = new Date(Date.now() - 3 * 60_000).toISOString();
+    if (!m || !(m.status === "open" || (m.status === "claimed" && String(m.claimedAt) < stale))) return null;
+    const patch = { status: "claimed" as const, claimedAt: now() };
+    tx.update("messages", id, patch);
+    return { ...m, ...patch };
+  });
 }
 
 export async function getMessage(id: string): Promise<ChatMessageDoc | null> {
@@ -340,26 +430,38 @@ export async function claimNextAction(): Promise<ActionDoc | null> {
     50,
     ["status", "in", ["queued", "working"]],
   );
-  const next = rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
-  if (!next) return null;
-  const claimedAt = now();
-  await db.update("actions", next.id, { status: "working", claimedAt });
-  return { ...next, status: "working", claimedAt };
+  for (const next of rows.sort((a, b) => a.createdAt.localeCompare(b.createdAt))) {
+    const claimed = await claimAction(next.id);
+    if (claimed) return claimed;
+  }
+  return null;
 }
 
 /** Claims one action if it's queued (or its claim went stale). Null otherwise. */
 export async function claimAction(id: string): Promise<ActionDoc | null> {
-  const a = await getAction(id);
-  const stale = new Date(Date.now() - 5 * 60_000).toISOString();
-  if (!a || !(a.status === "queued" || (a.status === "working" && String(a.claimedAt) < stale))) return null;
-  const claimedAt = now();
-  await db.update("actions", id, { status: "working", claimedAt });
-  return { ...a, status: "working", claimedAt };
+  return db.transaction(async (tx) => {
+    const a = await tx.get<ActionDoc>("actions", id);
+    const stale = new Date(Date.now() - 5 * 60_000).toISOString();
+    if (!a || !(a.status === "queued" || (a.status === "working" && String(a.claimedAt) < stale))) return null;
+    const patch = { status: "working" as const, claimedAt: now() };
+    tx.update("actions", id, patch);
+    return { ...a, ...patch };
+  });
 }
 
 export async function completeAction(
   id: string,
-  out: Pick<ActionDoc, "status" | "summary" | "channel" | "email" | "document" | "links" | "error">,
+  out: ActionCompletion,
 ) {
-  await db.update("actions", id, { ...out, completedAt: now() } as Record<string, unknown>);
+  await db.transaction(async (tx) => {
+    const action = await tx.get<ActionDoc>("actions", id);
+    if (!action) throw new ActionCompletionError(`Action ${id} not found`);
+    if (action.status === "done") throw new ActionCompletionError("This action is already done");
+    const result = out.status === "done" ? await tx.get<Result>("results", action.requestId) : null;
+    const decision = result?.decisions[action.decisionIndex];
+    if (out.status === "done" && !decision) throw new ActionCompletionError("The decision is missing. Restore the brief before completing this action.");
+    const problem = actionCompletionProblem(out, decision);
+    if (problem) throw new ActionCompletionError(problem);
+    tx.update("actions", id, { ...out, completedAt: now() } as Doc);
+  });
 }
