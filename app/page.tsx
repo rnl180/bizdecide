@@ -8,7 +8,7 @@ import { LANDING } from "@/lib/i18n-landing";
 import { RecentRequests } from "@/components/MyRequests";
 import { SERVICE_ICONS } from "@/components/RequestMeta";
 import { saveRequest } from "@/lib/myRequests";
-import { useKancil } from "@/lib/kancil";
+import { KANCIL_LINES, useKancil, useKancilTip, type KancilTip } from "@/lib/kancil";
 import {
   FIELDS,
   dataWarnings,
@@ -159,6 +159,25 @@ export default function IntakePage() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  // Kancil coaches the form, one tip at a time: where to drop files, the consent box once the send card is in view,
+  // then the sample, a missing business name, or the most useful file still missing.
+  const coach = KANCIL_LINES[lang].coach;
+  const missingKind = (["sales", "purchases", "bank", "suppliers"] as const).find((k) => !data[k]);
+  const tip: KancilTip | null =
+    !inForm || reading || uploading || busy
+      ? null
+      : !anything
+        ? { id: "coach-drop", target: ".qx-drop", place: "inside", pose: "catch", text: coach.drop, ms: 6000, once: true }
+        : ready && sendInView && !agreed
+          ? { id: "coach-consent", target: ".qx-send .consent", place: "right", pose: "wave", text: coach.consent, ms: 6000 }
+          : demoLoaded
+            ? { id: "coach-demo", pose: "cheer", text: coach.demo, ms: 6000 }
+            : hasNumbers && !hasName
+              ? { id: "coach-name", target: "#biz-name", place: "right", pose: "peek", text: coach.name, ms: 6000 }
+              : missingKind && coach.missing[missingKind]
+                ? { id: `coach-missing-${missingKind}`, target: ".qx-drop", place: "inside", pose: "read", text: coach.missing[missingKind]!, ms: 6500 }
+                : null;
+  useKancilTip(tip);
   const turnover = data.sales ? annualSales(data.sales.rows as SaleRow[]) : null;
   const toggleFlag = (f: string) => setFlags((x) => (x.includes(f) ? x.filter((y) => y !== f) : [...x, f]));
   const date = (d: string) =>

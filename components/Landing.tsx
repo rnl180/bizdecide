@@ -5,6 +5,7 @@ import { Icon, type IconName } from "@/components/Icon";
 import { PRIORITY_ICON } from "@/components/RequestMeta";
 import { LANGS, setLang, type Lang } from "@/lib/i18n";
 import { LANDING, type LandingStrings } from "@/lib/i18n-landing";
+import { KANCIL_LINES, kancilTip, kancilTipDone, type KancilTip } from "@/lib/kancil";
 
 /** Home page hero and "how it works", above the intake form. Styles live in app/landing.css (lx-*). */
 
@@ -29,9 +30,28 @@ const dotParts = (text: string) => text.split(" · ").map((p, i, all) => (i < al
 
 // ---------- hero ----------
 
+/** First visit: once Kancil has said hello, he shows the way: upload, what you get, and the sample. */
+const TOUR_AFTER_MS = 5200;
+function useTour(lang: Lang) {
+  useEffect(() => {
+    const [upload, brief, sample] = KANCIL_LINES[lang].tour;
+    const steps: KancilTip[] = [
+      { id: "tour-upload", target: ".lx-ctas .btn-primary", place: "left", pose: "wave", text: upload, ms: 5000 },
+      { id: "tour-brief", target: ".lx-found", place: "left", pose: "read", text: brief, ms: 5500 },
+      { id: "tour-sample", target: ".lx-ctas .btn-secondary", place: "right", pose: "peek", text: sample, ms: 4500 },
+    ].map((s) => ({ ...s, group: "tour", once: true, skipUnseen: true }) as KancilTip);
+    const timer = setTimeout(() => steps.forEach(kancilTip), TOUR_AFTER_MS);
+    return () => {
+      clearTimeout(timer);
+      steps.forEach((s) => kancilTipDone(s.id));
+    };
+  }, [lang]);
+}
+
 export function LandingHero({ lang, onTryDemo }: { lang: Lang; onTryDemo: () => void }) {
   const t = LANDING[lang];
   const h = t.hero;
+  useTour(lang);
   return (
     <section className="hero-band lx-hero">
       <div className="container lx-hero-grid">

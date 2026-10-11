@@ -1,16 +1,16 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { Icon, type IconName } from "@/components/Icon";
 import { PRIORITY_ICON, STATUS, StatusIcon, VERDICT_ICON } from "@/components/RequestMeta";
-import { useLang } from "@/lib/i18n";
+import { useLang, type Lang } from "@/lib/i18n";
 import { APP, type AppStrings } from "@/lib/i18n-app";
 import { impactKind, impactTotals } from "@/lib/impact";
 import { DecisionAction, FoundHeadline, useActions } from "@/components/DecisionAction";
 import { marketPack, money } from "@/lib/markets";
 import type { Channel, Statements } from "@/lib/statements";
 import { saveRequest, toSaved } from "@/lib/myRequests";
-import { useKancil, type KancilMood } from "@/lib/kancil";
+import { KANCIL_LINES, kancilTip, useKancil, type KancilMood } from "@/lib/kancil";
 import {
   type ApplicationPack,
   type ChatMessageDoc,
@@ -25,6 +25,37 @@ import {
 function kancilFor(status: RequestStatus | undefined, loadFailed: boolean): KancilMood | null {
   if (!status) return loadFailed ? "worried" : null;
   return status === "completed" ? "cheer" : status === "failed" ? "worried" : status === "waiting_for_user" ? "peek" : "dig";
+}
+
+/**
+ * Kancil calls out money as the agents find it: each new finding with its running total, a "so far" line when
+ * the page opens mid-run, and the total once the brief is ready (the first time it is opened in this browser).
+ */
+function useMoneyNarration(id: string, data: Payload | null, lang: Lang) {
+  const seen = useRef<number | null>(null);
+  useEffect(() => {
+    if (!data) return;
+    const { request, result } = data;
+    const coach = KANCIL_LINES[lang].coach;
+    const fmt = money(request.market);
+    const running = request.status !== "completed" && request.status !== "failed";
+    let total = 0;
+    request.progress.forEach((p, i) => {
+      if (!p.impactRm || p.impactRm <= 0) return;
+      total += p.impactRm;
+      if (seen.current !== null && i >= seen.current)
+        kancilTip({ id: `found-${id}-${i}`, pose: "cheer", text: coach.found(fmt(p.impactRm), fmt(total)), ms: 4500 });
+    });
+    if (seen.current === null && running && total > 0) kancilTip({ id: `found-${id}-so-far`, pose: "cheer", text: coach.soFar(fmt(total)) });
+    seen.current = request.progress.length;
+    if (request.status === "completed" && result) {
+      // The same figure as the brief's headline (FoundHeadline): one-off money plus a year of monthly savings.
+      const totals = impactTotals(result.decisions);
+      const found = Math.round(totals.one_off) + 12 * Math.round(totals.monthly);
+      const text = found > 0 ? coach.done(fmt(found), request.businessName) : totals.financing > 0 ? coach.doneFunding(fmt(totals.financing)) : coach.doneReady;
+      kancilTip({ id: `done-${id}`, pose: "cheer", text, ms: 6000, once: true });
+    }
+  }, [id, data, lang]);
 }
 
 type Payload = { request: RequestDoc; question: QuestionDoc | null; result: Result | null; messages?: ChatMessageDoc[]; statements?: Statements | null };
@@ -45,6 +76,7 @@ export default function RequestPage({ params }: { params: Promise<{ id: string }
   const lang = useLang(data?.request.language);
   const t = APP[lang];
   useKancil(kancilFor(data?.request.status, !data && error !== null));
+  useMoneyNarration(id, data, lang);
 
   useEffect(() => {
     let stop = false;

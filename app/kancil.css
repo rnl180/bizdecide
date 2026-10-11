@@ -19,6 +19,11 @@ body:has(.qx-dock) .kc { bottom: calc(80px + env(safe-area-inset-bottom)); }
 /* speech bubble, to his left */
 .kc-say { position: absolute; right: calc(100% - 10px); bottom: 58%; margin: 0; width: max-content; max-width: 200px; padding: 8px 12px; border-radius: 14px 14px 4px 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-card); font-size: 0.8125rem; font-weight: 600; line-height: 1.35; color: var(--ink); pointer-events: none; transform-origin: 100% 100%; }
 @media (max-width: 640px) { .kc-say { max-width: 160px; } }
+/* coach tips: the bubble opens away from what he points at (components/Kancil.tsx spotFor) */
+.kc[data-say="right"] .kc-say { right: auto; left: calc(100% - 10px); border-radius: 14px 14px 14px 4px; transform-origin: 0 100%; }
+.kc[data-say="up-left"] .kc-say { right: auto; left: 0; bottom: calc(100% - 4px); border-radius: 14px 14px 14px 4px; transform-origin: 0 100%; }
+.kc[data-say="up-right"] .kc-say { bottom: calc(100% - 4px); }
+.kc-skip { display: block; margin-top: 6px; padding: 0; border: 0; background: none; font: inherit; font-size: 0.75rem; font-weight: 700; color: var(--brand); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; pointer-events: auto; }
 
 /* hide for good: shows on hover or keyboard focus, always on touch screens */
 .kc-close { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-2); cursor: pointer; pointer-events: auto; opacity: 0; transition: opacity 0.15s; }
@@ -26,6 +31,8 @@ body:has(.qx-dock) .kc { bottom: calc(80px + env(safe-area-inset-bottom)); }
 @media (hover: none) { .kc-close { opacity: 0.9; } }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* running to a tip and back */
+  .kc { transition: bottom 0.25s ease, transform 0.7s cubic-bezier(0.3, 0.7, 0.35, 1); }
   .kc[data-enter] { animation: kc-enter 1.4s cubic-bezier(0.3, 0.6, 0.4, 1) both; }
   /* walk cycle: four frames at 6 fps, each shown for a quarter of the loop, with a small bounce */
   .kc-walk { animation: kc-bob 0.333s ease-in-out infinite alternate; }
@@ -33,6 +40,12 @@ body:has(.qx-dock) .kc { bottom: calc(80px + env(safe-area-inset-bottom)); }
   .kc-walk img:nth-child(2) { animation-delay: -0.5s; }
   .kc-walk img:nth-child(3) { animation-delay: -0.333s; }
   .kc-walk img:nth-child(4) { animation-delay: -0.167s; }
+  /* running: the same four frames, faster */
+  .kc[data-moving] .kc-walk { animation-duration: 0.2s; }
+  .kc[data-moving] .kc-walk img { animation-duration: 0.4s; }
+  .kc[data-moving] .kc-walk img:nth-child(2) { animation-delay: -0.3s; }
+  .kc[data-moving] .kc-walk img:nth-child(3) { animation-delay: -0.2s; }
+  .kc[data-moving] .kc-walk img:nth-child(4) { animation-delay: -0.1s; }
   .kc-pose { animation: kc-pop 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4); }
   .kc[data-pose="front"] .kc-pose, .kc[data-pose="sleep"] .kc-pose { animation: kc-pop 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.4), kc-breathe 2.4s ease-in-out 0.35s infinite alternate; }
   .kc-hop { animation: kc-hop 0.45s ease-out; }
